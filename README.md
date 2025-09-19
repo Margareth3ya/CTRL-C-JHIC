@@ -97,16 +97,6 @@ Akses di browser:
 
 ---
 
-## 🖼️ Preview
-
-### Dashboard Admin
-![Dashboard](https://dummyimage.com/800x400/38b2ac/fff&text=Dashboard+SMK+PGRI+3+Malang)
-
-### Rekomendasi Jurusan
-![Rekomendasi Jurusan](https://dummyimage.com/800x400/ff2d20/fff&text=Fitur+Rekomendasi+Jurusan)
-
----
-
 ## 📌 Catatan untuk SysAdmin
 
 - Pastikan server memenuhi requirement PHP, Composer, dan Node.js.  
