@@ -88,8 +88,8 @@ Akses di browser:
 ## 🔑 Akun Default (Seeder)
 
 - **Admin**
-  - Email: `admin@smkpgri3.sch.id`
-  - Password: `password`
+  - Email: `root`
+  - Password: `admin`
 
 > Segera ganti password default demi keamanan ⚠️
 
