@@ -16,8 +16,6 @@
   Membantu siswa baru memilih jurusan sesuai minat, bakat, dan hasil tes.
 - 📰 **Berita & Informasi Sekolah**  
   Update kegiatan, pengumuman, dan event terbaru.
-- 👨‍🏫 **Profil Guru & Staff**  
-  Informasi lengkap tentang tenaga pendidik.
 - 📅 **Agenda Sekolah**  
   Jadwal kegiatan akademik dan non-akademik.
 - 📱 **Responsive Design**  
