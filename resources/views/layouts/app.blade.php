@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <script src="js/main.js"></script>
     <link rel="stylesheet" href="css/style.css">
+    @stack('styles')
 </head>
 <body class="bg-gray-100 text-gray-800">
     @include('components.navbar')
