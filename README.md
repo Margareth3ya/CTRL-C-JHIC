@@ -16,8 +16,6 @@
   Membantu siswa baru memilih jurusan sesuai minat, bakat, dan hasil tes.
 - 📰 **Berita & Informasi Sekolah**  
   Update kegiatan, pengumuman, dan event terbaru.
-- 👨‍🏫 **Profil Guru & Staff**  
-  Informasi lengkap tentang tenaga pendidik.
 - 📅 **Agenda Sekolah**  
   Jadwal kegiatan akademik dan non-akademik.
 - 📱 **Responsive Design**  
@@ -90,20 +88,10 @@ Akses di browser:
 ## 🔑 Akun Default (Seeder)
 
 - **Admin**
-  - Email: `admin@smkpgri3.sch.id`
-  - Password: `password`
+  - Email: `root`
+  - Password: `admin`
 
 > Segera ganti password default demi keamanan ⚠️
-
----
-
-## 🖼️ Preview
-
-### Dashboard Admin
-![Dashboard](https://dummyimage.com/800x400/38b2ac/fff&text=Dashboard+SMK+PGRI+3+Malang)
-
-### Rekomendasi Jurusan
-![Rekomendasi Jurusan](https://dummyimage.com/800x400/ff2d20/fff&text=Fitur+Rekomendasi+Jurusan)
 
 ---
 
