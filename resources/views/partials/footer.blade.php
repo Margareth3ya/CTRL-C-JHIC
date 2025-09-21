@@ -177,7 +177,7 @@
                         <i class="fas fa-chevron-right text-primary mr-2 text-xs"></i>
                         Beranda
                     </a></li>
-                <li><a href="#" class="footer-link flex items-center text-sm hover:text-white">
+                <li><a href="/profil" class="footer-link flex items-center text-sm hover:text-white">
                         <i class="fas fa-chevron-right text-primary mr-2 text-xs"></i>
                         Profil
                     </a></li>

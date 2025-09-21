@@ -11,3 +11,6 @@ Route::get('/informasi/berita', function () {
 Route::get('/informasi/berita/berita', function () {
     return view('informasi.berita_lengkap1');
 });
+Route::get('/profile', function () {
+    return view('profile.index');
+});

@@ -145,3 +145,25 @@
 .swiper-pagination-bullet-active {
     opacity: 1;
 }
+
+/* CUSTOM CSS PROFILE */
+.kepalas {
+    width: 350px;
+    height: 350px;
+    flex-shrink: 0;
+    border-radius: 668px;
+    background: #FFBE96;
+}
+
+.alumni {
+    height: 528px;
+}
+
+.thumbnail {
+    display: flex;
+    width: 1165px;
+    height: 555px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
