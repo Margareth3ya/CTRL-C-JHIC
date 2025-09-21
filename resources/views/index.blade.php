@@ -322,54 +322,52 @@
             });
 
             // Form submission
-            form.addEventListener('submit', function (e) {
+            form.addEventListener('submit', async function (e) {
                 e.preventDefault();
 
-                // Show loading state
                 submitButton.disabled = true;
                 submitButton.innerHTML = `
-                            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                            </svg>
-                            Memproses...
-                        `;
+            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Memproses...
+        `;
 
-                // Simulate API call
-                setTimeout(() => {
-                    const randomResult = departments[Math.floor(Math.random() * departments.length)];
+                try {
+                    const response = await fetch("/api/gemini", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
+                        },
+                        body: JSON.stringify({ keyword: keywordInput.value }),
+                    });
 
-                    // Display result
+                    const data = await response.json();
+
                     resultContent.innerHTML = `
-                                <div>
-                                    <h3 class="text-2xl font-bold text-blue-800">${randomResult.name}</h3>
-                                    <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm mt-2">
-                                        ${randomResult.department}
-                                    </span>
-                                </div>
-                                <div class="relative overflow-hidden rounded-xl">
-                                    <img
-                                        src="${randomResult.image}"
-                                        alt="${randomResult.name}"
-                                        class="w-full h-56 object-cover transition-transform duration-500 hover:scale-105"
-                                    />
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-                                </div>
-                                <p class="text-gray-700 text-lg leading-relaxed">
-                                    ${randomResult.description}
-                                </p>
-                            `;
+                <div>
+                    <h3 class="text-2xl font-bold text-blue-800">${data.name ?? "?"}</h3>
+                    <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm mt-2">
+                        ${data.department ?? "?"}
+                    </span>
+                </div>
+                <p class="text-gray-700 text-lg leading-relaxed mt-4">
+                    ${data.description ?? data.raw ?? "Tidak ada hasil."}
+                </p>
+            `;
 
-                    // Show result and reset UI
                     leftContent.classList.add('hidden');
                     resultContainer.classList.remove('hidden');
                     form.classList.add('hidden');
                     resetContainer.classList.remove('hidden');
-
-                    // Reset button state
+                } catch (error) {
+                    alert("Terjadi kesalahan, coba lagi.");
+                } finally {
                     submitButton.disabled = false;
                     submitButton.textContent = 'DAPATKAN REKOMENDASI';
-                }, 1500);
+                }
             });
 
             // Reset button
@@ -721,10 +719,6 @@
                     }
                 });
             }
-
         });
     </script>
-
-
-
 @endsection
