@@ -19,4 +19,3 @@ Route::get('/profile', function () {
 
 // API POST
 Route::post('/api/gemini', [RecommendationController::class, 'getRecommendation']);
-Route::get('/api/gemini', [RecommendationController::class, 'getRecommendation']);
