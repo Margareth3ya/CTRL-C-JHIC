@@ -1,31 +1,30 @@
 @extends('layouts.app')
 @push('styles')
-<style>
-   .card-active {
-    transform: translateX(0) scale(1);
-    opacity: 1;
-    transition: all 0.4s ease;
-}
+    <style>
+        .card-active {
+            transform: translateX(0) scale(1);
+            opacity: 1;
+            transition: all 0.4s ease;
+        }
 
-.card-behind {
-    transform: translateX(80px) scale(0.9);
-    opacity: 0.9;
-    transition: all 0.4s ease;
-}
+        .card-behind {
+            transform: translateX(80px) scale(0.9);
+            opacity: 0.9;
+            transition: all 0.4s ease;
+        }
 
-.card-far-behind {
-    transform: translateX(160px) scale(0.8);
-    opacity: 0.7;
-    transition: all 0.4s ease;
-}
+        .card-far-behind {
+            transform: translateX(160px) scale(0.8);
+            opacity: 0.7;
+            transition: all 0.4s ease;
+        }
 
-.card-more-behind {
-    transform: translateX(240px) scale(0.7);
-    opacity: 0.5;
-    transition: all 0.4s ease;
-}
-
-</style>
+        .card-more-behind {
+            transform: translateX(240px) scale(0.7);
+            opacity: 0.5;
+            transition: all 0.4s ease;
+        }
+    </style>
 
 @endpush
 @section('content')
@@ -35,7 +34,8 @@
                 <div class="swiper-container h-full w-full">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <div class="w-full h-full bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')">
+                            <div class="w-full h-full bg-cover bg-center"
+                                style="background-image: url('https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')">
                             </div>
                         </div>
                         <div class="swiper-slide">
@@ -197,7 +197,8 @@
                     </p>
                 </div>
 
-                <div id="resultContainer" class="hidden bg-gradient-to-br from-blue-50 to-orange-50 p-8 rounded-2xl shadow-lg">
+                <div id="resultContainer"
+                    class="hidden bg-gradient-to-br from-blue-50 to-orange-50 p-8 rounded-2xl shadow-lg">
                     <h2 class="text-3xl font-bold text-gray-900 mb-2">
                         REKOMENDASI KAMI
                     </h2>
@@ -217,15 +218,11 @@
 
                     <div class="mb-6 relative">
                         <label class="block text-gray-700 mb-2">Keyword</label>
-                        <input
-                            type="text"
-                            id="keywordInput"
-                            name="keyword"
-                            placeholder="Keyword yang sering didengar..."
+                        <input type="text" id="keywordInput" name="keyword" placeholder="Keyword yang sering didengar..."
                             class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                            required
-                        />
-                        <ul id="keywordDropdown" class="absolute z-10 w-full bg-white border border-gray-200 mt-1 rounded-lg shadow-md hidden">
+                            required />
+                        <ul id="keywordDropdown"
+                            class="absolute z-10 w-full bg-white border border-gray-200 mt-1 rounded-lg shadow-md hidden">
                             <li class="px-4 py-2 hover:bg-orange-100 cursor-pointer">Programming</li>
                             <li class="px-4 py-2 hover:bg-orange-100 cursor-pointer">Desain Grafis</li>
                             <li class="px-4 py-2 hover:bg-orange-100 cursor-pointer">Mesin</li>
@@ -235,11 +232,8 @@
                         </ul>
                     </div>
 
-                    <button
-                        type="submit"
-                        id="submitButton"
-                        class="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-4 rounded-lg font-medium text-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300 flex items-center justify-center"
-                    >
+                    <button type="submit" id="submitButton"
+                        class="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-4 rounded-lg font-medium text-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300 flex items-center justify-center">
                         DAPATKAN REKOMENDASI
                     </button>
                 </form>
@@ -250,10 +244,8 @@
                         <p class="text-gray-600 mb-6">
                             Ingin menjelajahi opsi jurusan lainnya? Klik tombol di bawah untuk mencoba lagi.
                         </p>
-                        <button
-                            id="resetButton"
-                            class="px-8 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all duration-300"
-                        >
+                        <button id="resetButton"
+                            class="px-8 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all duration-300">
                             Cari Rekomendasi Baru
                         </button>
                     </div>
@@ -263,7 +255,7 @@
     </section>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Elemen DOM
             const form = document.getElementById('recommendationForm');
             const keywordInput = document.getElementById('keywordInput');
@@ -274,7 +266,7 @@
             const resultContainer = document.getElementById('resultContainer');
             const resultContent = document.getElementById('resultContent');
             const resetContainer = document.getElementById('resetContainer');
-            
+
             // Data rekomendasi
             const departments = [
                 {
@@ -296,7 +288,7 @@
                     description: "Jurusan ini fokus pada desain grafis dan multimedia."
                 },
             ];
-            
+
             // Popular keywords
             const popularKeywords = [
                 "Programming",
@@ -306,82 +298,82 @@
                 "Jaringan",
                 "Animasi",
             ];
-            
+
             // Event listeners
-            keywordInput.addEventListener('focus', function() {
+            keywordInput.addEventListener('focus', function () {
                 keywordDropdown.classList.remove('hidden');
             });
-            
-            keywordInput.addEventListener('blur', function() {
+
+            keywordInput.addEventListener('blur', function () {
                 // Delay hiding to allow click on items
                 setTimeout(() => {
                     keywordDropdown.classList.add('hidden');
                 }, 200);
             });
-            
+
             // Add click events to dropdown items
             const dropdownItems = keywordDropdown.querySelectorAll('li');
             dropdownItems.forEach(item => {
-                item.addEventListener('mousedown', function(e) {
+                item.addEventListener('mousedown', function (e) {
                     e.preventDefault(); // Prevent blur from happening before setting value
                     keywordInput.value = this.textContent;
                     keywordDropdown.classList.add('hidden');
                 });
             });
-            
+
             // Form submission
-            form.addEventListener('submit', function(e) {
+            form.addEventListener('submit', function (e) {
                 e.preventDefault();
-                
+
                 // Show loading state
                 submitButton.disabled = true;
                 submitButton.innerHTML = `
-                    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Memproses...
-                `;
-                
+                            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Memproses...
+                        `;
+
                 // Simulate API call
                 setTimeout(() => {
                     const randomResult = departments[Math.floor(Math.random() * departments.length)];
-                    
+
                     // Display result
                     resultContent.innerHTML = `
-                        <div>
-                            <h3 class="text-2xl font-bold text-blue-800">${randomResult.name}</h3>
-                            <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm mt-2">
-                                ${randomResult.department}
-                            </span>
-                        </div>
-                        <div class="relative overflow-hidden rounded-xl">
-                            <img
-                                src="${randomResult.image}"
-                                alt="${randomResult.name}"
-                                class="w-full h-56 object-cover transition-transform duration-500 hover:scale-105"
-                            />
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-                        </div>
-                        <p class="text-gray-700 text-lg leading-relaxed">
-                            ${randomResult.description}
-                        </p>
-                    `;
-                    
+                                <div>
+                                    <h3 class="text-2xl font-bold text-blue-800">${randomResult.name}</h3>
+                                    <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm mt-2">
+                                        ${randomResult.department}
+                                    </span>
+                                </div>
+                                <div class="relative overflow-hidden rounded-xl">
+                                    <img
+                                        src="${randomResult.image}"
+                                        alt="${randomResult.name}"
+                                        class="w-full h-56 object-cover transition-transform duration-500 hover:scale-105"
+                                    />
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                                </div>
+                                <p class="text-gray-700 text-lg leading-relaxed">
+                                    ${randomResult.description}
+                                </p>
+                            `;
+
                     // Show result and reset UI
                     leftContent.classList.add('hidden');
                     resultContainer.classList.remove('hidden');
                     form.classList.add('hidden');
                     resetContainer.classList.remove('hidden');
-                    
+
                     // Reset button state
                     submitButton.disabled = false;
                     submitButton.textContent = 'DAPATKAN REKOMENDASI';
                 }, 1500);
             });
-            
+
             // Reset button
-            resetButton.addEventListener('click', function() {
+            resetButton.addEventListener('click', function () {
                 leftContent.classList.remove('hidden');
                 resultContainer.classList.add('hidden');
                 form.classList.remove('hidden');
@@ -390,8 +382,8 @@
             });
         });
     </script>
-<!-- ==Carousel Departemen== -->
-<section class="w-full py-16 bg-gray-50">
+    <!-- ==Carousel Departemen== -->
+    <section class="w-full py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <!-- Header -->
             <div class="text-center mb-12">
@@ -407,128 +399,137 @@
                     <div class="card-container relative h-full">
                         <!-- Data Departments -->
                         <div class="card absolute top-0 left-0 w-full bg-white rounded-2xl shadow-lg overflow-hidden h-80"
-                             data-index="0"
-                             style="z-index: 40;">
+                            data-index="0" style="z-index: 40;">
                             <div class="flex flex-col md:flex-row h-full">
                                 <!-- Image -->
                                 <div class="md:w-2/5">
-                                    <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=538&q=80" 
-                                         alt="TIK (Teknologi Informasi & Komunikasi)" 
-                                         class="w-full h-40 md:h-full object-cover">
+                                    <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=538&q=80"
+                                        alt="TIK (Teknologi Informasi & Komunikasi)"
+                                        class="w-full h-40 md:h-full object-cover">
                                 </div>
-                                
+
                                 <!-- Content -->
                                 <div class="md:w-3/5 p-6 flex flex-col justify-between">
                                     <div>
                                         <div class="flex items-center justify-between mb-4">
                                             <h3 class="text-2xl font-bold text-gray-900">TIK</h3>
-                                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
+                                            <span
+                                                class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
                                                 TIK (Teknologi Informasi & Komunikasi)
                                             </span>
                                         </div>
                                         <p class="text-gray-600 mb-6 line-clamp-3">
-                                            Departemen TIK membekali siswa dengan keterampilan di bidang teknologi informasi, 
-                                            meliputi pemrograman, desain web, jaringan komputer, dan manajemen data. 
-                                            Lulusan diharapkan mampu bersaing di industri IT maupun menjadi wirausaha digital yang kreatif dan inovatif.
+                                            Departemen TIK membekali siswa dengan keterampilan di bidang teknologi
+                                            informasi,
+                                            meliputi pemrograman, desain web, jaringan komputer, dan manajemen data.
+                                            Lulusan diharapkan mampu bersaing di industri IT maupun menjadi wirausaha
+                                            digital yang kreatif dan inovatif.
                                         </p>
                                     </div>
-                                    <a href="/jurusan" class="self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition-colors">
+                                    <a href="/jurusan"
+                                        class="self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition-colors">
                                         Selengkapnya →
                                     </a>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="card absolute top-0 left-0 w-full bg-white rounded-2xl shadow-lg overflow-hidden h-80"
-                             data-index="1"
-                             style="z-index: 30;">
+                            data-index="1" style="z-index: 30;">
                             <div class="flex flex-col md:flex-row h-full">
                                 <!-- Image -->
                                 <div class="md:w-2/5">
-                                    <img src="https://images.unsplash.com/photo-1581094288338-231b058b38b8?auto=format&fit=crop&w=453&q=80" 
-                                         alt="Pemesinan" 
-                                         class="w-full h-40 md:h-full object-cover">
+                                    <img src="https://images.unsplash.com/photo-1581094288338-231b058b38b8?auto=format&fit=crop&w=453&q=80"
+                                        alt="Pemesinan" class="w-full h-40 md:h-full object-cover">
                                 </div>
-                                
+
                                 <!-- Content -->
                                 <div class="md:w-3/5 p-6 flex flex-col justify-between">
                                     <div>
                                         <div class="flex items-center justify-between mb-4">
                                             <h3 class="text-2xl font-bold text-gray-900">Pemesinan</h3>
-                                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
+                                            <span
+                                                class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
                                                 Pemesinan
                                             </span>
                                         </div>
                                         <p class="text-gray-600 mb-6 line-clamp-3">
-                                            Departemen Pemesinan mempersiapkan siswa menguasai teknik pengoperasian mesin konvensional maupun CNC, 
-                                            membaca gambar teknik, dan proses manufaktur. Lulusan memiliki kompetensi untuk bekerja di industri manufaktur dan permesinan.
+                                            Departemen Pemesinan mempersiapkan siswa menguasai teknik pengoperasian mesin
+                                            konvensional maupun CNC,
+                                            membaca gambar teknik, dan proses manufaktur. Lulusan memiliki kompetensi untuk
+                                            bekerja di industri manufaktur dan permesinan.
                                         </p>
                                     </div>
-                                    <a href="/jurusan" class="self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition-colors">
+                                    <a href="/jurusan"
+                                        class="self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition-colors">
                                         Selengkapnya →
                                     </a>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="card absolute top-0 left-0 w-full bg-white rounded-2xl shadow-lg overflow-hidden h-80"
-                             data-index="2"
-                             style="z-index: 20;">
+                            data-index="2" style="z-index: 20;">
                             <div class="flex flex-col md:flex-row h-full">
                                 <!-- Image -->
                                 <div class="md:w-2/5">
-                                    <img src="https://images.unsplash.com/photo-1581093458791-9d33f465dea5?auto=format&fit=crop&w=368&q=80" 
-                                         alt="Kelistrikan" 
-                                         class="w-full h-40 md:h-full object-cover">
+                                    <img src="https://images.unsplash.com/photo-1581093458791-9d33f465dea5?auto=format&fit=crop&w=368&q=80"
+                                        alt="Kelistrikan" class="w-full h-40 md:h-full object-cover">
                                 </div>
-                                
+
                                 <!-- Content -->
                                 <div class="md:w-3/5 p-6 flex flex-col justify-between">
                                     <div>
                                         <div class="flex items-center justify-between mb-4">
                                             <h3 class="text-2xl font-bold text-gray-900">Kelistrikan</h3>
-                                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
+                                            <span
+                                                class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
                                                 Kelistrikan
                                             </span>
                                         </div>
                                         <p class="text-gray-600 mb-6 line-clamp-3">
-                                            Departemen Kelistrikan mengajarkan keterampilan instalasi, perawatan, dan perbaikan sistem kelistrikan, 
-                                            baik untuk bangunan maupun industri. Siswa juga dibekali pemahaman sistem kontrol dan otomasi.
+                                            Departemen Kelistrikan mengajarkan keterampilan instalasi, perawatan, dan
+                                            perbaikan sistem kelistrikan,
+                                            baik untuk bangunan maupun industri. Siswa juga dibekali pemahaman sistem
+                                            kontrol dan otomasi.
                                         </p>
                                     </div>
-                                    <a href="/jurusan" class="self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition-colors">
+                                    <a href="/jurusan"
+                                        class="self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition-colors">
                                         Selengkapnya →
                                     </a>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="card absolute top-0 left-0 w-full bg-white rounded-2xl shadow-lg overflow-hidden h-80"
-                             data-index="3"
-                             style="z-index: 10;">
+                            data-index="3" style="z-index: 10;">
                             <div class="flex flex-col md:flex-row h-full">
                                 <!-- Image -->
                                 <div class="md:w-2/5">
-                                    <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=336&q=80" 
-                                         alt="Otomotif" 
-                                         class="w-full h-40 md:h-full object-cover">
+                                    <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=336&q=80"
+                                        alt="Otomotif" class="w-full h-40 md:h-full object-cover">
                                 </div>
-                                
+
                                 <!-- Content -->
                                 <div class="md:w-3/5 p-6 flex flex-col justify-between">
                                     <div>
                                         <div class="flex items-center justify-between mb-4">
                                             <h3 class="text-2xl font-bold text-gray-900">Otomotif</h3>
-                                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
+                                            <span
+                                                class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
                                                 Otomotif
                                             </span>
                                         </div>
                                         <p class="text-gray-600 mb-6 line-clamp-3">
-                                            Departemen Otomotif berfokus pada pembelajaran teknologi kendaraan bermotor, perawatan, dan perbaikan mesin. 
-                                            Siswa dilatih secara praktis dengan peralatan modern untuk memenuhi kebutuhan industri.
+                                            Departemen Otomotif berfokus pada pembelajaran teknologi kendaraan bermotor,
+                                            perawatan, dan perbaikan mesin.
+                                            Siswa dilatih secara praktis dengan peralatan modern untuk memenuhi kebutuhan
+                                            industri.
                                         </p>
                                     </div>
-                                    <a href="/jurusan" class="self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition-colors">
+                                    <a href="/jurusan"
+                                        class="self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition-colors">
                                         Selengkapnya →
                                     </a>
                                 </div>
@@ -553,7 +554,7 @@
     </section>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const cards = document.querySelectorAll('.card');
             const dots = document.querySelectorAll('.dot-indicator');
             let currentIndex = 0;
@@ -561,48 +562,48 @@
             let startX = 0;
             let currentX = 0;
             let dragThreshold = 50;
-            
+
             // Initialize carousel dengan tumpukan kartu
             updateCarousel();
-            
+
             // Dot indicators
             dots.forEach((dot, index) => {
                 dot.addEventListener('click', () => navigateTo(index));
             });
-            
+
             // Add event listeners to all cards
             cards.forEach(card => {
                 // Touch events for mobile
                 card.addEventListener('touchstart', handleTouchStart, { passive: false });
                 card.addEventListener('touchmove', handleTouchMove, { passive: false });
                 card.addEventListener('touchend', handleTouchEnd);
-                
+
                 // Mouse events for desktop
                 card.addEventListener('mousedown', handleMouseDown);
                 card.addEventListener('mousemove', handleMouseMove);
                 card.addEventListener('mouseup', handleMouseUp);
                 card.addEventListener('mouseleave', handleMouseUp);
             });
-            
+
             function handleTouchStart(e) {
                 startX = e.touches[0].clientX;
                 isDragging = true;
                 cards.forEach(card => card.classList.add('card-dragging'));
                 e.preventDefault();
             }
-            
+
             function handleTouchMove(e) {
                 if (!isDragging) return;
                 currentX = e.touches[0].clientX;
                 updateDragPosition();
                 e.preventDefault();
             }
-            
+
             function handleTouchEnd() {
                 if (!isDragging) return;
                 finishDrag();
             }
-            
+
             function handleMouseDown(e) {
                 startX = e.clientX;
                 isDragging = true;
@@ -610,26 +611,26 @@
                 document.body.style.cursor = 'grabbing';
                 e.preventDefault();
             }
-            
+
             function handleMouseMove(e) {
                 if (!isDragging) return;
                 currentX = e.clientX;
                 updateDragPosition();
             }
-            
+
             function handleMouseUp() {
                 if (!isDragging) return;
                 finishDrag();
             }
-            
+
             function updateDragPosition() {
                 const diffX = currentX - startX;
-                
+
                 // Apply temporary transform during drag
                 cards.forEach((card, index) => {
                     const cardIndex = parseInt(card.getAttribute('data-index'));
                     const position = (cardIndex - currentIndex + cards.length) % cards.length;
-                    
+
                     if (position === 0) {
                         // Main card being dragged
                         card.style.transform = `translateX(${diffX}px) scale(1)`;
@@ -645,20 +646,20 @@
                     }
                 });
             }
-            
+
             function finishDrag() {
                 isDragging = false;
                 document.body.style.cursor = '';
-                
+
                 const diffX = currentX - startX;
-                
+
                 // Remove temporary drag styles
                 cards.forEach(card => {
                     card.classList.remove('card-dragging');
                     card.style.transform = '';
                     card.style.opacity = '';
                 });
-                
+
                 // Determine if we should change slide based on drag distance
                 if (Math.abs(diffX) > dragThreshold) {
                     if (diffX > 0) {
@@ -671,59 +672,59 @@
                     updateCarousel();
                 }
             }
-            
+
             function navigateTo(index) {
                 // Ensure index is within bounds
                 if (index < 0) index = cards.length - 1;
                 if (index >= cards.length) index = 0;
-                
+
                 currentIndex = index;
                 updateCarousel();
             }
-            
+
             function updateCarousel() {
-    // Update card positions dengan animasi
-    cards.forEach((card, index) => {
-        const cardIndex = parseInt(card.getAttribute('data-index'));
-        const position = (cardIndex - currentIndex + cards.length) % cards.length;
+                // Update card positions dengan animasi
+                cards.forEach((card, index) => {
+                    const cardIndex = parseInt(card.getAttribute('data-index'));
+                    const position = (cardIndex - currentIndex + cards.length) % cards.length;
 
-        // Reset semua kelas posisi
-        card.classList.remove('card-active', 'card-behind', 'card-far-behind', 'card-hidden');
+                    // Reset semua kelas posisi
+                    card.classList.remove('card-active', 'card-behind', 'card-far-behind', 'card-hidden');
 
-        if (position === 0) {
-            // Kartu utama
-            card.classList.add('card-active');
-            card.style.zIndex = 40;
-        } else if (position === 1) {
-            // Di belakang 1
-            card.classList.add('card-behind');
-            card.style.zIndex = 30;
-        } else if (position === 2) {
-            // Di belakang 2
-            card.classList.add('card-far-behind');
-            card.style.zIndex = 20;
-        } else {
-            // Sisanya sembunyikan
-            card.classList.add('card-hidden');
-            card.style.zIndex = 10;
-        }
-    });
+                    if (position === 0) {
+                        // Kartu utama
+                        card.classList.add('card-active');
+                        card.style.zIndex = 40;
+                    } else if (position === 1) {
+                        // Di belakang 1
+                        card.classList.add('card-behind');
+                        card.style.zIndex = 30;
+                    } else if (position === 2) {
+                        // Di belakang 2
+                        card.classList.add('card-far-behind');
+                        card.style.zIndex = 20;
+                    } else {
+                        // Sisanya sembunyikan
+                        card.classList.add('card-hidden');
+                        card.style.zIndex = 10;
+                    }
+                });
 
-    // Update dots
-    dots.forEach((dot, i) => {
-        if (i === currentIndex) {
-            dot.classList.remove('w-3', 'bg-gray-300');
-            dot.classList.add('w-6', 'bg-orange-500');
-        } else {
-            dot.classList.remove('w-6', 'bg-orange-500');
-            dot.classList.add('w-3', 'bg-gray-300');
-        }
-    });
-}
+                // Update dots
+                dots.forEach((dot, i) => {
+                    if (i === currentIndex) {
+                        dot.classList.remove('w-3', 'bg-gray-300');
+                        dot.classList.add('w-6', 'bg-orange-500');
+                    } else {
+                        dot.classList.remove('w-6', 'bg-orange-500');
+                        dot.classList.add('w-3', 'bg-gray-300');
+                    }
+                });
+            }
 
         });
     </script>
 
-    
+
 
 @endsection
