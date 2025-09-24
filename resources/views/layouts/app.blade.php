@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'SMK PGRI 3 MALANG')</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" type="image/png" href="https://i.ibb.co.com/MkPkNv4c/Logo-Sekolah.png">
+    <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/sitesv/AICyYdYcYW5s4crH8c55MxO1wQSkJOHNDR9xETVsqVLQcBAODQWgv-cPdEBqv90dz9fC9Fw1ciasYU6Zlpk9TLx2-rOshG9QnP9-zLnEDXUJ72L3GUQvk6ssVCM8WWoTa3xTQLXf8HAP3JrPqdvggYqnDcniAg-YYkYu6zpU1ffdLDE7v2puEsuVGfvVeFFNJ9Ubsh3cMkNMhSBramalf_XN6g">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <script src="js/main.js"></script>

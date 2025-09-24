@@ -327,12 +327,12 @@
 
                 submitButton.disabled = true;
                 submitButton.innerHTML = `
-            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-            Memproses...
-        `;
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Memproses...
+            `;
 
                 try {
                     const response = await fetch("/api/gemini", {
@@ -346,17 +346,29 @@
 
                     const data = await response.json();
 
-                    resultContent.innerHTML = `
-                <div>
-                    <h3 class="text-2xl font-bold text-blue-800">${data.name ?? "?"}</h3>
-                    <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm mt-2">
-                        ${data.department ?? "?"}
-                    </span>
-                </div>
-                <p class="text-gray-700 text-lg leading-relaxed mt-4">
-                    ${data.description ?? data.raw ?? "Tidak ada hasil."}
-                </p>
-            `;
+                    /**
+                     * ini result dari AI Nya, tolong jangan dirubah jika tidak ada revisi
+                     */
+                    if (data.name === "Tidak ditemukan") {
+                        resultContent.innerHTML = `
+                            <div class="p-4 bg-red-50 border border-red-200 rounded-lg">
+                                <h3 class="text-lg font-semibold text-red-800">${data.name}</h3>
+                                <p class="text-red-700 mt-2">${data.description}</p>
+                            </div>
+                        `;
+                    } else {
+                        resultContent.innerHTML = `
+                            <div>
+                                <h3 class="text-2xl font-bold text-blue-800">${data.name} 
+                                <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm mt-2">
+                                    ${data.department}
+                                </span></h3>
+                                <p class="text-gray-700 text-lg leading-relaxed mt-4">
+                                    ${data.description}
+                                </p>
+                            </div>
+                        `;
+                    }
 
                     leftContent.classList.add('hidden');
                     resultContainer.classList.remove('hidden');

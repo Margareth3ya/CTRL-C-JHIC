@@ -16,6 +16,6 @@ Route::get('/profile', function () {
     return view('profile.index');
 });
 
-
 // API POST
 Route::post('/api/gemini', [RecommendationController::class, 'getRecommendation']);
+Route::get('/api/gemini', [RecommendationController::class, 'getRecommendation']);
