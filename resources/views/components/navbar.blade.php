@@ -10,7 +10,7 @@
                     class="w-full h-full object-cover">
             </div>
             <span
-                class="text-xl md:text-2xl font-extrabold text-gray-800 hover:text-primary cursor-pointer transition duration-300">SKARIGA</span>
+                class="text-xl md:text-2xl font-extrabold text-gray-800 hover:text-primary cursor-pointer transition duration-300"></span>
         </div>
 
         <nav class="hidden md:flex space-x-6 lg:space-x-8 font-semibold text-gray-700">
@@ -63,7 +63,7 @@
                             Berita
                         </span>
                     </a>
-                    <a href="/informasi/pengumuman" class="dropdown-item block px-5 py-3 transition">
+                    <a href="/informasi/kegiatan" class="dropdown-item block px-5 py-3 transition">
                         <span class="flex items-center">
                             Kegiatan
                         </span>

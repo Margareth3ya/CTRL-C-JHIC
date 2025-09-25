@@ -14,6 +14,16 @@ Route::get('/informasi/berita', function () {
 Route::get('/informasi/berita/berita', function () {
     return view('informasi.berita_lengkap1');
 });
+Route::get('/informasi/kegiatan', function () {
+    return view('informasi.kegiatan');
+});
+Route::get('/informasi/ssb', function () {
+    return view('informasi.SSB');
+});
+Route::get('/informasi/prestasi', function () {
+    return view('informasi.prestasi');
+});
+
 Route::get('/profile', function () {
     return view('profile.index');
 });
