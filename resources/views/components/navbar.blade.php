@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="css/style.css">
 <script src="js/main.js"></script>
-<header class="bg-white shadow-md sticky top-0 z-50">
+<header class="bg-white rounded-2xl shadow-md sticky top-0 z-50">
     <div class="container mx-auto flex justify-between items-center px-4 py-3 md:px-6">
         <div class="flex items-center space-x-3">
             <div

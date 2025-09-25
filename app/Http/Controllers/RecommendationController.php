@@ -24,13 +24,15 @@ class RecommendationController extends Controller
                     Berdasarkan minat berikut: {$keyword}, rekomendasikan jurusan SMK yang paling cocok.
 
                     ⚠️ Aturan:
-                    1. Jika minat sesuai dengan salah satu jurusan SMK PGRI 3 MALANG Berikut adalah daftar jurusannya:
+                    1. Jika yang di input berhubungan tindak hacking,cybersecurity, jaringan maka akan memilih jurusan TKJ
+                    2. Jika minat sesuai dengan salah satu jurusan SMK PGRI 3 MALANG Berikut adalah daftar jurusannya:
                     ** Departemen / Kategori TIK: **
                         * RPL (Rekayasa Perangkat Lunak)
                         * DKV (Desain Komunikasi Visual)
                         * BP (Broadcasting dan Perfilman)
                         * NIMA (Animasi)
                         * BDP (Bisnis Digital & Pemasaran)
+                        * TKJ (Teknik Komputer dan Jaringan)
                     ** Departemen / Kategori Kelistrikan: **
                         * TE & AV (Teknik Elektronika &  Audio Video)
                         * TL (Teknik Pembangkit Tenaga Listrik)
@@ -62,7 +64,7 @@ class RecommendationController extends Controller
 
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
-        ])->post("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" . env('GEMINI_API_KEY'), [
+        ])->post("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" . env('GEMINI_API_KEY'), [
                     "contents" => [
                         [
                             "parts" => [["text" => $prompt]]

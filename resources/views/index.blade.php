@@ -25,7 +25,6 @@
             transition: all 0.4s ease;
         }
     </style>
-
 @endpush
 @section('content')
     <div class="relative overflow-hidden">
