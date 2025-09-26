@@ -43,7 +43,10 @@ Route::get('/program/jurusan', [DepartController::class, 'index']);
 Route::get('/program/organisasi', function() {
     return view('program.organisasi');
 });
-// KEPERLUAN TESTING
+
+
+
+// KEPERLUAN TESTING & DEBUGGING
 // Route::get('/api/gemini', [RecommendationController::class, 'getRecommendation']);
 // Route::get('/t', function() {
 //     try {

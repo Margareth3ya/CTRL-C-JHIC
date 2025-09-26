@@ -56,9 +56,9 @@
                 <div class="grid md:grid-cols-2 gap-8 items-center">
                     <div class="text-center md:text-left">
                         <div class="mb-6">
-                            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
+                            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight text-orange-500">
                                 SUCCESS BY<br>
-                                <span class="text-orange-500">DISCIPLINE</span>
+                                <span class="text-white">DISCIPLINE</span>
                             </h1>
                             <p class="text-xl md:text-2xl text-blue-100 mb-6">
                                 Membentuk siswa cerdas, terampil, dan berkarakter
@@ -77,29 +77,107 @@
 
                     <div class="grid grid-cols-2 gap-6">
                         <div
-                            class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 text-center border border-white border-opacity-20">
+                            class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 text-center border border-white border-opacity-20 hover:scale-105 hover:shadow-xl">
                             <div class="text-3xl md:text-4xl font-bold text-orange-500 mb-2">1000+</div>
-                            <div class="text-blue-100">Siswa Aktif</div>
+                            <div class="text-gray-100">Siswa Aktif</div>
                         </div>
                         <div
-                            class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 text-center border border-white border-opacity-20">
+                            class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 text-center border border-white border-opacity-20 hover:scale-105 hover:shadow-xl">
                             <div class="text-3xl md:text-4xl font-bold text-orange-500 mb-2">50+</div>
-                            <div class="text-blue-100">Guru Berpengalaman</div>
+                            <div class="text-gray-100">Guru Berpengalaman</div>
                         </div>
                         <div
-                            class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 text-center border border-white border-opacity-20">
+                            class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 text-center border border-white border-opacity-20 hover:scale-105 hover:shadow-xl">
                             <div class="text-3xl md:text-4xl font-bold text-orange-500 mb-2">10+</div>
-                            <div class="text-blue-100">Program Jurusan</div>
+                            <div class="text-gray-100">Program Jurusan</div>
                         </div>
                         <div
-                            class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 text-center border border-white border-opacity-20">
-                            <div class="text-3xl md:text-4xl font-bold text-orange-500 mb-2">98%</div>
-                            <div class="text-blue-100">Tingkat Kelulusan</div>
+                            class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 text-center border border-white border-opacity-20 hover:scale-105 hover:shadow-xl">
+                            <div class="text-3xl md:text-4xl font-bold text-orange-500 mb-2">COMINGSOON</div>
+                            <div class="text-gray-100">LOREM IPSUM</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- ==Rekomendasi Jurusan== -->
+        <section class="w-full py-16 bg-white flex justify-center">
+            <div class="w-full max-w-6xl px-4 flex flex-col lg:flex-row gap-12">
+                <!-- Kiri -->
+                <div class="w-full lg:w-1/2 flex flex-col justify-center">
+                    <div id="leftContent">
+                        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                            TEMUKAN JURUSAN
+                        </h2>
+                        <div class="text-3xl md:text-4xl font-bebas text-orange-400 mb-6">
+                            TEPAT UNTUKMU
+                        </div>
+                        <p class="text-lg text-gray-700 mb-8">
+                            Belum tahu jurusan apa yang cocok?<br />
+                            Masih bingung pilih jurusan?<br />
+                            Tenang, kita bantu.<br />
+                            Isi form di samping dan dapatkan rekomendasi jurusan.
+                        </p>
+                    </div>
+
+                    <div id="resultContainer"
+                        class="hidden bg-gradient-to-br from-blue-50 to-orange-50 p-8 rounded-2xl shadow-lg">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-2">
+                            REKOMENDASI KAMI
+                        </h2>
+                        <div class="w-20 h-1 bg-orange-500 mb-6"></div>
+                        <div id="resultContent" class="space-y-6">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Kanan -->
+                <div class="w-full lg:w-1/2 flex flex-col items-center">
+                    <form id="recommendationForm"
+                        class="w-full max-w-md bg-white rounded-2xl shadow-lg hover:shadow-2xl p-8 mb-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                            LOREM <span class="text-orange text-4xl font-bold text-orange-500">IPSUM</span>
+                        </h3>
+
+                        <div class="mb-6 relative">
+                            <label class="block text-gray-700 mb-2">Keyword</label>
+                            <input type="text" id="keywordInput" name="keyword"
+                                placeholder="Keyword yang sering didengar..."
+                                class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                required />
+                            <ul id="keywordDropdown"
+                                class="absolute z-10 w-full bg-white border border-gray-200 mt-1 rounded-lg shadow-md hidden">
+                                <!-- <li class="px-4 py-2 hover:bg-orange-100 cursor-pointer">Programming</li>
+                                        <li class="px-4 py-2 hover:bg-orange-100 cursor-pointer">Desain Grafis</li>
+                                        <li class="px-4 py-2 hover:bg-orange-100 cursor-pointer">Mesin</li>
+                                        <li class="px-4 py-2 hover:bg-orange-100 cursor-pointer">Multimedia</li>
+                                        <li class="px-4 py-2 hover:bg-orange-100 cursor-pointer">Jaringan</li>
+                                        <li class="px-4 py-2 hover:bg-orange-100 cursor-pointer">Animasi</li> -->
+                            </ul>
+                        </div>
+
+                        <button type="submit" id="submitButton"
+                            class="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white px-1 py-1 rounded-lg font-medium text-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300 flex items-center justify-center">
+                            LOREM IPSUM
+                        </button>
+                    </form>
+
+                    <div id="resetContainer" class="w-full max-w-md text-center animate-fade-in hidden">
+                        <div class="bg-gradient-to-br from-green-50 to-blue-50 p-8 rounded-2xl shadow-lg">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4">Rekomendasi Lainnya</h3>
+                            <p class="text-gray-600 mb-6">
+                                Ingin menjelajahi opsi jurusan lainnya? Klik tombol di bawah untuk mencoba lagi.
+                            </p>
+                            <button id="resetButton"
+                                class="px-8 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all duration-300">
+                                Cari Rekomendasi Baru
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <div class="bg-white py-16">
             <div class="container mx-auto px-4">
@@ -114,23 +192,26 @@
                 </div>
 
                 <div class="grid md:grid-cols-3 gap-8">
-                    <div class="text-center p-6 rounded-lg hover:shadow-lg transition-shadow">
+                    <div
+                        class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-l-8 border-blue-500">
                         <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                             <i class="fas fa-book-open text-blue-600 text-2xl"></i>
                         </div>
                         <h3 class="text-xl font-semibold text-gray-800 mb-2">Kurikulum Modern</h3>
                         <p class="text-gray-600">Kurikulum terupdate yang sesuai dengan kebutuhan industri masa kini.</p>
                     </div>
-                    <div class="text-center p-6 rounded-lg hover:shadow-lg transition-shadow">
+                    <div
+                        class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-l-8 border-orange-500">
                         <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
                             <i class="fas fa-laptop-code text-orange-600 text-2xl"></i>
                         </div>
                         <h3 class="text-xl font-semibold text-gray-800 mb-2">Fasilitas Lengkap</h3>
                         <p class="text-gray-600">Laboratorium dan peralatan modern untuk mendukung pembelajaran praktis.</p>
                     </div>
-                    <div class="text-center p-6 rounded-lg hover:shadow-lg transition-shadow">
+                    <div
+                        class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-l-8 border-blue-500">
                         <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-user-graduate text-green-600 text-2xl"></i>
+                            <i class="fas fa-user-graduate text-blue-600 text-2xl"></i>
                         </div>
                         <h3 class="text-xl font-semibold text-gray-800 mb-2">Bimbingan Karir</h3>
                         <p class="text-gray-600">Program bimbingan karir untuk mempersiapkan siswa memasuki dunia kerja.</p>
@@ -151,22 +232,22 @@
                 </div>
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="bg-white rounded-lg p-6 text-center shadow-md hover:shadow-xl transition-shadow">
+                    <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-l-8 border-blue-500">
                         <i class="fas fa-tools text-4xl text-blue-600 mb-4"></i>
                         <h3 class="text-lg font-semibold mb-2">Workshop</h3>
                         <p class="text-gray-600">Sesi praktik langsung dengan alat dan materi nyata.</p>
                     </div>
-                    <div class="bg-white rounded-lg p-6 text-center shadow-md hover:shadow-xl transition-shadow">
+                    <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-l-8 border-orange-500">
                         <i class="fas fa-industry text-4xl text-orange-600 mb-4"></i>
                         <h3 class="text-lg font-semibold mb-2">Industry Visit</h3>
                         <p class="text-gray-600">Kunjungan langsung ke industri untuk belajar praktik terbaik.</p>
                     </div>
-                    <div class="bg-white rounded-lg p-6 text-center shadow-md hover:shadow-xl transition-shadow">
+                    <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-l-8 border-green-500">
                         <i class="fas fa-handshake text-4xl text-green-600 mb-4"></i>
                         <h3 class="text-lg font-semibold mb-2">Magang</h3>
                         <p class="text-gray-600">Program magang untuk pengalaman kerja langsung.</p>
                     </div>
-                    <div class="bg-white rounded-lg p-6 text-center shadow-md hover:shadow-xl transition-shadow">
+                    <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-l-8 border-purple-500">
                         <i class="fas fa-project-diagram text-4xl text-purple-600 mb-4"></i>
                         <h3 class="text-lg font-semibold mb-2">Project Based</h3>
                         <p class="text-gray-600">Pembelajaran melalui proyek nyata yang menantang.</p>
@@ -176,85 +257,13 @@
         </div>
     </div>
 
-    <!-- ==Rekomendasi Jurusan== -->
-    <section class="w-full py-16 bg-white flex justify-center">
-        <div class="w-full max-w-6xl px-4 flex flex-col lg:flex-row gap-12">
-            <!-- Kiri -->
-            <div class="w-full lg:w-1/2 flex flex-col justify-center">
-                <div id="leftContent">
-                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                        TEMUKAN JURUSAN
-                    </h2>
-                    <div class="text-3xl md:text-4xl font-bebas text-orange-400 mb-6">
-                        TEPAT UNTUKMU
-                    </div>
-                    <p class="text-lg text-gray-700 mb-8">
-                        Belum tahu jurusan apa yang cocok?<br />
-                        Masih bingung pilih jurusan?<br />
-                        Tenang, kita bantu.<br />
-                        Isi form di samping dan dapatkan rekomendasi jurusan.
-                    </p>
-                </div>
-
-                <div id="resultContainer"
-                    class="hidden bg-gradient-to-br from-blue-50 to-orange-50 p-8 rounded-2xl shadow-lg">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-2">
-                        REKOMENDASI KAMI
-                    </h2>
-                    <div class="w-20 h-1 bg-orange-500 mb-6"></div>
-                    <div id="resultContent" class="space-y-6">
-                        <!-- Hasil akan diisi oleh JavaScript -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Form Kanan -->
-            <div class="w-full lg:w-1/2 flex flex-col items-center">
-                <form id="recommendationForm" class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 mb-8">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
-                        Ceritakan Minatmu
-                    </h3>
-
-                    <div class="mb-6 relative">
-                        <label class="block text-gray-700 mb-2">Keyword</label>
-                        <input type="text" id="keywordInput" name="keyword" placeholder="Keyword yang sering didengar..."
-                            class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                            required />
-                        <ul id="keywordDropdown"
-                            class="absolute z-10 w-full bg-white border border-gray-200 mt-1 rounded-lg shadow-md hidden">
-                            <li class="px-4 py-2 hover:bg-orange-100 cursor-pointer">Programming</li>
-                            <li class="px-4 py-2 hover:bg-orange-100 cursor-pointer">Desain Grafis</li>
-                            <li class="px-4 py-2 hover:bg-orange-100 cursor-pointer">Mesin</li>
-                            <li class="px-4 py-2 hover:bg-orange-100 cursor-pointer">Multimedia</li>
-                            <li class="px-4 py-2 hover:bg-orange-100 cursor-pointer">Jaringan</li>
-                            <li class="px-4 py-2 hover:bg-orange-100 cursor-pointer">Animasi</li>
-                        </ul>
-                    </div>
-
-                    <button type="submit" id="submitButton"
-                        class="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-4 rounded-lg font-medium text-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300 flex items-center justify-center">
-                        DAPATKAN REKOMENDASI
-                    </button>
-                </form>
-
-                <div id="resetContainer" class="w-full max-w-md text-center animate-fade-in hidden">
-                    <div class="bg-gradient-to-br from-green-50 to-blue-50 p-8 rounded-2xl shadow-lg">
-                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Rekomendasi Lainnya</h3>
-                        <p class="text-gray-600 mb-6">
-                            Ingin menjelajahi opsi jurusan lainnya? Klik tombol di bawah untuk mencoba lagi.
-                        </p>
-                        <button id="resetButton"
-                            class="px-8 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all duration-300">
-                            Cari Rekomendasi Baru
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <script>
+        function redirect() {
+            window.location.href = "/program/jurusan";
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
+
             // Elemen DOM
             const form = document.getElementById('recommendationForm');
             const keywordInput = document.getElementById('keywordInput');
@@ -266,61 +275,16 @@
             const resultContent = document.getElementById('resultContent');
             const resetContainer = document.getElementById('resetContainer');
 
-            // Data rekomendasi
-            const departments = [
-                {
-                    name: "Rekayasa Perangkat Lunak",
-                    department: "TIK",
-                    image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3",
-                    description: "Jurusan ini fokus pada pemrograman dan TI."
-                },
-                {
-                    name: "Teknik Pemesinan",
-                    department: "Pemesinan",
-                    image: "https://images.unsplash.com/photo-1581094288338-231b058b38b8?ixlib=rb-4.0.3",
-                    description: "Jurusan ini mempelajari mesin dan teknik manufaktur."
-                },
-                {
-                    name: "Desain Komunikasi Visual",
-                    department: "DKV",
-                    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3",
-                    description: "Jurusan ini fokus pada desain grafis dan multimedia."
-                },
-            ];
-
-            // Popular keywords
-            const popularKeywords = [
-                "Programming",
-                "Desain Grafis",
-                "Mesin",
-                "Multimedia",
-                "Jaringan",
-                "Animasi",
-            ];
-
-            // Event listeners
             keywordInput.addEventListener('focus', function () {
                 keywordDropdown.classList.remove('hidden');
             });
 
             keywordInput.addEventListener('blur', function () {
-                // Delay hiding to allow click on items
                 setTimeout(() => {
                     keywordDropdown.classList.add('hidden');
                 }, 200);
             });
 
-            // Add click events to dropdown items
-            const dropdownItems = keywordDropdown.querySelectorAll('li');
-            dropdownItems.forEach(item => {
-                item.addEventListener('mousedown', function (e) {
-                    e.preventDefault(); // Prevent blur from happening before setting value
-                    keywordInput.value = this.textContent;
-                    keywordDropdown.classList.add('hidden');
-                });
-            });
-
-            // Form submission
             form.addEventListener('submit', async function (e) {
                 e.preventDefault();
 
@@ -345,36 +309,64 @@
 
                     const data = await response.json();
 
-                    /**
-                     * ini result dari AI Nya, tolong jangan dirubah jika tidak ada revisi
-                     */
-                    if (data.name === "Tidak ditemukan") {
+                    // UNCOMMENT JIKA SEDANG TROUBLESHOOTING
+                    // console.log('API Response:', data);
+                    if (!response.ok) {
+                        throw new Error(data.error || 'Terjadi kesalahan');
+                    }
+                    if (data.jurusan_utama && data.jurusan_utama.name === "Tidak ditemukan") {
                         resultContent.innerHTML = `
-                            <div class="p-4 bg-red-50 border border-red-200 rounded-lg">
-                                <h3 class="text-lg font-semibold text-red-800">${data.name}</h3>
-                                <p class="text-red-700 mt-2">${data.description}</p>
+                        <div class="p-6 bg-red-50 border border-red-200 rounded-lg mb-4">
+                            <h3 class="text-xl font-semibold text-red-800 mb-2">${data.jurusan_utama.name}</h3>
+                            <p class="text-red-700">${data.jurusan_utama.description}</p>
+                        </div>
+                    `;
+                    } else if (data.jurusan_utama && data.jurusan_alternatif) {
+                        resultContent.innerHTML = `
+                        <div class="mb-6">
+                            <h3 class="text-lg font-semibold text-blue-800 mb-2">Jurusan Utama:</h3>
+                            <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                                <h4 class="text-xl font-bold text-gray-900">${data.jurusan_utama.name}</h4>
+                                <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm mt-2">
+                                    ${data.jurusan_utama.department}
+                                </span>
+                                <p class="text-gray-700 mt-3">${data.jurusan_utama.description}</p>
+                                <button onclick="redirect()" class="bg-orange-500 text-white font-medium px-4 py-2 mt-4 rounded-xl shadow-md hover:bg-orange-600 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">Lihat Selengkapnya ></button>
                             </div>
-                        `;
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-green-800 mb-2">Jurusan Alternatif:</h3>
+                            <div class="p-4 bg-green-50 border border-green-200 rounded-lg">
+                                <h4 class="text-xl font-bold text-gray-900">${data.jurusan_alternatif.name}</h4>
+                                <span class="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm mt-2">
+                                    ${data.jurusan_alternatif.department}
+                                </span>
+                                <p class="text-gray-700 mt-3">${data.jurusan_alternatif.description}</p>
+                                <button onclick="redirect()" class="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-5 py-2 mt-4 rounded-xl shadow-md hover:from-orange-600 hover:to-red-600 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">Lihat Selengkapnya ></button>
+                            </div>
+                        </div>
+                    `;
                     } else {
                         resultContent.innerHTML = `
-                            <div>
-                                <h3 class="text-2xl font-bold text-blue-800">${data.name} 
-                                <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm mt-2">
-                                    ${data.department}
-                                </span></h3>
-                                <p class="text-gray-700 text-lg leading-relaxed mt-4">
-                                    ${data.description}
-                                </p>
-                            </div>
-                        `;
+                        <div class="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                            <h3 class="text-lg font-semibold text-yellow-800">Format Response Tidak Dikenal</h3>
+                            <p class="text-yellow-700 mt-2">Silakan coba lagi dengan kata kunci yang berbeda.</p>
+                            <details class="mt-3">
+                                <summary class="cursor-pointer text-sm">Debug Info</summary>
+                                <pre class="text-xs mt-2">${JSON.stringify(data, null, 2)}</pre>
+                            </details>
+                        </div>
+                    `;
                     }
 
                     leftContent.classList.add('hidden');
                     resultContainer.classList.remove('hidden');
                     form.classList.add('hidden');
                     resetContainer.classList.remove('hidden');
+
                 } catch (error) {
-                    alert("Terjadi kesalahan, coba lagi.");
+                    console.error('Error:', error);
+                    alert("Terjadi kesalahan: " + error.message);
                 } finally {
                     submitButton.disabled = false;
                     submitButton.textContent = 'DAPATKAN REKOMENDASI';
