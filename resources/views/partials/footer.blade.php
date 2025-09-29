@@ -140,7 +140,7 @@
         <div>
             <div class="flex items-center space-x-3 mb-4">
                 <div
-                    class="w-14 h-14 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                    class="w-30 h-30 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
                     <img src="https://i.ibb.co.com/MkPkNv4c/Logo-Sekolah.png" alt="logo">
                 </div>
                 <div>

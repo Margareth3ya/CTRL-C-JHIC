@@ -29,6 +29,7 @@ Route::get('/profile', function () {
 });
 
 
+
 Route::get('/kontak', function () {
     return view('kontak');
 })->name('kontak');

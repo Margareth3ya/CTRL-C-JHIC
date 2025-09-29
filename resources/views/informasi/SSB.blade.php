@@ -105,7 +105,7 @@
 
 
 
-    <!-- Hero Section -->
+<!-- Hero Section -->
     <div class="relative container mx-auto px-4 py-12 lg:py-24">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <!-- Text Content -->
@@ -116,22 +116,30 @@
                 <p class="text-lg lg:text-xl text-gray-700 leading-relaxed">
                     SMK PGRI 3 Malang (Skariga) membuka Pendaftaran Peserta Didik Baru (PPDB) Tahun Ajaran 2025/2026 melalui Jalur Makmur. Segera daftarkan diri Anda untuk menjadi bagian dari sekolah unggulan dengan berbagai program keahlian yang siap mencetak lulusan berkompeten dan berkarakter.
                 </p>
+                <a href="{{ route('kontak') }}" 
+       class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-3xl text-lg lg:text-xl font-poppins font-bold transition-colors inline-flex items-center justify-center">
+        Daftar Sekarang
+    </a>
                 <button onclick="document.getElementById('offline-registration').scrollIntoView({behavior: 'smooth'});" 
                     class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-3xl text-lg lg:text-xl font-poppins font-bold transition-colors">
                     Tata Cara Pendaftaran →
                 </button>
+                    
 
             </div>
-
-            <!-- Image -->
-            <div class="order-first lg:order-last">
-            <img src="{{ asset('assets/Daftar.png') }}" 
-            class="w-full h-[500px] object-cover rounded-2xl shadow-2xl">
-
-
+            <!-- Slideshow -->
+            <div class="order-first lg:order-last relative w-full h-[500px] rounded-2xl overflow-hidden shadow-2xl">
+                <div id="slider" class="flex h-full transition-transform duration-1000 ease-in-out">
+                    <img src="{{ asset('assets/Daftar.png') }}" class="w-full h-full object-cover flex-shrink-0">
+                    <img src="{{ asset('assets/Kegiatan1.png') }}" class="w-full h-full object-cover flex-shrink-0">
+                    <img src="{{ asset('assets/Kegiatan2.png') }}" class="w-full h-full object-cover flex-shrink-0">
+                    <img src="{{ asset('assets/Kegiatan3.png') }}" class="w-full h-full object-cover flex-shrink-0">
+                </div>
             </div>
+
         </div>
     </div>
+
 
     <!-- Offline Registration Steps -->
     <div id="offline-registration" class="relative py-16 lg:py-24">
@@ -197,4 +205,16 @@
         </div>
     </div>
 </div>
+
+<script>
+    let currentIndex = 0;
+    const slider = document.getElementById('slider');
+    const totalSlides = slider.children.length;
+
+    setInterval(() => {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }, 3000); // ganti slide setiap 3 detik
+</script>
+
 @endsection

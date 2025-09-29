@@ -1,6 +1,13 @@
 @extends('layouts.app')
 @push('styles')
     <style>
+
+        .font-bebas {
+            font-family: 'Bebas Neue', cursive;
+        }
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
         .card-active {
             transform: translateX(0) scale(1);
             opacity: 1;
@@ -24,17 +31,45 @@
             opacity: 0.5;
             transition: all 0.4s ease;
         }
+
+        /* Lingkaran dasar */
+        .bg-circle {
+            position: absolute;
+            width: 20rem;
+            height: 20rem;
+            border-radius: 50%; /* lingkaran sempurna */
+            opacity: 0.7; /* transparansi supaya gak terlalu solid */
+            z-index: -1; /* biar selalu di belakang konten */
+            
+        }
+
+        /* Lingkaran lebih besar di layar besar */
+        @media (min-width: 1024px) {
+            .bg-circle {
+                width: 28rem;
+                height: 28rem;
+            }
+        }
+
+        /* Warna lingkaran */
+        .bg-orange-blur {
+            background: rgba(255, 179, 132, 0.6); /* Orange soft */
+        }
+
+        .bg-blue-blur {
+            background: rgba(174, 219, 228, 0.6); /* Blue soft */
+        }
     </style>
 @endpush
 @section('content')
-    <div class="relative overflow-hidden">
+    <div class="relative overflow- bg-white">
         <div class="relative bg-gradient-to-r from-blue-900 to-blue-700 text-white">
             <div class="absolute inset-0 z-0">
                 <div class="swiper-container h-full w-full">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
                             <div class="w-full h-full bg-cover bg-center"
-                                style="background-image: url('https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')">
+                                style="background-image: url('{{ asset('assets/Hero1.png') }}')">
                             </div>
                         </div>
                         <div class="swiper-slide">
@@ -56,9 +91,9 @@
                 <div class="grid md:grid-cols-2 gap-8 items-center">
                     <div class="text-center md:text-left">
                         <div class="mb-6">
-                            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight text-orange-500">
+                            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bebas mb-4 leading-tight text-orange-500">
                                 SUCCESS BY<br>
-                                <span class="text-white">DISCIPLINE</span>
+                                <span class="text-orange">DISCIPLINE</span>
                             </h1>
                             <p class="text-xl md:text-2xl text-blue-100 mb-6">
                                 Membentuk siswa cerdas, terampil, dan berkarakter
@@ -77,40 +112,49 @@
 
                     <div class="grid grid-cols-2 gap-6">
                         <div
-                            class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 text-center border border-white border-opacity-20 hover:scale-105 hover:shadow-xl">
+                            class="bg-white bg-opacity-40 backdrop-blur-sm rounded-xl p-6 text-center border border-white border-opacity-20 hover:scale-105 hover:shadow-xl">
                             <div class="text-3xl md:text-4xl font-bold text-orange-500 mb-2">1000+</div>
-                            <div class="text-gray-100">Siswa Aktif</div>
+                            <div class="text-black">Siswa Aktif</div>
                         </div>
                         <div
-                            class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 text-center border border-white border-opacity-20 hover:scale-105 hover:shadow-xl">
+                            class="bg-white bg-opacity-40 backdrop-blur-sm rounded-xl p-6 text-center border border-white border-opacity-20 hover:scale-105 hover:shadow-xl">
                             <div class="text-3xl md:text-4xl font-bold text-orange-500 mb-2">50+</div>
-                            <div class="text-gray-100">Guru Berpengalaman</div>
+                            <div class="text-black">Guru Berpengalaman</div>
                         </div>
                         <div
-                            class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 text-center border border-white border-opacity-20 hover:scale-105 hover:shadow-xl">
+                            class="bg-white bg-opacity-40 backdrop-blur-sm rounded-xl p-6 text-center border border-white border-opacity-20 hover:scale-105 hover:shadow-xl">
                             <div class="text-3xl md:text-4xl font-bold text-orange-500 mb-2">10+</div>
-                            <div class="text-gray-100">Program Jurusan</div>
+                            <div class="text-black">Program Jurusan</div>
                         </div>
                         <div
-                            class="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 text-center border border-white border-opacity-20 hover:scale-105 hover:shadow-xl">
-                            <div class="text-3xl md:text-4xl font-bold text-orange-500 mb-2">COMINGSOON</div>
-                            <div class="text-gray-100">LOREM IPSUM</div>
+                            class="bg-white bg-opacity-40 backdrop-blur-sm rounded-xl p-6 text-center border border-white border-opacity-20 hover:scale-105 hover:shadow-xl">
+                            <div class="text-3xl md:text-4xl font-bold text-orange-500 mb-2">100+</div>
+                            <div class="text-black">Kerjasama Industri</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Background Circles -->
+        <div class="absolute inset-0 pointer-events-none z-0">
+            <div class="bg-blue-blur bg-circle -left-32 -top-1/4"></div>
+            <div class="bg-blue-blur bg-circle -left-28 top-1/3"></div>
+            <div class="bg-orange-blur bg-circle -right-32 top-1/4"></div>
+            <div class="bg-orange-blur bg-circle -right-28 bottom-40"></div>
+        </div>
+
+
         <!-- ==Rekomendasi Jurusan== -->
-        <section class="w-full py-16 bg-white flex justify-center">
+        <section class=" relative z-10 w-full py-16 bg-transparent flex justify-center">
             <div class="w-full max-w-6xl px-4 flex flex-col lg:flex-row gap-12">
                 <!-- Kiri -->
                 <div class="w-full lg:w-1/2 flex flex-col justify-center">
                     <div id="leftContent">
-                        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                        <h2 class="text-5xl md:text-6xl font-bebas text-gray-900 mb-4">
                             TEMUKAN JURUSAN
                         </h2>
-                        <div class="text-3xl md:text-4xl font-bebas text-orange-400 mb-6">
+                        <div class="text-4xl md:text-5xl font-bebas text-orange-400 mb-6">
                             TEPAT UNTUKMU
                         </div>
                         <p class="text-lg text-gray-700 mb-8">
@@ -136,14 +180,14 @@
                 <div class="w-full lg:w-1/2 flex flex-col items-center">
                     <form id="recommendationForm"
                         class="w-full max-w-md bg-white rounded-2xl shadow-lg hover:shadow-2xl p-8 mb-8">
-                        <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
-                            LOREM <span class="text-orange text-4xl font-bold text-orange-500">IPSUM</span>
+                        <h3 class="text-4xl font-bebas text-gray-800 mb-6 text-center">
+                            apa yang kamu <span class="text-orange text-5xl font-bold text-orange-500">SUKA?</span>
                         </h3>
 
                         <div class="mb-6 relative">
-                            <label class="block text-gray-700 mb-2">Keyword</label>
+                            <label class="block text-gray-700 mb-2">Coba tuliskan</label>
                             <input type="text" id="keywordInput" name="keyword"
-                                placeholder="Keyword yang sering didengar..."
+                                placeholder="tulis disini..."
                                 class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                                 required />
                             <ul id="keywordDropdown"
@@ -159,7 +203,7 @@
 
                         <button type="submit" id="submitButton"
                             class="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white px-1 py-1 rounded-lg font-medium text-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300 flex items-center justify-center">
-                            LOREM IPSUM
+                            Temukan Jurusanmu
                         </button>
                     </form>
 
@@ -179,11 +223,11 @@
             </div>
         </section>
 
-        <div class="bg-white py-16">
+        <div class="relative z-10 bg-transparent py-16">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-                        <span class="text-blue-900">SKARIGA</span>?
+                    <h2 class="text-3xl md:text-5xl font-bebas text-gray-800 mb-4">
+                        Kenapa harus <span class="text-blue-500">SKARIGA?</span>
                     </h2>
                     <p class="text-lg text-gray-600 max-w-2xl mx-auto">
                         Sekolah Kejuruan Unggulan yang berfokus pada pengembangan potensi siswa
@@ -193,7 +237,7 @@
 
                 <div class="grid md:grid-cols-3 gap-8">
                     <div
-                        class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-l-8 border-blue-500">
+                        class="bg-blue-50 rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-l-8 border-blue-500">
                         <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                             <i class="fas fa-book-open text-blue-600 text-2xl"></i>
                         </div>
@@ -201,7 +245,7 @@
                         <p class="text-gray-600">Kurikulum terupdate yang sesuai dengan kebutuhan industri masa kini.</p>
                     </div>
                     <div
-                        class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-l-8 border-orange-500">
+                        class="bg-orange-50 rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-l-8 border-orange-500">
                         <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
                             <i class="fas fa-laptop-code text-orange-600 text-2xl"></i>
                         </div>
@@ -209,7 +253,7 @@
                         <p class="text-gray-600">Laboratorium dan peralatan modern untuk mendukung pembelajaran praktis.</p>
                     </div>
                     <div
-                        class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-l-8 border-blue-500">
+                        class="bg-blue-50 rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-l-8 border-blue-500">
                         <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                             <i class="fas fa-user-graduate text-blue-600 text-2xl"></i>
                         </div>
@@ -220,10 +264,10 @@
             </div>
         </div>
 
-        <div class="bg-gray-50 py-16">
+        <div class="bg-transparent -50 py-16">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                    <h2 class="text-3xl md:text-5xl font-bebas text-gray-800 mb-4">
                         PEMBELAJARAN <span class="text-orange-500">PRAKTIS</span>
                     </h2>
                     <p class="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -232,23 +276,23 @@
                 </div>
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-l-8 border-blue-500">
+                    <div class="bg-blue-50 rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-l-8 border-blue-500">
                         <i class="fas fa-tools text-4xl text-blue-600 mb-4"></i>
                         <h3 class="text-lg font-semibold mb-2">Workshop</h3>
                         <p class="text-gray-600">Sesi praktik langsung dengan alat dan materi nyata.</p>
                     </div>
-                    <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-l-8 border-orange-500">
+                    <div class="bg-orange-50 rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-l-8 border-orange-500">
                         <i class="fas fa-industry text-4xl text-orange-600 mb-4"></i>
                         <h3 class="text-lg font-semibold mb-2">Industry Visit</h3>
                         <p class="text-gray-600">Kunjungan langsung ke industri untuk belajar praktik terbaik.</p>
                     </div>
-                    <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-l-8 border-green-500">
-                        <i class="fas fa-handshake text-4xl text-green-600 mb-4"></i>
+                    <div class="bg-blue-50 rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-l-8 border-blue-500">
+                        <i class="fas fa-handshake text-4xl text-blue-600 mb-4"></i>
                         <h3 class="text-lg font-semibold mb-2">Magang</h3>
                         <p class="text-gray-600">Program magang untuk pengalaman kerja langsung.</p>
                     </div>
-                    <div class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-l-8 border-purple-500">
-                        <i class="fas fa-project-diagram text-4xl text-purple-600 mb-4"></i>
+                    <div class="bg-orange-50 rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-l-8 border-orange-500">
+                        <i class="fas fa-project-diagram text-4xl text-orange-600 mb-4"></i>
                         <h3 class="text-lg font-semibold mb-2">Project Based</h3>
                         <p class="text-gray-600">Pembelajaran melalui proyek nyata yang menantang.</p>
                     </div>
@@ -384,11 +428,11 @@
         });
     </script>
     <!-- ==Carousel Departemen== -->
-    <section class="w-full py-16 bg-gray-50">
+    <section class="w-full py-16 bg-white">
         <div class="container mx-auto px-4">
             <!-- Header -->
             <div class="text-center mb-12">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">
+                <h2 class="text-4xl md:text-5xl font-bebas text-gray-900 mb-2">
                     <span class="text-black">4 Departemen Unggulan</span>
                     <span class="text-orange-500"> SKARIGA</span>
                 </h2>
@@ -404,7 +448,7 @@
                             <div class="flex flex-col md:flex-row h-full">
                                 <!-- Image -->
                                 <div class="md:w-2/5">
-                                    <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=538&q=80"
+                                    <img src="{{ asset('assets/Depart1.png') }}"
                                         alt="TIK (Teknologi Informasi & Komunikasi)"
                                         class="w-full h-40 md:h-full object-cover">
                                 </div>
@@ -440,7 +484,7 @@
                             <div class="flex flex-col md:flex-row h-full">
                                 <!-- Image -->
                                 <div class="md:w-2/5">
-                                    <img src="https://images.unsplash.com/photo-1581094288338-231b058b38b8?auto=format&fit=crop&w=453&q=80"
+                                    <img src="{{ asset('assets/Depart2.png') }}"
                                         alt="Pemesinan" class="w-full h-40 md:h-full object-cover">
                                 </div>
 
@@ -474,7 +518,7 @@
                             <div class="flex flex-col md:flex-row h-full">
                                 <!-- Image -->
                                 <div class="md:w-2/5">
-                                    <img src="https://images.unsplash.com/photo-1581093458791-9d33f465dea5?auto=format&fit=crop&w=368&q=80"
+                                    <img src="{{ asset('assets/Depart3.png') }}"
                                         alt="Kelistrikan" class="w-full h-40 md:h-full object-cover">
                                 </div>
 
@@ -508,7 +552,7 @@
                             <div class="flex flex-col md:flex-row h-full">
                                 <!-- Image -->
                                 <div class="md:w-2/5">
-                                    <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=336&q=80"
+                                    <img src="{{ asset('assets/Depart4.png') }}"
                                         alt="Otomotif" class="w-full h-40 md:h-full object-cover">
                                 </div>
 

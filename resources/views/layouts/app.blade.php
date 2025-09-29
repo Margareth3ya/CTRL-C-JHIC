@@ -15,11 +15,11 @@
     <link rel="stylesheet" href="css/style.css">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+    @stack('scripts')
     @stack('styles')
 </head>
 
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-white-100 text-gray-800">
     @include('components.navbar')
     <main>
         @yield('content')

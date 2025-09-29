@@ -14,9 +14,11 @@
         
         /* Tambahan styling untuk layout yang lebih stabil */
         .hero-section {
-            min-height: 100vh;
+            min-height: auto; /* biar sesuai konten saja */
             position: relative;
+            padding-top: 2rem; /* bisa diatur sesuai kebutuhan */
         }
+
         
         .achievement-section {
             padding: 4rem 1rem;
@@ -45,11 +47,64 @@
                 margin-top: 2rem;
             }
         }
+
+        .bg-orange-blur {
+            background: rgba(255, 179.25, 132.16, 0.32);
+        }
+        
+        .bg-blue-blur {
+            background: #AEDBE4;
+            opacity: 0.50;
+        }
+        .bg-circle {
+            width: 20rem;
+            height: 20rem;
+            position: absolute;
+        }
+
+        @media (min-width: 1024px) {
+            .bg-circle {
+                width: 28rem;
+                height: 28rem;
+            }
+        }
+
+        /* wrapper khusus background */
+        .bg-circles-wrapper {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1; /* semua circle otomatis di belakang */
+        }
+
+
     </style>
 @endpush
 
 @section('content')
-<div class="bg-white min-h-screen">
+<div class="relative min-h-screen">
+
+  <!-- Background Circles -->
+  <div class="bg-circles-wrapper">
+    <div class="grid grid-cols-2 grid-rows-2 w-full h-full">
+      <div class="flex items-start justify-start">
+        <div class="bg-blue-blur rounded-full bg-circle -translate-x-1/3 -translate-y-1/3"></div>
+      </div>
+      <div class="flex items-start justify-end">
+        <div class="bg-orange-blur rounded-full bg-circle translate-x-1/3 -translate-y-1/3"></div>
+      </div>
+      <div class="flex items-end justify-start">
+        <div class="bg-blue-blur rounded-full bg-circle -translate-x-1/3 translate-y-1/3"></div>
+      </div>
+      <div class="flex items-end justify-end">
+        <div class="bg-orange-blur rounded-full bg-circle translate-x-1/3 translate-y-1/3"></div>
+      </div>
+    </div>
+  </div>
+
+
+
+
 
     <!-- Hero Section -->
     <section class="hero-section flex items-center px-4 md:px-16 py-8">
@@ -69,8 +124,8 @@
                 <!-- Hero Image -->
                 <div class="hero-image md:w-1/2 flex justify-center md:justify-end relative">
                     <img id="hero-slideshow" 
-                        class="w-full max-w-md md:max-w-lg rounded-lg shadow-lg transition-opacity duration-700 opacity-100" 
-                        src="{{ asset('assets/Berita1.png') }}"
+                        class="w-full max-w-md md:max-w-lg rounded-lg transition-opacity duration-700 opacity-100" 
+                        src="{{ asset('assets/PrestasiA.png') }}"
                         alt="Hero Slideshow">
                 </div>
 
@@ -86,9 +141,9 @@
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Achievement 1 -->
-                <div class="achievement-card bg-white rounded-2xl shadow-lg overflow-hidden">
-                    <img class="w-full h-64 object-cover" 
-                         src="{{ asset('assets/Berita1.png') }}" 
+                <div class="achievement-card bg-white rounded-2xl shadow-lg object-cover">
+                    <img class="w-full h-80 object-cover" 
+                         src="{{ asset('assets/Prestasi1.png') }}" 
                          alt="Juara 2 LKS Nasional">
                     <div class="p-6">
                         <h3 class="text-2xl font-poppins font-semibold mb-2">Juara 2 LKS Nasional</h3>
@@ -101,8 +156,8 @@
 
                 <!-- Achievement 2 -->
                 <div class="achievement-card bg-white rounded-2xl shadow-lg overflow-hidden">
-                    <img class="w-full h-64 object-cover" 
-                         src="{{ asset('assets/Berita1.png') }}" 
+                    <img class="w-full h-80 object-cover" 
+                         src="{{ asset('assets/Prestasi2.png') }}" 
                          alt="Juara 1 LKS Nasional">
                     <div class="p-6">
                         <h3 class="text-2xl font-poppins font-semibold mb-2">Juara 1 LKS Nasional</h3>
@@ -115,8 +170,8 @@
 
                 <!-- Achievement 3 -->
                 <div class="achievement-card bg-white rounded-2xl shadow-lg overflow-hidden">
-                    <img class="w-full h-64 object-cover" 
-                         src="{{ asset('assets/Berita1.png') }}"
+                    <img class="w-full h-80 object-cover" 
+                         src="{{ asset('assets/Prestasi1.png') }}"
                          alt="Juara 2 LKS Nasional">
                     <div class="p-6">
                         <h3 class="text-2xl font-poppins font-semibold mb-2">Juara 2 LKS Nasional</h3>
@@ -137,8 +192,8 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const images = [
-            "{{ asset('assets/Berita1.png') }}",
-            "{{ asset('assets/Berita2.png') }}",
+            "{{ asset('assets/PrestasiA.png') }}",
+            "{{ asset('assets/PrestasiB.png') }}",
             "{{ asset('assets/Berita3.png') }}"
         ];
 

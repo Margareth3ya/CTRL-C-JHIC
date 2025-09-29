@@ -57,11 +57,25 @@
                             placeholder="Email" required>
                     </div>
 
-                    <div class="mb-4">
-                        <input type="text" name="subjek" value="{{ old('subjek') }}"
-                            class="mt-1 bg-gray-200 block w-full border border-gray-300 rounded-xl shadow-sm p-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                            placeholder="Subject" required>
-                    </div>
+<div class="mb-4">
+    <label class="block text-gray-700 font-semibold mb-2">Subjek</label>
+    <div class="flex gap-6">
+        <label class="inline-flex items-center">
+            <input type="radio" name="subjek" value="Konsultasi"
+                   class="text-orange-500 focus:ring-orange-400"
+                   {{ old('subjek') === 'Konsultasi' ? 'checked' : '' }} required>
+            <span class="ml-2">Konsultasi</span>
+        </label>
+
+        <label class="inline-flex items-center">
+            <input type="radio" name="subjek" value="Pendaftaran"
+                   class="text-orange-500 focus:ring-orange-400"
+                   {{ old('subjek') === 'Pendaftaran' ? 'checked' : '' }}>
+            <span class="ml-2">Pendaftaran</span>
+        </label>
+    </div>
+</div>
+
 
                     <div class="mb-6">
                         <textarea name="pesan" rows="5"

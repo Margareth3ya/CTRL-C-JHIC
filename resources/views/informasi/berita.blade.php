@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <!-- ===== Section 1 ===== -->
-<section class="py-12 md:py-16">
+<section class="py-12 md:py-16 bg-white">
     <div class="container mx-auto px-4">
         <h2 class="text-3xl md:text-4xl font-bold text-black mb-8 md:mb-12 text-center">
             BERITA TERBARU
