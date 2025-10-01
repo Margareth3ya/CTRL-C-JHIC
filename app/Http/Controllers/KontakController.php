@@ -40,8 +40,8 @@ class KontakController extends Controller
                 'waktu' => now()->format('d F Y H:i:s')
             ];
 
-            // Mail::to('radityapanca02@gmail.com')
-            //     ->send(new KontakMail($dataPesan));
+            Mail::to('radityapanca02@gmail.com')
+                ->send(new KontakMail($dataPesan));
 
             return redirect()->back()
                 ->with('success', 'Pesan Anda telah berhasil dikirim!');
