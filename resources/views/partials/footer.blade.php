@@ -136,22 +136,20 @@
         <div class="absolute bottom-10 right-1/4 w-48 h-48 rounded-full bg-primary animate-float"></div>
     </div>
 
-    <div class="relative z-10 grid md:grid-cols-4 gap-8">
+    <div class="relative z-10 grid md:grid-cols-5 gap-8 mt-6">
         <div>
-            <div class="flex items-center space-x-3 mb-4">
-                <div
-                    class="w-30 h-30 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                    <img src="https://i.ibb.co.com/MkPkNv4c/Logo-Sekolah.png" alt="logo">
+            <div class="flex items-center mb-4">
+                <div class="w-40 h-40 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    <img src="https://i.ibb.co.com/MkPkNv4c/Logo-Sekolah.png" alt="logo_SKARIGA">
                 </div>
                 <div>
                     <h2 class="text-white font-bold text-xl">SKARIGA</h2>
                     <p class="text-sm text-gray-400">Successful by Discipline</p>
                 </div>
             </div>
-            <p class="text-sm mb-4">Sekolah unggulan yang berkomitmen untuk mencetak generasi disiplin dan berprestasi.
-            </p>
 
-            <div class="mt-6 flex space-x-4">
+            <div class="flex">
+                <span class="text-gray-400">Social Media: </span>
                 <a href="#"
                     class="social-icon w-10 h-10 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center">
                     <i class="fab fa-facebook-f"></i>
@@ -236,7 +234,9 @@
                     <span>Senin - Jumat: 07:00 - 16:00</span>
                 </p>
             </div>
+        </div>
 
+        <div>
             <div class="mt-4 rounded-lg overflow-hidden map-container shadow-lg">
                 <div class="bg-gray-800 h-40 flex items-center justify-center">
                     <div class="text-center w-full h-full">
