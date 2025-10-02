@@ -188,25 +188,71 @@
     </div>
 
     <!-- Statistics Section -->
-    <div class="relative py-16 lg:py-24">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl lg:text-6xl font-bebas text-black text-center mb-12 lg:mb-20">
-                Data jumlah peserta diterima setiap tahun
-            </h2>
-            
-            <!-- Chart/Graph dengan container responsif -->
-            <div class="chart-container bg-transparent rounded-2xl p-4 lg:p-8">
-<img src="{{ asset('assets/Chart.png') }}" 
-     alt="Data Statistik" 
-     class="chart-image rounded-lg w-full max-w-2xl mx-auto">
-
-
-            </div>
+<div class="relative py-16 lg:py-24">
+    <div class="container mx-auto px-4">
+        <h2 class="text-4xl lg:text-6xl font-bebas text-black text-center mb-12 lg:mb-20">
+            Data jumlah peserta diterima setiap tahun
+        </h2>
+        
+        <!-- Chart/Graph dengan container responsif -->
+        <div class="chart-container bg-transparent rounded-2xl p-4 lg:p-8">
+            <canvas id="myChart" class="chart-image rounded-lg w-full max-w-2xl mx-auto"></canvas>
         </div>
     </div>
 </div>
 
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+    const ctx = document.getElementById('myChart');
+
+    const data = {
+        labels: ["2021", "2022", "2023", "2024", "2025"],
+        datasets: [
+            {
+                label: "Data Pendaftar",
+                data: [800, 700, 860, 870, 980], // nanti bisa diganti dari backend
+                backgroundColor: "rgba(253, 136, 58, 0.8)",
+                borderRadius: 10
+            },
+            {
+                label: "Data Peserta Diterima",
+                data: [750, 680, 820, 830, 920],
+                backgroundColor: "rgba(54, 162, 235, 0.8)",
+                borderRadius: 10
+            }
+        ]
+    };
+
+    const config = {
+        type: 'bar',
+        data: data,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    suggestedMax: 1100
+                }
+            },
+            animation: {
+                duration: 1200,
+                easing: 'easeOutQuart'
+            }
+        }
+    };
+
+    new Chart(ctx, config);
+});
+
     let currentIndex = 0;
     const slider = document.getElementById('slider');
     const totalSlides = slider.children.length;

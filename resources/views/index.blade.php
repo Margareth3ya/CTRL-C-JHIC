@@ -598,7 +598,102 @@
         </div>
     </section>
 
+    <!-- == Kerjasama Industri == -->
+    <section class="w-full bg-white py-16">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-5xl font-bebas text-gray-900 text-center mb-12">
+        KERJASAMA <span class="text-orange-500">INDUSTRI</span>
+        </h2>
+
+        <!-- Slider Baris 1 -->
+        <div class="swiper kerjasamaSwiper1 mb-10">
+        <div class="swiper-wrapper flex items-center">
+            <div class="swiper-slide flex justify-center items-center">
+            <img src="{{ asset('assets/lg.png') }}" class="h-16 object-contain" alt="LG" />
+            </div>
+            <div class="swiper-slide flex justify-center items-center">
+            <img src="{{ asset('assets/alfamart.png') }}" class="h-16 object-contain" alt="Alfamart" />
+            </div>
+            <div class="swiper-slide flex justify-center items-center">
+            <img src="{{ asset('assets/daihatsu.png') }}" class="h-16 object-contain" alt="Daihatsu" />
+            </div>
+            <div class="swiper-slide flex justify-center items-center">
+            <img src="{{ asset('assets/pjb.png') }}" class="h-16 object-contain" alt="PJB" />
+            </div>
+            <div class="swiper-slide flex justify-center items-center">
+            <img src="{{ asset('assets/bd.png') }}" class="h-16 object-contain" alt="B&D" />
+            </div>
+            <div class="swiper-slide flex justify-center items-center">
+            <img src="{{ asset('assets/indonesia-power.png') }}" class="h-16 object-contain" alt="Indonesia Power" />
+            </div>
+        </div>
+        </div>
+
+        <!-- Slider Baris 2 (arah sebaliknya) -->
+        <div class="swiper kerjasamaSwiper2">
+        <div class="swiper-wrapper flex items-center">
+                        <div class="swiper-slide flex justify-center items-center">
+            <img src="{{ asset('assets/jatim.png') }}" class="h-16 object-contain" alt="LG" />
+            </div>
+            <div class="swiper-slide flex justify-center items-center">
+            <img src="{{ asset('assets/jaghos.png') }}" class="h-16 object-contain" alt="Alfamart" />
+            </div>
+            <div class="swiper-slide flex justify-center items-center">
+            <img src="{{ asset('assets/asco.png') }}" class="h-16 object-contain" alt="Daihatsu" />
+            </div>
+            <div class="swiper-slide flex justify-center items-center">
+            <img src="{{ asset('assets/japfa.png') }}" class="h-16 object-contain" alt="PJB" />
+            </div>
+            <div class="swiper-slide flex justify-center items-center">
+            <img src="{{ asset('assets/crpu.png') }}" class="h-16 object-contain" alt="B&D" />
+            </div>
+            <div class="swiper-slide flex justify-center items-center">
+            <img src="{{ asset('assets/radar.png') }}" class="h-16 object-contain" alt="Indonesia Power" />
+            </div>
+        </div>
+        </div>
+    </div>
+    </section>
+
     <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Baris 1 (arah ke kanan)
+            new Swiper(".kerjasamaSwiper1", {
+            slidesPerView: 4,
+            spaceBetween: 30,
+            loop: true,
+            autoplay: {
+                delay: 0,
+                disableOnInteraction: false,
+            },
+            speed: 3000,
+            breakpoints: {
+                320: { slidesPerView: 2, spaceBetween: 20 },
+                640: { slidesPerView: 3, spaceBetween: 20 },
+                1024: { slidesPerView: 5, spaceBetween: 30 },
+            },
+            });
+
+            // Baris 2 (arah ke kiri → pakai reverse)
+            new Swiper(".kerjasamaSwiper2", {
+            slidesPerView: 4,
+            spaceBetween: 30,
+            loop: true,
+            autoplay: {
+                delay: 0,
+                disableOnInteraction: false,
+                reverseDirection: true, // jalan ke kiri
+            },
+            speed: 3000,
+            breakpoints: {
+                320: { slidesPerView: 2, spaceBetween: 20 },
+                640: { slidesPerView: 3, spaceBetween: 20 },
+                1024: { slidesPerView: 5, spaceBetween: 30 },
+            },
+            });
+        });
+
         document.addEventListener('DOMContentLoaded', function () {
             const cards = document.querySelectorAll('.card');
             const dots = document.querySelectorAll('.dot-indicator');
