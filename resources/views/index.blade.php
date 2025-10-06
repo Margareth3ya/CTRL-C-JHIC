@@ -427,177 +427,154 @@
             });
         });
     </script>
-    <!-- ==Carousel Departemen== -->
-    <section class="w-full py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <!-- Header -->
-            <div class="text-center mb-12">
-                <h2 class="text-4xl md:text-5xl font-bebas text-gray-900 mb-2">
-                    <span class="text-black">4 Departemen Unggulan</span>
-                    <span class="text-orange-500"> SKARIGA</span>
-                </h2>
-            </div>
+<!-- ==Carousel Departemen (Stacked)== -->
+<section class="w-full py-16 bg-white relative overflow-hidden">
+    <div class="container mx-auto px-4">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h2 class="text-4xl md:text-5xl font-bebas text-gray-900 mb-2">
+                <span class="text-black">4 Departemen Unggulan</span>
+                <span class="text-orange-500"> SKARIGA</span>
+            </h2>
+        </div>
 
-            <!-- Carousel Container -->
-            <div class="relative w-full max-w-4xl mx-auto">
-                <div class="overflow-hidden h-96">
-                    <div class="card-container relative h-full">
-                        <!-- Data Departments -->
-                        <div class="card absolute top-0 left-0 w-full bg-white rounded-2xl shadow-lg overflow-hidden h-80"
-                            data-index="0" style="z-index: 40;">
-                            <div class="flex flex-col md:flex-row h-full">
-                                <!-- Image -->
-                                <div class="md:w-2/5">
-                                    <img src="{{ asset('assets/Depart1.png') }}"
-                                        alt="TIK (Teknologi Informasi & Komunikasi)"
-                                        class="w-full h-40 md:h-full object-cover">
-                                </div>
-
-                                <!-- Content -->
-                                <div class="md:w-3/5 p-6 flex flex-col justify-between">
-                                    <div>
-                                        <div class="flex items-center justify-between mb-4">
-                                            <h3 class="text-2xl font-bold text-gray-900">TIK</h3>
-                                            <span
-                                                class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
-                                                TIK (Teknologi Informasi & Komunikasi)
-                                            </span>
-                                        </div>
-                                        <p class="text-gray-600 mb-6 line-clamp-3">
-                                            Departemen TIK membekali siswa dengan keterampilan di bidang teknologi
-                                            informasi,
-                                            meliputi pemrograman, desain web, jaringan komputer, dan manajemen data.
-                                            Lulusan diharapkan mampu bersaing di industri IT maupun menjadi wirausaha
-                                            digital yang kreatif dan inovatif.
-                                        </p>
+        <!-- Carousel Container -->
+        <div class="relative w-full max-w-4xl mx-auto">
+            <div class="overflow-visible h-96">
+                <div class="card-container relative h-full">
+                    <!-- Card Loop -->
+                    <div class="card absolute inset-0 bg-white rounded-2xl shadow-lg overflow-hidden h-80 transition-all duration-700"
+                        data-index="0" style="z-index: 40; transform: translate(0, 0) scale(1);">
+                        <div class="flex flex-col md:flex-row h-full">
+                            <div class="md:w-2/5">
+                                <img src="{{ asset('assets/Depart1.png') }}" alt="TIK"
+                                    class="w-full h-40 md:h-full object-cover">
+                            </div>
+                            <div class="md:w-3/5 p-6 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex items-center justify-between mb-4">
+                                        <h3 class="text-2xl font-bold text-gray-900">TIK</h3>
+                                        <span
+                                            class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
+                                            Teknologi Informasi & Komunikasi
+                                        </span>
                                     </div>
-                                    <a href="/jurusan"
-                                        class="self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition-colors">
-                                        Selengkapnya →
-                                    </a>
+                                    <p class="text-gray-600 mb-6 line-clamp-3">
+                                        Departemen TIK membekali siswa dengan keterampilan di bidang teknologi informasi,
+                                        meliputi pemrograman, desain web, jaringan komputer, dan manajemen data.
+                                    </p>
                                 </div>
+                                <a href="/jurusan"
+                                    class="self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition">
+                                    Selengkapnya →
+                                </a>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="card absolute top-0 left-0 w-full bg-white rounded-2xl shadow-lg overflow-hidden h-80"
-                            data-index="1" style="z-index: 30;">
-                            <div class="flex flex-col md:flex-row h-full">
-                                <!-- Image -->
-                                <div class="md:w-2/5">
-                                    <img src="{{ asset('assets/Depart2.png') }}"
-                                        alt="Pemesinan" class="w-full h-40 md:h-full object-cover">
-                                </div>
-
-                                <!-- Content -->
-                                <div class="md:w-3/5 p-6 flex flex-col justify-between">
-                                    <div>
-                                        <div class="flex items-center justify-between mb-4">
-                                            <h3 class="text-2xl font-bold text-gray-900">Pemesinan</h3>
-                                            <span
-                                                class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
-                                                Pemesinan
-                                            </span>
-                                        </div>
-                                        <p class="text-gray-600 mb-6 line-clamp-3">
-                                            Departemen Pemesinan mempersiapkan siswa menguasai teknik pengoperasian mesin
-                                            konvensional maupun CNC,
-                                            membaca gambar teknik, dan proses manufaktur. Lulusan memiliki kompetensi untuk
-                                            bekerja di industri manufaktur dan permesinan.
-                                        </p>
+                    <div class="card absolute inset-0 bg-white rounded-2xl shadow-lg overflow-hidden h-80 transition-all duration-700"
+                        data-index="1" style="z-index: 30; transform: translate(40px, 20px) scale(0.95); opacity: 0.9;">
+                        <div class="flex flex-col md:flex-row h-full">
+                            <div class="md:w-2/5">
+                                <img src="{{ asset('assets/Depart2.png') }}" alt="Pemesinan"
+                                    class="w-full h-40 md:h-full object-cover">
+                            </div>
+                            <div class="md:w-3/5 p-6 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex items-center justify-between mb-4">
+                                        <h3 class="text-2xl font-bold text-gray-900">Pemesinan</h3>
+                                        <span
+                                            class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
+                                            Teknik Pemesinan
+                                        </span>
                                     </div>
-                                    <a href="/jurusan"
-                                        class="self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition-colors">
-                                        Selengkapnya →
-                                    </a>
+                                    <p class="text-gray-600 mb-6 line-clamp-3">
+                                        Membekali siswa menguasai teknik mesin konvensional dan CNC, membaca gambar teknik,
+                                        serta proses manufaktur industri.
+                                    </p>
                                 </div>
+                                <a href="/jurusan"
+                                    class="self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition">
+                                    Selengkapnya →
+                                </a>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="card absolute top-0 left-0 w-full bg-white rounded-2xl shadow-lg overflow-hidden h-80"
-                            data-index="2" style="z-index: 20;">
-                            <div class="flex flex-col md:flex-row h-full">
-                                <!-- Image -->
-                                <div class="md:w-2/5">
-                                    <img src="{{ asset('assets/Depart3.png') }}"
-                                        alt="Kelistrikan" class="w-full h-40 md:h-full object-cover">
-                                </div>
-
-                                <!-- Content -->
-                                <div class="md:w-3/5 p-6 flex flex-col justify-between">
-                                    <div>
-                                        <div class="flex items-center justify-between mb-4">
-                                            <h3 class="text-2xl font-bold text-gray-900">Kelistrikan</h3>
-                                            <span
-                                                class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
-                                                Kelistrikan
-                                            </span>
-                                        </div>
-                                        <p class="text-gray-600 mb-6 line-clamp-3">
-                                            Departemen Kelistrikan mengajarkan keterampilan instalasi, perawatan, dan
-                                            perbaikan sistem kelistrikan,
-                                            baik untuk bangunan maupun industri. Siswa juga dibekali pemahaman sistem
-                                            kontrol dan otomasi.
-                                        </p>
+                    <div class="card absolute inset-0 bg-white rounded-2xl shadow-lg overflow-hidden h-80 transition-all duration-700"
+                        data-index="2" style="z-index: 20; transform: translate(80px, 40px) scale(0.9); opacity: 0.8;">
+                        <div class="flex flex-col md:flex-row h-full">
+                            <div class="md:w-2/5">
+                                <img src="{{ asset('assets/Depart3.png') }}" alt="Kelistrikan"
+                                    class="w-full h-40 md:h-full object-cover">
+                            </div>
+                            <div class="md:w-3/5 p-6 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex items-center justify-between mb-4">
+                                        <h3 class="text-2xl font-bold text-gray-900">Kelistrikan</h3>
+                                        <span
+                                            class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
+                                            Teknik Kelistrikan
+                                        </span>
                                     </div>
-                                    <a href="/jurusan"
-                                        class="self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition-colors">
-                                        Selengkapnya →
-                                    </a>
+                                    <p class="text-gray-600 mb-6 line-clamp-3">
+                                        Mengajarkan keterampilan instalasi, perawatan, dan sistem kontrol listrik
+                                        untuk bangunan dan industri.
+                                    </p>
                                 </div>
+                                <a href="/jurusan"
+                                    class="self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition">
+                                    Selengkapnya →
+                                </a>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="card absolute top-0 left-0 w-full bg-white rounded-2xl shadow-lg overflow-hidden h-80"
-                            data-index="3" style="z-index: 10;">
-                            <div class="flex flex-col md:flex-row h-full">
-                                <!-- Image -->
-                                <div class="md:w-2/5">
-                                    <img src="{{ asset('assets/Depart4.png') }}"
-                                        alt="Otomotif" class="w-full h-40 md:h-full object-cover">
-                                </div>
-
-                                <!-- Content -->
-                                <div class="md:w-3/5 p-6 flex flex-col justify-between">
-                                    <div>
-                                        <div class="flex items-center justify-between mb-4">
-                                            <h3 class="text-2xl font-bold text-gray-900">Otomotif</h3>
-                                            <span
-                                                class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
-                                                Otomotif
-                                            </span>
-                                        </div>
-                                        <p class="text-gray-600 mb-6 line-clamp-3">
-                                            Departemen Otomotif berfokus pada pembelajaran teknologi kendaraan bermotor,
-                                            perawatan, dan perbaikan mesin.
-                                            Siswa dilatih secara praktis dengan peralatan modern untuk memenuhi kebutuhan
-                                            industri.
-                                        </p>
+                    <div class="card absolute inset-0 bg-white rounded-2xl shadow-lg overflow-hidden h-80 transition-all duration-700"
+                        data-index="3" style="z-index: 10; transform: translate(120px, 60px) scale(0.85); opacity: 0.7;">
+                        <div class="flex flex-col md:flex-row h-full">
+                            <div class="md:w-2/5">
+                                <img src="{{ asset('assets/Depart4.png') }}" alt="Otomotif"
+                                    class="w-full h-40 md:h-full object-cover">
+                            </div>
+                            <div class="md:w-3/5 p-6 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex items-center justify-between mb-4">
+                                        <h3 class="text-2xl font-bold text-gray-900">Otomotif</h3>
+                                        <span
+                                            class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
+                                            Teknik Otomotif
+                                        </span>
                                     </div>
-                                    <a href="/jurusan"
-                                        class="self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition-colors">
-                                        Selengkapnya →
-                                    </a>
+                                    <p class="text-gray-600 mb-6 line-clamp-3">
+                                        Fokus pada teknologi kendaraan bermotor, perawatan, dan sistem permesinan modern
+                                        yang memenuhi kebutuhan industri.
+                                    </p>
                                 </div>
+                                <a href="/jurusan"
+                                    class="self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition">
+                                    Selengkapnya →
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Dots Indicator -->
+            <!-- Dots -->
             <div class="flex justify-center mt-12 space-x-2">
-                <button class="dot-indicator w-6 h-3 rounded-full bg-orange-500" data-index="0"></button>
-                <button class="dot-indicator w-3 h-3 rounded-full bg-gray-300" data-index="1"></button>
-                <button class="dot-indicator w-3 h-3 rounded-full bg-gray-300" data-index="2"></button>
-                <button class="dot-indicator w-3 h-3 rounded-full bg-gray-300" data-index="3"></button>
+                <button class="dot w-6 h-3 rounded-full bg-orange-500" data-index="0"></button>
+                <button class="dot w-3 h-3 rounded-full bg-gray-300" data-index="1"></button>
+                <button class="dot w-3 h-3 rounded-full bg-gray-300" data-index="2"></button>
+                <button class="dot w-3 h-3 rounded-full bg-gray-300" data-index="3"></button>
             </div>
 
-            <div class="text-center mt-4 text-gray-500">
-                Geser kartu untuk melihat departemen lainnya
+            <div class="text-center mt-4 text-gray-500 text-sm">
+                Geser atau klik titik untuk melihat departemen lainnya
             </div>
         </div>
-    </section>
-
+    </div>
+</section>
     <!-- == Kerjasama Industri == -->
     <section class="w-full bg-white py-16">
     <div class="container mx-auto px-4">
@@ -605,29 +582,7 @@
         KERJASAMA <span class="text-orange-500">INDUSTRI</span>
         </h2>
 
-        <!-- Slider Baris 1 -->
-        <div class="swiper kerjasamaSwiper1 mb-10">
-        <div class="swiper-wrapper flex items-center">
-            <div class="swiper-slide flex justify-center items-center">
-            <img src="{{ asset('assets/lg.png') }}" class="h-16 object-contain" alt="LG" />
-            </div>
-            <div class="swiper-slide flex justify-center items-center">
-            <img src="{{ asset('assets/alfamart.png') }}" class="h-16 object-contain" alt="Alfamart" />
-            </div>
-            <div class="swiper-slide flex justify-center items-center">
-            <img src="{{ asset('assets/daihatsu.png') }}" class="h-16 object-contain" alt="Daihatsu" />
-            </div>
-            <div class="swiper-slide flex justify-center items-center">
-            <img src="{{ asset('assets/pjb.png') }}" class="h-16 object-contain" alt="PJB" />
-            </div>
-            <div class="swiper-slide flex justify-center items-center">
-            <img src="{{ asset('assets/bd.png') }}" class="h-16 object-contain" alt="B&D" />
-            </div>
-            <div class="swiper-slide flex justify-center items-center">
-            <img src="{{ asset('assets/indonesia-power.png') }}" class="h-16 object-contain" alt="Indonesia Power" />
-            </div>
-        </div>
-        </div>
+        
 
         <!-- Slider Baris 2 (arah sebaliknya) -->
         <div class="swiper kerjasamaSwiper2">
@@ -649,6 +604,30 @@
             </div>
             <div class="swiper-slide flex justify-center items-center">
             <img src="{{ asset('assets/radar.png') }}" class="h-16 object-contain" alt="Indonesia Power" />
+            </div>
+        </div>
+        </div>
+
+        <!-- Slider Baris 1 -->
+        <div class="swiper kerjasamaSwiper1 mb-10">
+        <div class="swiper-wrapper flex items-center">
+            <div class="swiper-slide flex justify-center items-center">
+            <img src="{{ asset('assets/lg.png') }}" class="h-16 object-contain" alt="LG" />
+            </div>
+            <div class="swiper-slide flex justify-center items-center">
+            <img src="{{ asset('assets/alfamart.png') }}" class="h-16 object-contain" alt="Alfamart" />
+            </div>
+            <div class="swiper-slide flex justify-center items-center">
+            <img src="{{ asset('assets/daihatsu.png') }}" class="h-16 object-contain" alt="Daihatsu" />
+            </div>
+            <div class="swiper-slide flex justify-center items-center">
+            <img src="{{ asset('assets/pjb.png') }}" class="h-16 object-contain" alt="PJB" />
+            </div>
+            <div class="swiper-slide flex justify-center items-center">
+            <img src="{{ asset('assets/bd.png') }}" class="h-16 object-contain" alt="B&D" />
+            </div>
+            <div class="swiper-slide flex justify-center items-center">
+            <img src="{{ asset('assets/indonesia-power.png') }}" class="h-16 object-contain" alt="Indonesia Power" />
             </div>
         </div>
         </div>
@@ -862,5 +841,7 @@
                 });
             }
         });
+
+        
     </script>
 @endsection
