@@ -1,91 +1,178 @@
 @extends('layouts.app')
 
 @push('styles')
-    <style>
-        .font-bebas {
-            font-family: 'Bebas Neue', cursive;
-        }
-        .font-league-spartan {
-            font-family: 'League Spartan', sans-serif;
-        }
-        .font-poppins {
-            font-family: 'Poppins', sans-serif;
-        }
-        
-        /* Tambahan styling untuk layout yang lebih stabil */
-        .hero-section {
-            min-height: auto; /* biar sesuai konten saja */
-            position: relative;
-            padding-top: 2rem; /* bisa diatur sesuai kebutuhan */
-        }
+<style>
+    /* === FONT === */
+    .font-bebas {
+        font-family: 'Bebas Neue', cursive;
+    }
+    .font-league-spartan {
+        font-family: 'League Spartan', sans-serif;
+    }
+    .font-poppins {
+        font-family: 'Poppins', sans-serif;
+    }
 
-        
-        .achievement-section {
-            padding: 4rem 1rem;
-        }
-        
-        .achievement-card {
-            transition: transform 0.3s ease;
-        }
-        
-        .achievement-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .hero-text {
-                position: static !important;
-                text-align: center;
-                margin-top: 2rem;
-            }
-            
-            .hero-image {
-                position: static !important;
-                width: 100% !important;
-                height: auto !important;
-                margin-top: 2rem;
-            }
-        }
+    /* === HERO SECTION === */
+    .hero-section {
+        padding-top: 1rem;   /* lebih rapat */
+        padding-bottom: 1.25rem; 
+    }
 
-        .bg-orange-blur {
-            background: rgba(255, 179.25, 132.16, 0.32);
-        }
-        
-        .bg-blue-blur {
-            background: #AEDBE4;
-            opacity: 0.50;
-        }
+    .hero-text h1 {
+        margin-bottom: 0.2rem;
+    }
+    .hero-text h2 {
+        margin-top: 0.2rem;
+    }
+
+    /* === PRESTASI SECTION === */
+    .achievement-section {
+        padding-top: 1.25rem;   /* semula 4rem */
+        padding-bottom: 1.25rem;
+    }
+
+    .achievement-section h2 {
+        margin-bottom: 0.75rem;
+    }
+
+    .achievement-section .space-y-4,
+    .achievement-section .space-y-6 {
+        row-gap: 0.75rem !important; 
+    }
+
+    .achievement-section .flex.md\\:flex-row {
+        gap: 1rem !important; 
+    }
+
+    .achievement-section h3,
+    .achievement-section h4 {
+        margin-bottom: 0.25rem;
+    }
+    .achievement-section p {
+        margin-top: 0.25rem;
+    }
+
+    .achievement-section .md\\:ml-6 {
+        margin-left: 0.75rem !important;
+    }
+    .achievement-section .mt-3 {
+        margin-top: 0.25rem !important;
+    }
+
+    /* === BACKGROUND CIRCLES === */
+    .bg-orange-blur {
+        background: rgba(255, 179.25, 132.16, 0.32);
+    }
+    .bg-blue-blur {
+        background: #AEDBE4;
+        opacity: 0.50;
+    }
+
+    .bg-circle {
+        width: 18rem;
+        height: 18rem;
+        position: absolute;
+    }
+    @media (min-width: 1024px) {
         .bg-circle {
-            width: 20rem;
-            height: 20rem;
-            position: absolute;
+            width: 24rem;
+            height: 24rem;
+        }
+    }
+
+    .bg-circles-wrapper {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: -1;
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 768px) {
+        .hero-text {
+            position: static !important;
+            text-align: center;
+            margin-top: 0.75rem;
         }
 
-        @media (min-width: 1024px) {
-            .bg-circle {
-                width: 28rem;
-                height: 28rem;
-            }
+        .hero-image {
+            position: static !important;
+            width: 100% !important;
+            height: auto !important;
+            margin-top: 1rem;
         }
+    }
 
-        /* wrapper khusus background */
-        .bg-circles-wrapper {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            z-index: -1; /* semua circle otomatis di belakang */
+    @media (max-width: 640px) {
+        #image-stack img {
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
+    }
 
-        @media (max-width: 640px) {
-  #image-stack img {
-    border-radius: 1rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  }
+    /* === CARD HOVER === */
+    .achievement-card {
+        transition: transform 0.3s ease;
+    }
+    .achievement-card:hover {
+        transform: translateY(-3px);
+    }
+
+    /* === ATUR JARAK ANTAR SECTION (FULL) === */
+    section {
+        padding-top: 1.25rem;
+        padding-bottom: 1.25rem;
+    }
+
+    section + section {
+        margin-top: -3.5rem !important;  /* tarik lebih rapat antar section */
+    }
+
+    /* Jika ingin lebih rapat lagi, ubah -2.5rem → -3rem */
+    /* === PERBAIKI JARAK ANTAR TEKS & GAMBAR DI SECTION PRESTASI === */
+.achievement-section .flex {
+    align-items: flex-start;           /* pastikan gambar & teks sejajar atas */
+    gap: 2rem !important;              /* jarak horizontal gambar-teks (default konsisten) */
 }
 
-    </style>
+@media (max-width: 768px) {
+    .achievement-section .flex {
+        flex-direction: column !important;
+        gap: 1rem !important;          /* jarak vertikal antar gambar dan teks di HP */
+    }
+}
+
+/* Jarak antar elemen teks di dalam deskripsi */
+.achievement-section h3 {
+    margin-bottom: 0.3rem !important;
+}
+
+.achievement-section h4 {
+    margin-top: 0rem !important;
+    margin-bottom: 0.4rem !important;
+}
+
+.achievement-section p {
+    margin-top: 0rem !important;
+    line-height: 1.5;
+}
+
+/* Pastikan jarak kiri-kanan teks konsisten */
+.achievement-section .md\:ml-4,
+.achievement-section .md\:ml-6 {
+    margin-left: 2rem !important;
+}
+
+.achievement-section .max-w-md {
+    max-width: 32rem; /* biar lebar teks seragam */
+}
+
+    
+</style>
 @endpush
+
+
 
 @section('content')
 <div class="relative min-h-screen">
@@ -154,31 +241,31 @@
 
 
 <!-- Achievement Section Zig Zag -->
-<section class="achievement-section bg-white relative py-12">
-  <div class="container mx-auto px-4 md:px-16">
-    <h2 class="text-4xl md:text-5xl font-bebas text-center mb-10">
+<section class="achievement-section bg-white relative py-4">
+  <div class="container mx-auto px-4 md:px-12">
+    <h2 class="text-4xl md:text-5xl font-bebas text-center mb-4">
       Prestasi Terbaru
     </h2>
 
-    <div class="space-y-10 md:space-y-12"> <!-- jarak antar prestasi dikontrol di sini -->
+    <div class="space-y-2 md:space-y-4">
 
-      <!-- Item 1 -->
-      <div class="flex flex-col md:flex-row items-center md:gap-10">
+      <!-- Item 1 (gambar kiri) -->
+      <div class="flex flex-col md:flex-row items-center md:gap-4">
         <!-- Gambar -->
         <div class="group relative bg-white rounded-xl shadow-lg overflow-hidden 
                     hover:shadow-2xl transition-all duration-500 
-                    transform hover:-translate-y-2 max-w-sm w-full">
+                    transform hover:-translate-y-1 max-w-sm w-full">
           <div class="overflow-hidden">
             <img src="{{ asset('assets/LKS.png') }}" alt="Juara 2 LKS Nasional"
-                 class="w-full h-[24rem] object-cover transform 
+                 class="w-full h-[20rem] object-cover transform 
                         group-hover:scale-110 transition-transform duration-700 ease-out">
           </div>
         </div>
 
         <!-- Teks -->
-        <div class="md:ml-6 mt-6 md:mt-0 max-w-md">
-          <h3 class="text-5xl md:text-6xl font-bebas mb-2">Juara 2 LKS Nasional</h3>
-          <h4 class="text-3xl md:text-4xl text-orange-500 font-bebas mb-3">
+        <div class="md:ml-4 mt-2 md:mt-0 max-w-md">
+          <h3 class="text-4xl md:text-5xl font-bebas mb-0.5">Juara 2 LKS Nasional</h3>
+          <h4 class="text-2xl md:text-3xl text-orange-500 font-bebas mb-1">
             Industrial Control
           </h4>
           <p class="text-gray-700 leading-relaxed text-base md:text-lg">
@@ -188,12 +275,13 @@
         </div>
       </div>
 
-      <!-- Item 2 (gambar di kanan, teks rata kanan) -->
-      <div class="flex flex-col md:flex-row items-center md:gap-10 justify-end">
+      <!-- Item 2 (gambar kanan) -->
+      <div class="flex flex-col md:flex-row items-center md:gap-4 justify-end">
         <!-- Teks -->
-        <div class="max-w-md md:order-1 mt-6 md:mt-0 text-right"> 
-          <h3 class="text-5xl md:text-6xl font-bebas mb-2">Juara 1 LKS Nasional</h3>
-          <h4 class="text-3xl md:text-4xl text-orange-500 font-bebas mb-3">
+        <div class="max-w-md md:order-1 mt-2 md:mt-0 text-right md:mr-4"> 
+          <!-- 🔹 Tambahkan md:mr-4 agar jarak ke gambar konsisten -->
+          <h3 class="text-4xl md:text-5xl font-bebas mb-0.5">Juara 1 LKS Nasional</h3>
+          <h4 class="text-2xl md:text-3xl text-orange-500 font-bebas mb-1">
             Robot Manufacturing System
           </h4>
           <p class="text-gray-700 leading-relaxed text-base md:text-lg">
@@ -205,32 +293,136 @@
         <!-- Gambar -->
         <div class="group relative bg-white rounded-xl shadow-lg overflow-hidden 
                     hover:shadow-2xl transition-all duration-500 
-                    transform hover:-translate-y-2 max-w-sm w-full md:order-2">
+                    transform hover:-translate-y-1 max-w-sm w-full md:order-2">
           <div class="overflow-hidden">
-            <img src="{{ asset('assets/Prestasi2.png') }}" alt="Juara 1 LKS Nasional"
-                 class="w-full h-[24rem] object-cover transform 
+            <img src="{{ asset('assets/Prestasi2.jpg') }}" alt="Juara 1 LKS Nasional"
+                 class="w-full h-[20rem] object-cover transform 
                         group-hover:scale-110 transition-transform duration-700 ease-out">
           </div>
         </div>
       </div>
 
-      <!-- Item 3 -->
-      <div class="flex flex-col md:flex-row items-center md:gap-10">
+      <!-- Item 3 (gambar kiri lagi) -->
+      <div class="flex flex-col md:flex-row items-center md:gap-4">
         <!-- Gambar -->
         <div class="group relative bg-white rounded-xl shadow-lg overflow-hidden 
                     hover:shadow-2xl transition-all duration-500 
-                    transform hover:-translate-y-2 max-w-sm w-full">
+                    transform hover:-translate-y-1 max-w-sm w-full">
           <div class="overflow-hidden">
-            <img src="{{ asset('assets/Prestasi1.png') }}" alt="Juara 2 LKS Nasional"
-                 class="w-full h-[24rem] object-cover transform 
+            <img src="{{ asset('assets/Prestasi3.jpg') }}" alt="Juara 2 LKS Nasional"
+                 class="w-full h-[20rem] object-cover transform 
                         group-hover:scale-110 transition-transform duration-700 ease-out">
           </div>
         </div>
 
         <!-- Teks -->
-        <div class="md:ml-6 mt-6 md:mt-0 max-w-md">
-          <h3 class="text-5xl md:text-6xl font-bebas mb-2">Juara 2 LKS Nasional</h3>
-          <h4 class="text-3xl md:text-4xl text-orange-500 font-bebas mb-3">
+        <div class="md:ml-4 mt-2 md:mt-0 max-w-md">
+          <h3 class="text-4xl md:text-5xl font-bebas mb-0.5">Juara 2 LKS Nasional</h3>
+          <h4 class="text-2xl md:text-3xl text-orange-500 font-bebas mb-1">
+            Industrial Control
+          </h4>
+          <p class="text-gray-700 leading-relaxed text-base md:text-lg">
+            MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil mempertahankan 
+            <u>medali</u> emas di LKS Nasional.
+          </p>
+        </div>
+      </div>
+      <!-- Item 2 (gambar kanan) -->
+      <div class="flex flex-col md:flex-row items-center md:gap-4 justify-end">
+        <!-- Teks -->
+        <div class="max-w-md md:order-1 mt-2 md:mt-0 text-right md:mr-4"> 
+          <!-- 🔹 Tambahkan md:mr-4 agar jarak ke gambar konsisten -->
+          <h3 class="text-4xl md:text-5xl font-bebas mb-0.5">Juara 1 LKS Nasional</h3>
+          <h4 class="text-2xl md:text-3xl text-orange-500 font-bebas mb-1">
+            Robot Manufacturing System
+          </h4>
+          <p class="text-gray-700 leading-relaxed text-base md:text-lg">
+            MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil mempertahankan 
+            <u>medali</u> emas di LKS Nasional.
+          </p>
+        </div>
+
+        <!-- Gambar -->
+        <div class="group relative bg-white rounded-xl shadow-lg overflow-hidden 
+                    hover:shadow-2xl transition-all duration-500 
+                    transform hover:-translate-y-1 max-w-sm w-full md:order-2">
+          <div class="overflow-hidden">
+            <img src="{{ asset('assets/Prestasi2.jpg') }}" alt="Juara 1 LKS Nasional"
+                 class="w-full h-[20rem] object-cover transform 
+                        group-hover:scale-110 transition-transform duration-700 ease-out">
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 3 (gambar kiri lagi) -->
+      <div class="flex flex-col md:flex-row items-center md:gap-4">
+        <!-- Gambar -->
+        <div class="group relative bg-white rounded-xl shadow-lg overflow-hidden 
+                    hover:shadow-2xl transition-all duration-500 
+                    transform hover:-translate-y-1 max-w-sm w-full">
+          <div class="overflow-hidden">
+            <img src="{{ asset('assets/Prestasi3.jpg') }}" alt="Juara 2 LKS Nasional"
+                 class="w-full h-[20rem] object-cover transform 
+                        group-hover:scale-110 transition-transform duration-700 ease-out">
+          </div>
+        </div>
+
+        <!-- Teks -->
+        <div class="md:ml-4 mt-2 md:mt-0 max-w-md">
+          <h3 class="text-4xl md:text-5xl font-bebas mb-0.5">Juara 2 LKS Nasional</h3>
+          <h4 class="text-2xl md:text-3xl text-orange-500 font-bebas mb-1">
+            Industrial Control
+          </h4>
+          <p class="text-gray-700 leading-relaxed text-base md:text-lg">
+            MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil mempertahankan 
+            <u>medali</u> emas di LKS Nasional.
+          </p>
+        </div>
+      </div>
+      <!-- Item 2 (gambar kanan) -->
+      <div class="flex flex-col md:flex-row items-center md:gap-4 justify-end">
+        <!-- Teks -->
+        <div class="max-w-md md:order-1 mt-2 md:mt-0 text-right md:mr-4"> 
+          <!-- 🔹 Tambahkan md:mr-4 agar jarak ke gambar konsisten -->
+          <h3 class="text-4xl md:text-5xl font-bebas mb-0.5">Juara 1 LKS Nasional</h3>
+          <h4 class="text-2xl md:text-3xl text-orange-500 font-bebas mb-1">
+            Robot Manufacturing System
+          </h4>
+          <p class="text-gray-700 leading-relaxed text-base md:text-lg">
+            MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil mempertahankan 
+            <u>medali</u> emas di LKS Nasional.
+          </p>
+        </div>
+
+        <!-- Gambar -->
+        <div class="group relative bg-white rounded-xl shadow-lg overflow-hidden 
+                    hover:shadow-2xl transition-all duration-500 
+                    transform hover:-translate-y-1 max-w-sm w-full md:order-2">
+          <div class="overflow-hidden">
+            <img src="{{ asset('assets/Prestasi2.jpg') }}" alt="Juara 1 LKS Nasional"
+                 class="w-full h-[20rem] object-cover transform 
+                        group-hover:scale-110 transition-transform duration-700 ease-out">
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 3 (gambar kiri lagi) -->
+      <div class="flex flex-col md:flex-row items-center md:gap-4">
+        <!-- Gambar -->
+        <div class="group relative bg-white rounded-xl shadow-lg overflow-hidden 
+                    hover:shadow-2xl transition-all duration-500 
+                    transform hover:-translate-y-1 max-w-sm w-full">
+          <div class="overflow-hidden">
+            <img src="{{ asset('assets/Prestasi3.jpg') }}" alt="Juara 2 LKS Nasional"
+                 class="w-full h-[20rem] object-cover transform 
+                        group-hover:scale-110 transition-transform duration-700 ease-out">
+          </div>
+        </div>
+
+        <!-- Teks -->
+        <div class="md:ml-4 mt-2 md:mt-0 max-w-md">
+          <h3 class="text-4xl md:text-5xl font-bebas mb-0.5">Juara 2 LKS Nasional</h3>
+          <h4 class="text-2xl md:text-3xl text-orange-500 font-bebas mb-1">
             Industrial Control
           </h4>
           <p class="text-gray-700 leading-relaxed text-base md:text-lg">
@@ -243,6 +435,9 @@
     </div>
   </div>
 </section>
+
+
+
 
 
 

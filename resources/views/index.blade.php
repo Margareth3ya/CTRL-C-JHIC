@@ -59,6 +59,26 @@
         .bg-blue-blur {
             background: rgba(174, 219, 228, 0.6); /* Blue soft */
         }
+        .swiper-slide {
+    position: relative;
+}
+
+.swiper-slide::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6));
+    z-index: 1;
+}
+.swiper-slide > div {
+    position: relative;
+    z-index: 0;
+}
+.swiper-slide-industri {
+    width: auto;
+    flex-shrink: 0;
+}
+
     </style>
 @endpush
 @section('content')
@@ -74,7 +94,7 @@
                         </div>
                         <div class="swiper-slide">
                             <div class="w-full h-full bg-cover bg-center"
-                                style="background-image: url('https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')">
+                                style="background-image: url('{{ asset('assets/Kegiatan2.png') }}')">
                             </div>
                         </div>
                         <div class="swiper-slide">
@@ -93,7 +113,7 @@
                         <div class="mb-6">
                             <h1 class="text-4xl md:text-5xl lg:text-6xl font-bebas mb-4 leading-tight text-orange-500">
                                 SUCCESS BY<br>
-                                <span class="text-orange">DISCIPLINE</span>
+                                <span class="text-white">DISCIPLINE</span>
                             </h1>
                             <p class="text-xl md:text-2xl text-blue-100 mb-6">
                                 Membentuk siswa cerdas, terampil, dan berkarakter
@@ -112,24 +132,24 @@
 
                     <div class="grid grid-cols-2 gap-6">
                         <div
-                            class="bg-white bg-opacity-40 backdrop-blur-sm rounded-xl p-6 text-center border border-white border-opacity-20 hover:scale-105 hover:shadow-xl">
+                            class="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-6 text-center border border-white border-opacity-20 hover:scale-105 hover:shadow-xl">
                             <div class="text-3xl md:text-4xl font-bold text-orange-500 mb-2">1000+</div>
-                            <div class="text-black">Siswa Aktif</div>
+                            <div class="text-white">Siswa Aktif</div>
                         </div>
                         <div
-                            class="bg-white bg-opacity-40 backdrop-blur-sm rounded-xl p-6 text-center border border-white border-opacity-20 hover:scale-105 hover:shadow-xl">
+                            class="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-6 text-center border border-white border-opacity-20 hover:scale-105 hover:shadow-xl">
                             <div class="text-3xl md:text-4xl font-bold text-orange-500 mb-2">50+</div>
-                            <div class="text-black">Guru Berpengalaman</div>
+                            <div class="text-white">Guru Berpengalaman</div>
                         </div>
                         <div
-                            class="bg-white bg-opacity-40 backdrop-blur-sm rounded-xl p-6 text-center border border-white border-opacity-20 hover:scale-105 hover:shadow-xl">
-                            <div class="text-3xl md:text-4xl font-bold text-orange-500 mb-2">10+</div>
-                            <div class="text-black">Program Jurusan</div>
+                            class="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-6 text-center border border-white border-opacity-20 hover:scale-105 hover:shadow-xl">
+                            <div class="text-3xl md:text-4xl font-bold text-orange-500 mb-2">16</div>
+                            <div class="text-white">Program Jurusan</div>
                         </div>
                         <div
-                            class="bg-white bg-opacity-40 backdrop-blur-sm rounded-xl p-6 text-center border border-white border-opacity-20 hover:scale-105 hover:shadow-xl">
+                            class="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-6 text-center border border-white border-opacity-20 hover:scale-105 hover:shadow-xl">
                             <div class="text-3xl md:text-4xl font-bold text-orange-500 mb-2">100+</div>
-                            <div class="text-black">Kerjasama Industri</div>
+                            <div class="text-white">Kerjasama Industri</div>
                         </div>
                     </div>
                 </div>
@@ -585,48 +605,48 @@
         
 
         <!-- Slider Baris 2 (arah sebaliknya) -->
-        <div class="swiper kerjasamaSwiper2">
+        <div class="swiper industriSwiper2">
         <div class="swiper-wrapper flex items-center">
-                        <div class="swiper-slide flex justify-center items-center">
+                        <div class="swiper-slide-industri flex justify-center items-center">
             <img src="{{ asset('assets/jatim.png') }}" class="h-16 object-contain" alt="LG" />
             </div>
-            <div class="swiper-slide flex justify-center items-center">
+            <div class="swiper-slide-industri flex justify-center items-center">
             <img src="{{ asset('assets/jaghos.png') }}" class="h-16 object-contain" alt="Alfamart" />
             </div>
-            <div class="swiper-slide flex justify-center items-center">
+            <div class="swiper-slide-industri flex justify-center items-center">
             <img src="{{ asset('assets/asco.png') }}" class="h-16 object-contain" alt="Daihatsu" />
             </div>
-            <div class="swiper-slide flex justify-center items-center">
+            <div class="swiper-slide-industri flex justify-center items-center">
             <img src="{{ asset('assets/japfa.png') }}" class="h-16 object-contain" alt="PJB" />
             </div>
-            <div class="swiper-slide flex justify-center items-center">
+            <div class="swiper-slide-industri flex justify-center items-center">
             <img src="{{ asset('assets/crpu.png') }}" class="h-16 object-contain" alt="B&D" />
             </div>
-            <div class="swiper-slide flex justify-center items-center">
+            <div class="swiper-slide-industri flex justify-center items-center">
             <img src="{{ asset('assets/radar.png') }}" class="h-16 object-contain" alt="Indonesia Power" />
             </div>
         </div>
         </div>
 
         <!-- Slider Baris 1 -->
-        <div class="swiper kerjasamaSwiper1 mb-10">
+        <div class="swiper industriSwiper1 mb-10">
         <div class="swiper-wrapper flex items-center">
-            <div class="swiper-slide flex justify-center items-center">
+            <div class="swiper-slide-industri flex justify-center items-center">
             <img src="{{ asset('assets/lg.png') }}" class="h-16 object-contain" alt="LG" />
             </div>
-            <div class="swiper-slide flex justify-center items-center">
+            <div class="swiper-slide-industri flex justify-center items-center">
             <img src="{{ asset('assets/alfamart.png') }}" class="h-16 object-contain" alt="Alfamart" />
             </div>
-            <div class="swiper-slide flex justify-center items-center">
+            <div class="swiper-slide-industri flex justify-center items-center">
             <img src="{{ asset('assets/daihatsu.png') }}" class="h-16 object-contain" alt="Daihatsu" />
             </div>
-            <div class="swiper-slide flex justify-center items-center">
+            <div class="swiper-slide-industri flex justify-center items-center">
             <img src="{{ asset('assets/pjb.png') }}" class="h-16 object-contain" alt="PJB" />
             </div>
-            <div class="swiper-slide flex justify-center items-center">
+            <div class="swiper-slide-industri flex justify-center items-center">
             <img src="{{ asset('assets/bd.png') }}" class="h-16 object-contain" alt="B&D" />
             </div>
-            <div class="swiper-slide flex justify-center items-center">
+            <div class="swiper-slide-industri flex justify-center items-center">
             <img src="{{ asset('assets/indonesia-power.png') }}" class="h-16 object-contain" alt="Indonesia Power" />
             </div>
         </div>
@@ -638,8 +658,9 @@
 
         document.addEventListener('DOMContentLoaded', function () {
             // Baris 1 (arah ke kanan)
-            new Swiper(".kerjasamaSwiper1", {
+            new Swiper(".industriSwiper1", {
             slidesPerView: 4,
+            slideClass: 'swiper-slide-industri',
             spaceBetween: 30,
             loop: true,
             autoplay: {
@@ -655,8 +676,9 @@
             });
 
             // Baris 2 (arah ke kiri → pakai reverse)
-            new Swiper(".kerjasamaSwiper2", {
+            new Swiper(".industriSwiper2", {
             slidesPerView: 4,
+            slideClass: 'swiper-slide-industri',
             spaceBetween: 30,
             loop: true,
             autoplay: {
@@ -673,174 +695,222 @@
             });
         });
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const cards = document.querySelectorAll('.card');
-            const dots = document.querySelectorAll('.dot-indicator');
-            let currentIndex = 0;
-            let isDragging = false;
-            let startX = 0;
-            let currentX = 0;
-            let dragThreshold = 50;
+        // Stack Card Departemen - Improved Version
+const cards = document.querySelectorAll('.card');
+const dots = document.querySelectorAll('.dot');
+let currentIndex = 0;
+let isDragging = false;
+let startX = 0;
+let currentX = 0;
+let dragThreshold = 80;
+let animationFrameId = null;
 
-            // Initialize carousel dengan tumpukan kartu
-            updateCarousel();
+function initializeCarousel() {
+    cards.forEach((card, index) => {
+        const cardIndex = parseInt(card.getAttribute('data-index'));
+        const position = (cardIndex - currentIndex + cards.length) % cards.length;
+        
+        card.style.transition = 'all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        
+        // Smooth stacking effect dengan easing yang lebih natural
+        if (position === 0) {
+            card.style.transform = 'translateX(0) scale(1) rotateY(0deg)';
+            card.style.opacity = '1';
+            card.style.zIndex = '40';
+            card.style.filter = 'brightness(1)';
+        } else if (position === 1) {
+            card.style.transform = 'translateX(50px) scale(0.92) rotateY(-5deg)';
+            card.style.opacity = '0.85';
+            card.style.zIndex = '30';
+            card.style.filter = 'brightness(0.95)';
+        } else if (position === 2) {
+            card.style.transform = 'translateX(90px) scale(0.84) rotateY(-8deg)';
+            card.style.opacity = '0.7';
+            card.style.zIndex = '20';
+            card.style.filter = 'brightness(0.9)';
+        } else if (position === 3) {
+            card.style.transform = 'translateX(120px) scale(0.76) rotateY(-10deg)';
+            card.style.opacity = '0.5';
+            card.style.zIndex = '10';
+            card.style.filter = 'brightness(0.85)';
+        }
+    });
 
-            // Dot indicators
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => navigateTo(index));
-            });
+    updateDots();
+}
 
-            // Add event listeners to all cards
-            cards.forEach(card => {
-                // Touch events for mobile
-                card.addEventListener('touchstart', handleTouchStart, { passive: false });
-                card.addEventListener('touchmove', handleTouchMove, { passive: false });
-                card.addEventListener('touchend', handleTouchEnd);
+function updateDots() {
+    dots.forEach((dot, i) => {
+        if (i === currentIndex) {
+            dot.classList.remove('w-3', 'bg-gray-300');
+            dot.classList.add('w-6', 'bg-orange-500');
+        } else {
+            dot.classList.remove('w-6', 'bg-orange-500');
+            dot.classList.add('w-3', 'bg-gray-300');
+        }
+    });
+}
 
-                // Mouse events for desktop
-                card.addEventListener('mousedown', handleMouseDown);
-                card.addEventListener('mousemove', handleMouseMove);
-                card.addEventListener('mouseup', handleMouseUp);
-                card.addEventListener('mouseleave', handleMouseUp);
-            });
+// Dot indicators dengan animasi smooth
+dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+        if (index !== currentIndex) {
+            navigateTo(index);
+        }
+    });
+});
 
-            function handleTouchStart(e) {
-                startX = e.touches[0].clientX;
-                isDragging = true;
-                cards.forEach(card => card.classList.add('card-dragging'));
-                e.preventDefault();
-            }
+// Event listeners dengan passive false untuk performa better
+cards.forEach(card => {
+    card.addEventListener('touchstart', handleTouchStart, { passive: false });
+    card.addEventListener('touchmove', handleTouchMove, { passive: false });
+    card.addEventListener('touchend', handleTouchEnd);
+    
+    card.addEventListener('mousedown', handleMouseDown);
+    card.addEventListener('mousemove', handleMouseMove);
+    card.addEventListener('mouseup', handleMouseUp);
+    card.addEventListener('mouseleave', handleMouseUp);
+});
 
-            function handleTouchMove(e) {
-                if (!isDragging) return;
-                currentX = e.touches[0].clientX;
-                updateDragPosition();
-                e.preventDefault();
-            }
+function handleTouchStart(e) {
+    startX = e.touches[0].clientX;
+    isDragging = true;
+    cards.forEach(card => card.style.transition = 'none');
+    e.preventDefault();
+}
 
-            function handleTouchEnd() {
-                if (!isDragging) return;
-                finishDrag();
-            }
+function handleTouchMove(e) {
+    if (!isDragging) return;
+    
+    if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+    }
+    
+    animationFrameId = requestAnimationFrame(() => {
+        currentX = e.touches[0].clientX;
+        updateDragPosition();
+    });
+    e.preventDefault();
+}
 
-            function handleMouseDown(e) {
-                startX = e.clientX;
-                isDragging = true;
-                cards.forEach(card => card.classList.add('card-dragging'));
-                document.body.style.cursor = 'grabbing';
-                e.preventDefault();
-            }
+function handleTouchEnd() {
+    if (!isDragging) return;
+    finishDrag();
+}
 
-            function handleMouseMove(e) {
-                if (!isDragging) return;
-                currentX = e.clientX;
-                updateDragPosition();
-            }
+function handleMouseDown(e) {
+    startX = e.clientX;
+    isDragging = true;
+    cards.forEach(card => card.style.transition = 'none');
+    document.body.style.cursor = 'grabbing';
+    e.preventDefault();
+}
 
-            function handleMouseUp() {
-                if (!isDragging) return;
-                finishDrag();
-            }
+function handleMouseMove(e) {
+    if (!isDragging) return;
+    
+    if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+    }
+    
+    animationFrameId = requestAnimationFrame(() => {
+        currentX = e.clientX;
+        updateDragPosition();
+    });
+}
 
-            function updateDragPosition() {
-                const diffX = currentX - startX;
+function handleMouseUp() {
+    if (!isDragging) return;
+    finishDrag();
+}
 
-                // Apply temporary transform during drag
-                cards.forEach((card, index) => {
-                    const cardIndex = parseInt(card.getAttribute('data-index'));
-                    const position = (cardIndex - currentIndex + cards.length) % cards.length;
+function updateDragPosition() {
+    const diffX = currentX - startX;
+    const progress = Math.min(Math.abs(diffX) / 300, 1); // Normalize progress 0-1
 
-                    if (position === 0) {
-                        // Main card being dragged
-                        card.style.transform = `translateX(${diffX}px) scale(1)`;
-                        card.style.opacity = `${1 - Math.abs(diffX) / 500}`;
-                    } else if (position === 1) {
-                        // Next card
-                        const scale = 0.9 + (Math.min(Math.abs(diffX), 200) * 0.1 / 200);
-                        card.style.transform = `translateX(${80 + diffX * 0.8}px) scale(${scale})`;
-                    } else if (position === 2) {
-                        // Second next card
-                        const scale = 0.8 + (Math.min(Math.abs(diffX), 200) * 0.1 / 200);
-                        card.style.transform = `translateX(${160 + diffX * 0.6}px) scale(${scale})`;
-                    }
-                });
-            }
+    cards.forEach((card, index) => {
+        const cardIndex = parseInt(card.getAttribute('data-index'));
+        const position = (cardIndex - currentIndex + cards.length) % cards.length;
 
-            function finishDrag() {
-                isDragging = false;
-                document.body.style.cursor = '';
+        // Smooth interpolation based on drag progress
+        if (position === 0) {
+            const scale = 1 - (progress * 0.08);
+            const opacity = 1 - (progress * 0.3);
+            card.style.transform = `translateX(${diffX}px) scale(${scale}) rotateY(${diffX * 0.1}deg)`;
+            card.style.opacity = opacity;
+        } else if (position === 1) {
+            const baseX = 50 + (diffX > 0 ? Math.min(diffX * 0.8, 80) : Math.max(diffX * 0.8, -30));
+            const scale = 0.92 - (progress * 0.08);
+            const opacity = 0.85 - (progress * 0.25);
+            card.style.transform = `translateX(${baseX}px) scale(${scale}) rotateY(${diffX * 0.08 - 5}deg)`;
+            card.style.opacity = opacity;
+        } else if (position === 2) {
+            const baseX = 90 + (diffX > 0 ? Math.min(diffX * 0.6, 60) : Math.max(diffX * 0.6, -20));
+            const scale = 0.84 - (progress * 0.08);
+            const opacity = 0.7 - (progress * 0.2);
+            card.style.transform = `translateX(${baseX}px) scale(${scale}) rotateY(${diffX * 0.06 - 8}deg)`;
+            card.style.opacity = opacity;
+        } else if (position === 3) {
+            const baseX = 120 + (diffX > 0 ? Math.min(diffX * 0.4, 40) : Math.max(diffX * 0.4, -10));
+            const scale = 0.76 - (progress * 0.06);
+            const opacity = 0.5 - (progress * 0.15);
+            card.style.transform = `translateX(${baseX}px) scale(${scale}) rotateY(${diffX * 0.04 - 10}deg)`;
+            card.style.opacity = opacity;
+        }
+    });
+}
 
-                const diffX = currentX - startX;
+function finishDrag() {
+    isDragging = false;
+    document.body.style.cursor = '';
+    
+    if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+    }
 
-                // Remove temporary drag styles
-                cards.forEach(card => {
-                    card.classList.remove('card-dragging');
-                    card.style.transform = '';
-                    card.style.opacity = '';
-                });
+    const diffX = currentX - startX;
 
-                // Determine if we should change slide based on drag distance
-                if (Math.abs(diffX) > dragThreshold) {
-                    if (diffX > 0) {
-                        navigateTo(currentIndex - 1); // Swipe right
-                    } else {
-                        navigateTo(currentIndex + 1); // Swipe left
-                    }
-                } else {
-                    // If not enough drag, return to current position
-                    updateCarousel();
-                }
-            }
+    // Restore smooth transitions
+    cards.forEach(card => {
+        card.style.transition = 'all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    });
 
-            function navigateTo(index) {
-                // Ensure index is within bounds
-                if (index < 0) index = cards.length - 1;
-                if (index >= cards.length) index = 0;
+    // Enhanced swipe detection dengan hysteresis
+    if (Math.abs(diffX) > dragThreshold) {
+        if (diffX > 0) {
+            // Swipe right - go to previous
+            navigateTo(currentIndex - 1);
+        } else {
+            // Swipe left - go to next
+            navigateTo(currentIndex + 1);
+        }
+    } else {
+        // Snap back to current position
+        initializeCarousel();
+    }
+}
 
-                currentIndex = index;
-                updateCarousel();
-            }
+function navigateTo(index) {
+    // Smooth circular navigation
+    if (index < 0) index = cards.length - 1;
+    if (index >= cards.length) index = 0;
 
-            function updateCarousel() {
-                // Update card positions dengan animasi
-                cards.forEach((card, index) => {
-                    const cardIndex = parseInt(card.getAttribute('data-index'));
-                    const position = (cardIndex - currentIndex + cards.length) % cards.length;
+    // Add subtle animation delay based on direction
+    const direction = index > currentIndex ? 1 : -1;
+    
+    cards.forEach((card, i) => {
+        const delay = Math.abs(i - currentIndex) * 0.05;
+        card.style.transition = `all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}s`;
+    });
 
-                    // Reset semua kelas posisi
-                    card.classList.remove('card-active', 'card-behind', 'card-far-behind', 'card-hidden');
+    currentIndex = index;
+    initializeCarousel();
+}
 
-                    if (position === 0) {
-                        // Kartu utama
-                        card.classList.add('card-active');
-                        card.style.zIndex = 40;
-                    } else if (position === 1) {
-                        // Di belakang 1
-                        card.classList.add('card-behind');
-                        card.style.zIndex = 30;
-                    } else if (position === 2) {
-                        // Di belakang 2
-                        card.classList.add('card-far-behind');
-                        card.style.zIndex = 20;
-                    } else {
-                        // Sisanya sembunyikan
-                        card.classList.add('card-hidden');
-                        card.style.zIndex = 10;
-                    }
-                });
-
-                // Update dots
-                dots.forEach((dot, i) => {
-                    if (i === currentIndex) {
-                        dot.classList.remove('w-3', 'bg-gray-300');
-                        dot.classList.add('w-6', 'bg-orange-500');
-                    } else {
-                        dot.classList.remove('w-6', 'bg-orange-500');
-                        dot.classList.add('w-3', 'bg-gray-300');
-                    }
-                });
-            }
-        });
+// Initialize dengan delay untuk animasi masuk yang smooth
+setTimeout(() => {
+    initializeCarousel();
+}, 100);
 
         
     </script>
