@@ -150,7 +150,7 @@
                     <!-- Card 2 -->
                     <div
                         class="relative bg-white rounded-2xl shadow-lg overflow-hidden group hover:scale-105 transition-transform hover:shadow-orange-300">
-                        <img src="https://i.ibb.co/0Y7WPN0/adit.jpg" alt="Aditia Tantra Permana"
+                        <img src="{{ asset('assets/adit.png') }}" alt="Aditia Tantra Permana"
                             class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4">
                             <h4 class="text-lg font-bold text-white">Aditia Tantra Permana</h4>
@@ -162,7 +162,7 @@
                     <!-- Card 3 -->
                     <div
                         class="relative bg-white rounded-2xl shadow-lg overflow-hidden group hover:scale-105 transition-transform hover:shadow-orange-300">
-                        <img src="https://i.ibb.co/qxgWzLw/khoko.jpg" alt="Khoko Rama Viera"
+                        <img src="{{ asset('assets/Rama.png') }}" alt="Khoko Rama Viera"
                             class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4">
                             <h4 class="text-lg font-bold text-white">Khoko Rama Viera</h4>

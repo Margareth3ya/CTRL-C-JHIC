@@ -94,12 +94,12 @@
                         </div>
                         <div class="swiper-slide">
                             <div class="w-full h-full bg-cover bg-center"
-                                style="background-image: url('{{ asset('assets/Kegiatan2.png') }}')">
+                                style="background-image: url('{{ asset('assets/Hero4.png') }}')">
                             </div>
                         </div>
                         <div class="swiper-slide">
                             <div class="w-full h-full bg-cover bg-center"
-                                style="background-image: url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')">
+                                style="background-image: url('{{ asset('assets/Hero3.png') }}')">
                             </div>
                         </div>
                     </div>
@@ -349,93 +349,127 @@
                 }, 200);
             });
 
-            form.addEventListener('submit', async function (e) {
-                e.preventDefault();
+// Di dalam event listener form submit, ganti bagian tombol dengan cara yang lebih aman
+form.addEventListener('submit', async function (e) {
+    e.preventDefault();
 
-                submitButton.disabled = true;
-                submitButton.innerHTML = `
-                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Memproses...
+    submitButton.disabled = true;
+    submitButton.innerHTML = `
+    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+    </svg>
+    Memproses...
+    `;
+
+    try {
+        const response = await fetch("/api/gemini", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
+            },
+            body: JSON.stringify({ keyword: keywordInput.value }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || 'Terjadi kesalahan');
+        }
+
+        if (data.jurusan_utama && data.jurusan_utama.name === "Tidak ditemukan") {
+            resultContent.innerHTML = `
+            <div class="p-6 bg-red-50 border border-red-200 rounded-lg mb-4">
+                <h3 class="text-xl font-semibold text-red-800 mb-2">${data.jurusan_utama.name}</h3>
+                <p class="text-red-700">${data.jurusan_utama.description}</p>
+            </div>
+            `;
+        } else if (data.jurusan_utama && data.jurusan_alternatif) {
+            // SIMPAN DATA REKOMENDASI KE LOCALSTORAGE
+            localStorage.setItem('recommendedMajors', JSON.stringify({
+                utama: data.jurusan_utama,
+                alternatif: data.jurusan_alternatif
+            }));
+
+            // Gunakan metode yang lebih aman untuk membuat tombol
+            resultContent.innerHTML = `
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold text-blue-800 mb-2">Jurusan Utama:</h3>
+                <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                    <h4 class="text-xl font-bold text-gray-900">${data.jurusan_utama.name}</h4>
+                    <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm mt-2">
+                        ${data.jurusan_utama.department}
+                    </span>
+                    <p class="text-gray-700 mt-3">${data.jurusan_utama.description}</p>
+                    <button type="button" class="redirect-btn bg-orange-500 text-white font-medium px-4 py-2 mt-4 rounded-xl shadow-md hover:bg-orange-600 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1" data-major="${data.jurusan_utama.name}">
+                        Lihat Selengkapnya →
+                    </button>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-green-800 mb-2">Jurusan Alternatif:</h3>
+                <div class="p-4 bg-green-50 border border-green-200 rounded-lg">
+                    <h4 class="text-xl font-bold text-gray-900">${data.jurusan_alternatif.name}</h4>
+                    <span class="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm mt-2">
+                        ${data.jurusan_alternatif.department}
+                    </span>
+                    <p class="text-gray-700 mt-3">${data.jurusan_alternatif.description}</p>
+                    <button type="button" class="redirect-btn bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-5 py-2 mt-4 rounded-xl shadow-md hover:from-orange-600 hover:to-red-600 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1" data-major="${data.jurusan_alternatif.name}">
+                        Lihat Selengkapnya →
+                    </button>
+                </div>
+            </div>
             `;
 
-                try {
-                    const response = await fetch("/api/gemini", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
-                        },
-                        body: JSON.stringify({ keyword: keywordInput.value }),
+            // Tambahkan event listener untuk tombol setelah mereka dibuat
+            setTimeout(() => {
+                document.querySelectorAll('.redirect-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const majorName = this.getAttribute('data-major');
+                        redirectToMajor(majorName);
                     });
+                });
+            }, 100);
 
-                    const data = await response.json();
+        } else {
+            resultContent.innerHTML = `
+            <div class="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                <h3 class="text-lg font-semibold text-yellow-800">Format Response Tidak Dikenal</h3>
+                <p class="text-yellow-700 mt-2">Silakan coba lagi dengan kata kunci yang berbeda.</p>
+            </div>
+            `;
+        }
 
-                    // UNCOMMENT JIKA SEDANG TROUBLESHOOTING
-                    // console.log('API Response:', data);
-                    if (!response.ok) {
-                        throw new Error(data.error || 'Terjadi kesalahan');
-                    }
-                    if (data.jurusan_utama && data.jurusan_utama.name === "Tidak ditemukan") {
-                        resultContent.innerHTML = `
-                        <div class="p-6 bg-red-50 border border-red-200 rounded-lg mb-4">
-                            <h3 class="text-xl font-semibold text-red-800 mb-2">${data.jurusan_utama.name}</h3>
-                            <p class="text-red-700">${data.jurusan_utama.description}</p>
-                        </div>
-                    `;
-                    } else if (data.jurusan_utama && data.jurusan_alternatif) {
-                        resultContent.innerHTML = `
-                        <div class="mb-6">
-                            <h3 class="text-lg font-semibold text-blue-800 mb-2">Jurusan Utama:</h3>
-                            <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                                <h4 class="text-xl font-bold text-gray-900">${data.jurusan_utama.name}</h4>
-                                <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm mt-2">
-                                    ${data.jurusan_utama.department}
-                                </span>
-                                <p class="text-gray-700 mt-3">${data.jurusan_utama.description}</p>
-                                <button onclick="redirect()" class="bg-orange-500 text-white font-medium px-4 py-2 mt-4 rounded-xl shadow-md hover:bg-orange-600 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">Lihat Selengkapnya ></button>
-                            </div>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-semibold text-green-800 mb-2">Jurusan Alternatif:</h3>
-                            <div class="p-4 bg-green-50 border border-green-200 rounded-lg">
-                                <h4 class="text-xl font-bold text-gray-900">${data.jurusan_alternatif.name}</h4>
-                                <span class="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm mt-2">
-                                    ${data.jurusan_alternatif.department}
-                                </span>
-                                <p class="text-gray-700 mt-3">${data.jurusan_alternatif.description}</p>
-                                <button onclick="redirect()" class="bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold px-5 py-2 mt-4 rounded-xl shadow-md hover:from-orange-600 hover:to-red-600 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">Lihat Selengkapnya ></button>
-                            </div>
-                        </div>
-                    `;
-                    } else {
-                        resultContent.innerHTML = `
-                        <div class="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-                            <h3 class="text-lg font-semibold text-yellow-800">Format Response Tidak Dikenal</h3>
-                            <p class="text-yellow-700 mt-2">Silakan coba lagi dengan kata kunci yang berbeda.</p>
-                            <details class="mt-3">
-                                <summary class="cursor-pointer text-sm">Debug Info</summary>
-                                <pre class="text-xs mt-2">${JSON.stringify(data, null, 2)}</pre>
-                            </details>
-                        </div>
-                    `;
-                    }
+        leftContent.classList.add('hidden');
+        resultContainer.classList.remove('hidden');
+        form.classList.add('hidden');
+        resetContainer.classList.remove('hidden');
 
-                    leftContent.classList.add('hidden');
-                    resultContainer.classList.remove('hidden');
-                    form.classList.add('hidden');
-                    resetContainer.classList.remove('hidden');
+    } catch (error) {
+        console.error('Error:', error);
+        alert("Terjadi kesalahan: " + error.message);
+    } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = 'DAPATKAN REKOMENDASI';
+    }
+});
 
-                } catch (error) {
-                    console.error('Error:', error);
-                    alert("Terjadi kesalahan: " + error.message);
-                } finally {
-                    submitButton.disabled = false;
-                    submitButton.textContent = 'DAPATKAN REKOMENDASI';
-                }
-            });
+// Fungsi redirect yang baru
+function redirectToMajor(majorName) {
+    console.log('Redirecting to major:', majorName); // Debug
+    
+    // Simpan jurusan yang dipilih ke localStorage
+    localStorage.setItem('selectedMajor', majorName);
+    
+    // Redirect ke halaman jurusan
+    window.location.href = '/program/jurusan';
+}
+
+// Fungsi redirect umum (untuk tombol yang sudah ada)
+function redirect() {
+    window.location.href = "/program/jurusan";
+}
 
             // Reset button
             resetButton.addEventListener('click', function () {
@@ -484,8 +518,10 @@
                                         meliputi pemrograman, desain web, jaringan komputer, dan manajemen data.
                                     </p>
                                 </div>
-                                <a href="/jurusan"
-                                    class="self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition">
+
+                                <a href="/program/jurusan" 
+                                class="redirect-department self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition"
+                                data-department="TIK">
                                     Selengkapnya →
                                 </a>
                             </div>
@@ -513,8 +549,9 @@
                                         serta proses manufaktur industri.
                                     </p>
                                 </div>
-                                <a href="/jurusan"
-                                    class="self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition">
+                                <a href="/program/jurusan" 
+                                class="redirect-department self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition"
+                                data-department="Pemesinan">
                                     Selengkapnya →
                                 </a>
                             </div>
@@ -542,8 +579,9 @@
                                         untuk bangunan dan industri.
                                     </p>
                                 </div>
-                                <a href="/jurusan"
-                                    class="self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition">
+                                <a href="/program/jurusan" 
+                                class="redirect-department self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition"
+                                data-department="Kelistrikan">
                                     Selengkapnya →
                                 </a>
                             </div>
@@ -571,8 +609,9 @@
                                         yang memenuhi kebutuhan industri.
                                     </p>
                                 </div>
-                                <a href="/jurusan"
-                                    class="self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition">
+                                <a href="/program/jurusan" 
+                                class="redirect-department self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition"
+                                data-department="Otomotif">
                                     Selengkapnya →
                                 </a>
                             </div>
@@ -655,6 +694,28 @@
     </section>
 
     <script>
+
+        // Fungsi untuk redirect ke halaman jurusan dengan departemen spesifik
+function redirectToDepartment(departmentName) {
+    // Simpan departemen yang dipilih ke localStorage
+    localStorage.setItem('selectedDepartment', departmentName);
+    
+    // Redirect ke halaman jurusan
+    window.location.href = '/program/jurusan';
+}
+
+// Event listener untuk tombol departemen
+document.addEventListener('DOMContentLoaded', function() {
+    const departmentButtons = document.querySelectorAll('.redirect-department');
+    
+    departmentButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const departmentName = this.getAttribute('data-department');
+            redirectToDepartment(departmentName);
+        });
+    });
+});
 
         document.addEventListener('DOMContentLoaded', function () {
             // Baris 1 (arah ke kanan)

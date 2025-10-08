@@ -148,21 +148,30 @@
                 </div>
             </div>
 
-            <div class="flex">
-                <span class="text-gray-400">Social Media: </span>
-                <a href="#"
-                    class="social-icon w-10 h-10 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="#"
-                    class="social-icon w-10 h-10 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="#"
-                    class="social-icon w-10 h-10 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center">
-                    <i class="fab fa-youtube"></i>
-                </a>
-            </div>
+<div class="flex flex-wrap items-center justify-between gap-4 mt-6">
+
+    <!-- Bagian kiri: Social Media -->
+    <div class="flex items-center gap-3">
+        <span class="text-gray-400 text-sm mr-2">Social Media:</span>
+        <a href="#" class="social-icon w-9 h-9 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center text-white transition">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="#" class="social-icon w-9 h-9 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center text-white transition">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="#" class="social-icon w-9 h-9 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center text-white transition">
+            <i class="fab fa-youtube"></i>
+        </a>
+    </div>
+
+    <!-- Bagian kanan: Supported by -->
+    <div class="flex items-center gap-2">
+        <span class="text-gray-400 text-sm">Supported by:</span>
+        <img src="{{ asset('assets/JagoanSupport.png') }}" alt="Jagoan Support" class="h-8 object-contain">
+    </div>
+
+</div>
+
         </div>
 
         <div>

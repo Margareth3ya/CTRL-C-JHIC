@@ -189,7 +189,7 @@
                             hover:shadow-2xl transition-all duration-500 
                             w-full mx-auto transform hover:-translate-y-2">
                     <div class="overflow-hidden">
-                        <img src="{{ asset('assets/Kegiatan7.png') }}" alt="Kegiatan Lain"
+                        <img src="{{ asset('assets/Apel.jpg') }}" alt="Kegiatan Lain"
                              class="w-full h-[28rem] object-cover transform 
                                     group-hover:scale-110 transition-transform duration-700 ease-out">
                     </div>
@@ -265,7 +265,81 @@
                             hover:shadow-2xl transition-all duration-500 
                             w-full mx-auto transform hover:-translate-y-2">
                     <div class="overflow-hidden">
-                        <img src="{{ asset('assets/Kegiatan7.png') }}" alt="Kegiatan Lain"
+                        <img src="{{ asset('assets/Pondok.jpg') }}" alt="Kegiatan Lain"
+                             class="w-full h-[28rem] object-cover transform 
+                                    group-hover:scale-110 transition-transform duration-700 ease-out">
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                        <h3 class="text-lg md:text-xl font-semibold text-white mb-1">
+                            Kegiatan Lain
+                        </h3>
+                        <p class="text-gray-200 text-sm md:text-base">- 10 Mei 2025</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- === Gallery Section (4 kolom) === -->
+        <div class="container mx-auto px-4 py-6 md:py-8 lg:py-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <!-- Card 1 -->
+                <div class="group relative bg-white rounded-xl shadow-md overflow-hidden 
+                            hover:shadow-2xl transition-all duration-500 
+                            w-full mx-auto transform hover:-translate-y-2">
+                    <div class="overflow-hidden">
+                        <img src="{{ asset('assets/Kegiatan4.png') }}" alt="Halal Bihalal"
+                             class="w-full h-[28rem] object-cover transform 
+                                    group-hover:scale-110 transition-transform duration-700 ease-out">
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                        <h3 class="text-lg md:text-xl font-semibold text-white mb-1">
+                            Acara Halal Bihalal Skariga
+                        </h3>
+                        <p class="text-gray-200 text-sm md:text-base">- 2 Mei 2025</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="group relative bg-white rounded-xl shadow-md overflow-hidden 
+                            hover:shadow-2xl transition-all duration-500 
+                            w-full mx-auto transform hover:-translate-y-2">
+                    <div class="overflow-hidden">
+                        <img src="{{ asset('assets/Kegiatan5.png') }}" alt="Halal Bihalal"
+                             class="w-full h-[28rem] object-cover transform 
+                                    group-hover:scale-110 transition-transform duration-700 ease-out">
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                        <h3 class="text-lg md:text-xl font-semibold text-white mb-1">
+                            Acara Halal Bihalal Skariga
+                        </h3>
+                        <p class="text-gray-200 text-sm md:text-base">- 2 Mei 2025</p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="group relative bg-white rounded-xl shadow-md overflow-hidden 
+                            hover:shadow-2xl transition-all duration-500 
+                            w-full mx-auto transform hover:-translate-y-2">
+                    <div class="overflow-hidden">
+                        <img src="{{ asset('assets/Kegiatan6.png') }}" alt="Halal Bihalal"
+                             class="w-full h-[28rem] object-cover transform 
+                                    group-hover:scale-110 transition-transform duration-700 ease-out">
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                        <h3 class="text-lg md:text-xl font-semibold text-white mb-1">
+                            Acara Halal Bihalal Skariga
+                        </h3>
+                        <p class="text-gray-200 text-sm md:text-base">- 2 Mei 2025</p>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="group relative bg-white rounded-xl shadow-md overflow-hidden 
+                            hover:shadow-2xl transition-all duration-500 
+                            w-full mx-auto transform hover:-translate-y-2">
+                    <div class="overflow-hidden">
+                        <img src="{{ asset('assets/Pondok.jpg') }}" alt="Kegiatan Lain"
                              class="w-full h-[28rem] object-cover transform 
                                     group-hover:scale-110 transition-transform duration-700 ease-out">
                     </div>
