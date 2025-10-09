@@ -106,39 +106,52 @@
 
 
 <!-- Hero Section -->
-    <div class="relative container mx-auto px-4 py-12 lg:py-24">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            <!-- Text Content -->
-            <div class="space-y-6">
-                <h1 class="text-3xl lg:text-4xl font-poppins font-semibold text-black">
-                    Pendaftaran Siswa Baru Jalur Makmur Tahun Ajaran 2025/2026 Dibuka!
-                </h1>
-                <p class="text-lg lg:text-xl text-gray-700 leading-relaxed">
-                    SMK PGRI 3 Malang (Skariga) membuka Pendaftaran Peserta Didik Baru (PPDB) Tahun Ajaran 2025/2026 melalui Jalur Makmur. Segera daftarkan diri Anda untuk menjadi bagian dari sekolah unggulan dengan berbagai program keahlian yang siap mencetak lulusan berkompeten dan berkarakter.
-                </p>
+<div class="relative container mx-auto px-4 py-12 lg:py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+
+        <!-- Text Content -->
+        <div class="space-y-6 text-center lg:text-left">
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-poppins font-semibold text-black">
+                Pendaftaran Siswa Baru Jalur Makmur Tahun Ajaran 2025/2026 Dibuka!
+            </h1>
+            <p class="text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed">
+                SMK PGRI 3 Malang (Skariga) membuka Pendaftaran Peserta Didik Baru (PPDB) Tahun Ajaran 2025/2026 melalui Jalur Makmur. 
+                Segera daftarkan diri Anda untuk menjadi bagian dari sekolah unggulan dengan berbagai program keahlian yang siap mencetak 
+                lulusan berkompeten dan berkarakter.
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
                 <a href="{{ route('kontak') }}" 
-       class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-3xl text-lg lg:text-xl font-poppins font-bold transition-colors inline-flex items-center justify-center">
-        Daftar Sekarang
-    </a>
+                   class="bg-blue-500 hover:bg-orange-600 text-white font-semibold py-3 px-4 rounded-xl transition duration-300 shadow-md">
+                    Daftar Sekarang
+                </a>
+
                 <button onclick="document.getElementById('offline-registration').scrollIntoView({behavior: 'smooth'});" 
-                    class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-3xl text-lg lg:text-xl font-poppins font-bold transition-colors">
+                    class="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-4 rounded-xl transition duration-300 shadow-md">
                     Tata Cara Pendaftaran →
                 </button>
-                    
-
             </div>
-            <!-- Slideshow -->
-            <div class="order-first lg:order-last relative w-full h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-                <div id="slider" class="flex h-full transition-transform duration-1000 ease-in-out">
-                    <img src="{{ asset('assets/Daftar.png') }}" class="w-full h-full object-cover flex-shrink-0">
-                    <img src="{{ asset('assets/Kegiatan1.png') }}" class="w-full h-full object-cover flex-shrink-0">
-                    <img src="{{ asset('assets/Kegiatan2.png') }}" class="w-full h-full object-cover flex-shrink-0">
-                    <img src="{{ asset('assets/Kegiatan3.png') }}" class="w-full h-full object-cover flex-shrink-0">
-                </div>
-            </div>
-
         </div>
+
+        <!-- Slideshow -->
+        <div class="order-first lg:order-last relative w-full h-[400px] sm:h-[500px] lg:h-[700px] rounded-2xl overflow-hidden shadow-2xl group">
+            <div id="slider" class="flex h-full transition-transform duration-1000 ease-in-out">
+                @foreach (['Daftar.png', 'SSB1.jpg', 'SSB2.jpg', 'SSB3.jpg', 'SSB4.jpg'] as $image)
+                    <a href="https://www.instagram.com/reel/DPA1T5gilLj/?utm_source=ig_web_copy_link&igsh=cm0xaWYzeTlubXJo"
+                       target="_blank"
+                       class="relative w-full h-full flex-shrink-0 overflow-hidden group">
+                        <img src="{{ asset('assets/' . $image) }}"
+                             class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                            <span class="text-white text-lg sm:text-xl font-semibold tracking-wide">Buka di Instagram ↗</span>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+        </div>
+
     </div>
+</div>
 
 
     <!-- Offline Registration Steps -->
@@ -187,19 +200,27 @@
         </div>
     </div>
 
-    <!-- Statistics Section -->
+<!-- Statistics Section -->
 <div class="relative py-16 lg:py-24">
     <div class="container mx-auto px-4">
         <h2 class="text-4xl lg:text-6xl font-bebas text-black text-center mb-12 lg:mb-20">
-            Data jumlah peserta diterima setiap tahun
+            Data Jumlah Peserta Diterima Setiap Tahun
         </h2>
-        
-        <!-- Chart/Graph dengan container responsif -->
-        <div class="chart-container bg-transparent rounded-2xl p-4 lg:p-8">
-            <canvas id="myChart" class="chart-image rounded-lg w-full max-w-2xl mx-auto"></canvas>
+
+        <!-- Chart Container -->
+        <div class="relative w-full max-w-5xl mx-auto bg-white/60 backdrop-blur-sm rounded-2xl shadow-lg p-4 sm:p-6 md:p-8">
+            <div class="relative w-full h-[250px] sm:h-[350px] md:h-[450px] lg:h-[500px]">
+                <canvas id="myChart" class="w-full h-full"></canvas>
+            </div>
         </div>
+
+        <p class="text-center text-gray-700 mt-8 max-w-2xl mx-auto font-poppins text-base sm:text-lg">
+            Grafik di atas menunjukkan jumlah pendaftar dan peserta yang diterima di SMK PGRI 3 Malang setiap tahun.
+            Data ini mencerminkan peningkatan antusiasme calon siswa baru dari waktu ke waktu.
+        </p>
     </div>
 </div>
+
 
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

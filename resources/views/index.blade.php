@@ -78,6 +78,37 @@
     width: auto;
     flex-shrink: 0;
 }
+.card-active {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+    z-index: 40;
+    filter: brightness(1);
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card-behind {
+    transform: translateX(80px) scale(0.92);
+    opacity: 1;
+    z-index: 30;
+    filter: brightness(0.9);
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card-far-behind {
+    transform: translateX(160px) scale(0.84);
+    opacity: 1;
+    z-index: 20;
+    filter: brightness(0.8);
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card-more-behind {
+    transform: translateX(240px) scale(0.76);
+    opacity: 1;
+    z-index: 10;
+    filter: brightness(0.7);
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
 
     </style>
 @endpush
@@ -386,11 +417,14 @@ form.addEventListener('submit', async function (e) {
             </div>
             `;
         } else if (data.jurusan_utama && data.jurusan_alternatif) {
-            // SIMPAN DATA REKOMENDASI KE LOCALSTORAGE
-            localStorage.setItem('recommendedMajors', JSON.stringify({
-                utama: data.jurusan_utama,
-                alternatif: data.jurusan_alternatif
-            }));
+        // SIMPAN DATA REKOMENDASI KE LOCALSTORAGE DENGAN TIMESTAMP
+        const recommendationData = {
+            utama: data.jurusan_utama,
+            alternatif: data.jurusan_alternatif,
+            timestamp: Date.now(), // Tambahkan timestamp
+            expiresIn: 30000
+        };
+        localStorage.setItem('recommendedMajors', JSON.stringify(recommendationData));
 
             // Gunakan metode yang lebih aman untuk membuat tombol
             resultContent.innerHTML = `
@@ -480,6 +514,8 @@ function redirect() {
                 keywordInput.value = '';
             });
         });
+
+        
     </script>
 <!-- ==Carousel Departemen (Stacked)== -->
 <section class="w-full py-16 bg-white relative overflow-hidden">
@@ -496,9 +532,9 @@ function redirect() {
         <div class="relative w-full max-w-4xl mx-auto">
             <div class="overflow-visible h-96">
                 <div class="card-container relative h-full">
-                    <!-- Card Loop -->
+                    <!-- Card Loop - TANPA INLINE STYLE -->
                     <div class="card absolute inset-0 bg-white rounded-2xl shadow-lg overflow-hidden h-80 transition-all duration-700"
-                        data-index="0" style="z-index: 40; transform: translate(0, 0) scale(1);">
+                        data-index="0">
                         <div class="flex flex-col md:flex-row h-full">
                             <div class="md:w-2/5">
                                 <img src="{{ asset('assets/Depart1.png') }}" alt="TIK"
@@ -529,7 +565,7 @@ function redirect() {
                     </div>
 
                     <div class="card absolute inset-0 bg-white rounded-2xl shadow-lg overflow-hidden h-80 transition-all duration-700"
-                        data-index="1" style="z-index: 30; transform: translate(40px, 20px) scale(0.95); opacity: 0.9;">
+                        data-index="1">
                         <div class="flex flex-col md:flex-row h-full">
                             <div class="md:w-2/5">
                                 <img src="{{ asset('assets/Depart2.png') }}" alt="Pemesinan"
@@ -549,17 +585,18 @@ function redirect() {
                                         serta proses manufaktur industri.
                                     </p>
                                 </div>
-                                <a href="/program/jurusan" 
-                                class="redirect-department self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition"
-                                data-department="Pemesinan">
-                                    Selengkapnya →
-                                </a>
+                                    <a href="/program/jurusan" 
+                                    class="redirect-department self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition"
+                                    data-department="Pemesinan">
+                                        Selengkapnya →
+                                    </a>
+
                             </div>
                         </div>
                     </div>
 
                     <div class="card absolute inset-0 bg-white rounded-2xl shadow-lg overflow-hidden h-80 transition-all duration-700"
-                        data-index="2" style="z-index: 20; transform: translate(80px, 40px) scale(0.9); opacity: 0.8;">
+                        data-index="2">
                         <div class="flex flex-col md:flex-row h-full">
                             <div class="md:w-2/5">
                                 <img src="{{ asset('assets/Depart3.png') }}" alt="Kelistrikan"
@@ -584,12 +621,13 @@ function redirect() {
                                 data-department="Kelistrikan">
                                     Selengkapnya →
                                 </a>
+
                             </div>
                         </div>
                     </div>
 
                     <div class="card absolute inset-0 bg-white rounded-2xl shadow-lg overflow-hidden h-80 transition-all duration-700"
-                        data-index="3" style="z-index: 10; transform: translate(120px, 60px) scale(0.85); opacity: 0.7;">
+                        data-index="3">
                         <div class="flex flex-col md:flex-row h-full">
                             <div class="md:w-2/5">
                                 <img src="{{ asset('assets/Depart4.png') }}" alt="Otomotif"
@@ -629,7 +667,7 @@ function redirect() {
             </div>
 
             <div class="text-center mt-4 text-gray-500 text-sm">
-                Geser atau klik titik untuk melihat departemen lainnya
+                Geser atau klik untuk melihat departemen lainnya
             </div>
         </div>
     </div>
@@ -694,6 +732,33 @@ function redirect() {
     </section>
 
     <script>
+        // Fungsi untuk redirect ke halaman jurusan dengan departemen spesifik
+function redirectToDepartment(departmentName) {
+    console.log('Redirecting to department:', departmentName);
+    
+    // Simpan departemen yang dipilih ke localStorage
+    localStorage.setItem('selectedDepartment', departmentName);
+    
+    // Hapus rekomendasi jurusan jika ada (opsional)
+    localStorage.removeItem('selectedMajor');
+    localStorage.removeItem('recommendedMajors');
+    
+    // Redirect ke halaman jurusan
+    window.location.href = '/program/jurusan';
+}
+
+// Event listener untuk tombol departemen
+document.addEventListener('DOMContentLoaded', function() {
+    const departmentButtons = document.querySelectorAll('.redirect-department');
+    
+    departmentButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const departmentName = this.getAttribute('data-department');
+            redirectToDepartment(departmentName);
+        });
+    });
+});
 
         // Fungsi untuk redirect ke halaman jurusan dengan departemen spesifik
 function redirectToDepartment(departmentName) {
@@ -771,29 +836,21 @@ function initializeCarousel() {
         const cardIndex = parseInt(card.getAttribute('data-index'));
         const position = (cardIndex - currentIndex + cards.length) % cards.length;
         
-        card.style.transition = 'all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        // Hapus semua inline style dan reset ke CSS class
+        card.removeAttribute('style');
         
-        // Smooth stacking effect dengan easing yang lebih natural
+        // Hapus semua class posisi sebelumnya
+        card.classList.remove('card-active', 'card-behind', 'card-far-behind', 'card-more-behind');
+        
+        // Tambahkan class berdasarkan posisi
         if (position === 0) {
-            card.style.transform = 'translateX(0) scale(1) rotateY(0deg)';
-            card.style.opacity = '1';
-            card.style.zIndex = '40';
-            card.style.filter = 'brightness(1)';
+            card.classList.add('card-active');
         } else if (position === 1) {
-            card.style.transform = 'translateX(50px) scale(0.92) rotateY(-5deg)';
-            card.style.opacity = '0.85';
-            card.style.zIndex = '30';
-            card.style.filter = 'brightness(0.95)';
+            card.classList.add('card-behind');
         } else if (position === 2) {
-            card.style.transform = 'translateX(90px) scale(0.84) rotateY(-8deg)';
-            card.style.opacity = '0.7';
-            card.style.zIndex = '20';
-            card.style.filter = 'brightness(0.9)';
+            card.classList.add('card-far-behind');
         } else if (position === 3) {
-            card.style.transform = 'translateX(120px) scale(0.76) rotateY(-10deg)';
-            card.style.opacity = '0.5';
-            card.style.zIndex = '10';
-            card.style.filter = 'brightness(0.85)';
+            card.classList.add('card-more-behind');
         }
     });
 
@@ -893,26 +950,27 @@ function updateDragPosition() {
         const cardIndex = parseInt(card.getAttribute('data-index'));
         const position = (cardIndex - currentIndex + cards.length) % cards.length;
 
-        // Smooth interpolation based on drag progress
+        // Untuk efek drag, kita tetap gunakan inline style
+        // Tapi hanya untuk transform dan opacity, biarkan class untuk z-index dan filter
         if (position === 0) {
             const scale = 1 - (progress * 0.08);
             const opacity = 1 - (progress * 0.3);
             card.style.transform = `translateX(${diffX}px) scale(${scale}) rotateY(${diffX * 0.1}deg)`;
             card.style.opacity = opacity;
         } else if (position === 1) {
-            const baseX = 50 + (diffX > 0 ? Math.min(diffX * 0.8, 80) : Math.max(diffX * 0.8, -30));
+            const baseX = 80 + (diffX > 0 ? Math.min(diffX * 0.8, 80) : Math.max(diffX * 0.8, -30));
             const scale = 0.92 - (progress * 0.08);
             const opacity = 0.85 - (progress * 0.25);
             card.style.transform = `translateX(${baseX}px) scale(${scale}) rotateY(${diffX * 0.08 - 5}deg)`;
             card.style.opacity = opacity;
         } else if (position === 2) {
-            const baseX = 90 + (diffX > 0 ? Math.min(diffX * 0.6, 60) : Math.max(diffX * 0.6, -20));
+            const baseX = 160 + (diffX > 0 ? Math.min(diffX * 0.6, 60) : Math.max(diffX * 0.6, -20));
             const scale = 0.84 - (progress * 0.08);
             const opacity = 0.7 - (progress * 0.2);
             card.style.transform = `translateX(${baseX}px) scale(${scale}) rotateY(${diffX * 0.06 - 8}deg)`;
             card.style.opacity = opacity;
         } else if (position === 3) {
-            const baseX = 120 + (diffX > 0 ? Math.min(diffX * 0.4, 40) : Math.max(diffX * 0.4, -10));
+            const baseX = 240 + (diffX > 0 ? Math.min(diffX * 0.4, 40) : Math.max(diffX * 0.4, -10));
             const scale = 0.76 - (progress * 0.06);
             const opacity = 0.5 - (progress * 0.15);
             card.style.transform = `translateX(${baseX}px) scale(${scale}) rotateY(${diffX * 0.04 - 10}deg)`;
@@ -931,11 +989,6 @@ function finishDrag() {
 
     const diffX = currentX - startX;
 
-    // Restore smooth transitions
-    cards.forEach(card => {
-        card.style.transition = 'all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-    });
-
     // Enhanced swipe detection dengan hysteresis
     if (Math.abs(diffX) > dragThreshold) {
         if (diffX > 0) {
@@ -946,7 +999,7 @@ function finishDrag() {
             navigateTo(currentIndex + 1);
         }
     } else {
-        // Snap back to current position
+        // Snap back to current position - gunakan initializeCarousel untuk kembali ke CSS class
         initializeCarousel();
     }
 }

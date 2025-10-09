@@ -5,6 +5,30 @@
     <div class="max-w-7xl mx-auto px-4">
         <h2 class="text-center text-5xl font-bebas text-gray-800 mb-8">DEPARTEMEN UNGGULAN SKARIGA</h2>
 
+        <!-- Search Bar -->
+        <div class="mb-8 max-w-2xl mx-auto relative">
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fas fa-search text-gray-400"></i>
+                </div>
+                <input 
+                    type="text" 
+                    id="searchInput"
+                    placeholder="Cari jurusan berdasarkan nama, keterampilan, atau bidang pekerjaan..."
+                    class="w-full pl-10 pr-10 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 shadow-sm"
+                >
+                <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                    <button 
+                        id="clearSearch"
+                        class="hidden text-gray-400 hover:text-gray-600 transition-colors"
+                    >
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="searchResults" class="absolute left-0 right-0 mt-1 bg-white border border-gray-200 rounded-xl shadow-lg max-h-60 overflow-y-auto z-50 hidden"></div>
+        </div>
+
         <!-- Banner Rekomendasi -->
         <div id="recommendationBanner" class="hidden mb-8 bg-gradient-to-r from-orange-50 to-blue-50 border-l-4 border-orange-500 p-6 rounded-lg">
             <div class="flex items-center justify-between">
@@ -57,35 +81,370 @@ const departmentData = @json($departments);
 const activeMajors = {};
 let isTransitioning = false;
 
-// Check for recommended major on page load
+// Search functionality
+let searchTimeout = null;
+
 document.addEventListener('DOMContentLoaded', function() {
+    initializeSearch();
     checkRecommendedMajor();
+    scrollToSelectedDepartment();
 });
+
+function initializeSearch() {
+    const searchInput = document.getElementById('searchInput');
+    const clearSearch = document.getElementById('clearSearch');
+    const searchResults = document.getElementById('searchResults');
+
+    searchInput.addEventListener('input', function(e) {
+        const query = e.target.value.trim();
+        
+        // Toggle clear button
+        if (query.length > 0) {
+            clearSearch.classList.remove('hidden');
+        } else {
+            clearSearch.classList.add('hidden');
+            searchResults.classList.add('hidden');
+            return;
+        }
+
+        // Debounce search
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            performSearch(query);
+        }, 300);
+    });
+
+    clearSearch.addEventListener('click', function() {
+        searchInput.value = '';
+        clearSearch.classList.add('hidden');
+        searchResults.classList.add('hidden');
+        searchInput.focus();
+    });
+
+    // Hide results when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.classList.add('hidden');
+        }
+    });
+
+    // Handle enter key
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            const query = e.target.value.trim();
+            if (query.length > 0) {
+                performSearch(query, true);
+            }
+        }
+    });
+
+    // Handle escape key
+    searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            searchResults.classList.add('hidden');
+            searchInput.blur();
+        }
+    });
+}
+
+function performSearch(query, isEnter = false) {
+    const searchResults = document.getElementById('searchResults');
+    
+    if (query.length < 2) {
+        searchResults.classList.add('hidden');
+        return;
+    }
+
+    const results = searchMajors(query);
+    
+    if (results.length > 0) {
+        displaySearchResults(results);
+        searchResults.classList.remove('hidden');
+    } else {
+        searchResults.innerHTML = `
+            <div class="p-4 text-center text-gray-500">
+                <i class="fas fa-search mb-2 text-gray-400 text-lg"></i>
+                <p class="text-sm">Tidak ditemukan jurusan dengan kata kunci "${query}"</p>
+            </div>
+        `;
+        searchResults.classList.remove('hidden');
+    }
+
+    // Jika enter ditekan dan ada hasil, buka hasil pertama
+    if (isEnter && results.length > 0) {
+        openSearchResult(results[0]);
+    }
+}
+
+function searchMajors(query) {
+    const results = [];
+    const lowerQuery = query.toLowerCase();
+
+    // Search through all departments and majors
+    for (const [deptKey, dept] of Object.entries(departmentData)) {
+        const majors = dept.majors || [];
+        
+        for (let i = 0; i < majors.length; i++) {
+            const major = majors[i];
+            let matchScore = 0;
+
+            // Check name match (highest priority)
+            if (major.name.toLowerCase().includes(lowerQuery)) {
+                matchScore += 100;
+            }
+
+            // Check description match
+            if (major.desc && major.desc.toLowerCase().includes(lowerQuery)) {
+                matchScore += 50;
+            }
+
+            // Check skills match
+            if (major.skills && major.skills.toLowerCase().includes(lowerQuery)) {
+                matchScore += 30;
+            }
+
+            // Check careers match
+            if (major.careers && major.careers.toLowerCase().includes(lowerQuery)) {
+                matchScore += 20;
+            }
+
+            // Check department name match
+            if (dept.title.toLowerCase().includes(lowerQuery)) {
+                matchScore += 10;
+            }
+
+            if (matchScore > 0) {
+                results.push({
+                    deptKey,
+                    deptName: dept.title,
+                    majorIndex: i,
+                    major: major,
+                    matchScore: matchScore
+                });
+            }
+        }
+    }
+
+    // Sort by match score (highest first)
+    return results.sort((a, b) => b.matchScore - a.matchScore);
+}
+
+function displaySearchResults(results) {
+    const searchResults = document.getElementById('searchResults');
+    
+    searchResults.innerHTML = results.map(result => `
+        <div class="search-result-item p-3 border-b border-gray-100 hover:bg-orange-50 cursor-pointer transition-all duration-200"
+             onclick="openSearchResult(${JSON.stringify(result).replace(/"/g, '&quot;')})">
+            <div class="flex justify-between items-start mb-1">
+                <h4 class="font-semibold text-gray-800 text-sm">${result.major.name}</h4>
+                <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full whitespace-nowrap">${result.deptName}</span>
+            </div>
+            <p class="text-xs text-gray-600 line-clamp-2 mb-1">${result.major.desc || ''}</p>
+            <div class="flex items-center text-xs text-gray-500">
+                <i class="fas fa-arrow-right mr-1 text-orange-500"></i>
+                <span>Klik untuk membuka jurusan</span>
+            </div>
+        </div>
+    `).join('');
+
+    // Add "clear results" option if many results
+    if (results.length > 5) {
+        searchResults.innerHTML += `
+            <div class="p-2 text-center border-t border-gray-100 bg-gray-50">
+                <button onclick="clearSearchResults()" class="text-xs text-orange-600 hover:text-orange-700 font-medium">
+                    <i class="fas fa-times mr-1"></i>
+                    Hapus Pencarian
+                </button>
+            </div>
+        `;
+    }
+}
+
+function openSearchResult(result) {
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    
+    // Hide search results dan clear input
+    searchResults.classList.add('hidden');
+    searchInput.value = '';
+    document.getElementById('clearSearch').classList.add('hidden');
+    
+    console.log('Opening search result:', result);
+    
+    // Scroll to department terlebih dahulu
+    const departmentElement = document.getElementById(`department-${result.deptKey}`);
+    if (departmentElement) {
+        departmentElement.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center'
+        });
+
+        // Tunggu scroll selesai, lalu buka departemen dan langsung ke jurusan spesifik
+        setTimeout(() => {
+            // Buka departemen dan langsung tampilkan jurusan yang dicari
+            showSpecificMajor(result.deptKey, result.majorIndex);
+            
+            // Highlight jurusan yang dicari
+            highlightSearchedMajor(result.deptKey);
+        }, 800);
+    }
+}
+
+function clearSearchResults() {
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    const clearSearch = document.getElementById('clearSearch');
+    
+    searchInput.value = '';
+    searchResults.classList.add('hidden');
+    clearSearch.classList.add('hidden');
+}
+
+function highlightSearchedMajor(deptKey) {
+    const card = document.getElementById(`department-card-${deptKey}`);
+    if (card) {
+        // Hapus animasi sebelumnya
+        card.style.animation = 'none';
+        
+        // Trigger reflow
+        void card.offsetWidth;
+        
+        // Apply animasi baru
+        card.style.animation = 'searchHighlight 2s ease-in-out';
+        
+        const inner = card.querySelector('.major-inner');
+        if (inner) {
+            inner.style.boxShadow = '0 0 0 3px rgba(59, 130, 246, 0.5)';
+            inner.style.transition = 'box-shadow 0.3s ease';
+            
+            setTimeout(() => {
+                inner.style.boxShadow = '0 20px 40px rgba(0,0,0,0.1)';
+            }, 3000);
+        }
+    }
+}
+
+// Check for recommended major on page load
+let countdownInterval = null;
 
 function checkRecommendedMajor() {
     const selectedMajor = localStorage.getItem('selectedMajor');
-    const recommendedMajors = localStorage.getItem('recommendedMajors');
+    const recommendedMajorsStr = localStorage.getItem('recommendedMajors');
     
-    if (selectedMajor && recommendedMajors) {
-        const majorsData = JSON.parse(recommendedMajors);
-        showRecommendationBanner(selectedMajor, majorsData);
-        
-        // Auto-scroll dan buka jurusan yang sesuai setelah delay
-        setTimeout(() => {
-            scrollToRecommendedMajor(selectedMajor);
-        }, 1000);
+    if (selectedMajor && recommendedMajorsStr) {
+        try {
+            const recommendedMajors = JSON.parse(recommendedMajorsStr);
+            
+            if (recommendedMajors && recommendedMajors.timestamp) {
+                const currentTime = Date.now();
+                const timeElapsed = currentTime - recommendedMajors.timestamp;
+                const expiresIn = recommendedMajors.expiresIn || 15000; // 15 detik
+                
+                if (timeElapsed < expiresIn) {
+                    // Data masih valid, tampilkan rekomendasi dengan countdown
+                    showRecommendationBanner(selectedMajor, recommendedMajors);
+                    
+                    // Auto-scroll dan buka jurusan yang sesuai setelah delay
+                    setTimeout(() => {
+                        scrollToRecommendedMajor(selectedMajor);
+                    }, 1000);
+
+                    // Start countdown timer
+                    startCountdownTimer(expiresIn - timeElapsed);
+                    
+                    return;
+                }
+            }
+        } catch (error) {
+            console.error('Error parsing recommendation data:', error);
+        }
     }
+    
+    // Jika data tidak valid atau sudah kedaluwarsa, hapus dari localStorage
+    removeRecommendation();
 }
+
+function startCountdownTimer(timeLeft) {
+    const bannerText = document.getElementById('recommendedMajorText');
+    if (!bannerText) return;
+    
+    // Hapus interval sebelumnya jika ada
+    if (countdownInterval) {
+        clearInterval(countdownInterval);
+    }
+    
+    let remainingTime = Math.floor(timeLeft / 1000);
+    
+    // Update immediately
+    updateCountdownDisplay(remainingTime);
+    
+    // Update every second
+    countdownInterval = setInterval(() => {
+        remainingTime--;
+        
+        if (remainingTime <= 0) {
+            clearInterval(countdownInterval);
+            countdownInterval = null;
+            removeRecommendation();
+            return;
+        }
+        
+        updateCountdownDisplay(remainingTime);
+    }, 1000);
+}
+
+function updateCountdownDisplay(seconds) {
+    const bannerText = document.getElementById('recommendedMajorText');
+    if (!bannerText) return;
+    
+    const originalContent = bannerText.innerHTML.split('<br><small')[0];
+    const countdownHtml = `<br><small class="recommendation-timer">⏰ Rekomendasi ini akan hilang dalam <strong>${seconds}</strong> detik</small>`;
+    
+    bannerText.innerHTML = originalContent + countdownHtml;
+}
+
+function removeRecommendation() {
+    // Hentikan countdown
+    if (countdownInterval) {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+    }
+    
+    const banner = document.getElementById('recommendationBanner');
+    if (banner) {
+        banner.classList.add('hidden');
+    }
+    
+    // Hapus data dari localStorage
+    localStorage.removeItem('selectedMajor');
+    localStorage.removeItem('recommendedMajors');
+    
+    console.log('Rekomendasi jurusan telah direset');
+}
+
+window.addEventListener('beforeunload', removeRecommendation);
+
+document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+        removeRecommendation();
+    }
+});
 
 function showRecommendationBanner(selectedMajor, majorsData) {
     const banner = document.getElementById('recommendationBanner');
     const bannerText = document.getElementById('recommendedMajorText');
+    
+    if (!banner || !bannerText) return;
     
     let recommendationText = `Berdasarkan minat Anda, kami merekomendasikan: <strong>${selectedMajor}</strong>`;
     
     if (majorsData.utama && majorsData.utama.description) {
         recommendationText += ` - ${majorsData.utama.description.substring(0, 100)}...`;
     }
+    
+    // Initial countdown display akan diupdate oleh startCountdownTimer
+    const initialTimeLeft = Math.ceil((majorsData.expiresIn - (Date.now() - majorsData.timestamp)) / 1000);
+    recommendationText += `<br><small class="recommendation-timer">⏰ Rekomendasi ini akan hilang dalam <strong>${initialTimeLeft}</strong> detik</small>`;
     
     bannerText.innerHTML = recommendationText;
     banner.classList.remove('hidden');
@@ -364,13 +723,229 @@ function setupDragSwipe(deptId) {
     inner.addEventListener('touchend', end);
 }
 
+// Fungsi untuk auto-scroll ke departemen yang dipilih
+function scrollToSelectedDepartment() {
+    const selectedDepartment = localStorage.getItem('selectedDepartment');
+    
+    if (selectedDepartment) {
+        console.log('Mencari departemen:', selectedDepartment);
+        
+        // Mapping nama departemen ke ID
+        const departmentMap = {
+            'TIK': 'department-tik',
+            'Pemesinan': 'department-pemesinan', 
+            'Kelistrikan': 'department-elektro',
+            'Otomotif': 'department-otomotif'
+        };
+        
+        const departmentId = departmentMap[selectedDepartment];
+        
+        if (departmentId) {
+            const departmentElement = document.getElementById(departmentId);
+            if (departmentElement) {
+                // Scroll ke departemen yang dipilih
+                departmentElement.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center'
+                });
+                
+                // Auto-buka departemen setelah delay
+                setTimeout(() => {
+                    showFirstMajor(departmentId.replace('department-', ''));
+                    
+                    // Highlight departemen yang dipilih
+                    highlightSelectedDepartment(departmentElement);
+                }, 800);
+                
+                // Hapus selectedDepartment setelah digunakan
+                setTimeout(() => {
+                    localStorage.removeItem('selectedDepartment');
+                }, 2000);
+            }
+        }
+    }
+}
+
+// Fungsi untuk highlight departemen yang dipilih
+function highlightSelectedDepartment(departmentElement) {
+    departmentElement.style.transition = 'all 0.5s ease';
+    departmentElement.style.boxShadow = '0 0 0 3px rgba(249, 115, 22, 0.5)';
+    
+    // Hapus highlight setelah beberapa detik
+    setTimeout(() => {
+        departmentElement.style.boxShadow = '0 20px 40px rgba(0,0,0,0.1)';
+    }, 3000);
+}
+
 // Pastikan fungsi tersedia di global scope
 window.showSpecificMajor = showSpecificMajor;
 window.closeRecommendationBanner = closeRecommendationBanner;
+window.openSearchResult = openSearchResult;
+window.clearSearchResults = clearSearchResults;
 
 </script>
 
 <style>
+    /* Search Bar Styles */
+#searchInput {
+    font-size: 0.95rem;
+    background: white;
+    border: 2px solid #e5e7eb;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+#searchInput:focus {
+    border-color: #f97316;
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+    outline: none;
+}
+
+#searchInput::placeholder {
+    color: #9ca3af;
+    font-size: 0.9rem;
+}
+
+#clearSearch {
+    transition: all 0.2s ease;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+}
+
+#clearSearch:hover {
+    transform: scale(1.1);
+    background: #f3f4f6;
+    border-radius: 50%;
+}
+
+/* Search Results Styles */
+#searchResults {
+    position: absolute;
+    width: 100%;
+    background: white;
+    border: 1px solid #e5e7eb;
+    margin-top: 4px;
+    box-sizing: border-box;
+    max-width: 100%;
+    left: 0;
+    right: 0;
+}
+
+.search-result-item {
+    border-bottom: 1px solid #f3f4f6;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item:hover {
+    background: #fff7ed;
+    transform: translateX(2px);
+}
+
+.search-result-item h4 {
+    transition: color 0.2s ease;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.search-result-item:hover h4 {
+    color: #f97316;
+}
+
+/* Animation for search highlight */
+@keyframes searchHighlight {
+    0%, 100% { 
+        transform: scale(1);
+    }
+    50% { 
+        transform: scale(1.01);
+    }
+}
+
+/* Style untuk countdown timer */
+.recommendation-timer {
+    font-size: 0.875rem;
+    color: #dc2626;
+    font-weight: 600;
+    animation: pulse 1.5s infinite;
+    background: rgba(254, 226, 226, 0.3);
+    padding: 4px 8px;
+    border-radius: 6px;
+    margin-top: 4px;
+    display: inline-block;
+}
+
+.recommendation-timer strong {
+    color: #dc2626;
+    font-size: 1rem;
+    animation: bounce 0.5s infinite alternate;
+}
+
+@keyframes pulse {
+    0%, 100% { 
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% { 
+        opacity: 0.8;
+        transform: scale(1.02);
+    }
+}
+
+@keyframes bounce {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+}
+
+/* Style untuk banner rekomendasi */
+#recommendationBanner {
+    border-left: 4px solid #f97316;
+    background: linear-gradient(135deg, #fed7aa 0%, #bfdbfe 100%);
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
+}
+
+/* Ensure no overflow */
+.search-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Text overflow handling */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.whitespace-nowrap {
+    white-space: nowrap;
+}
+
+/* Style untuk highlight departemen */
+.department-highlight {
+    animation: departmentPulse 2s ease-in-out;
+    border: 3px solid rgba(249, 115, 22, 0.5);
+    border-radius: 20px;
+}
+
+@keyframes departmentPulse {
+    0%, 100% { 
+        box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7);
+    }
+    50% { 
+        box-shadow: 0 0 0 10px rgba(249, 115, 22, 0);
+    }
+}
+
 .font-bebas {
     font-family: 'Bebas Neue', cursive;
 }
@@ -386,6 +961,7 @@ window.closeRecommendationBanner = closeRecommendationBanner;
     display: flex;
     overflow: hidden;
     perspective: 1000px;
+    box-sizing: border-box;
 }
 
 .major-card {
@@ -393,6 +969,7 @@ window.closeRecommendationBanner = closeRecommendationBanner;
     height: 100%;
     user-select: none;
     cursor: grab;
+    box-sizing: border-box;
 }
 
 .major-card.recommended-major .major-inner {
@@ -410,6 +987,7 @@ window.closeRecommendationBanner = closeRecommendationBanner;
     overflow: hidden;
     transition: all 0.5s ease;
     box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    box-sizing: border-box;
 }
 
 /* Animasi highlight */
@@ -509,6 +1087,16 @@ window.closeRecommendationBanner = closeRecommendationBanner;
     .content-section { padding: 25px; }
     .major-title { font-size: 1.5rem; }
     .major-description { font-size: 1rem; }
+    #searchInput {
+        font-size: 16px;
+        padding: 12px 40px 12px 40px;
+    }
+    #searchResults {
+        max-height: 50vh;
+    }
+    .search-result-item {
+        padding: 12px;
+    }
 }
 @media (max-width: 480px) {
     .content-section { padding: 20px; }
