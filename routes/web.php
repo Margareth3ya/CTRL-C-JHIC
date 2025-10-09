@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
+// ======== IMPORT MODEL ========
+use App\Models\Visitor;
+
+// ======== IMPORT CONTROLLERS ========
 use App\Http\Controllers\RecommendationController;
 use App\Http\Controllers\DepartController;
 use App\Http\Controllers\KontakController;
@@ -9,6 +14,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\ContentController;
+use App\Http\Controllers\VisitorController;
 
 // Public routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -43,11 +49,29 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
     Route::get('/contents/{id}/edit', [ContentController::class, 'edit'])->name('admin.contents.edit');
     Route::put('/contents/{id}', [ContentController::class, 'update'])->name('admin.contents.update');
     Route::delete('/contents/{id}', [ContentController::class, 'destroy'])->name('admin.contents.destroy');
+
+    // Apis Chart
+    Route::get('/visitor-stats', [AdminController::class, 'getVisitorStats'])->name('admin.visitor.stats');
+
 });
 
-// Redirect root to login
-Route::redirect('/', '/login');
 Route::get('/', function () {
+    $ip = Request::ip();
+    $today = now()->toDateString();
+
+    // fungsi untuk cek apakah pengunjung sudah tercatat, jangan sentuh bahaya wkwk
+    $exists = Visitor::where('ip_address', $ip)
+        ->where('visit_date', $today)
+        ->exists();
+
+    if (!$exists) {
+        Visitor::create([
+            'ip_address' => $ip,
+            'user_agent' => Request::header('User-Agent'),
+            'visit_date' => $today,
+        ]);
+    }
+
     return view('index');
 });
 Route::get('/informasi/berita', function () {
@@ -70,19 +94,23 @@ Route::get('/profile', function () {
     return view('profile.index');
 });
 
-// Halaman login
-
-
 Route::get('/kontak', function () {
     return view('kontak');
 })->name('kontak');
 
 
-// API POST
+// API
 Route::post('/api/gemini', [RecommendationController::class, 'getRecommendation']);
 Route::post('/kontak/kirim', [KontakController::class, 'kirim'])->name('kontak.kirim');
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/api/pengunjung', [VisitorController::class, 'Update'])->name('api.visitor');
+});
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+});
 
-// TAHAP DEVELOPMENT LOGIC
+
+
+// DONE
 Route::get('/program/jurusan', [DepartController::class, 'index']);
 Route::get('/program/organisasi', function () {
     return view('program.organisasi');

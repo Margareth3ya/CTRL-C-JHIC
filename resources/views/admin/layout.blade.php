@@ -1,13 +1,21 @@
 <!-- resources/views/admin/layout.blade.php -->
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Website Sekolah</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <style>
+        canvas {
+            transition: all 0.3s ease;
+        }
+    </style>
 </head>
+
 <body class="bg-gray-100">
     <div class="flex h-screen">
         <!-- Sidebar -->
@@ -17,28 +25,28 @@
                 <p class="text-blue-200 text-sm">Website Sekolah</p>
             </div>
             <nav class="mt-6">
-                <a href="{{ route('admin.dashboard') }}" 
-                   class="block py-2 px-4 hover:bg-blue-700 {{ request()->routeIs('admin.dashboard') ? 'bg-blue-700' : '' }}">
+                <a href="{{ route('admin.dashboard') }}"
+                    class="block py-2 px-4 hover:bg-blue-700 {{ request()->routeIs('admin.dashboard') ? 'bg-blue-700' : '' }}">
                     <i class="fas fa-tachometer-alt mr-2"></i>Dashboard
                 </a>
-                <a href="{{ route('admin.users.index') }}" 
-                   class="block py-2 px-4 hover:bg-blue-700 {{ request()->routeIs('admin.users.*') ? 'bg-blue-700' : '' }}">
+                <a href="{{ route('admin.users.index') }}"
+                    class="block py-2 px-4 hover:bg-blue-700 {{ request()->routeIs('admin.users.*') ? 'bg-blue-700' : '' }}">
                     <i class="fas fa-users mr-2"></i>Users
                 </a>
-                <a href="{{ route('admin.assets.index') }}" 
-                   class="block py-2 px-4 hover:bg-blue-700 {{ request()->routeIs('admin.assets.*') ? 'bg-blue-700' : '' }}">
+                <a href="{{ route('admin.assets.index') }}"
+                    class="block py-2 px-4 hover:bg-blue-700 {{ request()->routeIs('admin.assets.*') ? 'bg-blue-700' : '' }}">
                     <i class="fas fa-images mr-2"></i>Assets
                 </a>
-                <a href="{{ route('admin.contents.index') }}" 
-                   class="block py-2 px-4 hover:bg-blue-700 {{ request()->routeIs('admin.contents.*') ? 'bg-blue-700' : '' }}">
+                <a href="{{ route('admin.contents.index') }}"
+                    class="block py-2 px-4 hover:bg-blue-700 {{ request()->routeIs('admin.contents.*') ? 'bg-blue-700' : '' }}">
                     <i class="fas fa-file-alt mr-2"></i>Konten
                 </a>
-                
+
                 <!-- Logout Button -->
                 <form action="{{ route('logout') }}" method="POST" class="mt-4">
                     @csrf
-                    <button type="submit" 
-                            class="w-full text-left block py-2 px-4 hover:bg-blue-700 text-red-200 hover:text-white">
+                    <button type="submit"
+                        class="w-full text-left block py-2 px-4 hover:bg-blue-700 text-red-200 hover:text-white">
                         <i class="fas fa-sign-out-alt mr-2"></i>Logout
                     </button>
                 </form>
@@ -95,4 +103,5 @@
         }
     </script>
 </body>
+
 </html>

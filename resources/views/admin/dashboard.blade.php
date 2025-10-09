@@ -42,12 +42,17 @@
         </div>
     </div>
 
-    <div class="bg-white rounded-lg shadow hover:shadow-md">
-        <div class="px-6 py-4 border-b border-gray-200">
-            <h3 class="text-lg font-semibold text-gray-800">Aktivitas Terbaru</h3>
-        </div>
-        <div class="p-6">
-            <p class="text-gray-600">Selamat datang di dashboard admin website sekolah.</p>
-        </div>
+    <!-- render chart -->
+    <div class="p-6 bg-white rounded-lg shadow">
+        <h2 class="text-lg font-semibold mb-3">Statistik Pengunjung <span id="live-indicator"
+                class="text-sm text-gray-500">Connecting to server.....</span></h2>
+        <canvas id="visitorChart"></canvas>
     </div>
+
+    <!-- import chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module">
+        import { initVisitorChart } from "/js/apis.js";
+        initVisitorChart("{{ route('admin.visitor.stats') }}", @json($labels), @json($data));
+    </script>
 @endsection

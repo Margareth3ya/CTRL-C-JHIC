@@ -23,6 +23,9 @@ class RecommendationController extends Controller
 1.1 Jika yang di input berhubungan dengan Sound maka akan di rujuk ke jurusan TE & AV
 2. Jika minat sesuai dengan salah satu jurusan SMK PGRI 3 MALANG berikut:
 
+⚠️ Aturan Utama:
+1. Jika user menginput selain jurusan atau hal yang tidak relevan abaikan
+
 ** Departemen / Kategori TIK: **
 - RPL (Rekayasa Perangkat Lunak)
 - DKV (Desain Komunikasi Visual)
@@ -63,7 +66,7 @@ Jika minat TIDAK relevan, balas dengan:
 \"jurusan_utama\": {
     \"name\": \"Tidak ditemukan\",
     \"department\": \"N/A\",
-    \"description\": \"Maaf, tidak ditemukan jurusan yang sesuai\"
+    \"description\": \"Penjelasan singkat kenapa tidak relevan\"
 },
 \"jurusan_alternatif\": null
 }

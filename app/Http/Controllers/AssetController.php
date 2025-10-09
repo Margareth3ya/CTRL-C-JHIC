@@ -42,7 +42,7 @@ class AssetController extends Controller
             ]);
         }
 
-        return redirect()->route('admin.asset.index')->with('success', 'Upload berhasil...');
+        return redirect()->route('admin.assets.index')->with('success', 'Upload berhasil...');
     }
 
     /**
