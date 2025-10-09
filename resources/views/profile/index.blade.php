@@ -136,8 +136,9 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     @forelse ($alumnis as $alumni)
                         <div
-                            class="relative bg-white rounded-2xl shadow-lg overflow-hidden group hover:scale-105 transition-transform hover:shadow-orange-300 ">
-                            <img src="{{ asset('assets/alumni/' . $alumni->image) }}" alt="{{ $alumni->title }}" >
+                            class="relative bg-white rounded-2xl shadow-lg overflow-hidden group hover:scale-105 transition-transform hover:shadow-orange-300">
+                            <img src="{{ asset('assets/alumni/' . $alumni->image) }}" alt="{{ $alumni->title }}"
+                                class="w-full object-cover group-hover:scale-105 transition-transform duration-500">
                             <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4">
                                 <h4 class="text-lg font-bold text-white">{{ $alumni->title }}</h4>
                                 <p class="text-gray-200 text-sm">{{ $alumni->body }}</p>

@@ -36,12 +36,12 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
     Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('admin.users.destroy');
     
     // Assets
-    Route::get('/assets', [AssetController::class, 'index'])->name('admin.assets.index');
-    Route::get('/assets/create', [AssetController::class, 'create'])->name('admin.assets.create');
-    Route::post('/assets', [AssetController::class, 'store'])->name('admin.assets.store');
-    Route::get('/assets/{id}/edit', [AssetController::class, 'edit'])->name('admin.assets.edit');
-    Route::put('/assets/{id}', [AssetController::class, 'update'])->name('admin.assets.update');
-    Route::delete('/assets/{id}', [AssetController::class, 'destroy'])->name('admin.assets.destroy');
+    Route::get('/assets', [ContentController::class, 'index'])->name('admin.assets.index');
+    Route::get('/assets/create', [ContentController::class, 'create'])->name('admin.assets.create');
+    Route::post('/assets', [ContentController::class, 'store'])->name('admin.assets.store');
+    Route::get('/assets/{id}/edit', [ContentController::class, 'edit'])->name('admin.assets.edit');
+    Route::put('/assets/{id}', [ContentController::class, 'update'])->name('admin.assets.update');
+    Route::delete('/assets/{id}', [ContentController::class, 'destroy'])->name('admin.assets.destroy');
     
     // Contents
     Route::get('/contents', [ContentController::class, 'index'])->name('admin.contents.index');
