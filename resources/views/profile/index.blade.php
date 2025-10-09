@@ -134,43 +134,19 @@
             <div class="mt-24 mb-16">
                 <h3 class="text-3xl font-bold text-center mb-12">Apa Kata Alumni?</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Card 1 -->
-                    <div
-                        class="relative bg-white rounded-2xl shadow-lg overflow-hidden group hover:scale-105 transition-transform hover:shadow-orange-300">
-                        <img src="https://i.ibb.co.com/mCRP7JfG/42ce6bf11e12f9434558e84566c18ab75e4c76d1.jpg"
-                            alt="Raditya Mahatma"
-                            class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4">
-                            <h4 class="text-lg font-bold text-white">Raditya Mahatma</h4>
-                            <p class="text-gray-200 text-sm">“Belajar di jurusan TKI memberikan saya keterampilan jaringan
-                                dan IT yang langsung terpakai di dunia kerja. Terima kasih guru-guru atas bimbingannya.”</p>
-                            <span class="text-xs text-gray-300 mt-1">– Radit, Alumni TKI 2024</span>
+                    @forelse ($alumnis as $alumni)
+                        <div
+                            class="relative bg-white rounded-2xl shadow-lg overflow-hidden group hover:scale-105 transition-transform hover:shadow-orange-300 ">
+                            <img src="{{ asset('assets/alumni/' . $alumni->image) }}" alt="{{ $alumni->title }}" >
+                            <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4">
+                                <h4 class="text-lg font-bold text-white">{{ $alumni->title }}</h4>
+                                <p class="text-gray-200 text-sm">{{ $alumni->body }}</p>
+                                <span class="text-xs text-gray-300 mt-1">{{ $alumni->credit }}</span>
+                            </div>
                         </div>
-                    </div>
-                    <!-- Card 2 -->
-                    <div
-                        class="relative bg-white rounded-2xl shadow-lg overflow-hidden group hover:scale-105 transition-transform hover:shadow-orange-300">
-                        <img src="{{ asset('assets/adit.png') }}" alt="Aditia Tantra Permana"
-                            class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4">
-                            <h4 class="text-lg font-bold text-white">Aditia Tantra Permana</h4>
-                            <p class="text-gray-200 text-sm">“Belajar di jurusan TKI membekali saya keterampilan jaringan
-                                dan IT yang langsung terpakai di dunia kerja. Terima kasih guru-guru atas bimbingannya.”</p>
-                            <span class="text-xs text-gray-300 mt-1">– Adit, Alumni TKI 2023</span>
-                        </div>
-                    </div>
-                    <!-- Card 3 -->
-                    <div
-                        class="relative bg-white rounded-2xl shadow-lg overflow-hidden group hover:scale-105 transition-transform hover:shadow-orange-300">
-                        <img src="{{ asset('assets/Rama.png') }}" alt="Khoko Rama Viera"
-                            class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4">
-                            <h4 class="text-lg font-bold text-white">Khoko Rama Viera</h4>
-                            <p class="text-gray-200 text-sm">“Belajar di jurusan TKI memberikan saya keterampilan jaringan
-                                dan IT yang langsung terpakai di dunia kerja. Terima kasih guru-guru atas bimbingannya.”</p>
-                            <span class="text-xs text-gray-300 mt-1">– Khoko, Alumni TKI 2024</span>
-                        </div>
-                    </div>
+                    @empty
+                        <p class="text-center text-gray-500 col-span-3">Belum ada data alumni.</p>
+                    @endforelse
                 </div>
             </div>
 
@@ -203,14 +179,14 @@
                 function playVideo() {
                     let container = document.getElementById('videoContainer');
                     container.innerHTML = `
-                            <iframe class="w-full h-96 rounded-2xl"
-                                src="https://www.youtube.com/embed/FAwdUR9SFRU?autoplay=1"
-                                title="Profil SKARIGA"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen>
-                            </iframe>
-                        `;
+                                        <iframe class="w-full h-96 rounded-2xl"
+                                            src="https://www.youtube.com/embed/FAwdUR9SFRU?autoplay=1"
+                                            title="Profil SKARIGA"
+                                            frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowfullscreen>
+                                        </iframe>
+                                    `;
                 }
             </script>
 

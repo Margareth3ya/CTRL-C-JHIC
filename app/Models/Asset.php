@@ -9,5 +9,5 @@ class Asset extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['image'];
+    protected $fillable = ['image', 'folder', 'path'];
 }

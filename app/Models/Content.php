@@ -9,5 +9,12 @@ class Content extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description'];
+    protected $fillable = [
+        'title',
+        'body',
+        'credit',
+        'folder',
+        'image',
+    ];
 }
+

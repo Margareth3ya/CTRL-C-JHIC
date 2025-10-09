@@ -1,46 +1,54 @@
-<!-- resources/views/admin/contents/index.blade.php -->
 @extends('admin.layout')
-
-@section('title', 'Manajemen Konten')
+@section('title', 'Daftar Konten')
 
 @section('content')
-    <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold text-gray-800">Manajemen Konten</h2>
-        <a href="{{ route('admin.contents.create') }}"
-            class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
-            <i class="fas fa-plus mr-2"></i>Tambah Konten
-        </a>
-    </div>
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <div class="flex justify-between mb-4">
+            <h2 class="text-2xl font-semibold">Daftar Konten</h2>
+            <a href="{{ route('admin.contents.create') }}"
+                class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                + Tambah Konten
+            </a>
+        </div>
 
-    <div class="bg-white rounded-lg shadow overflow-hidden">
-        <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
+        <table class="min-w-full border border-gray-200 rounded-lg">
+            <thead class="bg-gray-100">
                 <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Judul</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Deskripsi
-                    </th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                    <th class="px-4 py-2 border">#</th>
+                    <th class="px-4 py-2 border">Preview</th>
+                    <th class="px-4 py-2 border">Judul</th>
+                    <th class="px-4 py-2 border">Desc</th>
+                    <th class="px-4 py-2 border">Folder</th>
+                    <th class="px-4 py-2 border">Aksi</th>
                 </tr>
             </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-                @foreach($contents as $content)
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $content->id }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $content->title }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-500">{{ Str::limit($content->description, 100) }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <a href="{{ route('admin.contents.edit', $content->id) }}"
-                                class="text-blue-600 hover:text-blue-900 mr-3">
-                                <i class="fas fa-edit"></i> Edit
-                            </a>
-                            <form action="{{ route('admin.contents.destroy', $content->id) }}" method="POST" class="inline"
-                                onsubmit="return confirmDelete()">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-600 hover:text-red-900">
-                                    <i class="fas fa-trash"></i> Hapus
-                                </button>
+            <tbody>
+                @foreach ($contents as $content)
+                    <tr class="border-t">
+                        <td class="px-4 py-2 text-center">{{ $loop->iteration }}</td>
+                        <td class="px-4 py-2 text-center">
+                            @if($content->image)
+                                <img src="{{ asset('assets/' . $content->folder . '/' . $content->image) }}" class="h-16 mx-auto rounded">
+                            @endif
+                        </td>
+                        <td class="px-4 py-2 text-center">{{ $content->title }}</td>
+                        <td class="px-4 py-2 text-left max-w-xs">
+                            <div class="text-gray-600 text-sm">
+                                {{ Str::limit(strip_tags($content->body), 50, '...') }}
+                            </div>
+                        </td>
+                        <td class="px-4 py-2 text-left max-w-xs">
+                            <div class="text-gray-600 text-sm">
+                                {{ Str::limit(strip_tags($content->credit), 50, '...') }}
+                            </div>
+                        </td>
+
+                        <td class="px-4 py-2 text-center capitalize">{{ $content->folder }}</td>
+                        <td class="px-4 py-2 text-center">
+                            <a href="{{ route('admin.contents.edit', $content->id) }}" class="bg-yellow-500 px-4 py-2 rounded-lg text-white hover:bg-yellow-600">Edit</a>
+                            <form action="{{ route('admin.contents.destroy', $content->id) }}" method="POST" class="inline">
+                                @csrf @method('DELETE')
+                                <button class="bg-red-500 px-4 py-2 rounded-lg text-white hover:bg-red-600" onclick="return confirm('Yakin hapus konten ini?')">Hapus</button>
                             </form>
                         </td>
                     </tr>

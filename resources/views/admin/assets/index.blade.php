@@ -1,41 +1,42 @@
-<!-- resources/views/admin/assets/index.blade.php -->
 @extends('admin.layout')
-
-@section('title', 'Manajemen Assets')
+@section('title', 'Daftar Asset')
 
 @section('content')
-    <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold text-gray-800">Manajemen Assets</h2>
-        <a href="{{ route('admin.assets.create') }}" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
-            <i class="fas fa-plus mr-2"></i>Upload Asset
+<div class="bg-white p-6 rounded-lg shadow-md">
+    <div class="flex justify-between mb-4">
+        <h2 class="text-2xl font-semibold">Daftar Asset</h2>
+        <a href="{{ route('admin.assets.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+            + Tambah Asset
         </a>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        @foreach($assets as $asset)
-            <div class="bg-white rounded-lg shadow overflow-hidden">
-                <img src="{{ asset('assets/' . $asset->image) }}" alt="Asset" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <p class="text-sm text-gray-600 mb-2">{{ $asset->image }}</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-xs text-gray-500">{{ $asset->created_at->format('d M Y') }}</span>
-                        <div class="space-x-2">
-                            <a href="{{ route('admin.assets.edit', $asset->id) }}"
-                                class="text-blue-600 hover:text-blue-900 text-sm">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <form action="{{ route('admin.assets.destroy', $asset->id) }}" method="POST" class="inline"
-                                onsubmit="return confirmDelete()">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-600 hover:text-red-900 text-sm">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-    </div>
+    <table class="min-w-full border border-gray-200 rounded-lg">
+        <thead class="bg-gray-100">
+            <tr>
+                <th class="px-4 py-2 border">#</th>
+                <th class="px-4 py-2 border">Preview</th>
+                <th class="px-4 py-2 border">Folder</th>
+                <th class="px-4 py-2 border">Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($assets as $asset)
+                <tr class="border-t">
+                    <td class="px-4 py-2 text-center">{{ $loop->iteration }}</td>
+                    <td class="px-4 py-2 text-center">
+                        <img src="{{ asset('assets/'.$asset->folder.'/'.$asset->image) }}" class="h-16 mx-auto rounded">
+                    </td>
+                    <td class="px-4 py-2 text-center capitalize">{{ $asset->folder }}</td>
+                    <td class="px-4 py-2 text-center">
+                        <a href="{{ route('admin.assets.edit', $asset->id) }}" class="bg-yellow-500 px-4 py-2 rounded-lg text-white hover:bg-yellow-600">Edit</a>
+                        <form action="{{ route('admin.assets.destroy', $asset->id) }}" method="POST" class="inline">
+                            @csrf @method('DELETE')
+                            <button class="bg-red-500 px-4 py-2 rounded-lg text-white hover:bg-red-600" onclick="return confirm('Yakin hapus asset ini?')">Hapus</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
 @endsection

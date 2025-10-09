@@ -15,6 +15,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\VisitorController;
+use App\Http\Controllers\ProfileController;
 
 // Public routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -90,9 +91,8 @@ Route::get('/informasi/prestasi', function () {
     return view('informasi.prestasi');
 });
 
-Route::get('/profile', function () {
-    return view('profile.index');
-});
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+
 
 Route::get('/kontak', function () {
     return view('kontak');
