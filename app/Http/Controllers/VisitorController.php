@@ -17,9 +17,5 @@ class VisitorController extends Controller
             ->get();
 
         return response()->json($visitors);
-
-        if (!auth()->check() || auth()->user()->role !== 'admin') {
-            abort(403);
-        }
     }
 }

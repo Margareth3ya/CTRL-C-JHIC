@@ -6,7 +6,7 @@
         <div class="flex items-center space-x-3">
             <div
                 class="w-16 h-10 md:w-20 md:h-12 rounded-full flex items-center justify-center text-white font-bold text-xs md:text-sm overflow-hidden pulse-grow">
-                <img src="https://i.ibb.co.com/MkPkNv4c/Logo-Sekolah.png" alt="Logo Sekolah"
+                <img src="{{ asset('assets/icon.png') }}" alt="Logo Sekolah"
                     class="w-full h-full object-cover">
             </div>
             <span
@@ -85,7 +85,7 @@
                     <a href="/informasi/ssb"
                         class="dropdown-item block px-5 py-3 transition {{ request()->is('informasi/ssb') ? 'text-primary bg-gray-50' : '' }}">
                         <span class="flex items-center">
-                            Informasi SSB
+                            Pendaftaran
                         </span>
                     </a>
                 </div>

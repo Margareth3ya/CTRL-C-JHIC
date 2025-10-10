@@ -33,10 +33,10 @@
                     class="block py-2 px-4 hover:bg-blue-700 {{ request()->routeIs('admin.users.*') ? 'bg-blue-700' : '' }}">
                     <i class="fas fa-users mr-2"></i>Users
                 </a>
-                <a href="{{ route('admin.assets.index') }}"
+                {{-- <a href="{{ route('admin.assets.index') }}"
                     class="block py-2 px-4 hover:bg-blue-700 {{ request()->routeIs('admin.assets.*') ? 'bg-blue-700' : '' }}">
                     <i class="fas fa-images mr-2"></i>Assets
-                </a>
+                </a> --}}
                 <a href="{{ route('admin.contents.index') }}"
                     class="block py-2 px-4 hover:bg-blue-700 {{ request()->routeIs('admin.contents.*') ? 'bg-blue-700' : '' }}">
                     <i class="fas fa-file-alt mr-2"></i>Konten
