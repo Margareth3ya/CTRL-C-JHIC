@@ -787,12 +787,36 @@ window.clearSearchResults = clearSearchResults;
 
 <style>
     /* Search Bar Styles */
+/* Search Bar Styles - Higher z-index */
+.search-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    z-index: 1000; /* Tingkatkan z-index */
+}
+
 #searchInput {
     font-size: 0.95rem;
     background: white;
     border: 2px solid #e5e7eb;
     transition: all 0.3s ease;
     box-sizing: border-box;
+    position: relative;
+    z-index: 1001; /* Lebih tinggi */
+}
+
+#searchResults {
+    position: absolute;
+    width: 100%;
+    background: white;
+    border: 1px solid #e5e7eb;
+    margin-top: 4px;
+    box-sizing: border-box;
+    max-width: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1002; /* Lebih tinggi lagi */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* Tambah shadow untuk emphasis */
 }
 
 #searchInput:focus {

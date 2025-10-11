@@ -2,12 +2,8 @@
 
 @push('styles')
 <style>
-    /* === FONT === */
     .font-bebas {
         font-family: 'Bebas Neue', cursive;
-    }
-    .font-league-spartan {
-        font-family: 'League Spartan', sans-serif;
     }
     .font-poppins {
         font-family: 'Poppins', sans-serif;
@@ -30,110 +26,211 @@
     }
 
     /* === PRESTASI SECTION === */
-.achievement-section {
-    padding-top: 8rem; /* ⬅️ UBAH NILAI INI jadi lebih besar */
-    padding-bottom: 2rem;
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(180deg, #fff 0%, #fafafa 100%);
-}
-
-.achievement-section h2 {
-    margin-bottom: 3rem;
-    position: relative;
-    text-align: center;
-    width: 100%;
-    display: block;
-}
-
-.achievement-section h2::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 3px;
-    background: linear-gradient(90deg, #f97316, #fdba74);
-    border-radius: 2px;
-}
-
-    /* === DUAL ACHIEVEMENT LAYOUT (REDESAIN) === */
-    .achievement-pair {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        margin-bottom: 5rem;
-        gap: 3rem;
+    .achievement-section {
+        padding: 4rem 1rem;
         position: relative;
+        overflow: hidden;
+        background: linear-gradient(180deg, #fafafa 0%, #fff 100%);
     }
 
-    .achievement-item {
-        flex: 1 1 48%;
-        min-width: 300px;
+    .achievement-section h2 {
+        margin-bottom: 3rem;
+        position: relative;
+        text-align: center;
+        width: 100%;
+        display: block;
+        font-family: 'Bebas Neue', cursive;
+        font-size: 2.5rem;
+        background: linear-gradient(135deg, #1f2937, #374151);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .achievement-section h2::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 3px;
+        background: linear-gradient(90deg, #f97316, #fdba74);
+        border-radius: 2px;
+    }
+
+    /* === DUAL ACHIEVEMENT LAYOUT === */
+    .achievement-container {
         display: flex;
         flex-direction: column;
+        gap: 2.5rem;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .achievement-pair {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 2rem;
+        align-items: flex-start; /* Pastikan semua card mulai dari atas */
+    }
+
+    /* Card dasar */
+    .achievement-item {
+        display: flex;
+        align-items: stretch;
+        flex: 1 1 48%;
         background: white;
-        border-radius: 1rem;
-        padding: 1.5rem;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-        transition: all 0.3s ease;
+        border-radius: 1.5rem;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        transition: all 0.4s ease;
         border: 1px solid #f3f4f6;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .achievement-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #f97316, #fdba74);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .achievement-item:hover::before {
+        opacity: 1;
     }
 
     .achievement-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        transform: translateY(-8px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
         border-color: #f97316;
     }
 
-    /* Layout untuk item kiri (normal position) */
+    /* TINGGI CARD BERGANDA - PAGE 1 */
+    /* Pair 1: KIRI BESAR, Kanan kecil (sejajar bawah) */
+    #page-1 .achievement-pair:nth-child(1) .achievement-item.left-layout {
+        min-height: 340px; /* Sangat besar untuk prestasi pertama */
+        max-height: 360px;
+    }
+    
+    #page-1 .achievement-pair:nth-child(1) .achievement-item.right-layout {
+        min-height: 280px; /* Lebih kecil, sejajar bawah */
+        max-height: 300px;
+        margin-top: 60px; /* Diturunkan agar sejajar bawah dengan card besar */
+    }
+
+    /* Pair 2: Kanan besar, Kiri kecil (sejajar bawah) */
+    #page-1 .achievement-pair:nth-child(2) .achievement-item.left-layout {
+        min-height: 280px;
+        max-height: 300px;
+        margin-top: 60px; /* Diturunkan */
+    }
+    
+    #page-1 .achievement-pair:nth-child(2) .achievement-item.right-layout {
+        min-height: 340px; /* Besar */
+        max-height: 360px;
+    }
+
+    /* Pair 3: Kiri besar, Kanan kecil (sejajar bawah) */
+    #page-1 .achievement-pair:nth-child(3) .achievement-item.left-layout {
+        min-height: 340px; /* Besar */
+        max-height: 360px;
+    }
+    
+    #page-1 .achievement-pair:nth-child(3) .achievement-item.right-layout {
+        min-height: 280px; /* Kecil, sejajar bawah */
+        max-height: 300px;
+        margin-top: 60px; /* Diturunkan */
+    }
+
+    /* TINGGI CARD BERGANDA - PAGE 2 */
+    /* Pair 1: Kanan besar, Kiri kecil (sejajar bawah) */
+    #page-2 .achievement-pair:nth-child(1) .achievement-item.left-layout {
+        min-height: 280px;
+        max-height: 300px;
+        margin-top: 60px; /* Diturunkan */
+    }
+    
+    #page-2 .achievement-pair:nth-child(1) .achievement-item.right-layout {
+        min-height: 340px; /* Besar */
+        max-height: 360px;
+    }
+
+    /* Pair 2: Kiri besar, Kanan kecil (sejajar bawah) */
+    #page-2 .achievement-pair:nth-child(2) .achievement-item.left-layout {
+        min-height: 340px; /* Besar */
+        max-height: 360px;
+    }
+    
+    #page-2 .achievement-pair:nth-child(2) .achievement-item.right-layout {
+        min-height: 280px; /* Kecil, sejajar bawah */
+        max-height: 300px;
+        margin-top: 60px; /* Diturunkan */
+    }
+
+    /* Pair 3: Kanan besar, Kiri kecil (sejajar bawah) */
+    #page-2 .achievement-pair:nth-child(3) .achievement-item.left-layout {
+        min-height: 280px;
+        max-height: 300px;
+        margin-top: 60px; /* Diturunkan */
+    }
+    
+    #page-2 .achievement-pair:nth-child(3) .achievement-item.right-layout {
+        min-height: 340px; /* Besar */
+        max-height: 360px;
+    }
+
+    /* Layout kiri */
     .achievement-item.left-layout {
         flex-direction: row;
-        align-items: flex-start;
+        text-align: left;
     }
 
-    /* Layout untuk item kanan (posisi lebih rendah + teks rata kanan) */
+    .achievement-item.left-layout .achievement-image-container {
+        margin-right: 1.5rem;
+    }
+
+    /* Layout kanan */
     .achievement-item.right-layout {
         flex-direction: row-reverse;
-        align-items: flex-start;
-        margin-top: 4rem;
-        background: linear-gradient(135deg, #fff 0%, #fff9f5 100%);
-    }
-
-    .achievement-image-container {
-        flex: 0 0 45%;
-        margin-right: 1.5rem;
-        position: relative;
+        text-align: right;
     }
 
     .achievement-item.right-layout .achievement-image-container {
-        margin-right: 0;
         margin-left: 1.5rem;
     }
 
-    .achievement-image-container::before {
-        content: '';
-        position: absolute;
-        top: -8px;
-        left: -8px;
-        right: -8px;
-        bottom: -8px;
-        background: linear-gradient(135deg, #f97316, #fdba74);
-        border-radius: 1rem;
-        opacity: 0.1;
-        z-index: 0;
+    /* CONTAINER GAMBAR BESAR */
+    .achievement-image-container {
+        flex: 0 0 45%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
+    /* GAMBAR BESAR */
     .achievement-image {
         width: 100%;
-        height: 280px;
+        height: 100%;
+        max-width: 260px;
+        max-height: 260px;
+        min-width: 220px;
+        min-height: 220px;
         object-fit: cover;
-        border-radius: 0.75rem;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        transition: all 0.3s ease;
+        border-radius: 1rem;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        transition: all 0.4s ease;
+        border: 3px solid white;
         position: relative;
-        z-index: 1;
+        z-index: 2;
     }
 
     .achievement-image:hover {
@@ -141,58 +238,74 @@
         box-shadow: 0 12px 30px rgba(0,0,0,0.2);
     }
 
+    /* Konten teks */
     .achievement-content {
         flex: 1;
-        padding: 0.5rem 0;
-    }
-
-    /* Teks rata kiri untuk item kiri */
-    .achievement-item.left-layout .achievement-content {
-        text-align: left;
-    }
-
-    /* Teks rata kanan untuk item kanan */
-    .achievement-item.right-layout .achievement-content {
-        text-align: right;
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .achievement-content h3 {
+        font-family: 'Bebas Neue', cursive;
+        font-size: 2rem;
         margin-bottom: 0.5rem;
-        font-size: 2.25rem;
         background: linear-gradient(135deg, #1f2937, #374151);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-    }
-
-    .achievement-content h4 {
-        margin-bottom: 1rem;
-        font-size: 1.5rem;
-        color: #f97316;
         position: relative;
-        display: inline-block;
+        letter-spacing: 1px;
+        line-height: 1.2;
     }
 
-    .achievement-content h4::after {
-        content: '';
+    .achievement-content h3::after {
+        content: "";
         position: absolute;
-        bottom: -5px;
+        bottom: -0.4rem;
         left: 0;
-        width: 40px;
-        height: 2px;
-        background: #f97316;
+        width: 50px;
+        height: 3px;
+        background: linear-gradient(90deg, #f97316, #fdba74);
+        border-radius: 2px;
     }
 
-    .achievement-item.right-layout .achievement-content h4::after {
+    .achievement-item.right-layout .achievement-content h3::after {
         left: auto;
         right: 0;
     }
 
+    .achievement-content h4 {
+        font-family: 'Bebas Neue', cursive;
+        font-size: 1.5rem;
+        color: #f97316;
+        margin-bottom: 0.8rem;
+        letter-spacing: 0.5px;
+        line-height: 1.2;
+    }
+
     .achievement-content p {
-        color: #6b7280;
-        line-height: 1.7;
+        font-family: 'Poppins', sans-serif;
         font-size: 0.95rem;
-        margin-top: 1rem;
+        color: #6b7280;
+        line-height: 1.6;
+        margin-top: 0.8rem;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    /* Jumlah baris teks berdasarkan tinggi card */
+    .achievement-item[min-height="280px"] .achievement-content p,
+    .achievement-item[min-height="300px"] .achievement-content p {
+        -webkit-line-clamp: 4; /* Untuk card kecil */
+    }
+
+    .achievement-item[min-height="340px"] .achievement-content p,
+    .achievement-item[min-height="360px"] .achievement-content p {
+        -webkit-line-clamp: 8; /* Untuk card besar */
     }
 
     /* === PAGINATION STYLES === */
@@ -282,51 +395,101 @@
     }
 
     /* === RESPONSIVE DESIGN === */
-    @media (max-width: 768px) {
-        .achievement-pair {
-            flex-direction: column;
-            gap: 2rem;
-            margin-bottom: 3rem;
+    @media (max-width: 1200px) {
+        .achievement-container {
+            max-width: 1100px;
         }
         
-        .achievement-item {
-            flex: 1 1 100%;
-            margin-top: 0 !important;
+        .achievement-image {
+            max-width: 240px;
+            max-height: 240px;
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .achievement-container {
+            gap: 2rem;
+            max-width: 900px;
         }
 
-        .achievement-item.left-layout,
-        .achievement-item.right-layout {
-            flex-direction: column;
-        }
-
-        .achievement-image-container {
-            flex: 0 0 auto;
-            margin-right: 0;
-            margin-left: 0;
-            margin-bottom: 1.5rem;
-            width: 100%;
-        }
-
-        .achievement-item.right-layout .achievement-image-container {
-            margin-left: 0;
-        }
-
-        /* Di mobile, semua teks rata kiri */
-        .achievement-item.right-layout .achievement-content {
-            text-align: left;
-        }
-
-        .achievement-item.right-layout .achievement-content h4::after {
-            left: 0;
-            right: auto;
+        .achievement-pair {
+            gap: 1.5rem;
         }
 
         .achievement-image {
-            height: 220px;
+            max-width: 220px;
+            max-height: 220px;
+        }
+        
+        /* Di tablet, buat semua card sama tinggi dan hapus margin top */
+        #page-1 .achievement-pair .achievement-item,
+        #page-2 .achievement-pair .achievement-item {
+            min-height: 300px !important;
+            max-height: 320px !important;
+            margin-top: 0 !important;
+        }
+        
+        .achievement-item[min-height="300px"] .achievement-content p {
+            -webkit-line-clamp: 6;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .achievement-section {
+            padding: 3rem 1rem;
+        }
+
+        .achievement-section h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .achievement-container {
+            gap: 2rem;
+        }
+
+        .achievement-pair {
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .achievement-item {
+            flex-direction: column !important;
+            text-align: center !important;
+            padding: 1.5rem;
+            min-height: auto !important;
+            max-height: none !important;
+            margin-top: 0 !important;
+        }
+
+        .achievement-item .achievement-image-container {
+            margin: 0 0 1rem 0 !important;
+            flex: 0 0 auto;
+        }
+
+        .achievement-content h3::after {
+            left: 50% !important;
+            transform: translateX(-50%);
+        }
+
+        .achievement-image {
+            width: 200px;
+            height: 200px;
+            max-width: none;
+            max-height: none;
+        }
+        
+        .achievement-content {
+            padding: 0;
+        }
+        
+        .achievement-content p {
+            -webkit-line-clamp: 4;
         }
 
         .pagination-container {
             gap: 0.75rem;
+            margin-top: 3rem;
         }
 
         .pagination-btn {
@@ -340,332 +503,369 @@
         }
     }
 
-    /* === SECTION SPACING === */
-    section {
-        padding-top: 1.25rem;
-        padding-bottom: 1.25rem;
+    @media (max-width: 480px) {
+        .achievement-section {
+            padding: 2rem 1rem;
+        }
+
+        .achievement-section h2 {
+            font-size: 1.75rem;
+        }
+
+        .achievement-item {
+            padding: 1.25rem;
+        }
+
+        .achievement-content h3 {
+            font-size: 1.7rem;
+        }
+
+        .achievement-content h4 {
+            font-size: 1.3rem;
+        }
+
+        .achievement-image {
+            width: 180px;
+            height: 180px;
+        }
     }
 
-    /* section + section {
-        margin-top: -3.5rem !important;
-    } */
+    /* Image Stack Styles */
+    #image-stack {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 26rem;
+    }
 
-    @media (max-width: 640px) {
-        #image-stack img {
-            border-radius: 1rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    #image-stack img {
+        position: absolute;
+        object-fit: cover;
+        border-radius: 1rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        transition: all 0.6s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    }
+
+    @media (max-width: 768px) {
+        #image-stack {
+            height: 20rem;
         }
         
-        .achievement-image {
-            height: 200px;
+        #image-stack img {
+            border-radius: 0.75rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        #image-stack {
+            height: 16rem;
         }
     }
 </style>
 @endpush
 
 @section('content')
-<div class="relative min-h-screen">
+<div class="min-h-screen">
 
-<!-- Hero Section -->
-<section class="hero-section flex items-center justify-center px-4 md:px-16 py-8">
-    <div class="container mx-auto flex flex-col items-center text-center gap-4">
-        
-        <!-- Text -->
-        <div class="hero-text">
-            <h1 class="text-orange-500 text-5xl md:text-6xl font-bebas leading-tight">
-                SKAriga
-            </h1>
-            <h2 class="text-black text-4xl md:text-5xl font-bebas leading-tight">
-                sekolahnya murid berprestasi
-            </h2>
-        </div>
-
-        <div id="image-stack" 
-           class="relative flex items-center justify-center w-full h-[26rem] md:h-[30rem] perspective-[1000px]">
-            <img src="{{ asset('assets/Prestasi1.jpg') }}"
-                 class="absolute object-cover rounded-2xl shadow-2xl transition-all duration-700 ease-in-out 
-                        w-[65%] sm:w-[50%] md:w-[30%] h-[22rem] md:h-[26rem]"
-                 alt="Prestasi 1">
-            <img src="{{ asset('assets/Prestasi2.jpg') }}"
-                 class="absolute object-cover rounded-2xl shadow-xl transition-all duration-700 ease-in-out 
-                        w-[65%] sm:w-[50%] md:w-[30%] h-[22rem] md:h-[26rem]"
-                 alt="Prestasi 2">
-            <img src="{{ asset('assets/Prestasi3.jpg') }}"
-                 class="absolute object-cover rounded-2xl shadow-lg transition-all duration-700 ease-in-out 
-                        w-[65%] sm:w-[50%] md:w-[30%] h-[22rem] md:h-[26rem]"
-                 alt="Prestasi 3">
-        </div>
-    </div>
-</section>
-
-<!-- Achievement Section -->
-<section class="achievement-section bg-white relative py-4">
-    <div class="container mx-auto px-4 md:px-12">
-        <h2 class="text-4xl md:text-5xl font-bebas text-center mb-8">
-            Prestasi Terbaru
-        </h2>
-
-        <!-- Page 1 -->
-        <div class="achievement-page active" id="page-1">
-            <!-- Pair 1 -->
-            <div class="achievement-pair">
-                <!-- Achievement 1 - Kiri -->
-                <div class="achievement-item left-layout">
-                    <div class="achievement-image-container">
-                        <div class="overflow-hidden rounded-xl">
-                            <img src="{{ asset('assets/LKS.png') }}" alt="Juara 2 LKS Nasional"
-                                 class="achievement-image">
-                        </div>
-                    </div>
-                    <div class="achievement-content">
-                        <h3 class="font-bebas">Juara 2 LKS Nasional</h3>
-                        <h4 class="font-bebas">Industrial Control</h4>
-                        <p class="font-poppins">
-                            MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil mempertahankan 
-                            <u>medali</u> emas di LKS Nasional dengan prestasi membanggakan di bidang Industrial Control.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Achievement 2 - Kanan -->
-                <div class="achievement-item right-layout">
-                    <div class="achievement-image-container">
-                        <div class="overflow-hidden rounded-xl">
-                            <img src="{{ asset('assets/Prestasi2.jpg') }}" alt="Juara 1 LKS Nasional"
-                                 class="achievement-image">
-                        </div>
-                    </div>
-                    <div class="achievement-content">
-                        <h3 class="font-bebas">Juara 1 LKS Nasional</h3>
-                        <h4 class="font-bebas">Robot Manufacturing System</h4>
-                        <p class="font-poppins">
-                            MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil mempertahankan 
-                            <u>medali</u> emas di LKS Nasional dengan inovasi di bidang Robot Manufacturing System.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pair 2 -->
-            <div class="achievement-pair">
-                <!-- Achievement 3 - Kiri -->
-                <div class="achievement-item left-layout">
-                    <div class="achievement-image-container">
-                        <div class="overflow-hidden rounded-xl">
-                            <img src="{{ asset('assets/Prestasi3.jpg') }}" alt="Juara 2 LKS Nasional"
-                                 class="achievement-image">
-                        </div>
-                    </div>
-                    <div class="achievement-content">
-                        <h3 class="font-bebas">Juara 2 LKS Nasional</h3>
-                        <h4 class="font-bebas">Teknik Komputer</h4>
-                        <p class="font-poppins">
-                            MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil mempertahankan 
-                            <u>medali</u> emas di LKS Nasional dengan performa konsisten di bidang Teknik Komputer.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Achievement 4 - Kanan -->
-                <div class="achievement-item right-layout">
-                    <div class="achievement-image-container">
-                        <div class="overflow-hidden rounded-xl">
-                            <img src="{{ asset('assets/Prestasi1.jpg') }}" alt="Juara 3 LKS Nasional"
-                                 class="achievement-image">
-                        </div>
-                    </div>
-                    <div class="achievement-content">
-                        <h3 class="font-bebas">Juara 3 LKS Nasional</h3>
-                        <h4 class="font-bebas">Teknik Elektronika</h4>
-                        <p class="font-poppins">
-                            MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil mempertahankan 
-                            <u>medali</u> emas di LKS Nasional dengan keahlian di bidang Teknik Elektronika.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pair 3 -->
-            <div class="achievement-pair">
-                <!-- Achievement 5 - Kiri -->
-                <div class="achievement-item left-layout">
-                    <div class="achievement-image-container">
-                        <div class="overflow-hidden rounded-xl">
-                            <img src="{{ asset('assets/Prestasi2.jpg') }}" alt="Juara 1 Olimpiade Sains"
-                                 class="achievement-image">
-                        </div>
-                    </div>
-                    <div class="achievement-content">
-                        <h3 class="font-bebas">Juara 1 Olimpiade Sains</h3>
-                        <h4 class="font-bebas">Fisika Terapan</h4>
-                        <p class="font-poppins">
-                            MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil meraih 
-                            <u>medali</u> emas di Olimpiade Sains Nasional dengan keunggulan di bidang Fisika Terapan.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Achievement 6 - Kanan -->
-                <div class="achievement-item right-layout">
-                    <div class="achievement-image-container">
-                        <div class="overflow-hidden rounded-xl">
-                            <img src="{{ asset('assets/Prestasi3.jpg') }}" alt="Juara 2 Kompetisi Robotik"
-                                 class="achievement-image">
-                        </div>
-                    </div>
-                    <div class="achievement-content">
-                        <h3 class="font-bebas">Juara 2 Kompetisi Robotik</h3>
-                        <h4 class="font-bebas">Robotika Industri</h4>
-                        <p class="font-poppins">
-                            MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil mempertahankan 
-                            <u>medali</u> perak di Kompetisi Robotik Nasional dengan inovasi di bidang Robotika Industri.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Page 2 -->
-        <div class="achievement-page" id="page-2">
-            <!-- Pair 4 -->
-            <div class="achievement-pair">
-                <!-- Achievement 7 - Kiri -->
-                <div class="achievement-item left-layout">
-                    <div class="achievement-image-container">
-                        <div class="overflow-hidden rounded-xl">
-                            <img src="{{ asset('assets/Prestasi1.jpg') }}" alt="Juara 1 Lomba Programming"
-                                 class="achievement-image">
-                        </div>
-                    </div>
-                    <div class="achievement-content">
-                        <h3 class="font-bebas">Juara 1 Lomba Programming</h3>
-                        <h4 class="font-bebas">Web Development</h4>
-                        <p class="font-poppins">
-                            MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil meraih 
-                            <u>medali</u> emas di Lomba Programming Nasional dengan karya inovatif di bidang Web Development.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Achievement 8 - Kanan -->
-                <div class="achievement-item right-layout">
-                    <div class="achievement-image-container">
-                        <div class="overflow-hidden rounded-xl">
-                            <img src="{{ asset('assets/Prestasi2.jpg') }}" alt="Juara 2 Lomba Desain"
-                                 class="achievement-image">
-                        </div>
-                    </div>
-                    <div class="achievement-content">
-                        <h3 class="font-bebas">Juara 2 Lomba Desain</h3>
-                        <h4 class="font-bebas">Graphic Design</h4>
-                        <p class="font-poppins">
-                            MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil mempertahankan 
-                            <u>medali</u> perak di Lomba Desain Grafis Nasional dengan kreativitas luar biasa.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pair 5 -->
-            <div class="achievement-pair">
-                <!-- Achievement 9 - Kiri -->
-                <div class="achievement-item left-layout">
-                    <div class="achievement-image-container">
-                        <div class="overflow-hidden rounded-xl">
-                            <img src="{{ asset('assets/Prestasi3.jpg') }}" alt="Juara 1 Lomba Bahasa Inggris"
-                                 class="achievement-image">
-                        </div>
-                    </div>
-                    <div class="achievement-content">
-                        <h3 class="font-bebas">Juara 1 Lomba Bahasa Inggris</h3>
-                        <h4 class="font-bebas">Public Speaking</h4>
-                        <p class="font-poppins">
-                            MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil meraih 
-                            <u>medali</u> emas di Lomba Bahasa Inggris Nasional dengan kemampuan public speaking yang memukau.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Achievement 10 - Kanan -->
-                <div class="achievement-item right-layout">
-                    <div class="achievement-image-container">
-                        <div class="overflow-hidden rounded-xl">
-                            <img src="{{ asset('assets/Prestasi1.jpg') }}" alt="Juara 3 Lomba Matematika"
-                                 class="achievement-image">
-                        </div>
-                    </div>
-                    <div class="achievement-content">
-                        <h3 class="font-bebas">Juara 3 Lomba Matematika</h3>
-                        <h4 class="font-bebas">Matematika Terapan</h4>
-                        <p class="font-poppins">
-                            MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil mempertahankan 
-                            <u>medali</u> perunggu di Lomba Matematika Nasional dengan solusi kreatif.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pair 6 -->
-            <div class="achievement-pair">
-                <!-- Achievement 11 - Kiri -->
-                <div class="achievement-item left-layout">
-                    <div class="achievement-image-container">
-                        <div class="overflow-hidden rounded-xl">
-                            <img src="{{ asset('assets/Prestasi2.jpg') }}" alt="Juara 1 Lomba Elektronika"
-                                 class="achievement-image">
-                        </div>
-                    </div>
-                    <div class="achievement-content">
-                        <h3 class="font-bebas">Juara 1 Lomba Elektronika</h3>
-                        <h4 class="font-bebas">Elektronika Dasar</h4>
-                        <p class="font-poppins">
-                            MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil meraih 
-                            <u>medali</u> emas di Lomba Elektronika Nasional dengan penguasaan konsep yang mendalam.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Achievement 12 - Kanan -->
-                <div class="achievement-item right-layout">
-                    <div class="achievement-image-container">
-                        <div class="overflow-hidden rounded-xl">
-                            <img src="{{ asset('assets/Prestasi3.jpg') }}" alt="Juara 2 Lomba Jaringan"
-                                 class="achievement-image">
-                        </div>
-                    </div>
-                    <div class="achievement-content">
-                        <h3 class="font-bebas">Juara 2 Lomba Jaringan</h3>
-                        <h4 class="font-bebas">Network Security</h4>
-                        <p class="font-poppins">
-                            MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil mempertahankan 
-                            <u>medali</u> perak di Lomba Jaringan Komputer dengan keahlian di bidang keamanan jaringan.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Pagination Controls -->
-        <div class="pagination-container">
-            <button class="pagination-btn" id="prev-btn" disabled>
-                ← Sebelumnya
-            </button>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container mx-auto flex flex-col items-center text-center gap-4 px-4 md:px-16">
             
-            <div class="page-info">
-                Halaman <span id="current-page">1</span> dari <span id="total-pages">2</span>
+            <!-- Text -->
+            <div class="hero-text">
+                <h1 class="text-orange-500 text-5xl md:text-6xl font-bebas leading-tight">
+                    SKAriga
+                </h1>
+                <h2 class="text-black text-4xl md:text-5xl font-bebas leading-tight">
+                    sekolahnya murid berprestasi
+                </h2>
             </div>
-            
-            <button class="pagination-btn" id="next-btn">
-                Selanjutnya →
-            </button>
+
+            <div id="image-stack">
+                <img src="{{ asset('assets/Prestasi1.jpg') }}"
+                     class="w-[65%] sm:w-[50%] md:w-[30%] h-[22rem] md:h-[26rem]"
+                     alt="Prestasi 1">
+                <img src="{{ asset('assets/Prestasi2.jpg') }}"
+                     class="w-[65%] sm:w-[50%] md:w-[30%] h-[22rem] md:h-[26rem]"
+                     alt="Prestasi 2">
+                <img src="{{ asset('assets/Prestasi3.jpg') }}"
+                     class="w-[65%] sm:w-[50%] md:w-[30%] h-[22rem] md:h-[26rem]"
+                     alt="Prestasi 3">
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+
+    <!-- Achievement Section -->
+    <section class="achievement-section">
+        <div class="container mx-auto">
+            <h2 class="font-bebas">PRESTASI TERBARU</h2>
+
+            <!-- Page 1 -->
+            <div class="achievement-page active" id="page-1">
+                <div class="achievement-container">
+                    <!-- Pair 1: KIRI BESAR (prestasi pertama), Kanan kecil sejajar bawah -->
+                    <div class="achievement-pair">
+                        <!-- Achievement 1 - Kiri (SANGAT BESAR - prestasi utama) -->
+                        <div class="achievement-item left-layout">
+                            <div class="achievement-image-container">
+                                <img src="{{ asset('assets/LKS.png') }}" alt="Juara 1 LKS Nasional"
+                                     class="achievement-image">
+                            </div>
+                            <div class="achievement-content">
+                                <h3 class="font-bebas">Juara 1 LKS Nasional</h3>
+                                <h4 class="font-bebas">Industrial Control</h4>
+                                <p class="font-poppins">
+                                    MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil meraih 
+                                    <u>medali emas</u> di LKS Nasional dengan prestasi luar biasa di bidang Industrial Control.
+                                    Tim kami menunjukkan keahlian teknis yang exceptional dalam merancang sistem kontrol industri.
+                                    Prestasi ini merupakan bukti nyata kualitas pendidikan vokasi di SKARIGA.
+                                    Siswa berhasil mengalahkan puluhan peserta dari seluruh Indonesia.
+                                    Inovasi yang ditampilkan mendapat apresiasi tinggi dari para juri.
+                                    Prestasi ini membuka peluang kerjasama dengan industri nasional.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Achievement 2 - Kanan (kecil, sejajar bawah) -->
+                        <div class="achievement-item right-layout">
+                            <div class="achievement-image-container">
+                                <img src="{{ asset('assets/Prestasi2.jpg') }}" alt="Juara 2 LKS Nasional"
+                                     class="achievement-image">
+                            </div>
+                            <div class="achievement-content">
+                                <h3 class="font-bebas">Juara 2 LKS Nasional</h3>
+                                <h4 class="font-bebas">Robot Manufacturing System</h4>
+                                <p class="font-poppins">
+                                    MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil mempertahankan 
+                                    <u>medali perak</u> di LKS Nasional dengan inovasi di bidang Robot Manufacturing System.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pair 2: Kanan besar, Kiri kecil sejajar bawah -->
+                    <div class="achievement-pair">
+                        <!-- Achievement 3 - Kiri (kecil, sejajar bawah) -->
+                        <div class="achievement-item left-layout">
+                            <div class="achievement-image-container">
+                                <img src="{{ asset('assets/Prestasi3.jpg') }}" alt="Juara 3 LKS Nasional"
+                                     class="achievement-image">
+                            </div>
+                            <div class="achievement-content">
+                                <h3 class="font-bebas">Juara 3 LKS Nasional</h3>
+                                <h4 class="font-bebas">Teknik Komputer</h4>
+                                <p class="font-poppins">
+                                    MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil meraih 
+                                    <u>medali perunggu</u> di LKS Nasional dengan performa konsisten di bidang Teknik Komputer.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Achievement 4 - Kanan (besar) -->
+                        <div class="achievement-item right-layout">
+                            <div class="achievement-image-container">
+                                <img src="{{ asset('assets/Prestasi1.jpg') }}" alt="Juara 1 Olimpiade Sains"
+                                     class="achievement-image">
+                            </div>
+                            <div class="achievement-content">
+                                <h3 class="font-bebas">Juara 1 Olimpiade Sains</h3>
+                                <h4 class="font-bebas">Fisika Terapan</h4>
+                                <p class="font-poppins">
+                                    MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil meraih 
+                                    <u>medali emas</u> di Olimpiade Sains Nasional dengan keunggulan di bidang Fisika Terapan.
+                                    Siswa menunjukkan pemahaman mendalam tentang konsep fisika dalam aplikasi industri.
+                                    Prestasi ini membuktikan bahwa pendidikan vokasi juga unggul dalam bidang sains.
+                                    Tim berhasil menyelesaikan semua tantangan dengan solusi kreatif dan inovatif.
+                                    Prestasi ini menjadi inspirasi bagi siswa lainnya untuk terus berprestasi.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pair 3: Kiri besar, Kanan kecil sejajar bawah -->
+                    <div class="achievement-pair">
+                        <!-- Achievement 5 - Kiri (besar) -->
+                        <div class="achievement-item left-layout">
+                            <div class="achievement-image-container">
+                                <img src="{{ asset('assets/Prestasi2.jpg') }}" alt="Juara 1 Kompetisi Programming"
+                                     class="achievement-image">
+                            </div>
+                            <div class="achievement-content">
+                                <h3 class="font-bebas">Juara 1 Kompetisi Programming</h3>
+                                <h4 class="font-bebas">Web Development</h4>
+                                <p class="font-poppins">
+                                    MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil meraih 
+                                    <u>medali emas</u> di Kompetisi Programming Nasional dengan karya inovatif di bidang Web Development.
+                                    Aplikasi web yang dikembangkan berhasil memecahkan masalah nyata di masyarakat.
+                                    Tim programming menunjukkan kemampuan coding yang sangat mumpuni.
+                                    Prestasi ini membuktikan kesiapan siswa SKARIGA menghadapi era digital.
+                                    Inovasi yang dibuat mendapat perhatian dari perusahaan teknologi ternama.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Achievement 6 - Kanan (kecil, sejajar bawah) -->
+                        <div class="achievement-item right-layout">
+                            <div class="achievement-image-container">
+                                <img src="{{ asset('assets/Prestasi3.jpg') }}" alt="Juara 2 Lomba Desain"
+                                     class="achievement-image">
+                            </div>
+                            <div class="achievement-content">
+                                <h3 class="font-bebas">Juara 2 Lomba Desain</h3>
+                                <h4 class="font-bebas">Graphic Design</h4>
+                                <p class="font-poppins">
+                                    MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil meraih 
+                                    <u>medali perak</u> di Lomba Desain Grafis Nasional dengan kreativitas luar biasa.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 2 -->
+            <div class="achievement-page" id="page-2">
+                <div class="achievement-container">
+                    <!-- Pair 1: Kanan besar, Kiri kecil sejajar bawah -->
+                    <div class="achievement-pair">
+                        <!-- Achievement 7 - Kiri (kecil, sejajar bawah) -->
+                        <div class="achievement-item left-layout">
+                            <div class="achievement-image-container">
+                                <img src="{{ asset('assets/Prestasi1.jpg') }}" alt="Juara 3 Lomba Bahasa Inggris"
+                                     class="achievement-image">
+                            </div>
+                            <div class="achievement-content">
+                                <h3 class="font-bebas">Juara 3 Lomba Bahasa Inggris</h3>
+                                <h4 class="font-bebas">Public Speaking</h4>
+                                <p class="font-poppins">
+                                    MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil meraih 
+                                    <u>medali perunggu</u> di Lomba Bahasa Inggris Nasional dengan kemampuan public speaking.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Achievement 8 - Kanan (besar) -->
+                        <div class="achievement-item right-layout">
+                            <div class="achievement-image-container">
+                                <img src="{{ asset('assets/Prestasi2.jpg') }}" alt="Juara 1 Lomba Elektronika"
+                                     class="achievement-image">
+                            </div>
+                            <div class="achievement-content">
+                                <h3 class="font-bebas">Juara 1 Lomba Elektronika</h3>
+                                <h4 class="font-bebas">Elektronika Dasar</h4>
+                                <p class="font-poppins">
+                                    MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil meraih 
+                                    <u>medali emas</u> di Lomba Elektronika Nasional dengan penguasaan konsep yang mendalam.
+                                    Siswa mendemonstrasikan kemampuan troubleshooting dan desain sirkuit yang excellent.
+                                    Prestasi ini menunjukkan kualitas laboratorium dan pengajaran elektronika di sekolah.
+                                    Tim berhasil menyelesaikan semua tantangan teknis dengan solusi yang efisien.
+                                    Prestasi ini membuka peluang kerjasama dengan industri elektronika nasional.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pair 2: Kiri besar, Kanan kecil sejajar bawah -->
+                    <div class="achievement-pair">
+                        <!-- Achievement 9 - Kiri (besar) -->
+                        <div class="achievement-item left-layout">
+                            <div class="achievement-image-container">
+                                <img src="{{ asset('assets/Prestasi3.jpg') }}" alt="Juara 1 Lomba Jaringan"
+                                     class="achievement-image">
+                            </div>
+                            <div class="achievement-content">
+                                <h3 class="font-bebas">Juara 1 Lomba Jaringan</h3>
+                                <h4 class="font-bebas">Network Security</h4>
+                                <p class="font-poppins">
+                                    MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil meraih 
+                                    <u>medali emas</u> di Lomba Jaringan Komputer dengan keahlian di bidang keamanan jaringan.
+                                    Tim jaringan menunjukkan kemampuan mengamankan sistem dari berbagai ancaman cyber.
+                                    Prestasi ini membuktikan kesiapan siswa menghadapi tantangan keamanan digital.
+                                    Solusi yang diberikan mendapat apresiasi dari pakar keamanan siber.
+                                    Prestasi ini meningkatkan reputasi sekolah di bidang teknologi informasi.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Achievement 10 - Kanan (kecil, sejajar bawah) -->
+                        <div class="achievement-item right-layout">
+                            <div class="achievement-image-container">
+                                <img src="{{ asset('assets/Prestasi1.jpg') }}" alt="Juara 2 Lomba Matematika"
+                                     class="achievement-image">
+                            </div>
+                            <div class="achievement-content">
+                                <h3 class="font-bebas">Juara 2 Lomba Matematika</h3>
+                                <h4 class="font-bebas">Matematika Terapan</h4>
+                                <p class="font-poppins">
+                                    MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil meraih 
+                                    <u>medali perak</u> di Lomba Matematika Nasional dengan solusi kreatif.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pair 3: Kanan besar, Kiri kecil sejajar bawah -->
+                    <div class="achievement-pair">
+                        <!-- Achievement 11 - Kiri (kecil, sejajar bawah) -->
+                        <div class="achievement-item left-layout">
+                            <div class="achievement-image-container">
+                                <img src="{{ asset('assets/Prestasi2.jpg') }}" alt="Juara 3 Lomba Otomotif"
+                                     class="achievement-image">
+                            </div>
+                            <div class="achievement-content">
+                                <h3 class="font-bebas">Juara 3 Lomba Otomotif</h3>
+                                <h4 class="font-bebas">Teknik Kendaraan</h4>
+                                <p class="font-poppins">
+                                    MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil meraih 
+                                    <u>medali perunggu</u> di Lomba Otomotif Nasional dengan keahlian di bidang teknik kendaraan.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Achievement 12 - Kanan (besar) -->
+                        <div class="achievement-item right-layout">
+                            <div class="achievement-image-container">
+                                <img src="{{ asset('assets/Prestasi3.jpg') }}" alt="Juara 1 Lomba Kewirausahaan"
+                                     class="achievement-image">
+                            </div>
+                            <div class="achievement-content">
+                                <h3 class="font-bebas">Juara 1 Lomba Kewirausahaan</h3>
+                                <h4 class="font-bebas">Business Plan</h4>
+                                <p class="font-poppins">
+                                    MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil meraih 
+                                    <u>medali emas</u> di Lomba Kewirausahaan Nasional dengan business plan yang inovatif.
+                                    Tim kewirausahaan berhasil menciptakan model bisnis yang sustainable dan profitable.
+                                    Prestasi ini menunjukkan bahwa siswa SKARIGA tidak hanya terampil teknis tapi juga entrepreneurial.
+                                    Business plan yang dibuat mendapat perhatian dari investor potensial.
+                                    Prestasi ini membuktikan komitmen sekolah dalam mencetak lulusan yang mandiri dan kreatif.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination Controls -->
+            <div class="pagination-container">
+                <button class="pagination-btn" id="prev-btn" disabled>
+                    ← Sebelumnya
+                </button>
+                
+                <div class="page-info">
+                    Halaman <span id="current-page">1</span> dari <span id="total-pages">2</span>
+                </div>
+                
+                <button class="pagination-btn" id="next-btn">
+                    Selanjutnya →
+                </button>
+            </div>
+        </div>
+    </section>
 
 </div>
-@endsection
 
-@push('scripts')
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         // Image stack animation
@@ -755,4 +955,4 @@
         });
     });
 </script>
-@endpush
+@endsection

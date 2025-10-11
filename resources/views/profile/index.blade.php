@@ -41,7 +41,7 @@
                     <p class="mt-6 font-semibold text-gray-800">
                         Moch. Lukman Hakim, S.T., M.M
                     </p>
-                </div>
+                </div>a
             </div>
 
             {{-- ====== VISI ====== --}}
