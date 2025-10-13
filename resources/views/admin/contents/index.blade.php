@@ -18,6 +18,7 @@
                     <th class="px-4 py-2 border">Preview</th>
                     <th class="px-4 py-2 border">Judul</th>
                     <th class="px-4 py-2 border">Desc</th>
+                    <th class="px-4 py-2 border">Author</th>
                     <th class="px-4 py-2 border">Folder</th>
                     <th class="px-4 py-2 border">Aksi</th>
                 </tr>

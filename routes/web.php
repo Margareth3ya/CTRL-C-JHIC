@@ -112,9 +112,8 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
 // DONE
 Route::get('/program/jurusan', [DepartController::class, 'index']);
-Route::get('/program/organisasi', function () {
-    return view('program.organisasi');
-});
+Route::get('/program/organisasi', [App\Http\Controllers\ProgramController::class, 'index'])->name('program.index');
+
 
 
 

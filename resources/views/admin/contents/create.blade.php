@@ -31,7 +31,7 @@
                 <option value="berita">Berita</option>
                 <option value="kegiatan">Kegiatan</option>
                 <option value="ssb">SSB</option>
-                <option value="ssb_section1">SSB Section 1</option>
+                <option value="ekstrakulikuler">Ekstrakulikuler</option>
                 <option value="prestasi">Prestasi</option>
             </select>
         </div>
