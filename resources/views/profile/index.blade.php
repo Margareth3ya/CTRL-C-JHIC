@@ -4,8 +4,28 @@
 
 @section('content')
     <link rel="stylesheet" href="css/style.css">
+        {{-- === Background Circles TANPA BLUR === --}}
+<div class="fixed inset-0 -z-10 overflow-hidden">
+    <!-- Atas kiri -->
+    <div class="absolute w-96 h-96 bg-orange-200 rounded-full opacity-40 -top-40 -left-40"></div>
+
+    <!-- Atas kanan -->
+    <div class="absolute w-80 h-80 bg-blue-200 rounded-full opacity-30 -top-32 -right-32"></div>
+
+    <!-- Tengah -->
+    <div class="absolute w-72 h-72 bg-orange-100 rounded-full opacity-40 top-1/3 left-1/4"></div>
+    <div class="absolute w-64 h-64 bg-blue-100 rounded-full opacity-30 top-1/2 right-1/3"></div>
+
+    <!-- Bawah kiri -->
+    <div class="absolute w-80 h-80 bg-orange-300 rounded-full opacity-20 bottom-40 left-20"></div>
+
+    <!-- Bawah kanan -->
+    <div class="absolute w-96 h-96 bg-blue-300 rounded-full opacity-25 bottom-48 right-32"></div>
+</div>
+
 
     <section class="relative bg-white py-16">
+
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             {{-- ====== SAMBUTAN KEPALA SEKOLAH ====== --}}
@@ -41,7 +61,7 @@
                     <p class="mt-6 font-semibold text-gray-800">
                         Moch. Lukman Hakim, S.T., M.M
                     </p>
-                </div>a
+                </div>
             </div>
 
             {{-- ====== VISI ====== --}}
@@ -74,59 +94,27 @@
                     </p>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- Card 1 -->
-                    <div
-                        class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-t-8 border-orange-500">
-                        <div class="flex justify-center mb-4">
-                            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-orange-100">
-                                <i class="fas fa-bullseye text-orange-500 text-2xl"></i>
+                    @php
+                        $misi = [
+                            ['icon' => 'fas fa-bullseye', 'color' => 'orange', 'title' => 'Menumbuhkan Semangat', 'text' => 'Menumbuhkan semangat keunggulan yang kompetitif di seluruh warga sekolah.'],
+                            ['icon' => 'fas fa-graduation-cap', 'color' => 'sky', 'title' => 'Pembelajaran Berstandar', 'text' => 'Pembelajaran berbasis standar nasional & internasional dengan mempertingkatkan kemampuan siswa.'],
+                            ['icon' => 'fas fa-book-open', 'color' => 'orange', 'title' => 'Penguatan Agama & Budaya', 'text' => 'Penguatan ajaran agama dan budaya bangsa sebagai pedoman sikap.'],
+                            ['icon' => 'fas fa-school', 'color' => 'sky', 'title' => 'Pengelolaan Sekolah', 'text' => 'Pengelolaan sekolah berstandar nasional & internasional dengan partisipasi warga dan stakeholder.'],
+                        ];
+                    @endphp
+
+                    @foreach ($misi as $item)
+                        <div
+                            class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-t-8 border-{{ $item['color'] }}-500">
+                            <div class="flex justify-center mb-4">
+                                <div class="w-16 h-16 flex items-center justify-center rounded-full bg-{{ $item['color'] }}-100">
+                                    <i class="{{ $item['icon'] }} text-{{ $item['color'] }}-500 text-2xl"></i>
+                                </div>
                             </div>
+                            <h4 class="font-bold text-gray-800 text-lg mb-3">{{ $item['title'] }}</h4>
+                            <p class="text-gray-600 text-sm">{{ $item['text'] }}</p>
                         </div>
-                        <h4 class="font-bold text-gray-800 text-lg mb-3">Menumbuhkan Semangat</h4>
-                        <p class="text-gray-600 text-sm">
-                            Menumbuhkan semangat keunggulan yang kompetitif di seluruh warga sekolah.
-                        </p>
-                    </div>
-                    <!-- Card 2 -->
-                    <div
-                        class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-t-8 border-sky-500">
-                        <div class="flex justify-center mb-4">
-                            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-sky-100">
-                                <i class="fas fa-graduation-cap text-sky-500 text-2xl"></i>
-                            </div>
-                        </div>
-                        <h4 class="font-bold text-gray-800 text-lg mb-3">Pembelajaran Berstandar</h4>
-                        <p class="text-gray-600 text-sm">
-                            Pembelajaran berbasis standar nasional & internasional dengan mempertingkatkan kemampuan siswa.
-                        </p>
-                    </div>
-                    <!-- Card 3 -->
-                    <div
-                        class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-t-8 border-orange-500">
-                        <div class="flex justify-center mb-4">
-                            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-orange-100">
-                                <i class="fas fa-book-open text-orange-500 text-2xl"></i>
-                            </div>
-                        </div>
-                        <h4 class="font-bold text-gray-800 text-lg mb-3">Penguatan Agama & Budaya</h4>
-                        <p class="text-gray-600 text-sm">
-                            Penguatan ajaran agama dan budaya bangsa sebagai pedoman sikap.
-                        </p>
-                    </div>
-                    <!-- Card 4 -->
-                    <div
-                        class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-t-8 border-sky-500">
-                        <div class="flex justify-center mb-4">
-                            <div class="w-16 h-16 flex items-center justify-center rounded-full bg-sky-100">
-                                <i class="fas fa-school text-sky-500 text-2xl"></i>
-                            </div>
-                        </div>
-                        <h4 class="font-bold text-gray-800 text-lg mb-3">Pengelolaan Sekolah</h4>
-                        <p class="text-gray-600 text-sm">
-                            Pengelolaan sekolah berstandar nasional & internasional dengan partisipasi warga dan
-                            stakeholder.
-                        </p>
-                    </div>
+                    @endforeach
                 </div>
             </div>
 
@@ -146,7 +134,7 @@
                             </div>
                         </div>
                     @empty
-                        <p class="text-center text-gray-500 col-span-3">Belum da data alumni.</p>
+                        <p class="text-center text-gray-500 col-span-3">Belum ada data alumni.</p>
                     @endforelse
                 </div>
                 <div class="mt-4">{{ $alumnis->links('pagination::simple-tailwind') }}</div>
@@ -155,7 +143,6 @@
             {{-- ====== PROFIL LENGKAP SKARIGA ====== --}}
             <div class="mb-20">
                 <h3 class="text-3xl font-bold text-center mb-8">Profil Lengkap SKARIGA</h3>
-
                 <div id="videoContainer"
                     class="relative w-full max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-lg group">
                     <img id="thumbnailImage" src="https://img.youtube.com/vi/FAwdUR9SFRU/maxresdefault.jpg"
@@ -181,14 +168,13 @@
                 function playVideo() {
                     let container = document.getElementById('videoContainer');
                     container.innerHTML = `
-                                        <iframe class="w-full h-96 rounded-2xl"
-                                            src="https://www.youtube.com/embed/FAwdUR9SFRU?autoplay=1"
-                                            title="Profil SKARIGA"
-                                            frameborder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowfullscreen>
-                                        </iframe>
-                                    `;
+                        <iframe class="w-full h-96 rounded-2xl"
+                            src="https://www.youtube.com/embed/FAwdUR9SFRU?autoplay=1"
+                            title="Profil SKARIGA"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>`;
                 }
             </script>
 

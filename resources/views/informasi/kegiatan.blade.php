@@ -215,19 +215,27 @@
             font-size: 2rem;
         }
     }
+    .bg-circle-fix {
+    position: fixed !important;
+    z-index: 0 !important;
+    pointer-events: none;
+}
+
 </style>
 @endpush
 
 @section('content')
 <div class="relative w-full min-h-screen overflow-hidden bg-gray-50">
 
-    <!-- Background Circles -->
-    <div class="absolute inset-0 pointer-events-none z-0">
-        <div class="bg-blue-blur bg-circle -left-32 -top-20"></div>
-        <div class="bg-blue-blur bg-circle -left-28 top-1/3"></div>
-        <div class="bg-orange-blur bg-circle -right-32 top-24"></div>
-        <div class="bg-orange-blur bg-circle -right-28 bottom-40"></div>
-    </div>
+<!-- Background Circle Tanpa Blur -->
+<div class="bg-circle-fix inset-0">
+    <div class="absolute w-96 h-96 bg-orange-200 rounded-full opacity-40 -top-40 -left-40"></div>
+    <div class="absolute w-80 h-80 bg-blue-200 rounded-full opacity-30 -top-32 -right-32"></div>
+    <div class="absolute w-72 h-72 bg-orange-100 rounded-full opacity-40 top-1/3 left-1/4"></div>
+    <div class="absolute w-64 h-64 bg-blue-100 rounded-full opacity-30 top-1/2 right-1/3"></div>
+    <div class="absolute w-80 h-80 bg-orange-300 rounded-full opacity-20 bottom-40 left-20"></div>
+    <div class="absolute w-96 h-96 bg-blue-300 rounded-full opacity-25 bottom-48 right-32"></div>
+</div>
 
     <div class="absolute inset-0 bg-white bg-opacity-35 -z-0"></div>
 

@@ -142,7 +142,7 @@
                 <div class="grid md:grid-cols-2 gap-8 items-center">
                     <div class="text-center md:text-left">
                         <div class="mb-6">
-                            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bebas mb-4 leading-tight text-orange-500">
+                            <h1 class="text-6xl md:text-4xl lg:text-6xl font-bebas mb-4 leading-tight text-orange-500">
                                 SUCCESS BY<br>
                                 <span class="text-white">DISCIPLINE</span>
                             </h1>

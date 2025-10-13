@@ -2,6 +2,25 @@
 
 @section('content')
 <div class="min-h-screen bg-white-100 py-8">
+    <!-- Background Circles (tanpa blur) -->
+<div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+    <!-- Circle 1 - Orange (Top Left) -->
+    <div class="absolute w-96 h-96 bg-orange-200 rounded-full opacity-40 -top-40 -left-40"></div>
+
+    <!-- Circle 2 - Blue (Top Right) -->
+    <div class="absolute w-80 h-80 bg-blue-200 rounded-full opacity-30 -top-32 -right-32"></div>
+
+    <!-- Circle 3 - Orange (Bottom Left) -->
+    <div class="absolute w-72 h-72 bg-orange-100 rounded-full opacity-50 bottom-32 left-32"></div>
+
+    <!-- Circle 4 - Blue (Bottom Right) -->
+    <div class="absolute w-96 h-96 bg-blue-100 rounded-full opacity-30 bottom-48 right-48"></div>
+
+    <!-- Tambahan untuk kedalaman -->
+    <div class="absolute w-64 h-64 bg-orange-300 rounded-full opacity-20 top-1/4 left-1/4"></div>
+    <div class="absolute w-56 h-56 bg-blue-300 rounded-full opacity-20 top-1/3 right-1/3"></div>
+</div>
+
     <div class="max-w-7xl mx-auto px-4">
         <h2 class="text-center text-5xl font-bebas text-gray-800 mb-8">DEPARTEMEN UNGGULAN SKARIGA</h2>
 

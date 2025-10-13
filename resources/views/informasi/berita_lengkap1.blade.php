@@ -502,43 +502,39 @@
 
                     <div class="berita-konten">
                         <p>
-                            TIMESINDONESIA, MALANG – Komisi X DPR RI dr Gamal Albinsaid Serahkan Bantuan PIP bagi 80 siswa
-                            siswi SMK PGRI 3 Kota Malang untuk menunjang pendidikan, Kamis (7/8/2025). dr Gamal Albinsaid
-                            Komisi X DPR-RI mengatakan, bantuan PIP ini adalah salah satu bentuk kepedulian pemerintah dalam
-                            membantu masyarakat dalam menunjang pendidikan.
+MALANG – Ratusan pendaftar di SMK PGRI 3 Kota Malang antri untuk ikut seleksi pendaftaran siswa baru karena khawatir tidak mendapatkan kuota masuk di SMK favorit itu, Jumat (10/10/2025). 
+
+
+
+
+                        <p>
+Moch. Lukman Hakim, S.T., MM., Kepala SMK PGRI 3 Kota Malang menjelaskan pendaftaran siswa baru gelombang pertama dibuka tanggal 10 Oktober 2025. "Gemombang pertama memang sudah kami buka, karena tingginya animo masyarakat, orang tua dan siswa sendiri yang ingin bersekolah di SMK PGRI 3 Kota Malang. 
+
                         </p>
 
                         <p>
-                            Wakil rakyat dari Fraksi PKS ini juga berpesan kepada penerima PIP untuk rajin belajar dan selalu
-                            fokus dalam belajar dan berbakti kepada orang tua.
+"Memang tidak seperti kebanyakan seperti sekolah lain, kami melakukan seleksi terlebih dahulu dengan harapan mendapatkan siswa yang benar-benar ingin masuk di SMK PGRI 3 Kota Malang secara kompetensi akademis dan non akademik sekaligus mempunyai komitmen menjadi SMK yang terbaik di Indonesia. 
+
                         </p>
 
                         <p>
-                            dr Gamal mengaku, dalam meraih sukses dalam hidup dan karir untuk memegang teguh enam prinsip ini
-                            yang disampaikan antara lain Passion akan menjadi bahan bakar utama dalam menjalani segala
-                            tantangan hidup. Jika siswa SMK PGRI 3 Kota Malang memiliki passion yang kuat dalam studi agama dan
-                            kemanusiaan, maka mereka akan lebih mampu menghadapi berbagai rintangan yang muncul di masa depan.
+"Seleksi seperti ini paling tidak memiliki semacam resources yang benar-benar pada anak SMP/ MTS yang ingin masuk di sekolah berbasis industri, mengedepankan kedisiplinan sekaligus membentuk akhlakul karimah," ungkapnya. 
+
                         </p>
 
                         <p>
-                            Menurutnya, pointer kedua Kesedihan adalah bagian alami dari hidup. Namun, kesedihan ini harus
-                            dijadikan motivasi untuk bangkit dan mencapai hal-hal yang lebih besar. Ia mendorong siswa siswi
-                            SMK PGRI 3 Kota Malang untuk tidak takut menghadapi kegagalan, karena kegagalan adalah guru terbaik
-                            yang bisa membantu mereka tumbuh.
+Pada pembukaan seleksi pertama, dibuka kuota 500 pendaftar.  "Seleksi saat ini hanya 500 ,di SMK PGRI 3 Malang ada 12 jurusan dengan memiliki eksistensi masing-masing," tegasnya. 
+
                         </p>
 
                         <p>
-                            Dalam kunjungannya ke SMK PGRI 3 Malang, dr Gamal juga menyempatkan diri untuk berdialog langsung
-                            dengan para siswa. Ia memberikan motivasi tentang pentingnya pendidikan dalam membangun masa depan
-                            yang lebih baik. "Pendidikan adalah kunci kesuksesan. Manfaatkan kesempatan ini sebaik-baiknya,"
-                            pesannya.
-                        </p>
+Di SMK PGRI 3 Kota Malang siswa bisa mengeksplorasi melalui kemampuannya menuju Grand School menuju SDGS sesuai dengan WHO, termasuk memaksimalkan calon lulusan sekolah grand industrial.
 
-                        <p>
-                            Kepala Sekolah SMK PGRI 3 Malang menyampaikan terima kasih atas perhatian dan bantuan dari Komisi X
-                            DPR RI. "Bantuan PIP ini sangat berarti bagi siswa-siswi kami, terutama yang berasal dari keluarga
-                            kurang mampu. Ini akan meringankan beban orang tua dan memotivasi siswa untuk lebih giat belajar,"
-                            ujarnya.
+
+
+---
+Sumber: TIMES INDONESIA
+https://timesindonesia.co.id/indonesia-positif/559327/animo-pendaftar-smk-pgri-3-kota-malang-cukup-tinggi-kuota-dibatasi-500-pendaftar
                         </p>
                     </div>
                 </div>

@@ -42,6 +42,7 @@
     .berita-container {
         max-width: 1200px;
         margin: 0 auto;
+        position: relative;
     }
 
     /* Layout Utama */
@@ -61,6 +62,7 @@
         transition: all 0.4s ease;
         border: 1px solid #f3f4f6;
         height: fit-content;
+        position: relative;
     }
 
     .berita-main-card:hover {
@@ -118,6 +120,7 @@
         flex: 1;
         display: flex;
         height: 50%; /* Setengah dari container */
+        position: relative;
     }
 
     .berita-side-card:hover {
@@ -224,6 +227,26 @@
         transform: translateY(0);
     }
 
+    /* === MENGURANGI GAP UNTUK SEMUA SECTION SETELAH SECTION PERTAMA === */
+    .berita-section ~ .berita-section {
+        padding-top: 0; /* Hilangkan padding atas untuk semua section setelah section pertama */
+        padding-bottom: 2rem; /* Kurangi padding bawah */
+    }
+
+    .berita-section ~ .berita-section .berita-title {
+        margin-bottom: 2rem; /* Kurangi margin bawah judul */
+    }
+
+    /* Section pertama tetap normal */
+    .berita-section:first-child {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+
+    .berita-section:first-child .berita-title {
+        margin-bottom: 3rem;
+    }
+
     /* === RESPONSIVE DESIGN === */
     @media (max-width: 1024px) {
         .berita-layout {
@@ -315,30 +338,34 @@
         }
     }
 
-    /* === MENGURANGI GAP UNTUK SEMUA SECTION SETELAH SECTION PERTAMA === */
-.berita-section ~ .berita-section {
-    padding-top: 0; /* Hilangkan padding atas untuk semua section setelah section pertama */
-    padding-bottom: 2rem; /* Kurangi padding bawah */
+html, body {
+    background-color: transparent !important;
+    position: relative;
+    z-index: 0;
+}
+main {
+    position: relative;
+    z-index: 1;
 }
 
-.berita-section ~ .berita-section .berita-title {
-    margin-bottom: 2rem; /* Kurangi margin bawah judul */
-}
-
-/* Section pertama tetap normal */
-.berita-section:first-child {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-}
-
-.berita-section:first-child .berita-title {
-    margin-bottom: 3rem;
-}
 </style>
 @endpush
 
 @section('content')
-<div class="min-h-screen">
+<div class="min-h-screen relative z-0">
+
+
+    <!-- Background Circles -->
+<div class="fixed inset-0 z-[-1] overflow-hidden">
+
+    <div class="absolute w-96 h-96 bg-orange-200 rounded-full opacity-40 -top-40 -left-40"></div>
+    <div class="absolute w-80 h-80 bg-blue-200 rounded-full opacity-30 -top-32 -right-32"></div>
+    <div class="absolute w-72 h-72 bg-orange-100 rounded-full opacity-40 top-1/3 left-1/4"></div>
+    <div class="absolute w-64 h-64 bg-blue-100 rounded-full opacity-30 top-1/2 right-1/3"></div>
+    <div class="absolute w-80 h-80 bg-orange-300 rounded-full opacity-20 bottom-40 left-20"></div>
+    <div class="absolute w-96 h-96 bg-blue-300 rounded-full opacity-25 bottom-48 right-32"></div>
+</div>
+
 
     <!-- Section 1: Berita Terbaru -->
     <section class="berita-section">
@@ -359,9 +386,9 @@
                             </svg>
                             15 Januari 2025
                         </div>
-                        <h3 class="berita-main-title font-poppins">SMK PGRI 3 Malang Raih Emas & Perak LKS Nasional 2025</h3>
+                        <h3 class="berita-main-title font-poppins">Animo Pendaftar SMK PGRI 3 Kota Malang Cukup Tinggi, Kuota Dibatasi 500 Pendaftar</h3>
                         <p class="berita-main-excerpt font-poppins">
-                            MALANG POSCO MEDIA, MALANG – SMK PGRI 3 Malang (SKARIGA) berhasil mempertahankan medali emas di Lomba Kompetensi Siswa (LKS) Nasional dengan prestasi membanggakan di bidang Industrial Control dan Robot Manufacturing System.
+                            Ratusan pendaftar di SMK PGRI 3 Kota Malang antri untuk ikut seleksi pendaftaran siswa baru karena khawatir tidak mendapatkan kuota masuk di SMK favorit itu,
                         </p>
                         <a href="/informasi/berita/berita" class="berita-read-more font-poppins">
                             Baca Selengkapnya →
@@ -498,10 +525,8 @@
         </div>
     </section>
 
-
     <!-- Section 3: Berita Lainnya -->
     <section class="berita-section">
-        
         <div class="berita-container">
             <div class="berita-layout">
                 <!-- Card Besar Kiri -->
