@@ -21,33 +21,35 @@ class ContentController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'body' => 'nullable|string',
-            'credit' => 'nullable|string',
+            'body' => 'required|string',
             'folder' => 'required|string',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'image' => 'required',
+            'image.*' => 'image|mimes:jpeg,png,jpg,gif,webp'
         ]);
 
-        $folder = $request->folder;
-        $destinationPath = public_path("assets/{$folder}");
-        if (!file_exists($destinationPath)) mkdir($destinationPath, 0777, true);
+        $images = [];
 
-        $filename = null;
+        // Ambil semua file dari input image[]
         if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $filename = time().'.'.$file->getClientOriginalExtension();
-            $file->move($destinationPath, $filename);
+            foreach ($request->file('image') as $file) {
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('assets/' . $request->folder), $filename);
+                $images[] = $filename;
+            }
         }
 
+        // Simpan ke database
         Content::create([
             'title' => $request->title,
             'body' => $request->body,
-            'credit' => $request->credit,
-            'folder' => $folder,
-            'image' => $filename,
+            'folder' => $request->folder,
+            'image' => json_encode($images), // simpan dalam format JSON
         ]);
 
         return redirect()->route('admin.contents.index')->with('success', 'Konten berhasil ditambahkan!');
     }
+
+
 
     public function edit($id)
     {
@@ -59,45 +61,39 @@ class ContentController extends Controller
     {
         $content = Content::findOrFail($id);
 
-        $request->validate([
-            'title' => 'required|string|max:255',
+        $data = $request->validate([
+            'title' => 'required|string',
             'body' => 'nullable|string',
             'credit' => 'nullable|string',
             'folder' => 'required|string',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'images.*' => 'nullable|image|mimes:jpg,jpeg,png',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png',
         ]);
 
-        $folder = $request->folder;
-        $destinationPath = public_path("assets/{$folder}");
-        if (!file_exists($destinationPath)) mkdir($destinationPath, 0777, true);
-
-        $filename = $content->image;
-
-        if ($request->hasFile('image')) {
-            $old = public_path("assets/{$content->folder}/{$content->image}");
-            if (file_exists($old)) unlink($old);
-
+        if ($request->folder === 'ssb' && $request->hasFile('images')) {
+            $images = [];
+            foreach ($request->file('images') as $file) {
+                $name = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('assets/ssb'), $name);
+                $images[] = $name;
+            }
+            $data['image'] = json_encode($images);
+        } elseif ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = time().'.'.$file->getClientOriginalExtension();
-            $file->move($destinationPath, $filename);
+            $name = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('assets/' . $request->folder), $name);
+            $data['image'] = $name;
         }
-
-        $content->update([
-            'title' => $request->title,
-            'body' => $request->body,
-            'credit' => $request->credit,
-            'folder' => $folder,
-            'image' => $filename,
-        ]);
-
-        return redirect()->route('admin.contents.index')->with('success', 'Konten berhasil diperbarui!');
+        $content->update($data);
+        return redirect()->route('admin.contents.index')->with('success', 'Konten berhasil diperbarui.');
     }
 
     public function destroy($id)
     {
         $content = Content::findOrFail($id);
         $path = public_path("assets/{$content->folder}/{$content->image}");
-        if (file_exists($path)) unlink($path);
+        if (file_exists($path))
+            unlink($path);
         $content->delete();
         return back()->with('success', 'Konten berhasil dihapus!');
     }

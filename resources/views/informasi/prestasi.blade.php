@@ -38,64 +38,67 @@
                     class="mb-12 relative text-center w-full block font-bebas text-4xl bg-gradient-to-br from-gray-800 to-gray-700 bg-clip-text text-transparent after:content-[''] after:absolute after:-bottom-2.5 after:left-1/2 after:transform after:-translate-x-1/2 after:w-24 after:h-0.5 after:bg-gradient-to-r after:from-orange-500 after:to-orange-300 after:rounded">
                     PRESTASI TERBARU
                 </h2>
-                @foreach ($prestasi as $pres)
-                    <div class="achievement-page active" id="page-1">
-                        <div class="flex flex-col gap-10 max-w-[1400px] mx-auto">
-                            <div class="achievement-pair flex justify-between flex-wrap gap-8 items-start">
-                                <div
-                                    class="achievement-item left-layout flex items-stretch flex-1 min-w-[48%] bg-white rounded-2xl shadow-xl p-8 transition-all duration-400 ease-in-out border border-gray-100 relative overflow-hidden hover:-translate-y-2 hover:shadow-2xl hover:border-orange-500 min-h-[340px] max-h-[360px]">
-                                    <div
-                                        class="achievement-image-container flex-0 w-[45%] mr-6 relative flex items-center justify-center">
-                                        <img src="{{ asset('assets/' . $pres->folder . '/' . $pres->image) }}"
-                                            alt="{{ $pres->title }}"
-                                            class="achievement-image w-full h-full max-w-[260px] max-h-[260px] min-w-[220px] min-h-[220px] object-cover rounded-xl shadow-lg transition-all duration-400 ease-in-out border-2 border-white relative z-10 hover:scale-105 hover:shadow-xl">
-                                    </div>
-                                    <div class="achievement-content flex-1 relative z-10 flex flex-col justify-center">
-                                        <h3
-                                            class="font-bebas text-3xl mb-2 bg-gradient-to-br from-gray-800 to-gray-700 bg-clip-text text-transparent relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-12 after:h-0.5 after:bg-gradient-to-r after:from-orange-500 after:to-orange-300 after:rounded">
-                                            {{ $pres->title }}
-                                        </h3>
-                                        <h4 class="font-bebas text-2xl text-orange-500 mb-3">
-                                            {{ $pres->credit }}
-                                        </h4>
-                                        <p class="font-poppins text-sm text-gray-600 leading-relaxed mt-3 line-clamp-8">
-                                            {{ $pres->body }}
-                                        </p>
-                                    </div>
-                                </div>
+
+                @if($prestasi->isEmpty())
+                    <p class="text-center text-gray-500 font-poppins">Belum ada prestasi yang ditambahkan.</p>
+                @else
+                    <div class="grid md:grid-cols-2 gap-10 max-w-[1400px] mx-auto">
+                        @foreach ($prestasi as $index => $pres)
+                            <div
+                                class="achievement-item flex flex-col md:flex-row items-stretch bg-white rounded-2xl shadow-xl p-8 transition-all duration-400 ease-in-out border border-gray-100 relative overflow-hidden hover:-translate-y-2 hover:shadow-2xl hover:border-orange-500">
 
                                 <div
-                                    class="achievement-item right-layout flex items-stretch flex-1 min-w-[48%] bg-white rounded-2xl shadow-xl p-8 transition-all duration-400 ease-in-out border border-gray-100 relative overflow-hidden hover:-translate-y-2 hover:shadow-2xl hover:border-orange-500 min-h-[280px] max-h-[300px] mt-16">
-                                    <div
-                                        class="achievement-image-container flex-0 w-[45%] ml-6 relative flex items-center justify-center">
-                                        <img src="{{ asset('assets/' . $pres->folder . '/' . $pres->image) }}"
-                                            alt="{{ $pres->title }}"
-                                            class="achievement-image w-full h-full max-w-[260px] max-h-[260px] min-w-[220px] min-h-[220px] object-cover rounded-xl shadow-lg transition-all duration-400 ease-in-out border-2 border-white relative z-10 hover:scale-105 hover:shadow-xl">
-                                    </div>
-                                    <div class="achievement-content flex-1 relative z-10 flex flex-col justify-center">
-                                        <h3
-                                            class="font-bebas text-3xl mb-2 bg-gradient-to-br from-gray-800 to-gray-700 bg-clip-text text-transparent relative after:content-[''] after:absolute after:-bottom-1 after:right-0 after:w-12 after:h-0.5 after:bg-gradient-to-r after:from-orange-500 after:to-orange-300 after:rounded">
-                                            {{ $pres->title }}
-                                        </h3>
-                                        <h4 class="font-bebas text-2xl text-orange-500 mb-3">
-                                            {{ $pres->credit }}
-                                        </h4>
-                                        <p class="font-poppins text-sm text-gray-600 leading-relaxed mt-3 line-clamp-4">
-                                            {{ $pres->body }}
-                                        </p>
-                                    </div>
+                                    class="achievement-image-container w-full md:w-[45%] mb-6 md:mb-0 md:mr-6 flex items-center justify-center">
+                                    <img src="{{ asset('assets/' . $pres->folder . '/' . $pres->image) }}" alt="{{ $pres->title }}"
+                                        class="w-full h-full max-w-[260px] max-h-[260px] object-cover rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                                </div>
+
+                                <div class="achievement-content flex-1">
+                                    <h3
+                                        class="font-bebas text-3xl mb-2 bg-gradient-to-br from-gray-800 to-gray-700 bg-clip-text text-transparent">
+                                        {{ $pres->title }}
+                                    </h3>
+                                    <h4 class="font-bebas text-2xl text-orange-500 mb-3">
+                                        {{ $pres->credit }}
+                                    </h4>
+                                    <p class="font-poppins text-sm text-gray-600 leading-relaxed line-clamp-6">
+                                        {{ $pres->body }}
+                                    </p>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
+                        @foreach ($prestasi2 as $pres2)
+                            <div
+                                class="achievement-item flex flex-col md:flex-row items-stretch bg-white rounded-2xl shadow-xl p-8 transition-all duration-400 ease-in-out border border-gray-100 relative overflow-hidden hover:-translate-y-2 hover:shadow-2xl hover:border-orange-500">
+
+                                <div
+                                    class="achievement-image-container w-full md:w-[45%] mb-6 md:mb-0 md:mr-6 flex items-center justify-center">
+                                    <img src="{{ asset('assets/' . $pres2->folder . '/' . $pres2->image) }}" alt="{{ $pres2->title }}"
+                                        class="w-full h-full max-w-[260px] max-h-[260px] object-cover rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                                </div>
+
+                                <div class="achievement-content flex-1">
+                                    <h3
+                                        class="font-bebas text-3xl mb-2 bg-gradient-to-br from-gray-800 to-gray-700 bg-clip-text text-transparent">
+                                        {{ $pres2->title }}
+                                    </h3>
+                                    <h4 class="font-bebas text-2xl text-orange-500 mb-3">
+                                        {{ $pres2->credit }}
+                                    </h4>
+                                    <p class="font-poppins text-sm text-gray-600 leading-relaxed line-clamp-6">
+                                        {{ $pres2->body }}
+                                    </p>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                @endforeach
+                @endif
             </div>
         </section>
-
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             // Image stack animation
             const stack = document.querySelectorAll("#image-stack img");
             let index = 0;

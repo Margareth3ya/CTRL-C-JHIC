@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PendaftaranController;
 use Illuminate\Support\Facades\Route;
 
 // ======== IMPORT MODEL ========
@@ -16,6 +17,7 @@ use App\Http\Controllers\ContentController;
 use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BeritaController;
 
 // Public routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -75,18 +77,13 @@ Route::get('/', function () {
 
     return view('index');
 });
-Route::get('/informasi/berita', function () {
-    return view('informasi.berita');
-});
-Route::get('/informasi/berita/berita', function () {
-    return view('informasi.berita_lengkap1');
-});
+Route::get('/informasi/berita', [BeritaController::class, 'index'])->name('berita.index');
+Route::get('/informasi/berita/{id}', [BeritaController::class, 'show'])->name('berita.show');
+
 Route::get('/informasi/kegiatan', function () {
     return view('informasi.kegiatan');
 });
-Route::get('/informasi/ssb', function () {
-    return view('informasi.SSB');
-});
+Route::get('/informasi/ssb', [PendaftaranController::class, 'index'])->name('informasi.ssb');
 Route::get('/informasi/prestasi', [PrestasiController::class, 'index'])->name('informasi.index');
 
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');

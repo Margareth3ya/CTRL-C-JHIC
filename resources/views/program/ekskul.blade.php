@@ -55,7 +55,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
                     @forelse ($eks as $item)
                         <div class="relative h-64 overflow-hidden">
-                            <div class="bg-white rounded-2xl overflow-hidden shadow-xl transition-all duration-400 border border-gray-100 hover:-translate-y-3 hover:shadow-2xl hover:border-orange-500 relative opacity-0 transform translate-y-8 transition-all duration-500 ease-out scroll-reveal">
+                            <div class="bg-white rounded-2xl overflow-hidden shadow-xl transition-all duration-400 border border-gray-100 hover:-translate-y-3 hover:shadow-2xl hover:border-orange-500 relative opacity-0 transform translate-y-8 ease-out scroll-reveal">
                                 <img src="{{ asset('assets/' . $item->folder . '/' . $item->image) }}"
                                     alt="{{ $item->title }}"
                                     class="w-full h-full object-cover transition-transform duration-400 ease-in-out">

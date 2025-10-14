@@ -25,11 +25,12 @@
             </thead>
             <tbody>
                 @foreach ($contents as $content)
-                    <tr class="border-t">
+                    <tr class="border-t mx-auto">
                         <td class="px-4 py-2 text-center">{{ $loop->iteration }}</td>
                         <td class="px-4 py-2 text-center">
                             @if($content->image)
-                                <img src="{{ asset('assets/' . $content->folder . '/' . $content->image) }}" class="h-16 mx-auto rounded">
+                                <img src="{{ asset('assets/' . ($content->folder ? $content->folder . '/' : '') . trim(str_replace(['[', ']', '"'], '', $content->image))) }}"
+                                    alt="{{ $content->title ?? 'Gambar Konten' }}" class="h-16 mx-auto rounded" />
                             @endif
                         </td>
                         <td class="px-4 py-2 text-center">{{ $content->title }}</td>
@@ -46,10 +47,12 @@
 
                         <td class="px-4 py-2 text-center capitalize">{{ $content->folder }}</td>
                         <td class="px-4 py-2 text-center">
-                            <a href="{{ route('admin.contents.edit', $content->id) }}" class="bg-yellow-500 px-4 py-2 rounded-lg text-white hover:bg-yellow-600">Edit</a>
+                            <a href="{{ route('admin.contents.edit', $content->id) }}"
+                                class="bg-yellow-500 px-4 py-2 rounded-lg text-white hover:bg-yellow-600">Edit</a>
                             <form action="{{ route('admin.contents.destroy', $content->id) }}" method="POST" class="inline">
                                 @csrf @method('DELETE')
-                                <button class="bg-red-500 px-4 py-2 rounded-lg text-white hover:bg-red-600" onclick="return confirm('Yakin hapus konten ini?')">Hapus</button>
+                                <button class="bg-red-500 px-4 py-2 rounded-lg text-white hover:bg-red-600"
+                                    onclick="return confirm('Yakin hapus konten ini?')">Hapus</button>
                             </form>
                         </td>
                     </tr>
