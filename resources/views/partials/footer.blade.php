@@ -1,5 +1,5 @@
 <footer class="container flex flex-col mx-auto p-2 rounded-3xl bg-gradient-to-b from-gray-900 to-gray-800 text-gray-300 px-6 md:px-16 py-5 relative overflow-hidden">
-    
+
     <div class="absolute inset-0 opacity-5">
         <div class="absolute top-10 left-1/4 w-64 h-64 rounded-full bg-primary animate-pulse-slow"></div>
         <div class="absolute bottom-10 right-1/4 w-48 h-48 rounded-full bg-primary animate-float"></div>
@@ -90,9 +90,12 @@
         <div class="flex flex-col justify-center items-center text-center mx-auto">
             <span class="text-gray-400 text-sm tracking-wide">Supported by:</span>
             <img src="{{ asset('assets/JagoanSupport.png') }}" alt="Jagoan Support"
-                class="h-16 object-contain transition-transform duration-300 hover:scale-105">
+                class=" bg-white h-16 object-contain transition-transform rounded-lg duration-300 hover:scale-105">
+            </div>
+            <div class="flex flex-col justify-center items-center">
+                <span class="text-gray-400 text-sm">© SMK PGRI 3 MALANG</span>
+            </div>
         </div>
-    </div>
     <style>
     .footer-link {
         position: relative;
