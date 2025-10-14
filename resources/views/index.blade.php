@@ -87,7 +87,7 @@
 }
 
 .card-behind {
-    transform: translateX(80px) scale(0.92);
+    transform: translateX(120px) scale(0.92);
     opacity: 1;
     z-index: 30;
     filter: brightness(0.9);
@@ -95,7 +95,7 @@
 }
 
 .card-far-behind {
-    transform: translateX(160px) scale(0.84);
+    transform: translateX(240px) scale(0.84);
     opacity: 1;
     z-index: 20;
     filter: brightness(0.8);
@@ -103,7 +103,7 @@
 }
 
 .card-more-behind {
-    transform: translateX(240px) scale(0.76);
+    transform: translateX(360px) scale(0.76);
     opacity: 1;
     z-index: 10;
     filter: brightness(0.7);
