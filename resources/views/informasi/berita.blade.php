@@ -11,11 +11,12 @@
         }
 
         /* === BERITA SECTION === */
-        .berita-section {
-            padding: 4rem 1rem;
-            background: linear-gradient(180deg, #fafafa 0%, #fff 100%);
-            position: relative;
-        }
+.berita-section {
+    padding: 4rem 1rem;
+    background: transparent;
+    position: relative;
+}
+
 
         .berita-title {
             font-size: 2.5rem;
@@ -361,15 +362,7 @@
 @section('content')
 <div class="min-h-screen relative z-0">
 
-    <!-- Background Circles -->
-    <div class="fixed inset-0 z-[-1] overflow-hidden">
-        <div class="absolute w-96 h-96 bg-orange-200 rounded-full opacity-40 -top-40 -left-40"></div>
-        <div class="absolute w-80 h-80 bg-blue-200 rounded-full opacity-30 -top-32 -right-32"></div>
-        <div class="absolute w-72 h-72 bg-orange-100 rounded-full opacity-40 top-1/3 left-1/4"></div>
-        <div class="absolute w-64 h-64 bg-blue-100 rounded-full opacity-30 top-1/2 right-1/3"></div>
-        <div class="absolute w-80 h-80 bg-orange-300 rounded-full opacity-20 bottom-40 left-20"></div>
-        <div class="absolute w-96 h-96 bg-blue-300 rounded-full opacity-25 bottom-48 right-32"></div>
-    </div>
+
 
     @php
         // Ubah ke array biar index jelas
@@ -385,7 +378,15 @@
 
     @foreach ($sections as $section)
         @if ($section['items']->count())
-        <section class="berita-section">
+        <section class="berita-section relative overflow-hidden">
+
+                    <!-- === CIRCLE BACKGROUND UNTUK SECTION INI === -->
+        <div class="absolute inset-0 -z-[1] pointer-events-none">
+            <div class="absolute w-96 h-96 bg-orange-200 rounded-full opacity-40-top-20 left-1/4"></div>
+            <div class="absolute w-80 h-80 bg-blue-200 rounded-full opacity-30 top-1/2 right-1/4"></div>
+            <div class="absolute w-72 h-72 bg-orange-100 rounded-full opacity-40 bottom-0 left-1/3"></div>
+        </div>
+
             <h2 class="berita-title font-bebas">{{ $section['title'] }}</h2>
             <div class="berita-container">
                 <div class="berita-layout">
