@@ -8,7 +8,7 @@ class ProgramController extends Controller
 {
     public function index()
     {
-        $eks = Content::whereIn('folder', ['ekstrakurikuler', 'ekstrakulikuler'])->get();
-        return view('program.organisasi', compact('eks'));
+        $eks = Content::where('folder', 'ekstrakulikuler')->latest()->paginate(3);
+        return view('program.ekskul', compact('eks'));
     }
 }

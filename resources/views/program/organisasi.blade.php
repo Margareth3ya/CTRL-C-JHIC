@@ -409,7 +409,6 @@
         </section>
 
         <!-- Section: Ekstrakurikuler -->
-        <!-- NOTE OJOL PAKE NATIVE CSS, GAMBAR E ILANG ANJIRR -->
         <section class="">
             <h2 class="font-bebas text-center">EKSTRAKURIKULER</h2>
             <div class="">

@@ -12,8 +12,8 @@ use App\Http\Controllers\KontakController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\AssetController;
 use App\Http\Controllers\ContentController;
+use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\ProfileController;
 
@@ -26,7 +26,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['admin'])->prefix('admin')->group(function () {
     // Dashboard
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    
+
     // Users
     Route::get('/users', [UserController::class, 'index'])->name('admin.users.index');
     Route::get('/users/create', [UserController::class, 'create'])->name('admin.users.create');
@@ -34,7 +34,7 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
     Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
     Route::put('/users/{id}', [UserController::class, 'update'])->name('admin.users.update');
     Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('admin.users.destroy');
-    
+
     // Assets
     Route::get('/assets', [ContentController::class, 'index'])->name('admin.assets.index');
     Route::get('/assets/create', [ContentController::class, 'create'])->name('admin.assets.create');
@@ -42,7 +42,7 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
     Route::get('/assets/{id}/edit', [ContentController::class, 'edit'])->name('admin.assets.edit');
     Route::put('/assets/{id}', [ContentController::class, 'update'])->name('admin.assets.update');
     Route::delete('/assets/{id}', [ContentController::class, 'destroy'])->name('admin.assets.destroy');
-    
+
     // Contents
     Route::get('/contents', [ContentController::class, 'index'])->name('admin.contents.index');
     Route::get('/contents/create', [ContentController::class, 'create'])->name('admin.contents.create');
@@ -87,9 +87,7 @@ Route::get('/informasi/kegiatan', function () {
 Route::get('/informasi/ssb', function () {
     return view('informasi.SSB');
 });
-Route::get('/informasi/prestasi', function () {
-    return view('informasi.prestasi');
-});
+Route::get('/informasi/prestasi', [PrestasiController::class, 'index'])->name('informasi.index');
 
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 

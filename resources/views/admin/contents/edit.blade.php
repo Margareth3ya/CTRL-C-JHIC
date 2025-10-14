@@ -27,7 +27,7 @@
                 <option value="berita" {{ $content->folder == 'berita' ? 'selected' : '' }}>Berita</option>
                 <option value="kegiatan" {{ $content->folder == 'kegiatan' ? 'selected' : '' }}>Kegiatan</option>
                 <option value="ssb" {{ $content->folder == 'ssb' ? 'selected' : '' }}>SSB</option>
-                <option value="ssb-section1" {{ $content->folder == 'ssb-section1' ? 'selected' : '' }}>SSB Section 1</option>
+                <option value="ekstrakulikuler" {{ $content->folder == 'ekstrakulikuler' ? 'selected' : '' }}>Ekstrakulikuler</option>
                 <option value="prestasi" {{ $content->folder == 'prestasi' ? 'selected' : '' }}>Prestasi</option>
             </select>
         </div>
@@ -43,7 +43,7 @@
             <label class="block text-gray-700 font-medium mb-1">Isi Konten</label>
             <textarea name="body" rows="5" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring focus:ring-blue-200">{{ old('body', $content->body) }}</textarea>
         </div>
-        
+
         <div>
             <label class="block text-gray-700 font-medium mb-1">Isi Konten</label>
             <textarea name="credit" rows="5" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring focus:ring-blue-200">{{ old('body', $content->credit) }}</textarea>
