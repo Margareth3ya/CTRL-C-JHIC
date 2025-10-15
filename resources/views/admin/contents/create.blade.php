@@ -56,7 +56,7 @@
         // FUNGSI UNTUK MULTIPLE UPLOAD SSB
         document.getElementById('folder').addEventListener('change', function () {
             const fileInput = document.querySelector('input[name="image[]"]');
-            if (this.value === 'ssb') {
+            if (this.value === 'ssb' || this.value === 'kegiatan') {
                 fileInput.setAttribute('multiple', true);
             } else {
                 fileInput.removeAttribute('multiple');

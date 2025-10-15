@@ -107,7 +107,7 @@
 
             <div class="relative z-10">
                 <h3 class="text-3xl font-bold text-center mb-12">Apa Kata Alumni?</h3>
-                
+
                 <!-- Content Wrapper -->
                 <div class="alumni-content-wrapper pb-8" id="alumniContent">
                     @php
@@ -118,19 +118,19 @@
 
                     @if(count($alumniArray) > 0)
                         @for($i = 0; $i < $totalPages; $i++)
-                            <div class="alumni-page {{ $i === 0 ? 'alumni-page--active' : 'hidden' }}" 
+                            <div class="alumni-page {{ $i === 0 ? 'alumni-page--active' : 'hidden' }}"
                                  data-page="{{ $i + 1 }}"
                                  id="alumniPage{{ $i + 1 }}">
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                                    @foreach(array_slice($alumniArray, $i * $itemsPerPage, $itemsPerPage) as $alumni)
+                                    @foreach($alumnis as $alumni)
                                         <div
                                             class="flex relative h-96 bg-white rounded-2xl shadow-lg overflow-hidden group hover:scale-105 transition-transform hover:shadow-orange-300">
-                                            <img src="{{ asset('assets/alumni/' . $alumni['image']) }}" alt="{{ $alumni['title'] }}"
+                                            <img src="{{ asset('assets/alumni/' . $alumni->image) }}" alt="{{ $alumni->title }}"
                                                 class="w-full object-cover group-hover:scale-105 transition-transform duration-500">
                                             <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4">
-                                                <h4 class="text-lg font-bold text-white">{{ $alumni['title'] }}</h4>
-                                                <p class="text-gray-200 text-sm">{{ $alumni['body'] }}</p>
-                                                <span class="text-xs text-gray-300 mt-1">{{ $alumni['credit'] }}</span>
+                                                <h4 class="text-lg font-bold text-white">{{ $alumni->title }}</h4>
+                                                <p class="text-gray-200 text-sm">{{ $alumni->body }}</p>
+                                                <span class="text-xs text-gray-300 mt-1">{{ $alumni->credit }}</span>
                                             </div>
                                         </div>
                                     @endforeach
@@ -147,8 +147,8 @@
                 <!-- Navigation - Only show if there are multiple pages -->
                 @if($totalPages > 1)
                     <div class="alumni-navigation">
-                        <button 
-                            id="alumniPrevButton" 
+                        <button
+                            id="alumniPrevButton"
                             data-action="prev"
                             class="nav-button nav-button--disabled"
                             disabled
@@ -164,8 +164,8 @@
                             </div>
                         </div>
 
-                        <button 
-                            id="alumniNextButton" 
+                        <button
+                            id="alumniNextButton"
                             data-action="next"
                             class="nav-button"
                         >
@@ -209,7 +209,7 @@
         </section>
 
     </div>
-   
+
 
     <style>
         /* === PAGINATION SYSTEM FOR ALUMNI === */
@@ -226,7 +226,7 @@
             /* Reset semua style default */
             all: initial;
             font-family: inherit;
-            
+
             /* Style dasar */
             display: inline-flex;
             align-items: center;
@@ -264,9 +264,9 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.3), 
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
                 transparent);
             transition: left 0.6s ease;
         }
@@ -384,7 +384,7 @@
             const alumniNextButton = document.getElementById('alumniNextButton');
             const alumniCurrentPageEl = document.getElementById('alumniCurrentPage');
             const alumniTotalPagesEl = document.getElementById('alumniTotalPages');
-            
+
             // State
             let alumniCurrentPage = 1;
             const alumniTotalPages = {{ $totalPages ?? 1 }};
@@ -407,7 +407,7 @@
             // Navigation functions
             function goToAlumniPage(page) {
                 if (alumniIsAnimating || page < 1 || page > alumniTotalPages) return;
-                
+
                 alumniIsAnimating = true;
 
                 // Hide current page
@@ -427,7 +427,7 @@
                         newPageElement.classList.add('alumni-page--active');
                         newPageElement.classList.remove('hidden');
                     }
-                    
+
                     updateAlumniNavigation();
                     alumniIsAnimating = false;
                 }, 300);
@@ -449,7 +449,7 @@
                         alumniPrevButton.classList.remove('nav-button--disabled');
                     }
                 }
-                
+
                 if (alumniNextButton) {
                     if (alumniCurrentPage === alumniTotalPages) {
                         alumniNextButton.disabled = true;

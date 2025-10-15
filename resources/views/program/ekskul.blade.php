@@ -54,17 +54,26 @@
             <div class="ekskul-page active ">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
                     @forelse ($eks as $item)
+                        @php
+                            $images = json_decode($item->image, true);
+                            if (!is_array($images)) {
+                                $images = [$item->image];
+                            }
+                        @endphp
                         <div class="relative h-64 overflow-hidden">
-                            <div class="bg-white rounded-2xl overflow-hidden shadow-xl transition-all duration-400 border border-gray-100 hover:-translate-y-3 hover:shadow-2xl hover:border-orange-500 relative opacity-0 transform translate-y-8 ease-out scroll-reveal">
-                                <img src="{{ asset('assets/' . $item->folder . '/' . $item->image) }}"
-                                    alt="{{ $item->title }}"
-                                    class="w-full h-full object-cover transition-transform duration-400 ease-in-out">
-                            </div>
+                            @foreach ($images as $img)
+                                <div
+                                    class="bg-white rounded-2xl overflow-hidden shadow-xl transition-all duration-400 border border-gray-100 hover:-translate-y-3 hover:shadow-2xl hover:border-orange-500 relative opacity-0 transform translate-y-8 ease-out scroll-reveal">
+                                    <img src="{{ asset('assets/ekstrakulikuler' . '/' . $img) }}"
+                                        alt="{{ $item->title }}"
+                                        class="w-full h-full object-cover transition-transform duration-400 ease-in-out brightness-50 hover:scale-105">
+                                </div>
+                            @endforeach
                             <div
                                 class="absolute top-4 right-4 bg-gradient-to-br from-orange-500 to-orange-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg shadow-orange-500/30 z-10">
                                 EKSTRAKURIKULER
                             </div>
-                            <div class="absolute top-24 bottom-0 left-0 right-0 p-8 text-white z-10">
+                            <div class="absolute top-20 bottom-0 left-0 right-0 p-8 text-white z-10">
                                 <h3 class="text-2xl font-bebas font-bold mb-2">{{ $item->title }}</h3>
                                 <p class="text-gray-100 text-sm leading-relaxed opacity-90 font-poppins">{{ $item->body }}
                                 </p>

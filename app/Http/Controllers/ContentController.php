@@ -43,7 +43,7 @@ class ContentController extends Controller
             'title' => $request->title,
             'body' => $request->body,
             'folder' => $request->folder,
-            'image' => json_encode($images), // simpan dalam format JSON
+            'image' => json_encode($images),
         ]);
 
         return redirect()->route('admin.contents.index')->with('success', 'Konten berhasil ditambahkan!');
@@ -92,7 +92,7 @@ class ContentController extends Controller
     {
         $content = Content::findOrFail($id);
         $path = public_path("assets/{$content->folder}/{$content->image}");
-        if (file_exists($path))
+        if(file_exists($path))
             unlink($path);
         $content->delete();
         return back()->with('success', 'Konten berhasil dihapus!');

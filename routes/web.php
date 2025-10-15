@@ -18,6 +18,7 @@ use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\KegiatanController;
 
 // Public routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -77,17 +78,15 @@ Route::get('/', function () {
 
     return view('index');
 });
+
+// ROUTE INFORMASI
 Route::get('/informasi/berita', [BeritaController::class, 'index'])->name('berita.index');
 Route::get('/informasi/berita/{id}', [BeritaController::class, 'show'])->name('berita.show');
-
-Route::get('/informasi/kegiatan', function () {
-    return view('informasi.kegiatan');
-});
+Route::get('/informasi/kegiatan', [KegiatanController::class, 'index'])->name('informasi.kegiatan');
 Route::get('/informasi/ssb', [PendaftaranController::class, 'index'])->name('informasi.ssb');
 Route::get('/informasi/prestasi', [PrestasiController::class, 'index'])->name('informasi.index');
 
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-
 
 Route::get('/kontak', function () {
     return view('kontak');

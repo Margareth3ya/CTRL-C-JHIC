@@ -10,7 +10,7 @@ class BeritaController extends Controller
     public function index()
     {
         $berita = Content::where('folder', 'berita')
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'ASC')
             ->get();
 
         // bagi per section
