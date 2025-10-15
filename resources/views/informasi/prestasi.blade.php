@@ -1,7 +1,520 @@
 @extends('layouts.app')
 
+@push('styles')
+<style>
+    /* === GLOBAL STYLES === */
+    .font-bebas {
+        font-family: 'Bebas Neue', cursive;
+    }
+
+    .font-poppins {
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* === PRESTASI SECTION === */
+    .prestasi-section {
+        padding: 4rem 1rem 6rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Background Circles */
+    .prestasi-section::before {
+        content: '';
+        position: absolute;
+        width: 26rem;
+        height: 26rem;
+        background: #FFD2A0;
+        border-radius: 50%;
+        opacity: 0.5;
+        top: -10rem;
+        left: 25%;
+        z-index: -1;
+    }
+
+    .prestasi-section::after {
+        content: '';
+        position: absolute;
+        width: 20rem;
+        height: 20rem;
+        background: #FFE5B4;
+        border-radius: 50%;
+        opacity: 0.5;
+        bottom: -5rem;
+        left: 30%;
+        z-index: -1;
+    }
+
+    .prestasi-title {
+        font-size: 2.5rem;
+        background: linear-gradient(135deg, #1f2937, #374151);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 3rem;
+        position: relative;
+        text-align: center;
+        display: block;
+        width: 100%;
+    }
+
+    .prestasi-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 3px;
+        background: linear-gradient(90deg, #f97316, #fdba74);
+        border-radius: 2px;
+    }
+
+    /* === PAGINATION SYSTEM === */
+    .prestasi-section .prestasi-navigation {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 4rem;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    /* Reset dan styling dasar dengan specificity tinggi */
+    .prestasi-section .prestasi-navigation .nav-button {
+        /* Reset semua style default */
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background: none;
+        border: none;
+        outline: none;
+        margin: 0;
+        font: inherit;
+        color: inherit;
+        text-align: inherit;
+        text-decoration: none;
+        cursor: pointer;
+        box-sizing: border-box;
+        
+        /* Style dasar */
+        display: inline-block;
+        padding: 12px 24px;
+        background: linear-gradient(135deg, #f97316, #ea580c) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 12px;
+        font-family: 'Poppins', sans-serif !important;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 12px rgba(249, 115, 22, 0.25) !important;
+        position: relative;
+        overflow: hidden;
+        min-width: 120px;
+        text-align: center;
+        line-height: 1.5;
+    }
+
+    /* Hover effects */
+    .prestasi-section .prestasi-navigation .nav-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(249, 115, 22, 0.35) !important;
+    }
+
+    /* Shine effect */
+    .prestasi-section .prestasi-navigation .nav-button::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, 
+            transparent, 
+            rgba(255, 255, 255, 0.3), 
+            transparent);
+        transition: left 0.6s ease;
+    }
+
+    .prestasi-section .prestasi-navigation .nav-button:hover::after {
+        left: 100%;
+    }
+
+    /* Disabled state */
+    .prestasi-section .prestasi-navigation .nav-button.nav-button--disabled,
+    .prestasi-section .prestasi-navigation .nav-button:disabled {
+        background: linear-gradient(135deg, #e5e7eb, #d1d5db) !important;
+        color: #9ca3af !important;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .prestasi-section .prestasi-navigation .nav-button.nav-button--disabled:hover,
+    .prestasi-section .prestasi-navigation .nav-button:disabled:hover {
+        transform: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .prestasi-section .prestasi-navigation .nav-button.nav-button--disabled::after,
+    .prestasi-section .prestasi-navigation .nav-button:disabled::after {
+        display: none;
+    }
+
+    /* Page indicator */
+    .prestasi-section .prestasi-navigation .page-indicator {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        background: #f8fafc;
+        padding: 10px 20px;
+        border-radius: 10px;
+        border: 1px solid #e2e8f0;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        color: #475569;
+    }
+
+    .prestasi-section .prestasi-navigation .page-numbers {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .prestasi-section .prestasi-navigation .current-page {
+        color: #f97316;
+        font-size: 1.1rem;
+    }
+
+    .prestasi-section .prestasi-navigation .total-pages {
+        color: #64748b;
+    }
+
+    .prestasi-section .prestasi-navigation .page-slash {
+        color: #cbd5e1;
+    }
+
+    /* Page Transitions */
+    .prestasi-content-wrapper {
+        position: relative;
+        min-height: 600px;
+    }
+
+    .prestasi-page {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.5s ease-in-out;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        pointer-events: none;
+    }
+
+    .prestasi-page--active {
+        opacity: 1;
+        transform: translateY(0);
+        position: relative;
+        pointer-events: all;
+    }
+
+    /* Loading State */
+    .prestasi-loading {
+        display: none;
+        text-align: center;
+        padding: 2rem;
+        color: #6b7280;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .prestasi-loading--visible {
+        display: block;
+    }
+
+    /* === DUAL ACHIEVEMENT LAYOUT === */
+    .achievement-container {
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+        max-width: 1400px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 10;
+    }
+
+    .achievement-pair {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 2rem;
+        align-items: flex-start;
+    }
+
+    /* Card dasar */
+    .achievement-item {
+        display: flex;
+        align-items: stretch;
+        flex: 1 1 48%;
+        background: white;
+        border-radius: 1.5rem;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        transition: all 0.4s ease;
+        border: 1px solid #f3f4f6;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .achievement-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #f97316, #fdba74);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .achievement-item:hover::before {
+        opacity: 1;
+    }
+
+    .achievement-item:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        border-color: #f97316;
+    }
+
+    /* Layout kiri */
+    .achievement-item.left-layout {
+        flex-direction: row;
+        text-align: left;
+    }
+
+    .achievement-item.left-layout .achievement-image-container {
+        margin-right: 1.5rem;
+    }
+
+    /* Layout kanan */
+    .achievement-item.right-layout {
+        flex-direction: row-reverse;
+        text-align: right;
+    }
+
+    .achievement-item.right-layout .achievement-image-container {
+        margin-left: 1.5rem;
+    }
+
+    /* CONTAINER GAMBAR BESAR */
+    .achievement-image-container {
+        flex: 0 0 45%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* GAMBAR BESAR */
+    .achievement-image {
+        width: 100%;
+        height: 100%;
+        max-width: 260px;
+        max-height: 260px;
+        min-width: 220px;
+        min-height: 220px;
+        object-fit: cover;
+        border-radius: 1rem;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        transition: all 0.4s ease;
+        border: 3px solid white;
+        position: relative;
+        z-index: 2;
+    }
+
+    .achievement-image:hover {
+        transform: scale(1.05);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+    }
+
+    /* Konten teks */
+    .achievement-content {
+        flex: 1;
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .achievement-content h3 {
+        font-family: 'Bebas Neue', cursive;
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        background: linear-gradient(135deg, #1f2937, #374151);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        position: relative;
+        letter-spacing: 1px;
+        line-height: 1.2;
+    }
+
+    .achievement-content h3::after {
+        content: "";
+        position: absolute;
+        bottom: -0.4rem;
+        left: 0;
+        width: 50px;
+        height: 3px;
+        background: linear-gradient(90deg, #f97316, #fdba74);
+        border-radius: 2px;
+    }
+
+    .achievement-item.right-layout .achievement-content h3::after {
+        left: auto;
+        right: 0;
+    }
+
+    .achievement-content h4 {
+        font-family: 'Bebas Neue', cursive;
+        font-size: 1.5rem;
+        color: #f97316;
+        margin-bottom: 0.8rem;
+        letter-spacing: 0.5px;
+        line-height: 1.2;
+    }
+
+    .achievement-content p {
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.95rem;
+        color: #6b7280;
+        line-height: 1.6;
+        margin-top: 0.8rem;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    /* Animation Keyframes */
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .slide-in {
+        animation: slideIn 0.6s ease-out;
+    }
+
+    /* === RESPONSIVE DESIGN === */
+    @media (max-width: 768px) {
+        .prestasi-section {
+            padding: 4rem 1rem 2rem;
+        }
+
+        .prestasi-title {
+            font-size: 2.5rem;
+        }
+
+        .prestasi-section .prestasi-navigation {
+            gap: 1rem;
+            flex-direction: column;
+        }
+
+        .prestasi-section .prestasi-navigation .nav-button {
+            min-width: 140px;
+            padding: 10px 20px;
+        }
+
+        .prestasi-section .prestasi-navigation .page-indicator {
+            order: -1;
+        }
+
+        .achievement-pair {
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .achievement-item {
+            flex-direction: column !important;
+            text-align: center !important;
+            padding: 1.5rem;
+            min-height: auto !important;
+            max-height: none !important;
+            margin-top: 0 !important;
+        }
+
+        .achievement-item .achievement-image-container {
+            margin: 0 0 1rem 0 !important;
+            flex: 0 0 auto;
+        }
+
+        .achievement-content h3::after {
+            left: 50% !important;
+            transform: translateX(-50%);
+        }
+
+        .achievement-image {
+            width: 200px;
+            height: 200px;
+            max-width: none;
+            max-height: none;
+        }
+        
+        .achievement-content {
+            padding: 0;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .prestasi-title {
+            font-size: 2rem;
+        }
+
+        .prestasi-section .prestasi-navigation .nav-button {
+            font-size: 0.9rem;
+            padding: 8px 16px;
+        }
+
+        .achievement-image {
+            width: 180px;
+            height: 180px;
+        }
+    }
+    /* Zig-zag pattern murni dengan CSS */
+.achievement-pair:nth-child(odd) .achievement-item:first-child {
+    margin-top: 0;
+    transform: translateY(-10px);
+}
+
+.achievement-pair:nth-child(odd) .achievement-item:last-child {
+    margin-top: 30px;
+    transform: translateY(0);
+}
+
+.achievement-pair:nth-child(even) .achievement-item:first-child {
+    margin-top: 30px;
+    transform: translateY(0);
+}
+
+.achievement-pair:nth-child(even) .achievement-item:last-child {
+    margin-top: 0;
+    transform: translateY(-10px);
+}
+</style>
+@endpush
+
 @section('content')
-    <div class="relative z-[1]">
+    <div class="min-h-screen">
+
         <!-- HERO SECTION -->
         <section class="pt-4 pb-5 relative overflow-hidden bg-gradient-to-br from-white to-white">
             <!-- === BACKGROUND CIRCLE HERO === -->
@@ -36,317 +549,279 @@
             </div>
         </section>
 
-        <!-- ACHIEVEMENT SECTION -->
-        <section class="py-20 px-6 relative overflow-hidden bg-gradient-to-b from-gray-50 via-white to-gray-50">
-            <!-- === BACKGROUND ELEMENTS === -->
-            <div class="absolute inset-0 -z-[1] pointer-events-none">
-                <div class="absolute w-[18rem] h-[18rem] bg-[#FFD2A0]/40 rounded-full blur-3xl -top-10 left-1/4"></div>
-                <div class="absolute w-[16rem] h-[16rem] bg-[#B0E0FF]/40 rounded-full blur-3xl top-1/3 right-1/4"></div>
-                <div class="absolute w-[14rem] h-[14rem] bg-[#FFE5B4]/40 rounded-full blur-2xl bottom-0 left-1/3"></div>
+        <!-- PRESTASI SECTION -->
+        <section class="prestasi-section">
+            <h2 class="prestasi-title font-bebas">PRESTASI TERBARU</h2>
+            
+            <!-- Loading State -->
+            <div class="prestasi-loading" id="prestasiLoading">
+                <p>Memuat prestasi...</p>
             </div>
 
-            <div class="container mx-auto">
-                <h2
-                    class="mb-14 relative text-center font-bebas text-5xl tracking-wide
-                   bg-gradient-to-br from-gray-900 to-gray-700 bg-clip-text text-transparent
-                   after:content-[''] after:absolute after:-bottom-3 after:left-1/2
-                   after:-translate-x-1/2 after:w-28 after:h-1 after:bg-gradient-to-r
-                   after:from-orange-500 after:to-yellow-400 after:rounded-full">
-                    PRESTASI TERBARU
-                </h2>
-
-                @if ($prestasi->isEmpty() && $prestasi2->isEmpty())
-                    <p class="text-center text-gray-500 font-poppins text-lg">Belum ada prestasi yang ditambahkan.</p>
+            <!-- Content Wrapper -->
+            <div class="prestasi-content-wrapper" id="prestasiContent">
+                @php
+                    $itemsPerPage = 6; // 3 pairs per page
+                    $calculatedTotalPages = ceil($allPrestasi->count() / $itemsPerPage);
+                @endphp
+                
+                @if($allPrestasi->count() > 0)
+                    @for($i = 0; $i < $calculatedTotalPages; $i++)
+                        <div class="prestasi-page {{ $i === 0 ? 'prestasi-page--active' : '' }}" 
+                             data-page="{{ $i + 1 }}"
+                             id="prestasiPage{{ $i + 1 }}">
+                            <div class="achievement-container slide-in">
+                                @php
+                                    $pagePrestasi = $allPrestasi->slice($i * $itemsPerPage, $itemsPerPage);
+                                    $chunkedPrestasi = $pagePrestasi->chunk(2);
+                                @endphp
+                                
+                                @foreach($chunkedPrestasi as $index => $pair)
+    <div class="achievement-pair">
+        @foreach($pair as $pairIndex => $prestasi)
+            @php
+                // Layout sederhana berdasarkan pairIndex
+                $layoutClass = $pairIndex == 0 ? 'left-layout' : 'right-layout';
+            @endphp
+            
+            <div class="achievement-item {{ $layoutClass }}">
+                <div class="achievement-image-container">
+                    <img src="{{ asset('assets/' . $prestasi->folder . '/' . $prestasi->image) }}" 
+                         alt="{{ $prestasi->title }}" 
+                         class="achievement-image">
+                </div>
+                <div class="achievement-content">
+                    <h3 class="font-bebas">{{ $prestasi->title }}</h3>
+                    <h4 class="font-bebas">{{ $prestasi->credit }}</h4>
+                    <p class="font-poppins">{{ $prestasi->body }}</p>
+                </div>
+            </div>
+        @endforeach
+    </div>
+@endforeach
+                            </div>
+                        </div>
+                    @endfor
                 @else
-                    <div class="grid lg:grid-cols-2 gap-12 max-w-[1300px] mx-auto">
-                        @foreach ($prestasi as $pres)
-                            <div
-                                class="group flex flex-col md:flex-row bg-white/80 backdrop-blur-md rounded-3xl shadow-lg border border-gray-100 p-8 hover:-translate-y-2 hover:shadow-2xl hover:border-orange-400 transition-all duration-500">
-                                <div class="flex items-center justify-center w-full md:w-[45%] mb-6 md:mb-0 md:mr-8">
-                                    <img src="{{ asset('assets/' . $pres->folder . '/' . $pres->image) }}"
-                                        alt="{{ $pres->title }}"
-                                        class="w-full max-w-[280px] max-h-[280px] object-cover rounded-2xl shadow-md transition-transform duration-300 group-hover:scale-105">
-                                </div>
-                                <div class="flex-1">
-                                    <h3
-                                        class="font-bebas text-3xl mb-2 bg-gradient-to-br from-gray-800 to-gray-700 bg-clip-text text-transparent">
-                                        {{ $pres->title }}
-                                    </h3>
-                                    <h4 class="font-bebas text-2xl text-orange-500 mb-4">{{ $pres->credit }}</h4>
-                                    <p class="font-poppins text-gray-600 text-base leading-relaxed line-clamp-6">
-                                        {{ $pres->body }}
-                                    </p>
-                                </div>
-                            </div>
-                        @endforeach
-
-                        @foreach ($prestasi2 as $pres2)
-                            <div
-                                class="group flex flex-col md:flex-row bg-white/80 backdrop-blur-md rounded-3xl shadow-lg border border-gray-100 p-8 hover:-translate-y-2 hover:shadow-2xl hover:border-orange-400 transition-all duration-500">
-                                <div class="flex items-center justify-center w-full md:w-[45%] mb-6 md:mb-0 md:mr-8">
-                                    <img src="{{ asset('assets/' . $pres2->folder . '/' . $pres2->image) }}"
-                                        alt="{{ $pres2->title }}"
-                                        class="w-full max-w-[280px] max-h-[280px] object-cover rounded-2xl shadow-md transition-transform duration-300 group-hover:scale-105">
-                                </div>
-                                <div class="flex-1">
-                                    <h3
-                                        class="font-bebas text-3xl mb-2 bg-gradient-to-br from-gray-800 to-gray-700 bg-clip-text text-transparent">
-                                        {{ $pres2->title }}
-                                    </h3>
-                                    <h4 class="font-bebas text-2xl text-orange-500 mb-4">{{ $pres2->credit }}</h4>
-                                    <p class="font-poppins text-gray-600 text-base leading-relaxed line-clamp-6">
-                                        {{ $pres2->body }}
-                                    </p>
-                                </div>
-                            </div>
-                        @endforeach
+                    <div class="prestasi-page prestasi-page--active">
+                        <p class="text-center text-gray-500 font-poppins">Belum ada data prestasi.</p>
                     </div>
                 @endif
             </div>
+
+            <!-- Navigation - Only show if there are multiple pages -->
+            @if($calculatedTotalPages > 1)
+                <div class="prestasi-navigation">
+                    <button 
+                        id="prevButton" 
+                        data-action="prev"
+                        class="nav-button"
+                        disabled
+                    >
+                        ← Sebelumnya
+                    </button>
+
+                    <div class="page-indicator">
+                        <div class="page-numbers">
+                            <span class="current-page" id="currentPage">1</span>
+                            <span class="page-slash">/</span>
+                            <span class="total-pages" id="totalPages">{{ $calculatedTotalPages }}</span>
+                        </div>
+                    </div>
+
+                    <button 
+                        id="nextButton" 
+                        data-action="next"
+                        class="nav-button"
+                    >
+                        Selanjutnya →
+                    </button>
+                </div>
+            @endif
         </section>
-
-
     </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Image stack animation
-            const stack = document.querySelectorAll("#image-stack img");
-            let index = 0;
-
-            setTimeout(() => cycleImages(), 400);
-
-            function cycleImages() {
-                const order = [
-                    stack[index % stack.length],
-                    stack[(index + 1) % stack.length],
-                    stack[(index + 2) % stack.length],
-                ];
-
-                stack.forEach(img => {
-                    img.style.transition = "all 0.6s cubic-bezier(0.55, 0.085, 0.68, 0.53)";
-                    img.style.opacity = 0.7;
-                    img.style.zIndex = 10;
-                    img.style.transform = "translateY(8px) scale(0.85)";
-                });
-
-                const screenWidth = window.innerWidth;
-                let offset = screenWidth < 640 ? 6 : screenWidth < 1024 ? 10 : 14;
-
-                order[2].style.transform = `translateX(-${offset}rem) translateY(4px) scale(0.85) rotateY(8deg)`;
-                order[2].style.opacity = 0.75;
-                order[2].style.zIndex = 15;
-
-                order[1].style.transform = `translateX(${offset}rem) translateY(4px) scale(0.85) rotateY(-8deg)`;
-                order[1].style.opacity = 0.75;
-                order[1].style.zIndex = 20;
-
-                order[0].style.transition = "all 0.8s cubic-bezier(0.25, 1, 0.5, 1)";
-                order[0].style.opacity = 1;
-                order[0].style.zIndex = 30;
-                order[0].style.transform = "translateX(0) translateY(0) scale(1) rotateY(0deg)";
-
-                index++;
-                setTimeout(cycleImages, 2500);
-            }
-
-            // Pagination functionality
-            const pages = document.querySelectorAll('.achievement-page');
-            const prevBtn = document.getElementById('prev-btn');
-            const nextBtn = document.getElementById('next-btn');
-            const currentPageEl = document.getElementById('current-page');
-            const totalPagesEl = document.getElementById('total-pages');
-
-            let currentPage = 1;
-            const totalPages = pages.length;
-
-            totalPagesEl.textContent = totalPages;
-
-            function updatePagination() {
-                // Hide all pages
-                pages.forEach(page => page.classList.add('hidden'));
-                pages.forEach(page => page.classList.remove('active', 'block'));
-
-                // Show current page
-                const currentPageElement = document.getElementById(`page-${currentPage}`);
-                currentPageElement.classList.remove('hidden');
-                currentPageElement.classList.add('active', 'block');
-
-                // Update page indicator
-                currentPageEl.textContent = currentPage;
-
-                // Update button states
-                prevBtn.disabled = currentPage === 1;
-                nextBtn.disabled = currentPage === totalPages;
-            }
-
-            prevBtn.addEventListener('click', () => {
-                if (currentPage > 1) {
-                    currentPage--;
-                    updatePagination();
-                }
-            });
-
-            nextBtn.addEventListener('click', () => {
-                if (currentPage < totalPages) {
-                    currentPage++;
-                    updatePagination();
-                }
-            });
-
-            // Responsive adjustments for cards
-            function adjustCardHeights() {
-                const achievementItems = document.querySelectorAll('.achievement-item');
-                const isTablet = window.innerWidth <= 1024 && window.innerWidth > 768;
-                const isMobile = window.innerWidth <= 768;
-
-                if (isTablet) {
-                    achievementItems.forEach(item => {
-                        item.classList.remove('min-h-[280px]', 'min-h-[340px]', 'max-h-[300px]',
-                            'max-h-[360px]', 'mt-16');
-                        item.classList.add('min-h-[300px]', 'max-h-[320px]');
-                    });
-                } else if (isMobile) {
-                    achievementItems.forEach(item => {
-                        item.classList.remove('min-h-[280px]', 'min-h-[340px]', 'max-h-[300px]',
-                            'max-h-[360px]', 'mt-16');
-                        item.classList.add('min-h-auto', 'max-h-none');
-                    });
-                }
-            }
-
-            // Initial adjustment
-            adjustCardHeights();
-
-            // Adjust on resize
-            window.addEventListener('resize', () => {
-                adjustCardHeights();
-                clearTimeout(cycleImages);
-                setTimeout(cycleImages, 300);
-            });
-        });
-    </script>
-
-    <style>
-        html,
-        body {
-            background: transparent !important;
-            overflow-x: hidden;
-        }
-
-        section,
-        footer,
-        main,
-        div.relative.z-\[1\] {
-            position: relative;
-            z-index: 1;
-        }
-
-        html,
-        body {
-            position: relative;
-            background: transparent !important;
-        }
-
-        section,
-        main,
-        div.relative.min-h-screen {
-            position: relative;
-            z-index: 10;
-        }
-
-        .font-bebas {
-            font-family: 'Bebas Neue', cursive;
-        }
-
-        /* Custom utility classes for line clamping */
-        .line-clamp-4 {
-            display: -webkit-box;
-            -webkit-line-clamp: 4;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .line-clamp-8 {
-            display: -webkit-box;
-            -webkit-line-clamp: 8;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        /* Custom easing function */
-        .ease-custom {
-            transition-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
-        }
-
-        /* Animation for page transitions */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .achievement-page.active {
-            animation: fadeInUp 0.6s ease-out;
-        }
-
-        /* Custom styles for pagination button hover effect */
-        .pagination-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .pagination-btn:hover:not(:disabled)::before {
-            left: 100%;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 1024px) {
-            .achievement-item {
-                min-height: 300px !important;
-                max-height: 320px !important;
-                margin-top: 0 !important;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .achievement-item {
-                flex-direction: column !important;
-                text-align: center !important;
-                min-height: auto !important;
-                max-height: none !important;
-                margin-top: 0 !important;
-            }
-
-            .achievement-image-container {
-                margin: 0 0 1rem 0 !important;
-                flex: 0 0 auto !important;
-                width: 100% !important;
-            }
-
-            .achievement-content h3::after {
-                left: 50% !important;
-                transform: translateX(-50%);
-            }
-
-            .achievement-image {
-                width: 200px !important;
-                height: 200px !important;
-                max-width: none !important;
-                max-height: none !important;
-            }
-        }
-    </style>
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Elements
+        const prestasiContent = document.getElementById('prestasiContent');
+        const prestasiLoading = document.getElementById('prestasiLoading');
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+        const currentPageEl = document.getElementById('currentPage');
+        const totalPagesEl = document.getElementById('totalPages');
+        
+        // State - AMBIL TOTAL PAGES DARI ELEMENT HTML
+        let currentPage = 1;
+        const totalPages = totalPagesEl ? parseInt(totalPagesEl.textContent) : 1;
+        let isAnimating = false;
+
+        // Initialize
+        function initPagination() {
+            if (totalPages <= 1) {
+                if (prevButton) prevButton.style.display = 'none';
+                if (nextButton) nextButton.style.display = 'none';
+                return;
+            }
+
+            updateNavigation();
+            hideLoading();
+        }
+
+        // Navigation functions
+        function goToPage(page) {
+            if (isAnimating || page < 1 || page > totalPages) return;
+            
+            showLoading();
+            isAnimating = true;
+
+            // Hide current page
+            const currentPageElement = document.querySelector('.prestasi-page--active');
+            if (currentPageElement) {
+                currentPageElement.classList.remove('prestasi-page--active');
+            }
+
+            // Update current page
+            currentPage = page;
+
+            // Show new page after a short delay for smooth transition
+            setTimeout(() => {
+                const newPageElement = document.getElementById(`prestasiPage${page}`);
+                if (newPageElement) {
+                    newPageElement.classList.add('prestasi-page--active');
+                }
+                
+                updateNavigation();
+                hideLoading();
+                isAnimating = false;
+            }, 300);
+        }
+
+        function updateNavigation() {
+            // Update page indicator
+            if (currentPageEl) {
+                currentPageEl.textContent = currentPage;
+            }
+
+            // Update button states
+            if (prevButton) {
+                prevButton.disabled = currentPage === 1;
+                prevButton.classList.toggle('nav-button--disabled', currentPage === 1);
+            }
+            
+            if (nextButton) {
+                nextButton.disabled = currentPage === totalPages;
+                nextButton.classList.toggle('nav-button--disabled', currentPage === totalPages);
+            }
+        }
+
+        function showLoading() {
+            if (prestasiLoading) {
+                prestasiLoading.classList.add('prestasi-loading--visible');
+            }
+            if (prestasiContent) {
+                prestasiContent.style.opacity = '0.5';
+            }
+        }
+
+        function hideLoading() {
+            if (prestasiLoading) {
+                prestasiLoading.classList.remove('prestasi-loading--visible');
+            }
+            if (prestasiContent) {
+                prestasiContent.style.opacity = '1';
+            }
+        }
+
+        // Event listeners
+        if (prevButton) {
+            prevButton.addEventListener('click', function() {
+                if (!this.disabled) {
+                    goToPage(currentPage - 1);
+                }
+            });
+        }
+
+        if (nextButton) {
+            nextButton.addEventListener('click', function() {
+                if (!this.disabled) {
+                    goToPage(currentPage + 1);
+                }
+            });
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft' && currentPage > 1) {
+                goToPage(currentPage - 1);
+            } else if (event.key === 'ArrowRight' && currentPage < totalPages) {
+                goToPage(currentPage + 1);
+            }
+        });
+
+        // Initialize pagination
+        initPagination();
+
+        // Add animation to cards when they become visible
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('slide-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all achievement items
+        document.querySelectorAll('.achievement-item').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Image stack animation
+        const stack = document.querySelectorAll("#image-stack img");
+        let index = 0;
+
+        setTimeout(() => cycleImages(), 400);
+
+        function cycleImages() {
+            const order = [
+                stack[index % stack.length],
+                stack[(index + 1) % stack.length],
+                stack[(index + 2) % stack.length],
+            ];
+
+            stack.forEach(img => {
+                img.style.transition = "all 0.6s cubic-bezier(0.55, 0.085, 0.68, 0.53)";
+                img.style.opacity = 0.7;
+                img.style.zIndex = 10;
+                img.style.transform = "translateY(8px) scale(0.85)";
+            });
+
+            const screenWidth = window.innerWidth;
+            let offset = screenWidth < 640 ? 6 : screenWidth < 1024 ? 10 : 14;
+
+            order[2].style.transform = `translateX(-${offset}rem) translateY(4px) scale(0.85) rotateY(8deg)`;
+            order[2].style.opacity = 0.75;
+            order[2].style.zIndex = 15;
+
+            order[1].style.transform = `translateX(${offset}rem) translateY(4px) scale(0.85) rotateY(-8deg)`;
+            order[1].style.opacity = 0.75;
+            order[1].style.zIndex = 20;
+
+            order[0].style.transition = "all 0.8s cubic-bezier(0.25, 1, 0.5, 1)";
+            order[0].style.opacity = 1;
+            order[0].style.zIndex = 30;
+            order[0].style.transform = "translateX(0) translateY(0) scale(1) rotateY(0deg)";
+
+            index++;
+            setTimeout(cycleImages, 2500);
+        }
+    });
+</script>
+@endpush
