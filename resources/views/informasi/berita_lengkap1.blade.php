@@ -2,7 +2,7 @@
 
 @push('styles')
     <style>
-        .font-bebas {
+.font-bebas {
             font-family: 'Bebas Neue', cursive;
         }
 
@@ -15,11 +15,13 @@
             padding: 4rem 1rem;
             background: linear-gradient(180deg, #fafafa 0%, #fff 100%);
             position: relative;
-        }
+        }        
 
         .berita-container {
-            max-width: 1200px;
-            margin: 0 auto;
+            width: 98%;       
+            max-width: none;   
+            margin: 0 auto;      
+            position: relative;
         }
 
         /* Layout Utama */
@@ -40,13 +42,15 @@
             height: fit-content;
         }
 
-        .berita-gambar-utama {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 1rem;
-            margin-bottom: 2rem;
-        }
+.berita-gambar-utama {
+    display: block;
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+}
+
 
         .berita-judul {
             font-size: 2rem;
@@ -475,6 +479,7 @@
                 -webkit-line-clamp: 2;
             }
         }
+        
     </style>
 @endpush
 
@@ -496,7 +501,7 @@
                     <!-- Konten Berita Utama -->
                     <div class="berita-utama">
                         <img src="{{ asset('assets/berita/' . trim(str_replace(['[', ']', '"'], '', $berita->image))) }}"
-                            alt="{{ $berita->title }}" class="berita-side-image-large">
+                            alt="{{ $berita->title }}" class="berita-gambar-utama">
 
                         <div class="berita-meta">
                             <div class="berita-date">

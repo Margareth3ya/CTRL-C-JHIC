@@ -41,11 +41,13 @@
             border-radius: 2px;
         }
 
-        .berita-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-        }
+    .berita-container {
+        width: 98%;       
+        max-width: none;   
+        margin: 0 auto;      
+        position: relative;
+    }
+
 
         /* Layout Utama */
         .berita-layout {
@@ -110,6 +112,99 @@
             gap: 1rem;
             height: 100%;
         }
+
+        /* === SIDEBAR BERITA KANAN (SAMA DENGAN BERITA UTAMA) === */
+.berita-side-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.berita-side-card {
+    display: flex;
+    background: #fff;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f3f4f6;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.berita-side-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    border-color: #f97316;
+}
+
+/* Gambar */
+.berita-side-image {
+    width: 40%;
+    height: 120px;
+    object-fit: cover;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+.berita-side-card:hover .berita-side-image {
+    transform: scale(1.05);
+}
+
+/* Konten */
+.berita-side-content {
+    flex: 1;
+    padding: 0.9rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.berita-date {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: #6b7280;
+    margin-bottom: 0.3rem;
+}
+
+.berita-side-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 0.4rem;
+    line-height: 1.3;
+}
+
+.berita-side-excerpt {
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin-bottom: 0.5rem;
+}
+
+.berita-read-more {
+    font-size: 0.85rem;
+    color: #f97316;
+    font-weight: 600;
+    text-decoration: none;
+    align-self: flex-start;
+    transition: color 0.3s ease;
+}
+
+.berita-read-more:hover {
+    text-decoration: underline;
+    color: #ea580c;
+}
+
+/* Responsif */
+@media (max-width: 1024px) {
+    .berita-side-card {
+        flex-direction: column;
+    }
+    .berita-side-image {
+        width: 100%;
+        height: 180px;
+    }
+}
 
         /* Card Kecil Kanan */
         .berita-side-card {
@@ -356,6 +451,7 @@
             position: relative;
             z-index: 1;
         }
+        
     </style>
 @endpush
 
