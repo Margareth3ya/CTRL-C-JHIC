@@ -16,85 +16,79 @@
     </style>
 </head>
 
-<body class="bg-gray-100">
-    <div class="flex h-screen">
-        <!-- Sidebar -->
-        <div class="w-64 bg-blue-800 text-white">
-            <div class="p-4">
-                <h1 class="text-2xl font-bold">Admin Panel</h1>
-                <p class="text-blue-200 text-sm">Website Sekolah</p>
-            </div>
-            <nav class="mt-6">
-                <a href="{{ route('admin.dashboard') }}"
-                    class="block py-2 px-4 hover:bg-blue-700 {{ request()->routeIs('admin.dashboard') ? 'bg-blue-700' : '' }}">
-                    <i class="fas fa-tachometer-alt mr-2"></i>Dashboard
-                </a>
-                <a href="{{ route('admin.users.index') }}"
-                    class="block py-2 px-4 hover:bg-blue-700 {{ request()->routeIs('admin.users.*') ? 'bg-blue-700' : '' }}">
-                    <i class="fas fa-users mr-2"></i>Users
-                </a>
-                {{-- <a href="{{ route('admin.assets.index') }}"
-                    class="block py-2 px-4 hover:bg-blue-700 {{ request()->routeIs('admin.assets.*') ? 'bg-blue-700' : '' }}">
-                    <i class="fas fa-images mr-2"></i>Assets
-                </a> --}}
-                <a href="{{ route('admin.contents.index') }}"
-                    class="block py-2 px-4 hover:bg-blue-700 {{ request()->routeIs('admin.contents.*') ? 'bg-blue-700' : '' }}">
-                    <i class="fas fa-file-alt mr-2"></i>Konten
-                </a>
+<body class="bg-gray-100 flex h-screen">
 
-                <!-- Logout Button -->
-                <form action="{{ route('logout') }}" method="POST" class="mt-4">
-                    @csrf
-                    <button type="submit"
-                        class="w-full text-left block py-2 px-4 hover:bg-blue-700 text-red-200 hover:text-white">
-                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
-                    </button>
-                </form>
-            </nav>
+    <div class="fixed left-4 top-1/2 -translate-y-1/2 bg-blue-800/80 backdrop-blur-lg text-white rounded-2xl shadow-xl flex flex-col items-center py-4 w-16 hover:w-56 transition-all duration-300 z-50 group">
+        <div class="mb-6 text-center">
+            <i class="fas fa-graduation-cap text-3xl text-blue-200"></i>
         </div>
 
-        <!-- Main Content -->
-        <div class="flex-1 flex flex-col overflow-hidden">
-            <!-- Header -->
-            <header class="bg-white shadow">
-                <div class="flex justify-between items-center px-6 py-4">
-                    <h2 class="text-xl font-semibold text-gray-800">@yield('title', 'Dashboard')</h2>
-                    <div class="flex items-center space-x-4">
-                        <span class="text-gray-600">Selamat datang, <strong>{{ Auth::user()->username }}</strong></span>
-                        <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white">
-                            <i class="fas fa-user"></i>
-                        </div>
-                    </div>
+        <nav class="flex flex-col space-y-3 w-full px-2">
+            <a href="{{ route('admin.dashboard') }}"
+                class="flex items-center gap-3 p-3 rounded-xl hover:bg-blue-700 transition-all {{ request()->routeIs('admin.dashboard') ? 'bg-blue-700' : '' }}">
+                <i class="fas fa-tachometer-alt text-lg"></i>
+                <span class="hidden group-hover:inline text-sm font-medium">Dashboard</span>
+            </a>
+
+            <a href="{{ route('admin.users.index') }}"
+                class="flex items-center gap-3 p-3 rounded-xl hover:bg-blue-700 transition-all {{ request()->routeIs('admin.users.*') ? 'bg-blue-700' : '' }}">
+                <i class="fas fa-users text-lg"></i>
+                <span class="hidden group-hover:inline text-sm font-medium">Users</span>
+            </a>
+
+            <a href="{{ route('admin.contents.index') }}"
+                class="flex items-center gap-3 p-3 rounded-xl hover:bg-blue-700 transition-all {{ request()->routeIs('admin.contents.*') ? 'bg-blue-700' : '' }}">
+                <i class="fas fa-file-alt text-lg"></i>
+                <span class="hidden group-hover:inline text-sm font-medium">Konten</span>
+            </a>
+
+            <form action="{{ route('logout') }}" method="POST" class="mt-6 w-full">
+                @csrf
+                <button type="submit"
+                    class="flex items-center gap-3 p-3 rounded-xl hover:bg-red-600 w-full text-red-200 hover:text-white transition-all">
+                    <i class="fas fa-sign-out-alt text-lg"></i>
+                    <span class="hidden group-hover:inline text-sm font-medium">Logout</span>
+                </button>
+            </form>
+        </nav>
+    </div>
+
+    <div class="flex-1 flex flex-col ml-24 transition-all duration-300 group-hover:ml-60">
+        <header class="bg-white shadow px-6 py-4 flex justify-between items-center">
+            <h2 class="text-xl font-semibold text-gray-800">Dashboard Admin</h2>
+            <div class="flex items-center space-x-4">
+                <span class="text-gray-600">Selamat datang, <strong>{{ Auth::user()->username }}</strong></span>
+                <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white">
+                    <i class="fas fa-user"></i>
                 </div>
-            </header>
+            </div>
+        </header>
 
-            <!-- Content -->
-            <main class="flex-1 overflow-y-auto p-6">
-                @if(session('success'))
-                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
-                        {{ session('success') }}
-                    </div>
-                @endif
+        <main class="flex-1 overflow-y-auto p-6">
+            @if(session('success'))
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+                    {{ session('success') }}
+                </div>
+            @endif
 
-                @if(session('error'))
-                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-                        {{ session('error') }}
-                    </div>
-                @endif
+            @if(session('error'))
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                    {{ session('error') }}
+                </div>
+            @endif
 
-                @if($errors->any())
-                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-                        <ul>
-                            @foreach($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+            @if($errors->any())
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-                @yield('content')
-            </main>
-        </div>
+            @yield('content')
+        </main>
     </div>
 
     <script>
@@ -102,33 +96,33 @@
             return confirm('Apakah Anda yakin ingin menghapus data ini?');
         }
     </script>
-        <script>
-        (function () {
-            function detectDevTools() {
-                const widthThreshold = window.outerWidth - window.innerWidth > 160;
-                const heightThreshold = window.outerHeight - window.innerHeight > 160;
+    <script>
+        // (function () {
+        //     function detectDevTools() {
+        //         const widthThreshold = window.outerWidth - window.innerWidth > 160;
+        //         const heightThreshold = window.outerHeight - window.innerHeight > 160;
 
-                if (widthThreshold || heightThreshold) {
-                    document.body.innerHTML = '<div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: Arial, sans-serif;"><div style="text-align: center;"><h1 style="color: #dc2626;">Akses Ditolak</h1><p>Ngapain lihat lihat kocak</p></div></div>';
-                    throw new Error('DevTools detected');
-                }
-            }
-            detectDevTools();
-            window.addEventListener('resize', detectDevTools);
-            const originalConsole = {
-                log: console.log,
-                warn: console.warn,
-                error: console.error,
-                info: console.info
-            };
+        //         if (widthThreshold || heightThreshold) {
+        //             document.body.innerHTML = '<div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: Arial, sans-serif;"><div style="text-align: center;"><h1 style="color: #dc2626;">Akses Ditolak</h1><p>Ngapain lihat lihat kocak</p></div></div>';
+        //             throw new Error('DevTools detected');
+        //         }
+        //     }
+        //     detectDevTools();
+        //     window.addEventListener('resize', detectDevTools);
+        //     const originalConsole = {
+        //         log: console.log,
+        //         warn: console.warn,
+        //         error: console.error,
+        //         info: console.info
+        //     };
 
-            ['log', 'warn', 'error', 'info'].forEach(method => {
-                console[method] = function () {
-                    detectDevTools();
-                    originalConsole[method].apply(console, arguments);
-                };
-            });
-        })();
+        //     ['log', 'warn', 'error', 'info'].forEach(method => {
+        //         console[method] = function () {
+        //             detectDevTools();
+        //             originalConsole[method].apply(console, arguments);
+        //         };
+        //     });
+        // })();
     </script>
 </body>
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\AdminLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -21,6 +22,12 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        $user = User::where('username', $request->username)->first();
+        AdminLog::create([
+                'admin_name' => $user->name ?? $user->username,
+                'activity' => 'Menambahkan user baru',
+        ]);
+
         $request->validate([
             'username' => 'required|unique:users',
             'email' => 'nullable|email',
@@ -55,6 +62,11 @@ class UserController extends Controller
 
         try {
             $user = User::findOrFail($id);
+            AdminLog::create([
+                'admin_name' => $user->name ?? $user->username,
+                'activity' => 'Mengupdate user',
+            ]);
+
             $data = [
                 'username' => $request->username,
                 'email' => $request->email
