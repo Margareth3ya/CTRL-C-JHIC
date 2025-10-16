@@ -15,7 +15,7 @@ class AdminController extends Controller
     public function dashboard(Request $request)
     {
         $userCount = User::count();
-        $assetCount = Asset::count();
+        $assetCount = Content::count();
         $contentCount = Content::count();
 
         /*
