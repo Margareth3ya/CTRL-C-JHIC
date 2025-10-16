@@ -1025,7 +1025,6 @@ function navigateTo(index) {
 setTimeout(() => {
     initializeCarousel();
 }, 100);
-
         
     </script>
 @endsection
