@@ -34,7 +34,7 @@
     </div>
 
     <!-- Total Konten -->
-    <div class="lg:col-span-2 bg-gradient-to-br from-purple-500/80 to-pink-500/80 text-white rounded-2xl shadow-lg p-5 flex flex-col justify-between hover:shadow-pink-200/40 hover:-translate-y-1 transition-all duration-300">
+    <div class="lg:col-span-2 bg-gradient-to-br from-blue-500/80 to-pink-500/80 text-white rounded-2xl shadow-lg p-5 flex flex-col justify-between hover:shadow-pink-200/40 hover:-translate-y-1 transition-all duration-300">
         <div class="flex justify-between items-start">
             <div>
                 <h3 class="text-white/80 text-sm font-medium">Total Konten</h3>
@@ -73,7 +73,7 @@
 
             <!-- Filter tipe aktivitas -->
             <form method="GET" action="{{ route('admin.dashboard') }}">
-                <select name="filter" onchange="this.form.submit()" class="text-sm border-gray-200 rounded-lg text-gray-700 focus:ring-emerald-500 focus:border-emerald-500">
+                <select name="filter" onchange="this.form.submit()" class="text-sm border border-gray-300 rounded-lg px-3 py-1 text-gray-700 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white/50">
                     <option value="">Semua</option>
                     <option value="Login" {{ request('filter')=='Login'?'selected':'' }}>Login</option>
                     <option value="Tambah Data" {{ request('filter')=='Tambah Data'?'selected':'' }}>Tambah Data</option>
@@ -100,10 +100,83 @@
             @endforelse
         </div>
 
-        <!-- Pagination -->
+        <!-- Custom Pagination -->
         @if ($adminLogs->hasPages())
-            <div class="mt-4">
-                {{ $adminLogs->onEachSide(1)->links('vendor.pagination.tailwind-dashboard') }}
+            <div class="mt-4 pt-4 border-t border-gray-200/60">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <!-- Pagination Info -->
+                    <div class="text-xs text-gray-600">
+                        Menampilkan 
+                        <span class="font-medium">{{ ($adminLogs->currentPage() - 1) * $adminLogs->perPage() + 1 }}</span>-
+                        <span class="font-medium">{{ min($adminLogs->currentPage() * $adminLogs->perPage(), $adminLogs->total()) }}</span>
+                        dari
+                        <span class="font-medium">{{ $adminLogs->total() }}</span> aktivitas
+                    </div>
+
+                    <!-- Pagination Links -->
+                    <div class="flex items-center gap-1">
+                        <!-- Previous Button -->
+                        @if($adminLogs->onFirstPage())
+                            <span class="inline-flex items-center justify-center w-8 h-8 text-gray-400 bg-gray-100 rounded-lg cursor-not-allowed">
+                                <i class="fas fa-chevron-left text-xs"></i>
+                            </span>
+                        @else
+                            <a href="{{ $adminLogs->previousPageUrl() }}" 
+                               class="inline-flex items-center justify-center w-8 h-8 text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200 group">
+                                <i class="fas fa-chevron-left text-xs group-hover:-translate-x-0.5 transition-transform"></i>
+                            </a>
+                        @endif
+
+                        <!-- Page Numbers - Compact -->
+                        <div class="flex items-center gap-1">
+                            @php
+                                $current = $adminLogs->currentPage();
+                                $last = $adminLogs->lastPage();
+                                
+                                // Show limited page numbers for compact design
+                                $start = max(1, $current - 1);
+                                $end = min($last, $current + 1);
+                                
+                                // Always show first page if not in range
+                                if ($start > 1) {
+                                    echo '<a href="' . $adminLogs->url(1) . '" class="w-8 h-8 flex items-center justify-center text-xs font-medium text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">1</a>';
+                                    if ($start > 2) {
+                                        echo '<span class="w-8 h-8 flex items-center justify-center text-xs text-gray-400">...</span>';
+                                    }
+                                }
+                                
+                                // Show current page and neighbors
+                                for ($i = $start; $i <= $end; $i++) {
+                                    if ($i == $current) {
+                                        echo '<span class="w-8 h-8 flex items-center justify-center text-xs font-medium text-white bg-gradient-to-r from-emerald-500 to-green-500 rounded-lg shadow-sm">' . $i . '</span>';
+                                    } else {
+                                        echo '<a href="' . $adminLogs->url($i) . '" class="w-8 h-8 flex items-center justify-center text-xs font-medium text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">' . $i . '</a>';
+                                    }
+                                }
+                                
+                                // Always show last page if not in range
+                                if ($end < $last) {
+                                    if ($end < $last - 1) {
+                                        echo '<span class="w-8 h-8 flex items-center justify-center text-xs text-gray-400">...</span>';
+                                    }
+                                    echo '<a href="' . $adminLogs->url($last) . '" class="w-8 h-8 flex items-center justify-center text-xs font-medium text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">' . $last . '</a>';
+                                }
+                            @endphp
+                        </div>
+
+                        <!-- Next Button -->
+                        @if($adminLogs->hasMorePages())
+                            <a href="{{ $adminLogs->nextPageUrl() }}" 
+                               class="inline-flex items-center justify-center w-8 h-8 text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200 group">
+                                <i class="fas fa-chevron-right text-xs group-hover:translate-x-0.5 transition-transform"></i>
+                            </a>
+                        @else
+                            <span class="inline-flex items-center justify-center w-8 h-8 text-gray-400 bg-gray-100 rounded-lg cursor-not-allowed">
+                                <i class="fas fa-chevron-right text-xs"></i>
+                            </span>
+                        @endif
+                    </div>
+                </div>
             </div>
         @endif
     </div>
@@ -115,4 +188,21 @@
     import { initVisitorChart } from "/js/apis.js";
     initVisitorChart("{{ route('admin.visitor.stats') }}", @json($labels), @json($data));
 </script>
+
+<style>
+.scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 10px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+</style>
 @endsection

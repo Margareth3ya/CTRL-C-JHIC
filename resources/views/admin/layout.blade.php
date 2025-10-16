@@ -20,7 +20,9 @@
 
     <div class="fixed left-4 top-1/2 -translate-y-1/2 bg-blue-800/80 backdrop-blur-lg text-white rounded-2xl shadow-xl flex flex-col items-center py-4 w-16 hover:w-56 transition-all duration-300 z-50 group">
         <div class="mb-6 text-center">
+            <!-- <img src="{{ asset('assets/icon.png') }}" alt="logo_main"> -->
             <i class="fas fa-graduation-cap text-3xl text-blue-200"></i>
+            <span class="hidden group-hover:inline text-sm font-medium">SKARIGA</span>
         </div>
 
         <nav class="flex flex-col space-y-3 w-full px-2">

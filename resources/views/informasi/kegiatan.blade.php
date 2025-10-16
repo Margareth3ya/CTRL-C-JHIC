@@ -2,6 +2,44 @@
 
 @push('styles')
     <style>
+        /* === 3-CARD CAROUSEL === */
+.carousel-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  gap: 1.5rem;
+  transition: transform 0.8s ease-in-out;
+}
+
+.carousel-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  height: 420px;
+  width: 300px;
+  flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.8s ease, opacity 0.8s ease;
+  opacity: 0.8;
+}
+
+.carousel-card.center {
+  transform: scale(1.1);
+  opacity: 1;
+  z-index: 3;
+}
+
+.carousel-card.left {
+  transform: translateX(-120%) scale(0.9);
+  z-index: 1;
+}
+
+.carousel-card.right {
+  transform: translateX(120%) scale(0.9);
+  z-index: 1;
+}
+
         /* === Style-mu tetap dipertahankan === */
         .bg-circle-fix div {
             position: absolute;
@@ -174,6 +212,8 @@
                         @endif
 
                         {{-- Slideshow Tengah --}}
+                        <!-- TOLONG YANG INI DI FIX SOALNYA SLIDE NYA GA BERFUNGSI, HARUSNYA AMBIL 3 IMAGE DULU
+                        DARI YANG SUDAH DI UPLOAD DI FOLDER assets/kegiatan, baru di card 4 lanjut ke image kanan kiri dan bawah -->
                         @if (isset($slides[0]))
                             @php
                                 $mainImages = json_decode($slides[0]->image, true);

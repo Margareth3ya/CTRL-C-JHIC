@@ -9,8 +9,15 @@ class PrestasiController extends Controller
 {
     public function index()
     {
-        $prestasi = Content::where('folder', 'prestasi')->latest()->paginate(3);
-        $prestasi2 = Content::where('folder', 'prestasi2')->latest()->paginate(3);
-        return view('informasi.prestasi', compact('prestasi', 'prestasi2'));
+        $itemsPerPage = 2;
+        
+        $allPrestasi = Content::whereIn('folder', ['prestasi', 'prestasi2'])
+            ->latest()
+            ->get();
+        
+        $totalItems = $allPrestasi->count();
+        $totalPages = ceil($totalItems / $itemsPerPage);
+        
+        return view('informasi.prestasi', compact('allPrestasi', 'totalPages', 'itemsPerPage'));
     }
 }

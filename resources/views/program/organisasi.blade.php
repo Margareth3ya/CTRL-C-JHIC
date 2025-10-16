@@ -1,7 +1,8 @@
-
-
+@extends('layouts.app')
 
 @section('content')
+<link rel="stylesheet" href="css/style.css">
+<script src="js/main.js"></script>
     <div class="min-h-screen">
 
         <!-- Section: Organisasi OSIS -->

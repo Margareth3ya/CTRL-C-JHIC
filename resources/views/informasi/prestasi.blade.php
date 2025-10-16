@@ -535,18 +535,33 @@
                 </div>
 
                 <!-- Image Stack -->
-                <div id="image-stack" class="relative flex items-center justify-center w-full h-96 md:h-[26rem]">
-                    <img src="{{ asset('assets/Prestasi1.jpg') }}"
-                        class="absolute w-3/4 sm:w-1/2 md:w-[30%] h-80 md:h-[26rem] object-cover rounded-xl shadow-lg transition-all duration-500 ease-custom"
-                        alt="Prestasi 1">
-                    <img src="{{ asset('assets/Prestasi2.jpg') }}"
-                        class="absolute w-3/4 sm:w-1/2 md:w-[30%] h-80 md:h-[26rem] object-cover rounded-xl shadow-lg transition-all duration-500 ease-custom"
-                        alt="Prestasi 2">
-                    <img src="{{ asset('assets/Prestasi3.jpg') }}"
-                        class="absolute w-3/4 sm:w-1/2 md:w-[30%] h-80 md:h-[26rem] object-cover rounded-xl shadow-lg transition-all duration-500 ease-custom"
-                        alt="Prestasi 3">
-                </div>
-            </div>
+<!-- Image Stack -->
+<!-- Sekarang dinamis: ambil 3 foto pertama dari $allPrestasi -->
+<div id="image-stack" class="relative flex items-center justify-center w-full h-96 md:h-[26rem]">
+    @php
+        // Ambil hanya 3 prestasi pertama yang punya gambar
+        $topPrestasi = $allPrestasi->filter(fn($item) => !empty($item->image))->take(3);
+    @endphp
+
+    @forelse($topPrestasi as $index => $prestasi)
+        <img src="{{ asset('assets/' . $prestasi->folder . '/' . $prestasi->image) }}"
+            alt="{{ $prestasi->title ?? 'Prestasi ' . ($index + 1) }}"
+            class="absolute w-3/4 sm:w-1/2 md:w-[30%] h-80 md:h-[26rem] object-cover rounded-xl shadow-lg transition-all duration-500 ease-custom"
+        >
+    @empty
+        {{-- Jika tidak ada data, tampilkan 3 fallback gambar default --}}
+        <img src="{{ asset('assets/prestasi/default1.jpg') }}"
+            alt="Prestasi Default 1"
+            class="absolute w-3/4 sm:w-1/2 md:w-[30%] h-80 md:h-[26rem] object-cover rounded-xl shadow-lg transition-all duration-500 ease-custom">
+        <img src="{{ asset('assets/prestasi/default2.jpg') }}"
+            alt="Prestasi Default 2"
+            class="absolute w-3/4 sm:w-1/2 md:w-[30%] h-80 md:h-[26rem] object-cover rounded-xl shadow-lg transition-all duration-500 ease-custom">
+        <img src="{{ asset('assets/prestasi/default3.jpg') }}"
+            alt="Prestasi Default 3"
+            class="absolute w-3/4 sm:w-1/2 md:w-[30%] h-80 md:h-[26rem] object-cover rounded-xl shadow-lg transition-all duration-500 ease-custom">
+    @endforelse
+</div>
+
         </section>
 
         <!-- PRESTASI SECTION -->

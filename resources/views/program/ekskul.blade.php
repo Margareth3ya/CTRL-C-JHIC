@@ -210,7 +210,6 @@
             });
         });
     </script>
-
 @endsection
 @push('styles')
     <style>
@@ -378,4 +377,4 @@
             }
         }
     </style>
-@endsection
+@endpush

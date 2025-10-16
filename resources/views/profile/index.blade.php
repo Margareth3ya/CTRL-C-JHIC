@@ -124,7 +124,7 @@
                              id="alumniPage{{ $i + 1 }}">
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                                 @foreach($pageAlumni as $alumni)
-                                    <div class="flex relative h-96 bg-white rounded-2xl shadow-lg overflow-hidden group hover:scale-105 transition-transform duration-300 hover:shadow-orange-300">
+                                    <div class="flex relative h-120  bg-white rounded-2xl shadow-lg overflow-hidden group hover:scale-105 transition-transform duration-300 hover:shadow-orange-300">
                                         <img src="{{ asset('assets/alumni/' . $alumni->image) }}" alt="{{ $alumni->title }}"
                                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex flex-col justify-end p-6">
