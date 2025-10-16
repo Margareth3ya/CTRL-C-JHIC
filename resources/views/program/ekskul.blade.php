@@ -378,4 +378,4 @@
             }
         }
     </style>
-@endpush
+@endsection

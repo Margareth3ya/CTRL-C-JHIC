@@ -519,8 +519,8 @@
         <section class="pt-4 pb-5 relative overflow-hidden bg-gradient-to-br from-white to-white">
             <!-- === BACKGROUND CIRCLE HERO === -->
             <div class="absolute inset-0 -z-[1] pointer-events-none overflow-visible">
-                <div class="absolute w-[30rem] h-[30rem] bg-[#FFD2A0] rounded-full opacity-60 -top-40 -left-40 ]"></div>
-                <div class="absolute w-[25rem] h-[25rem] bg-[#B0E0FF] rounded-full opacity-60 -top-20 -right-32 "></div>
+                <div class="absolute w-[30rem] h-[30rem] bg-[#FFD2A0] rounded-full opacity-30 -top-40 -left-40 ]"></div>
+                <div class="absolute w-[25rem] h-[25rem] bg-[#B0E0FF] rounded-full opacity-30 -top-20 -right-32 "></div>
             </div>
 
             <div class="container mx-auto flex flex-col items-center text-center gap-4 px-4 md:px-16">
