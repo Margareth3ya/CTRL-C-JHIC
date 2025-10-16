@@ -66,12 +66,12 @@
                         <label for="email" class="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
                             <i class="fas fa-envelope text-blue-500 text-xs"></i>
                             Email
-                            <span class="text-xs text-gray-500">(opsional)</span>
                         </label>
                         <div class="relative">
                             <input type="email" 
                                    name="email" 
                                    id="email"
+                                   required
                                    value="{{ old('email') }}"
                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white/50 backdrop-blur-sm group-hover:bg-white/80"
                                    placeholder="user@example.com">

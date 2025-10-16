@@ -21,27 +21,29 @@ class UserController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $user = User::where('username', $request->username)->first();
-        AdminLog::create([
-                'admin_name' => $user->name ?? $user->username,
-                'activity' => 'Menambahkan user baru',
-        ]);
+{
+    $admin = auth()->user();
 
-        $request->validate([
-            'username' => 'required|unique:users',
-            'email' => 'nullable|email',
-            'password' => 'required|min:6'
-        ]);
+    $request->validate([
+        'username' => 'required|unique:users',
+        'email' => 'required|email',
+        'password' => 'required|min:6'
+    ]);
 
-        User::create([
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
-        ]);
+    $newUser = User::create([
+        'username' => $request->username,
+        'email' => $request->email,
+        'password' => Hash::make($request->password)
+    ]);
 
-        return redirect()->route('admin.users.index')->with('success', 'User berhasil dibuat.');
-    }
+    AdminLog::create([
+        'admin_name' => $admin->name ?? $admin->username,
+        'activity' => "Menambahkan user baru: {$newUser->username}",
+    ]);
+
+    return redirect()->route('admin.users.index')->with('success', 'User berhasil dibuat.');
+}
+
 
     public function edit($id)
     {
@@ -62,11 +64,7 @@ class UserController extends Controller
 
         try {
             $user = User::findOrFail($id);
-            AdminLog::create([
-                'admin_name' => $user->name ?? $user->username,
-                'activity' => 'Mengupdate user',
-            ]);
-
+            
             $data = [
                 'username' => $request->username,
                 'email' => $request->email
@@ -77,6 +75,11 @@ class UserController extends Controller
             }
 
             $user->update($data);
+            
+            AdminLog::create([
+                'admin_name' => $user->name ?? $user->username,
+                'activity' => "Mengupdate user baru: {$user->username}",
+            ]);
 
             return redirect()->route('admin.users.index')->with('success', 'User berhasil diupdate.');
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
