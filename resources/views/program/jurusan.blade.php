@@ -611,7 +611,12 @@ function renderMajorDetail(deptId, index) {
                 ` : ''}
             </div>
             <div class="content-section">
-                <div class="content-header">
+                <!-- Mobile Header - Nama Jurusan di Mobile -->
+                <div class="mobile-major-header md:hidden">
+                    <h3 class="mobile-major-title">${major.name}</h3>
+                </div>
+
+                <div class="content-header hidden md:block">
                     <h3 class="major-title">${major.name}</h3>
                     <p class="major-description">${major.desc}</p>
                 </div>
@@ -640,6 +645,10 @@ function renderMajorDetail(deptId, index) {
                          <div class="career-item">Konsultan bidang terkait</div>
                          <div class="career-item">Wirausahawan kreatif</div>`}
                     </div>
+                </div>
+
+                <div class="mobile-description md:hidden mt-4">
+                    <p class="text-gray-600 text-sm leading-relaxed">${major.desc}</p>
                 </div>
 
                 <div class="decor-icon"><i data-lucide="cpu"></i></div>
@@ -1013,7 +1022,33 @@ window.clearSearchResults = clearSearchResults;
     flex-direction: column;
     justify-content: center;
     overflow-y: auto;
+    position: relative;
 }
+
+/* Mobile Header untuk Nama Jurusan */
+.mobile-major-header {
+    display: none;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f97316;
+}
+
+.mobile-major-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #111;
+    margin: 0;
+    text-align: center;
+}
+
+.mobile-description {
+    display: none;
+    background: #f8fafc;
+    padding: 12px;
+    border-radius: 8px;
+    border-left: 3px solid #f97316;
+}
+
 .major-title {
     font-size: 2.2rem;
     font-weight: 800;
@@ -1044,7 +1079,10 @@ window.clearSearchResults = clearSearchResults;
     stroke-width: 2.2;
     flex-shrink: 0;
 }
-.section-content { color: #444; }
+.section-content { 
+    color: #444; 
+    max-height: none;
+}
 .skill-item, .career-item {
     padding: 8px 0 8px 14px;
     border-bottom: 1px solid #eee;
@@ -1075,43 +1113,15 @@ window.clearSearchResults = clearSearchResults;
 
 /* RESPONSIVE BREAKPOINTS */
 @media (max-width: 1024px) {
-    .major-inner { 
-        flex-direction: column; 
-        height: auto;
-        min-height: 100%;
-    }
-    .image-section { 
-        width: 100%; 
-        height: 250px; 
-    }
-    .content-section { 
-        width: 100%; 
-        padding: 30px; 
-        height: auto;
-    }
-    .major-title { 
-        font-size: 1.8rem; 
-    }
-    .decor-icon {
-        bottom: 15px;
-        right: 25px;
-    }
-    .decor-icon i {
-        width: 70px;
-        height: 70px;
-    }
+    .major-inner { flex-direction: column; }
+    .image-section { width: 100%; height: 250px; }
+    .content-section { width: 100%; padding: 30px; }
+    .major-title { font-size: 1.8rem; }
 }
-
 @media (max-width: 768px) {
-    .content-section { 
-        padding: 25px; 
-    }
-    .major-title { 
-        font-size: 1.5rem; 
-    }
-    .major-description { 
-        font-size: 1rem; 
-    }
+    .content-section { padding: 25px; }
+    .major-title { font-size: 1.5rem; }
+    .major-description { font-size: 1rem; }
     #searchInput {
         font-size: 16px; /* Prevent zoom on iOS */
         padding: 12px 40px 12px 40px;
@@ -1122,162 +1132,11 @@ window.clearSearchResults = clearSearchResults;
     .search-result-item {
         padding: 12px;
     }
-    .section-title {
-        font-size: 1.1rem;
-    }
-    .section-title .icon {
-        width: 20px;
-        height: 20px;
-    }
-    .decor-icon {
-        bottom: 10px;
-        right: 20px;
-    }
-    .decor-icon i {
-        width: 60px;
-        height: 60px;
-    }
 }
-
-@media (max-width: 640px) {
-    .major-inner {
-        border-radius: 16px;
-    }
-    .content-section {
-        padding: 20px;
-    }
-    .major-title {
-        font-size: 1.3rem;
-        margin-bottom: 8px;
-    }
-    .major-description {
-        font-size: 0.95rem;
-        margin-bottom: 16px;
-    }
-    .section-title {
-        font-size: 1rem;
-        margin-bottom: 8px;
-    }
-    .skill-item, .career-item {
-        padding: 6px 0 6px 12px;
-        font-size: 0.9rem;
-    }
-    .decor-icon {
-        display: none; /* Hide on very small screens */
-    }
-}
-
 @media (max-width: 480px) {
-    .content-section { 
-        padding: 16px; 
-    }
-    .major-title { 
-        font-size: 1.2rem; 
-    }
-    .major-description { 
-        font-size: 0.9rem; 
-        line-height: 1.5;
-    }
-    .section-title {
-        font-size: 0.95rem;
-    }
-    .section-title .icon {
-        width: 18px;
-        height: 18px;
-    }
-    .skill-item, .career-item {
-        font-size: 0.85rem;
-        padding: 5px 0 5px 10px;
-    }
-    
-    /* Mobile-specific touch improvements */
-    .major-card {
-        cursor: default;
-    }
-    
-    /* Better touch targets */
-    .skill-item, .career-item {
-        min-height: 24px;
-        display: flex;
-        align-items: center;
-    }
-}
-
-/* Landscape orientation for mobile */
-@media (max-height: 500px) and (orientation: landscape) {
-    .department-card {
-        height: 100vh;
-    }
-    .image-section {
-        height: 200px;
-    }
-    .content-section {
-        padding: 20px;
-        overflow-y: auto;
-        max-height: calc(100vh - 200px);
-    }
-}
-
-/* High DPI screens */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .image-section img {
-        image-rendering: -webkit-optimize-contrast;
-        image-rendering: crisp-edges;
-    }
-}
-
-/* Reduced motion for accessibility */
-@media (prefers-reduced-motion: reduce) {
-    .major-inner,
-    .department-card,
-    .search-result-item,
-    #recommendationBanner,
-    #searchInput {
-        transition: none;
-        animation: none;
-    }
-}
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-    .department-card {
-        background: #1f2937;
-    }
-    .major-inner {
-        background: #1f2937;
-        color: #f9fafb;
-    }
-    .major-title {
-        color: #f9fafb;
-    }
-    .major-description {
-        color: #d1d5db;
-    }
-    .section-title {
-        color: #e5e7eb;
-    }
-    .section-content {
-        color: #d1d5db;
-    }
-}
-
-/* Print styles */
-@media print {
-    .department-card {
-        break-inside: avoid;
-        box-shadow: none;
-        border: 1px solid #ccc;
-    }
-    .major-inner {
-        flex-direction: column;
-    }
-    .image-section {
-        width: 100%;
-        height: 200px;
-    }
-    .content-section {
-        width: 100%;
-    }
+    .content-section { padding: 20px; }
+    .major-title { font-size: 1.3rem; }
+    .major-description { font-size: 0.95rem; }
 }
 </style>
 @endsection
