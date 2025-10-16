@@ -68,6 +68,7 @@
                                 <option value="ekstrakulikuler" {{ $content->folder == 'ekstrakulikuler' ? 'selected' : '' }}>Ekstrakulikuler</option>
                                 <option value="prestasi" {{ $content->folder == 'prestasi' ? 'selected' : '' }}>Prestasi</option>
                                 <option value="prestasi2" {{ $content->folder == 'prestasi2' ? 'selected' : '' }}>Prestasi Card2</option>
+                                <option value="kepsek" {{ $content->folder == 'kepsek' ? 'selected' : '' }}>Foto Kepsek</option>
                             </select>
                             <div class="absolute inset-y-0 right-0 flex items-center pr-3">
                                 <i class="fas fa-chevron-down text-gray-400 group-focus-within:text-blue-500"></i>

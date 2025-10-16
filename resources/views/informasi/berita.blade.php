@@ -122,6 +122,7 @@
 
 .berita-side-card {
     display: flex;
+    height: 245px;
     background: #fff;
     border-radius: 1rem;
     overflow: hidden;
@@ -159,6 +160,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    min-height: 210px; /* tambahkan batas tinggi minimum */
 }
 
 .berita-date {
@@ -171,19 +173,27 @@
 }
 
 .berita-side-title {
+    font-weight: 600;
     font-size: 1rem;
-    font-weight: 700;
-    color: #1e293b;
-    margin-bottom: 0.4rem;
-    line-height: 1.3;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* tampil maksimal 2 baris */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
+
 
 .berita-side-excerpt {
-    font-size: 0.85rem;
     color: #6b7280;
+    line-height: 1.5;
+    font-size: 0.875rem;
     margin-bottom: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* tampil maksimal 3 baris */
+    -webkit-box-orient: vertical;
 }
-
 .berita-read-more {
     font-size: 0.85rem;
     color: #f97316;
@@ -209,20 +219,7 @@
     }
 }
 
-        /* Card Kecil Kanan */
-        .berita-side-card {
-            background: white;
-            border-radius: 1rem;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            border: 1px solid #f3f4f6;
-            flex: 1;
-            display: flex;
-            height: 50%;
-            /* Setengah dari container */
-            position: relative;
-        }
+
 
         .berita-side-card:hover {
             transform: translateY(-3px);

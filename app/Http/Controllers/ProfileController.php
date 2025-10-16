@@ -9,8 +9,8 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        // Hapus paginate(), gunakan get() saja
+        $kepsek = Content::where('folder', 'kepsek')->latest()->get();
         $alumnis = Content::where('folder', 'alumni')->latest()->get();
-        return view('profile.index', compact('alumnis'));
+        return view('profile.index', compact('alumnis', 'kepsek'));
     }
 }

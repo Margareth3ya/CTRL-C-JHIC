@@ -18,7 +18,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
             <div class="flex justify-center md:justify-start relative">
                 <div class="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden shadow-xl relative z-10 bg-orange-200">
-                    <img src="{{ asset('https://i.ibb.co.com/hJjdrSXg/Lukman-removebg-preview-2.png') }}"
+                    <img src="{{ asset('assets/kepsek/1760611327_Lukman-removebg-preview 2.png') }}"
                          alt="Kepala Sekolah" class="object-cover w-full h-full">
                 </div>
             </div>

@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @push('styles')
     <style>
-
         .font-bebas {
             font-family: 'Bebas Neue', cursive;
         }
@@ -60,56 +59,166 @@
             background: rgba(174, 219, 228, 0.6); /* Blue soft */
         }
         .swiper-slide {
-    position: relative;
-}
+            position: relative;
+        }
 
-.swiper-slide::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6));
-    z-index: 1;
-}
-.swiper-slide > div {
-    position: relative;
-    z-index: 0;
-}
-.swiper-slide-industri {
-    width: auto;
-    flex-shrink: 0;
-}
-.card-active {
-    transform: translateX(0) scale(1);
-    opacity: 1;
-    z-index: 40;
-    filter: brightness(1);
-    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
+        .swiper-slide::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6));
+            z-index: 1;
+        }
+        .swiper-slide > div {
+            position: relative;
+            z-index: 0;
+        }
+        .swiper-slide-industri {
+            width: auto;
+            flex-shrink: 0;
+        }
+        .card-active {
+            transform: translateX(0) scale(1);
+            opacity: 1;
+            z-index: 40;
+            filter: brightness(1);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
 
-.card-behind {
-    transform: translateX(120px) scale(0.92);
-    opacity: 1;
-    z-index: 30;
-    filter: brightness(0.9);
-    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
+        .card-behind {
+            transform: translateX(120px) scale(0.92);
+            opacity: 1;
+            z-index: 30;
+            filter: brightness(0.9);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
 
-.card-far-behind {
-    transform: translateX(240px) scale(0.84);
-    opacity: 1;
-    z-index: 20;
-    filter: brightness(0.8);
-    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
+        .card-far-behind {
+            transform: translateX(240px) scale(0.84);
+            opacity: 1;
+            z-index: 20;
+            filter: brightness(0.8);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
 
-.card-more-behind {
-    transform: translateX(360px) scale(0.76);
-    opacity: 1;
-    z-index: 10;
-    filter: brightness(0.7);
-    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
+        .card-more-behind {
+            transform: translateX(360px) scale(0.76);
+            opacity: 1;
+            z-index: 10;
+            filter: brightness(0.7);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
 
+        /* Responsive styles untuk card departemen */
+        @media (max-width: 768px) {
+            .card-container {
+                height: auto !important;
+                min-height: 400px;
+            }
+            
+            .card {
+                height: auto !important;
+                min-height: 380px;
+                margin-bottom: 20px;
+            }
+            
+            .card .flex {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .card img {
+                height: 200px !important;
+                width: 100% !important;
+            }
+            
+            .card > div > div {
+                width: 100% !important;
+            }
+            
+            .card .p-6 {
+                padding: 1.5rem !important;
+            }
+            
+            /* Tombol selengkapnya di mobile */
+            .redirect-department {
+                width: 100%;
+                text-align: center;
+                padding: 12px 16px !important;
+                font-size: 14px !important;
+                margin-top: 1rem;
+            }
+            
+            /* Adjust card positioning untuk mobile */
+            .card-active {
+                transform: translateX(0) scale(1) !important;
+                position: relative !important;
+                margin: 0 auto;
+            }
+            
+            .card-behind,
+            .card-far-behind,
+            .card-more-behind {
+                display: none !important;
+            }
+            
+            /* Dots indicator untuk mobile */
+            .dot {
+                width: 8px !important;
+                height: 8px !important;
+            }
+            
+            .dot.w-6 {
+                width: 24px !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .card {
+                min-height: 350px;
+            }
+            
+            .card img {
+                height: 180px !important;
+            }
+            
+            .card .p-6 {
+                padding: 1rem !important;
+            }
+            
+            .card h3 {
+                font-size: 1.5rem !important;
+            }
+            
+            .card p {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                min-height: 320px;
+                margin-bottom: 15px;
+            }
+            
+            .card img {
+                height: 160px !important;
+            }
+            
+            .redirect-department {
+                padding: 10px 14px !important;
+                font-size: 13px !important;
+            }
+        }
+
+        /* Pastikan tombol selalu terlihat */
+        .redirect-department {
+            position: relative !important;
+            z-index: 50 !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
     </style>
 @endpush
 @section('content')
@@ -151,14 +260,14 @@
                             </p>
                         </div>
 
-                        <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                            <a href="/profile">
-                                <button
-                                    class="border-2 border-white text-white hover:bg-orange-600 hover:text-white hover:scale-105 hover:shadow-lg px-8 py-3 rounded-lg font-semibold transition-all flex items-center justify-center">
-                                    Profile
-                                </button>
-                            </a>
-                        </div>
+<div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+    <a href="/profile" class="flex justify-center md:block">
+        <button
+            class="border-2 border-white text-white hover:bg-orange-600 hover:text-white hover:scale-105 hover:shadow-lg px-8 py-3 rounded-lg font-semibold transition-all flex items-center justify-center">
+            Profile
+        </button>
+    </a>
+</div>
                     </div>
 
                     <div class="grid grid-cols-2 gap-6">
@@ -196,83 +305,139 @@
         </div>
 
 
-        <!-- ==Rekomendasi Jurusan== -->
-        <section class=" relative z-10 w-full py-16 bg-transparent flex justify-center">
-            <div class="w-full max-w-6xl px-4 flex flex-col lg:flex-row gap-12">
-                <!-- Kiri -->
-                <div class="w-full lg:w-1/2 flex flex-col justify-center">
-                    <div id="leftContent">
-                        <h2 class="text-5xl md:text-6xl font-bebas text-gray-900 mb-4">
-                            TEMUKAN JURUSAN
-                        </h2>
-                        <div class="text-4xl md:text-5xl font-bebas text-orange-400 mb-6">
-                            TEPAT UNTUKMU
-                        </div>
-                        <p class="text-lg text-gray-700 mb-8">
-                            Belum tahu jurusan apa yang cocok?<br />
-                            Masih bingung pilih jurusan?<br />
-                            Tenang, kita bantu.<br />
-                            Isi form di samping dan dapatkan rekomendasi jurusan.
-                        </p>
-                    </div>
-
-                    <div id="resultContainer"
-                        class="hidden bg-gradient-to-br from-blue-50 to-orange-50 p-8 rounded-2xl shadow-lg">
-                        <h2 class="text-3xl font-bold text-gray-900 mb-2">
-                            REKOMENDASI KAMI
-                        </h2>
-                        <div class="w-20 h-1 bg-orange-500 mb-6"></div>
-                        <div id="resultContent" class="space-y-6">
-                        </div>
+<!-- ==Rekomendasi Jurusan== -->
+<section class="relative z-10 w-full py-16 bg-transparent flex justify-center">
+    <div class="w-full max-w-6xl px-4 flex flex-col lg:flex-row gap-12">
+        <!-- Kiri -->
+        <div class="w-full lg:w-2/5 flex flex-col justify-center">
+            <div id="leftContent">
+                <h2 class="text-5xl md:text-6xl font-bebas text-gray-900 mb-4">
+                    TEMUKAN JURUSAN
+                </h2>
+                <div class="text-4xl md:text-5xl font-bebas text-orange-400 mb-6">
+                    YANG COCOK UNTUKMU
+                </div>
+                <p class="text-lg text-gray-700 mb-6">
+                    Masih bingung memilih jurusan?<br />
+                    Ceritakan apa yang kamu ketahui, bakat, atau passion-mu,<br />
+                    dan kami akan rekomendasikan jurusan yang paling sesuai!
+                </p>
+                
+                <!-- Contoh Input yang Bisa Dicoba -->
+                <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6">
+                    <h4 class="font-semibold text-blue-800 mb-2 flex items-center">
+                        <i class="fas fa-lightbulb mr-2 text-orange-500"></i>
+                        Contoh yang bisa kamu tulis:
+                    </h4>
+                    <div class="text-sm text-blue-700 space-y-1">
+                        <div>• "Saya suka coding dan buat aplikasi"</div>
+                        <div>• "Suka otak-atik mesin dan elektronik"</div>
+                        <div>• "Hobi desain grafis dan editing video"</div>
+                        <div>• "Tertarik dengan jaringan komputer"</div>
+                        <div>• "Suka bekerja dengan tangan dan alat"</div>
                     </div>
                 </div>
 
-                <!-- Form Kanan -->
-                <div class="w-full lg:w-1/2 flex flex-col items-center">
-                    <form id="recommendationForm"
-                        class="w-full max-w-md bg-white rounded-2xl shadow-lg hover:shadow-2xl p-8 mb-8">
-                        <h3 class="text-4xl font-bebas text-gray-800 mb-6 text-center">
-                            apa yang kamu <span class="text-orange text-5xl font-bold text-orange-500">SUKA?</span>
-                        </h3>
-
-                        <div class="mb-6 relative">
-                            <label class="block text-gray-700 mb-2">Coba tuliskan</label>
-                            <input type="text" id="keywordInput" name="keyword"
-                                placeholder="tulis disini..."
-                                class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                                required />
-                            <ul id="keywordDropdown"
-                                class="absolute z-10 w-full bg-white border border-gray-200 mt-1 rounded-lg shadow-md hidden">
-                                <!-- <li class="px-4 py-2 hover:bg-orange-100 cursor-pointer">Programming</li>
-                                        <li class="px-4 py-2 hover:bg-orange-100 cursor-pointer">Desain Grafis</li>
-                                        <li class="px-4 py-2 hover:bg-orange-100 cursor-pointer">Mesin</li>
-                                        <li class="px-4 py-2 hover:bg-orange-100 cursor-pointer">Multimedia</li>
-                                        <li class="px-4 py-2 hover:bg-orange-100 cursor-pointer">Jaringan</li>
-                                        <li class="px-4 py-2 hover:bg-orange-100 cursor-pointer">Animasi</li> -->
-                            </ul>
-                        </div>
-
-                        <button type="submit" id="submitButton"
-                            class="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white px-1 py-1 rounded-lg font-medium text-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300 flex items-center justify-center">
-                            Temukan Jurusanmu
-                        </button>
-                    </form>
-
-                    <div id="resetContainer" class="w-full max-w-md text-center animate-fade-in hidden">
-                        <div class="bg-gradient-to-br from-green-50 to-blue-50 p-8 rounded-2xl shadow-lg">
-                            <h3 class="text-2xl font-bold text-gray-800 mb-4">Rekomendasi Lainnya</h3>
-                            <p class="text-gray-600 mb-6">
-                                Ingin menjelajahi opsi jurusan lainnya? Klik tombol di bawah untuk mencoba lagi.
-                            </p>
-                            <button id="resetButton"
-                                class="px-8 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all duration-300">
-                                Cari Rekomendasi Baru
-                            </button>
-                        </div>
+                <!-- Keunggulan Fitur -->
+                <!-- <div class="space-y-3">
+                    <div class="flex items-center text-gray-700">
+                        <i class="fas fa-check text-green-500 mr-3 text-lg"></i>
+                        <span>Analisis AI cerdas berdasarkan minatmu</span>
                     </div>
+                    <div class="flex items-center text-gray-700">
+                        <i class="fas fa-check text-green-500 mr-3 text-lg"></i>
+                        <span>Rekomendasi jurusan utama & alternatif</span>
+                    </div>
+                    <div class="flex items-center text-gray-700">
+                        <i class="fas fa-check text-green-500 mr-3 text-lg"></i>
+                        <span>Penjelasan detail prospek karir</span>
+                    </div>
+                </div>
+                 -->
+            </div>
+
+            <div id="resultContainer"
+                class="hidden bg-gradient-to-br from-blue-50 to-orange-50 p-8 rounded-2xl shadow-lg border border-orange-200">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">
+                    REKOMENDASI JURUSAN
+                </h2>
+                <div class="w-20 h-1 bg-orange-500 mb-6"></div>
+                <div id="resultContent" class="space-y-6">
                 </div>
             </div>
-        </section>
+        </div>
+
+        <!-- Form Kanan -->
+        <div class="w-full lg:w-3/5 flex flex-col items-center">
+            <form id="recommendationForm"
+                class="w-full max-w-md bg-white rounded-2xl shadow-xl hover:shadow-2xl p-8 mb-8 border border-gray-100">
+                <div class="text-center mb-2">
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-graduation-cap text-orange-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-3xl font-bebas text-gray-800 mb-2">
+                        APA YANG KAMU SUKA <span class="text-4xl text-orange-500">SUKA?</span>
+                    </h3>
+                    <p class="text-gray-600 text-sm mb-6">
+                        Tuliskan apa yang kamu sukai, pelajaran favorit, atau cita-citamu
+                    </p>
+                </div>
+
+                <div class="mb-6 relative">
+                    <textarea 
+                        id="keywordInput" 
+                        name="keyword"
+                        placeholder="Bingung? coba tuliskan apa yang kamu ketahui disini"
+                        class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none h-32"
+                        rows="4"
+                        required></textarea>
+                    
+                    <!-- Quick Suggestions
+                    <div class="mt-3">
+                        <p class="text-xs text-gray-500 mb-2">Coba ketik:</p>
+                        <div class="flex flex-wrap gap-2">
+                            <button type="button" class="quick-suggestion text-xs bg-gray-100 hover:bg-orange-100 text-gray-700 px-3 py-1 rounded-full border border-gray-200 transition-colors">
+                                programming
+                            </button>
+                            <button type="button" class="quick-suggestion text-xs bg-gray-100 hover:bg-orange-100 text-gray-700 px-3 py-1 rounded-full border border-gray-200 transition-colors">
+                                desain grafis
+                            </button>
+                            <button type="button" class="quick-suggestion text-xs bg-gray-100 hover:bg-orange-100 text-gray-700 px-3 py-1 rounded-full border border-gray-200 transition-colors">
+                                jaringan komputer
+                            </button>
+                            <button type="button" class="quick-suggestion text-xs bg-gray-100 hover:bg-orange-100 text-gray-700 px-3 py-1 rounded-full border border-gray-200 transition-colors">
+                                teknik mesin
+                            </button>
+                        </div>
+                    </div> -->
+                </div>
+
+                <button type="submit" id="submitButton"
+                    class="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-2 rounded-xl font-semibold text-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                    <i class="fas fa-search mr-3"></i>
+                    DAPATKAN REKOMENDASI
+                </button>
+            </form>
+
+            <div id="resetContainer" class="w-full max-w-md text-center animate-fade-in hidden">
+                <div class="bg-gradient-to-br from-green-50 to-blue-50 p-8 rounded-2xl shadow-lg border border-green-200">
+                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-redo text-green-500 text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Coba Rekomendasi Lain</h3>
+                    <p class="text-gray-600 mb-6">
+                        Ingin menjelajahi jurusan lainnya? Klik tombol di bawah untuk mencari rekomendasi baru.
+                    </p>
+                    <button id="resetButton"
+                        class="px-8 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-semibold hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                        <i class="fas fa-sync-alt mr-2"></i>
+                        Cari Rekomendasi Lain
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
         <div class="relative z-10 bg-transparent py-16">
             <div class="container mx-auto px-4">
@@ -530,64 +695,62 @@ function redirect() {
 
         <!-- Carousel Container -->
         <div class="relative w-full max-w-4xl mx-auto">
-            <div class="overflow-visible h-96">
+            <div class="overflow-visible h-96 md:h-80">
                 <div class="card-container relative h-full">
                     <!-- Card Loop - TANPA INLINE STYLE -->
-                    <div class="card absolute inset-0 bg-white rounded-2xl shadow-lg overflow-hidden h-80 transition-all duration-700"
+                    <div class="card absolute inset-0 bg-white rounded-2xl shadow-lg overflow-hidden h-80 md:h-72 transition-all duration-700"
                         data-index="0">
                         <div class="flex flex-col md:flex-row h-full">
                             <div class="md:w-2/5">
                                 <img src="{{ asset('assets/Depart1.png') }}" alt="TIK"
                                     class="w-full h-40 md:h-full object-cover">
                             </div>
-                            <div class="md:w-3/5 p-6 flex flex-col justify-between">
+                            <div class="md:w-3/5 p-4 md:p-6 flex flex-col justify-between">
                                 <div>
-                                    <div class="flex items-center justify-between mb-4">
-                                        <h3 class="text-2xl font-bold text-gray-900">TIK</h3>
+                                    <div class="flex items-center justify-between mb-3 md:mb-4">
+                                        <h3 class="text-xl md:text-2xl font-bold text-gray-900">TIK</h3>
                                         <span
-                                            class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
+                                            class="px-2 md:px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs md:text-sm font-semibold">
                                             Teknologi Informasi & Komunikasi
                                         </span>
                                     </div>
-                                    <p class="text-gray-600 mb-6 line-clamp-3">
+                                    <p class="text-gray-600 mb-4 md:mb-6 text-sm md:text-base line-clamp-3 md:line-clamp-none">
                                         Departemen TIK membekali siswa dengan keterampilan di bidang teknologi informasi,
                                         meliputi pemrograman, desain web, jaringan komputer, dan manajemen data.
                                     </p>
                                 </div>
 
                                 <a href="/program/jurusan" 
-                                class="redirect-department self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition"
-                                data-department="TIK">
+                                class="redirect-department self-start bg-orange-500 text-white px-4 md:px-6 py-2 md:py-2 rounded-lg text-xs md:text-sm font-semibold hover:bg-orange-600 transition w-full md:w-auto text-center">
                                     Selengkapnya →
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <div class="card absolute inset-0 bg-white rounded-2xl shadow-lg overflow-hidden h-80 transition-all duration-700"
+                    <div class="card absolute inset-0 bg-white rounded-2xl shadow-lg overflow-hidden h-80 md:h-72 transition-all duration-700"
                         data-index="1">
                         <div class="flex flex-col md:flex-row h-full">
                             <div class="md:w-2/5">
                                 <img src="{{ asset('assets/Depart2.png') }}" alt="Pemesinan"
                                     class="w-full h-40 md:h-full object-cover">
                             </div>
-                            <div class="md:w-3/5 p-6 flex flex-col justify-between">
+                            <div class="md:w-3/5 p-4 md:p-6 flex flex-col justify-between">
                                 <div>
-                                    <div class="flex items-center justify-between mb-4">
-                                        <h3 class="text-2xl font-bold text-gray-900">Pemesinan</h3>
+                                    <div class="flex items-center justify-between mb-3 md:mb-4">
+                                        <h3 class="text-xl md:text-2xl font-bold text-gray-900">Pemesinan</h3>
                                         <span
-                                            class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
+                                            class="px-2 md:px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs md:text-sm font-semibold">
                                             Teknik Pemesinan
                                         </span>
                                     </div>
-                                    <p class="text-gray-600 mb-6 line-clamp-3">
+                                    <p class="text-gray-600 mb-4 md:mb-6 text-sm md:text-base line-clamp-3 md:line-clamp-none">
                                         Membekali siswa menguasai teknik mesin konvensional dan CNC, membaca gambar teknik,
                                         serta proses manufaktur industri.
                                     </p>
                                 </div>
                                     <a href="/program/jurusan" 
-                                    class="redirect-department self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition"
-                                    data-department="Pemesinan">
+                                    class="redirect-department self-start bg-orange-500 text-white px-4 md:px-6 py-2 md:py-2 rounded-lg text-xs md:text-sm font-semibold hover:bg-orange-600 transition w-full md:w-auto text-center">
                                         Selengkapnya →
                                     </a>
 
@@ -595,30 +758,29 @@ function redirect() {
                         </div>
                     </div>
 
-                    <div class="card absolute inset-0 bg-white rounded-2xl shadow-lg overflow-hidden h-80 transition-all duration-700"
+                    <div class="card absolute inset-0 bg-white rounded-2xl shadow-lg overflow-hidden h-80 md:h-72 transition-all duration-700"
                         data-index="2">
                         <div class="flex flex-col md:flex-row h-full">
                             <div class="md:w-2/5">
                                 <img src="{{ asset('assets/Depart3.png') }}" alt="Kelistrikan"
                                     class="w-full h-40 md:h-full object-cover">
                             </div>
-                            <div class="md:w-3/5 p-6 flex flex-col justify-between">
+                            <div class="md:w-3/5 p-4 md:p-6 flex flex-col justify-between">
                                 <div>
-                                    <div class="flex items-center justify-between mb-4">
-                                        <h3 class="text-2xl font-bold text-gray-900">Kelistrikan</h3>
+                                    <div class="flex items-center justify-between mb-3 md:mb-4">
+                                        <h3 class="text-xl md:text-2xl font-bold text-gray-900">Kelistrikan</h3>
                                         <span
-                                            class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
+                                            class="px-2 md:px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs md:text-sm font-semibold">
                                             Teknik Kelistrikan
                                         </span>
                                     </div>
-                                    <p class="text-gray-600 mb-6 line-clamp-3">
+                                    <p class="text-gray-600 mb-4 md:mb-6 text-sm md:text-base line-clamp-3 md:line-clamp-none">
                                         Mengajarkan keterampilan instalasi, perawatan, dan sistem kontrol listrik
                                         untuk bangunan dan industri.
                                     </p>
                                 </div>
                                 <a href="/program/jurusan" 
-                                class="redirect-department self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition"
-                                data-department="Kelistrikan">
+                                class="redirect-department self-start bg-orange-500 text-white px-4 md:px-6 py-2 md:py-2 rounded-lg text-xs md:text-sm font-semibold hover:bg-orange-600 transition w-full md:w-auto text-center">
                                     Selengkapnya →
                                 </a>
 
@@ -626,30 +788,29 @@ function redirect() {
                         </div>
                     </div>
 
-                    <div class="card absolute inset-0 bg-white rounded-2xl shadow-lg overflow-hidden h-80 transition-all duration-700"
+                    <div class="card absolute inset-0 bg-white rounded-2xl shadow-lg overflow-hidden h-80 md:h-72 transition-all duration-700"
                         data-index="3">
                         <div class="flex flex-col md:flex-row h-full">
                             <div class="md:w-2/5">
                                 <img src="{{ asset('assets/Depart4.png') }}" alt="Otomotif"
                                     class="w-full h-40 md:h-full object-cover">
                             </div>
-                            <div class="md:w-3/5 p-6 flex flex-col justify-between">
+                            <div class="md:w-3/5 p-4 md:p-6 flex flex-col justify-between">
                                 <div>
-                                    <div class="flex items-center justify-between mb-4">
-                                        <h3 class="text-2xl font-bold text-gray-900">Otomotif</h3>
+                                    <div class="flex items-center justify-between mb-3 md:mb-4">
+                                        <h3 class="text-xl md:text-2xl font-bold text-gray-900">Otomotif</h3>
                                         <span
-                                            class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
+                                            class="px-2 md:px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs md:text-sm font-semibold">
                                             Teknik Otomotif
                                         </span>
                                     </div>
-                                    <p class="text-gray-600 mb-6 line-clamp-3">
+                                    <p class="text-gray-600 mb-4 md:mb-6 text-sm md:text-base line-clamp-3 md:line-clamp-none">
                                         Fokus pada teknologi kendaraan bermotor, perawatan, dan sistem permesinan modern
                                         yang memenuhi kebutuhan industri.
                                     </p>
                                 </div>
                                 <a href="/program/jurusan" 
-                                class="redirect-department self-start bg-orange-500 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-orange-600 transition"
-                                data-department="Otomotif">
+                                class="redirect-department self-start bg-orange-500 text-white px-4 md:px-6 py-2 md:py-2 rounded-lg text-xs md:text-sm font-semibold hover:bg-orange-600 transition w-full md:w-auto text-center">
                                     Selengkapnya →
                                 </a>
                             </div>
@@ -659,7 +820,7 @@ function redirect() {
             </div>
 
             <!-- Dots -->
-            <div class="flex justify-center mt-12 space-x-2">
+            <div class="flex justify-center mt-8 md:mt-12 space-x-2">
                 <button class="dot w-6 h-3 rounded-full bg-orange-500" data-index="0"></button>
                 <button class="dot w-3 h-3 rounded-full bg-gray-300" data-index="1"></button>
                 <button class="dot w-3 h-3 rounded-full bg-gray-300" data-index="2"></button>
@@ -821,7 +982,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-        // Stack Card Departemen - Improved Version
+        // Stack Card Departemen - Improved Version dengan responsive
 const cards = document.querySelectorAll('.card');
 const dots = document.querySelectorAll('.dot');
 let currentIndex = 0;
@@ -832,6 +993,8 @@ let dragThreshold = 80;
 let animationFrameId = null;
 
 function initializeCarousel() {
+    const isMobile = window.innerWidth < 768;
+    
     cards.forEach((card, index) => {
         const cardIndex = parseInt(card.getAttribute('data-index'));
         const position = (cardIndex - currentIndex + cards.length) % cards.length;
@@ -842,15 +1005,26 @@ function initializeCarousel() {
         // Hapus semua class posisi sebelumnya
         card.classList.remove('card-active', 'card-behind', 'card-far-behind', 'card-more-behind');
         
-        // Tambahkan class berdasarkan posisi
-        if (position === 0) {
-            card.classList.add('card-active');
-        } else if (position === 1) {
-            card.classList.add('card-behind');
-        } else if (position === 2) {
-            card.classList.add('card-far-behind');
-        } else if (position === 3) {
-            card.classList.add('card-more-behind');
+        // Di mobile, hanya tampilkan card aktif
+        if (isMobile) {
+            if (position === 0) {
+                card.classList.add('card-active');
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        } else {
+            // Di desktop, tampilkan semua card dengan efek stacked
+            card.style.display = 'block';
+            if (position === 0) {
+                card.classList.add('card-active');
+            } else if (position === 1) {
+                card.classList.add('card-behind');
+            } else if (position === 2) {
+                card.classList.add('card-far-behind');
+            } else if (position === 3) {
+                card.classList.add('card-more-behind');
+            }
         }
     });
 
@@ -943,6 +1117,7 @@ function handleMouseUp() {
 }
 
 function updateDragPosition() {
+    const isMobile = window.innerWidth < 768;
     const diffX = currentX - startX;
     const progress = Math.min(Math.abs(diffX) / 300, 1); // Normalize progress 0-1
 
@@ -950,26 +1125,29 @@ function updateDragPosition() {
         const cardIndex = parseInt(card.getAttribute('data-index'));
         const position = (cardIndex - currentIndex + cards.length) % cards.length;
 
+        // Di mobile, hanya beri efek pada card aktif
+        if (isMobile && position !== 0) return;
+
         // Untuk efek drag, kita tetap gunakan inline style
         // Tapi hanya untuk transform dan opacity, biarkan class untuk z-index dan filter
         if (position === 0) {
-            const scale = 1 - (progress * 0.08);
-            const opacity = 1 - (progress * 0.3);
+            const scale = isMobile ? 1 - (progress * 0.05) : 1 - (progress * 0.08);
+            const opacity = isMobile ? 1 - (progress * 0.2) : 1 - (progress * 0.3);
             card.style.transform = `translateX(${diffX}px) scale(${scale}) rotateY(${diffX * 0.1}deg)`;
             card.style.opacity = opacity;
-        } else if (position === 1) {
+        } else if (position === 1 && !isMobile) {
             const baseX = 80 + (diffX > 0 ? Math.min(diffX * 0.8, 80) : Math.max(diffX * 0.8, -30));
             const scale = 0.92 - (progress * 0.08);
             const opacity = 0.85 - (progress * 0.25);
             card.style.transform = `translateX(${baseX}px) scale(${scale}) rotateY(${diffX * 0.08 - 5}deg)`;
             card.style.opacity = opacity;
-        } else if (position === 2) {
+        } else if (position === 2 && !isMobile) {
             const baseX = 160 + (diffX > 0 ? Math.min(diffX * 0.6, 60) : Math.max(diffX * 0.6, -20));
             const scale = 0.84 - (progress * 0.08);
             const opacity = 0.7 - (progress * 0.2);
             card.style.transform = `translateX(${baseX}px) scale(${scale}) rotateY(${diffX * 0.06 - 8}deg)`;
             card.style.opacity = opacity;
-        } else if (position === 3) {
+        } else if (position === 3 && !isMobile) {
             const baseX = 240 + (diffX > 0 ? Math.min(diffX * 0.4, 40) : Math.max(diffX * 0.4, -10));
             const scale = 0.76 - (progress * 0.06);
             const opacity = 0.5 - (progress * 0.15);
@@ -1025,6 +1203,10 @@ function navigateTo(index) {
 setTimeout(() => {
     initializeCarousel();
 }, 100);
+
+// Handle window resize
+window.addEventListener('resize', initializeCarousel);
+
         
     </script>
 @endsection

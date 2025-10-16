@@ -1,125 +1,173 @@
-<footer
-    class="container flex flex-col mx-auto p-2 rounded-3xl bg-gradient-to-b from-gray-900 to-gray-800 text-gray-300 px-6 md:px-16 py-5 relative overflow-hidden">
+<footer class="w-full bg-transparent-to-b from-gray-900 to-gray-800 text-gray-300 relative overflow-hidden">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 opacity-5 pointer-events-none">
+            <div class="absolute top-10 left-1/4 w-64 h-64 rounded-full bg-primary animate-pulse-slow"></div>
+            <div class="absolute bottom-10 right-1/4 w-48 h-48 rounded-full bg-primary animate-float"></div>
+        </div>
 
-    <div class="absolute inset-0 opacity-5">
-        <div class="absolute top-10 left-1/4 w-64 h-64 rounded-full bg-primary animate-pulse-slow"></div>
-        <div class="absolute bottom-10 right-1/4 w-48 h-48 rounded-full bg-primary animate-float"></div>
-    </div>
-
-    <!-- GRID FOOTER -->
-    <div class="relative z-10 grid md:grid-cols-5 gap-8 mt-6">
-        <div>
-            <div class="flex items-center mb-4">
-                <div class="w-40 h-40 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                    <img src="https://i.ibb.co.com/MkPkNv4c/Logo-Sekolah.png" alt="logo_SKARIGA">
+        <!-- Container dengan rounded border -->
+        <div class="relative z-10 bg-gradient-to-b from-gray-800 to-gray-900 rounded-3xl p-6 md:p-8 lg:p-10 shadow-2xl border border-gray-700">
+            <!-- GRID FOOTER -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-10">
+                <!-- Logo & Brand - Diperkecil dan disejajarkan -->
+                <div class="md:col-span-2 lg:col-span-1 mt-16">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 flex-shrink-0">
+                            <img src="{{ asset('assets/icon.png') }}" alt="logo_SKARIGA" 
+                                 class="w-full h-full object-contain rounded-full">
+                        </div>
+                        <div class="flex flex-col">
+                            <h2 class="text-white font-bold text-lg sm:text-xl lg:text-2xl mb-0.5">SKARIGA</h2>
+                            <p class="text-xs text-gray-400">Successful by Discipline</p>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h2 class="text-white font-bold text-xl">SKARIGA</h2>
-                    <p class="text-sm text-gray-400">Successful by Discipline</p>
+
+                <!-- Tentang Sekolah -->
+                <div class="lg:col-span-1">
+                    <h3 class="text-white font-semibold mb-4 text-lg relative inline-block">
+                        <span class="relative z-10">Tentang Sekolah</span>
+                        <span class="absolute bottom-0 left-0 w-full h-1 bg-primary rounded-full"></span>
+                    </h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="/" class="footer-link flex items-center text-sm hover:text-white transition-colors duration-300">
+                                <i class="fas fa-chevron-right text-primary mr-2 text-xs flex-shrink-0"></i>
+                                Beranda
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/profile" class="footer-link flex items-center text-sm hover:text-white transition-colors duration-300">
+                                <i class="fas fa-chevron-right text-primary mr-2 text-xs flex-shrink-0"></i>
+                                Profil
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/program/jurusan" class="footer-link flex items-center text-sm hover:text-white transition-colors duration-300">
+                                <i class="fas fa-chevron-right text-primary mr-2 text-xs flex-shrink-0"></i>
+                                Jurusan
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Informasi & Layanan -->
+                <div class="lg:col-span-1">
+                    <h3 class="text-white font-semibold mb-4 text-lg relative inline-block">
+                        <span class="relative z-10">Informasi & Layanan</span>
+                        <span class="absolute bottom-0 left-0 w-full h-1 bg-primary rounded-full"></span>
+                    </h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="/informasi/berita" class="footer-link flex items-center text-sm hover:text-white transition-colors duration-300">
+                                <i class="fas fa-chevron-right text-primary mr-2 text-xs flex-shrink-0"></i>
+                                Berita
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/informasi/ssb" class="footer-link flex items-center text-sm hover:text-white transition-colors duration-300">
+                                <i class="fas fa-chevron-right text-primary mr-2 text-xs flex-shrink-0"></i>
+                                Pendaftaran
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/informasi/kegiatan" class="footer-link flex items-center text-sm hover:text-white transition-colors duration-300">
+                                <i class="fas fa-chevron-right text-primary mr-2 text-xs flex-shrink-0"></i>
+                                Kegiatan
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/informasi/prestasi" class="footer-link flex items-center text-sm hover:text-white transition-colors duration-300">
+                                <i class="fas fa-chevron-right text-primary mr-2 text-xs flex-shrink-0"></i>
+                                Prestasi
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Kontak -->
+                <div class="lg:col-span-1">
+                    <h3 class="text-white font-semibold mb-4 text-lg relative inline-block">
+                        <span class="relative z-10">Kontak</span>
+                        <span class="absolute bottom-0 left-0 w-full h-1 bg-primary rounded-full"></span>
+                    </h3>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-primary mr-3 mt-1 flex-shrink-0"></i>
+                            <span class="break-words">Jl. Raya Tlogomas No. 3, Malang, Jawa Timur</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-phone text-primary mr-3 flex-shrink-0"></i>
+                            <span>(0341) 123456</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope text-primary mr-3 flex-shrink-0"></i>
+                            <span class="break-all text-xs sm:text-sm">info@smkpgri3malang.sch.id</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-clock text-primary mr-3 flex-shrink-0"></i>
+                            <span>Senin - Jumat: 07:00 - 16:00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Map -->
+                <div class="md:col-span-2 lg:col-span-1">
+                    <div class="rounded-lg overflow-hidden map-container shadow-lg">
+                        <div class="bg-gray-800 h-48 lg:h-40 w-full">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.6898708661834!2d112.6019448!3d-7.9274244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e78821eaa6b3655%3A0x3cd0ba7cc35c7b6d!2sSMK%20PGRI%203%20Malang!5e0!3m2!1sid!2sid!4v1758358772409!5m2!1sid!2sid"
+                                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                                class="w-full h-full">
+                            </iframe>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div>
-            <h3 class="text-white font-semibold mb-4 text-lg relative inline-block">
-                <span class="relative z-10">Tentang Sekolah</span>
-                <span class="absolute bottom-0 left-0 w-full h-1 bg-primary rounded-full"></span>
-            </h3>
-            <ul class="space-y-3">
-                <li><a href="/" class="footer-link flex items-center text-sm hover:text-white"><i
-                            class="fas fa-chevron-right text-primary mr-2 text-xs"></i>Beranda</a></li>
-                <li><a href="/profile" class="footer-link flex items-center text-sm hover:text-white"><i
-                            class="fas fa-chevron-right text-primary mr-2 text-xs"></i>Profil</a></li>
-                <li><a href="/program/jurusan" class="footer-link flex items-center text-sm hover:text-white"><i
-                            class="fas fa-chevron-right text-primary mr-2 text-xs"></i>Jurusan</a></li>
-            </ul>
-        </div>
+            <!-- FOOTER BOTTOM BAR -->
+            <div class="mt-10 pt-6 border-t border-gray-700">
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+                    <!-- Social Media -->
+                    <div class="flex flex-col sm:flex-row items-center gap-4 order-2 lg:order-1">
+                        <span class="text-gray-400 text-sm whitespace-nowrap">Social Media:</span>
+                        <div class="flex gap-2">
+                            <a href="#" class="social-icon w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center text-white transition-all duration-300">
+                                <i class="fab fa-facebook-f text-sm"></i>
+                            </a>
+                            <a href="#" class="social-icon w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center text-white transition-all duration-300">
+                                <i class="fab fa-instagram text-sm"></i>
+                            </a>
+                            <a href="#" class="social-icon w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center text-white transition-all duration-300">
+                                <i class="fab fa-youtube text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
 
-        <div>
-            <h3 class="text-white font-semibold mb-4 text-lg relative inline-block">
-                <span class="relative z-10">Informasi & Layanan</span>
-                <span class="absolute bottom-0 left-0 w-full h-1 bg-primary rounded-full"></span>
-            </h3>
-            <ul class="space-y-3">
-                <li><a href="/informasi/berita" class="footer-link flex items-center text-sm hover:text-white"><i
-                            class="fas fa-chevron-right text-primary mr-2 text-xs"></i>Berita</a></li>
-                <li><a href="/informasi/ssb" class="footer-link flex items-center text-sm hover:text-white"><i
-                            class="fas fa-chevron-right text-primary mr-2 text-xs"></i>Pendaftaran</a></li>
-                <li><a href="/informasi/kegiatan" class="footer-link flex items-center text-sm hover:text-white"><i
-                            class="fas fa-chevron-right text-primary mr-2 text-xs"></i>Kegiatan</a></li>
-                <li><a href="/informasi/prestasi" class="footer-link flex items-center text-sm hover:text-white"><i
-                            class="fas fa-chevron-right text-primary mr-2 text-xs"></i>Prestasi</a></li>
-            </ul>
-        </div>
+                    <!-- Supported by -->
+                    <div class="flex flex-col items-center order-1 lg:order-2">
+                        <span class="text-gray-400 text-sm tracking-wide mb-2 whitespace-nowrap">Supported by:</span>
+                        <img src="{{ asset('assets/JagoanSupport.png') }}" alt="Jagoan Support"
+                             class="bg-white h-10 sm:h-12 object-contain transition-transform duration-300 hover:scale-105 rounded-lg max-w-[120px] sm:max-w-[140px]">
+                    </div>
 
-        <div>
-            <h3 class="text-white font-semibold mb-4 text-lg relative inline-block">
-                <span class="relative z-10">Kontak</span>
-                <span class="absolute bottom-0 left-0 w-full h-1 bg-primary rounded-full"></span>
-            </h3>
-            <div class="space-y-3 text-sm">
-                <p class="flex items-start"><i class="fas fa-map-marker-alt text-primary mr-3 mt-1"></i><span>Jl. Raya
-                        Tlogomas No. 3, Malang<br>Jawa Timur, Indonesia</span></p>
-                <p class="flex items-center"><i class="fas fa-phone text-primary mr-3"></i><span>(0341) 123456</span>
-                </p>
-                <p class="flex items-center"><i
-                        class="fas fa-envelope text-primary mr-3"></i><span>info@smkpgri3malang.sch.id</span></p>
-                <p class="flex items-center"><i class="fas fa-clock text-primary mr-3"></i><span>Senin - Jumat: 07:00 -
-                        16:00</span></p>
-            </div>
-        </div>
-
-        <div>
-            <div class="mt-4 rounded-lg overflow-hidden map-container shadow-lg">
-                <div class="bg-gray-800 h-40 flex items-center justify-center">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.6898708661834!2d112.6019448!3d-7.9274244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e78821eaa6b3655%3A0x3cd0ba7cc35c7b6d!2sSMK%20PGRI%203%20Malang!5e0!3m2!1sid!2sid!4v1758358772409!5m2!1sid!2sid"
-                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
-                    </iframe>
+                    <!-- Copyright -->
+                    <div class="text-center order-3 lg:order-3">
+                        <span class="text-gray-400 text-sm whitespace-nowrap">© SMK PGRI 3 MALANG | 2025</span>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- FOOTER BOTTOM BAR -->
-    <div
-        class="relative z-10 mt-8 pt-6 border-t border-gray-700 flex flex-col md:flex-row items-center justify-between gap-4">
-
-        <!-- Social Media -->
-        <div class="flex flex-wrap items-center justify-center md:justify-start gap-3">
-            <span class="text-gray-400 text-sm mr-2">Social Media:</span>
-            <a href="#"
-                class="social-icon w-9 h-9 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center text-white">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="#"
-                class="social-icon w-9 h-9 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center text-white">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="#"
-                class="social-icon w-9 h-9 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center text-white">
-                <i class="fab fa-youtube"></i>
-            </a>
-        </div>
-
-        <!-- Supported by -->
-        <div class="flex flex-col items-center md:items-center text-center">
-            <span class="text-gray-400 text-sm tracking-wide mb-1">Supported by:</span>
-            <img src="{{ asset('assets/JagoanSupport.png') }}" alt="Jagoan Support"
-                class="bg-white h-14 object-contain transition-transform rounded-lg duration-300 hover:scale-105">
-        </div>
-
-        <!-- Copyright -->
-        <div class="text-center md:text-right">
-            <span class="text-gray-400 text-sm">© SMK PGRI 3 MALANG | 2025</span>
         </div>
     </div>
 
     <style>
         .footer-link {
             position: relative;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
             transition: all 0.3s ease;
+            width: fit-content;
         }
 
         .footer-link::after {
@@ -145,7 +193,7 @@
         }
 
         .social-icon:hover {
-            transform: translateY(-5px) scale(1.1);
+            transform: translateY(-2px) scale(1.05);
         }
 
         .map-container {
@@ -155,14 +203,13 @@
 
         .map-container:hover {
             filter: grayscale(0);
-            transform: scale(1.02);
+            transform: scale(1.01);
         }
 
         @keyframes shine {
             0% {
                 background-position: -100% 0;
             }
-
             100% {
                 background-position: 200% 0;
             }

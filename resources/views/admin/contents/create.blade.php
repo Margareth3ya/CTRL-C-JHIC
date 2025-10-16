@@ -109,6 +109,7 @@
                                 <option value="ekstrakulikuler">Ekstrakulikuler</option>
                                 <option value="prestasi">Prestasi</option>
                                 <option value="prestasi2">Prestasi Card2</option>
+                                <option value="kepsek">Foto Kepsek</option>
                             </select>
                             <div class="absolute inset-y-0 right-0 flex items-center pr-3">
                                 <i class="fas fa-chevron-down text-gray-400 group-focus-within:text-blue-500"></i>
