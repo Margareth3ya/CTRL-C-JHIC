@@ -1,8 +1,7 @@
 @extends('layouts.app')
-
 @push('styles')
     <style>
-.font-bebas {
+        .font-bebas {
             font-family: 'Bebas Neue', cursive;
         }
 
@@ -42,15 +41,14 @@
             height: fit-content;
         }
 
-.berita-gambar-utama {
-    display: block;
-    width: 100%;
-    height: 450px;
-    object-fit: cover;
-    border-radius: 1rem;
-    margin-bottom: 2rem;
-}
-
+        .berita-gambar-utama {
+            display: block;
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
 
         .berita-judul {
             font-size: 2rem;
@@ -99,14 +97,6 @@
             margin-bottom: 1.5rem;
         }
 
-        /* Sidebar Berita Lain - STYLE BARU MIRIP HALAMAN BERITA */
-        .berita-sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            height: 100%;
-        }
-
         .sidebar-title {
             font-size: 1.5rem;
             font-weight: 700;
@@ -117,103 +107,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-        }
-
-        /* Card Berita Sidebar - STYLE BARU DENGAN GAMBAR LEBIH LEBAR */
-        .berita-side-card {
-            background: white;
-            border-radius: 1rem;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            border: 1px solid #f3f4f6;
-            display: flex;
-            height: 140px;
-            align-items: stretch;
-        }
-
-        .berita-side-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
-            border-color: #f97316;
-        }
-
-        /* GAMBAR LEBIH LEBAR - UKURAN DIPERBESAR */
-        .berita-side-image-container {
-            width: 180px;
-            /* DIPERBESAR dari 140px - LEBIH LEBAR KE SAMPING */
-            height: 100%;
-            flex-shrink: 0;
-            position: relative;
-            display: flex;
-            align-items: stretch;
-        }
-
-        .berita-side-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            transition: transform 0.3s ease;
-            display: block;
-            flex-shrink: 0;
-        }
-
-        .berita-side-card:hover .berita-side-image {
-            transform: scale(1.05);
-        }
-
-        .berita-side-content {
-            padding: 1.25rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .berita-side-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #1f2937;
-            line-height: 1.4;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .berita-side-excerpt {
-            color: #6b7280;
-            line-height: 1.5;
-            font-size: 0.875rem;
-            margin-bottom: 1rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .berita-read-more {
-            display: inline-flex;
-            align-items: center;
-            color: #f97316;
-            font-weight: 600;
-            text-decoration: none;
-            font-size: 0.875rem;
-            transition: all 0.3s ease;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .berita-read-more:hover {
-            color: #ea580c;
-            transform: translateX(3px);
-        }
-
-        .berita-date-small {
-            color: #9ca3af;
-            font-size: 0.8rem;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
         }
 
         /* Breadcrumb */
@@ -246,8 +139,7 @@
             top: 2rem;
         }
 
-        /* === STYLE BARU UNTUK CARD SAMPING YANG LEBIH BESAR === */
-        /* Container untuk card samping dengan ukuran lebih besar */
+        /* === STYLE BARU YANG KONSISTEN UNTUK SEMUA CARD SAMPING === */
         .berita-side-container {
             display: flex;
             flex-direction: column;
@@ -255,7 +147,7 @@
             height: 100%;
         }
 
-        /* Card Kecil Kanan - UKURAN DIPERBESAR DENGAN GAMBAR LEBIH LEBAR */
+        /* Card Samping - STYLE UNIFORM UNTUK SEMUA */
         .berita-side-card-large {
             background: white;
             border-radius: 1rem;
@@ -263,10 +155,9 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
             border: 1px solid #f3f4f6;
-            flex: 1;
             display: flex;
-            height: 160px;
-            /* DIPERBESAR dari 140px */
+            height: 160px; /* TINGGI KONSISTEN */
+            width: 100%; /* LEBAR PENUH */
         }
 
         .berita-side-card-large:hover {
@@ -275,50 +166,88 @@
             border-color: #f97316;
         }
 
-        /* GAMBAR LEBIH LEBAR - UKURAN DIPERBESAR */
+        /* CONTAINER GAMBAR YANG KONSISTEN */
+        .berita-side-image-container {
+            width: 200px; /* LEBAR GAMBAR KONSISTEN */
+            height: 100%; /* TINGGI MENGIKUTI CARD */
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: stretch;
+        }
+
+        /* GAMBAR YANG KONSISTEN */
         .berita-side-image-large {
-            width: 200px;
-            /* DIPERBESAR dari 160px - LEBIH LEBAR KE SAMPING */
+            width: 100%;
             height: 100%;
             object-fit: cover;
-            flex-shrink: 0;
+            object-position: center;
             transition: transform 0.3s ease;
+            display: block;
         }
 
         .berita-side-card-large:hover .berita-side-image-large {
             transform: scale(1.05);
         }
 
+        /* KONTEN YANG KONSISTEN */
         .berita-side-content-large {
             padding: 1.5rem;
-            /* DIPERBESAR padding */
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            min-width: 0; /* MENCEGAH OVERFLOW */
         }
 
         .berita-side-title-large {
             font-size: 1.2rem;
-            /* DIPERBESAR dari 1.1rem */
             font-weight: 600;
             margin-bottom: 0.5rem;
             color: #1f2937;
             line-height: 1.4;
             font-family: 'Poppins', sans-serif;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .berita-side-excerpt-large {
             color: #6b7280;
             line-height: 1.5;
             font-size: 0.9rem;
-            /* DIPERBESAR dari 0.875rem */
             margin-bottom: 1rem;
             display: -webkit-box;
-            -webkit-line-clamp: 3;
-            /* DIPERBESAR dari 2 baris */
+            -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
+        }
+
+        .berita-read-more {
+            display: inline-flex;
+            align-items: center;
+            color: #f97316;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .berita-read-more:hover {
+            color: #ea580c;
+            transform: translateX(3px);
+        }
+
+        .berita-date-small {
+            color: #9ca3af;
+            font-size: 0.8rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
         }
 
         /* Badge untuk card samping */
@@ -343,20 +272,12 @@
                 gap: 2rem;
             }
 
-            .berita-side-card,
             .berita-side-card-large {
-                height: 140px;
+                height: 150px;
             }
 
-            /* Sesuaikan ukuran gambar untuk tablet */
             .berita-side-image-container {
-                width: 160px;
-                /* Sedikit dikurangi untuk tablet */
-            }
-
-            .berita-side-image-large {
                 width: 180px;
-                /* Sedikit dikurangi untuk tablet */
             }
 
             .side-cards-container {
@@ -365,12 +286,13 @@
 
             .berita-side-container {
                 flex-direction: row;
+                flex-wrap: wrap;
                 gap: 1rem;
             }
 
             .berita-side-card-large {
-                flex: 1;
-                height: auto;
+                flex: 1 1 calc(50% - 0.5rem);
+                min-width: 300px;
             }
         }
 
@@ -397,34 +319,28 @@
                 gap: 0.5rem;
             }
 
-            .berita-side-card,
             .berita-side-card-large {
                 height: 140px;
             }
 
-            /* Sesuaikan ukuran gambar untuk mobile */
             .berita-side-image-container {
                 width: 140px;
-                /* Dikurangi untuk mobile */
             }
 
-            .berita-side-image-large {
-                width: 160px;
-                /* Dikurangi untuk mobile */
-            }
-
-            .berita-side-content,
             .berita-side-content-large {
                 padding: 1rem;
             }
 
-            .berita-side-title,
             .berita-side-title-large {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
 
             .berita-side-container {
                 flex-direction: column;
+            }
+
+            .berita-side-card-large {
+                flex: 1 1 100%;
             }
         }
 
@@ -449,24 +365,16 @@
                 font-size: 1rem;
             }
 
-            .berita-side-card,
             .berita-side-card-large {
                 height: 120px;
                 flex-direction: column;
             }
 
-            /* Untuk mobile kecil, gambar mengambil lebar penuh */
             .berita-side-image-container {
                 width: 100%;
                 height: 80px;
             }
 
-            .berita-side-image-large {
-                width: 100%;
-                height: 80px;
-            }
-
-            .berita-side-content,
             .berita-side-content-large {
                 padding: 0.75rem;
             }
@@ -479,7 +387,6 @@
                 -webkit-line-clamp: 2;
             }
         }
-        
     </style>
 @endpush
 
@@ -525,39 +432,41 @@
                     </div>
 
                     <!-- Sidebar Berita Lain -->
-                    <div class="side-cards-container">
-                        <h3 class="sidebar-title">BERITA LAINNYA</h3>
-                        <div class="berita-side-container">
-                            @foreach ($beritaLain as $item)
-                                <div class="berita-side-card-large">
-                                    <div class="relative">
-                                        <img src="{{ asset('assets/berita/' . trim(str_replace(['[', ']', '"'], '', $item->image))) }}"
-                                            class="berita-side-image-large">
-                                        <div class="berita-badge-side">{{ strtoupper($item->category ?? 'BERITA') }}</div>
-                                    </div>
-                                    <div class="berita-side-content-large">
-                                        <div>
-                                            <div class="berita-date-small">
-                                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                                    </path>
-                                                </svg>
-                                                {{ $item->created_at->translatedFormat('d F Y') }}
-                                            </div>
-                                            <h4 class="berita-side-title-large">{{ $item->title }}</h4>
-                                            <p class="berita-side-excerpt-large">
-                                                {{ Str::limit(strip_tags($item->content), 120) }}
-                                            </p>
-                                        </div>
-                                        <a href="{{ route('berita.show', $item->id) }}" class="berita-read-more">
-                                            Baca Selengkapnya →
-                                        </a>
-                                    </div>
-                                </div>
-                            @endforeach
+<div class="side-cards-container">
+    <h3 class="sidebar-title">BERITA LAINNYA</h3>
+    <div class="berita-side-container">
+        @foreach ($beritaLain as $item)
+            <div class="berita-side-card-large">
+                <!-- GAMBAR DENGAN CONTAINER YANG KONSISTEN -->
+                <div class="berita-side-image-container"> <!-- TAMBAHKAN INI -->
+                    <img src="{{ asset('assets/berita/' . trim(str_replace(['[', ']', '"'], '', $item->image))) }}" 
+                         class="berita-side-image-large">
+                    <div class="berita-badge-side">{{ strtoupper($item->category ?? 'BERITA') }}</div>
+                </div>
+                
+                <div class="berita-side-content-large">
+                    <div>
+                        <div class="berita-date-small">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            {{ $item->created_at->translatedFormat('d F Y') }}
                         </div>
+                        <h4 class="berita-side-title-large">{{ $item->title }}</h4>
+                        <p class="berita-side-excerpt-large">
+                            {{ Str::limit(strip_tags($item->content), 120) }}
+                        </p>
                     </div>
+                    <a href="{{ route('berita.show', $item->id) }}" class="berita-read-more">
+                        Baca Selengkapnya →
+                    </a>
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
                 </div>
             </div>
         </section>
