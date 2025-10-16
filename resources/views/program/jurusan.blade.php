@@ -1,88 +1,88 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen bg-white-100 py-8">
+<div class="min-h-screen bg-white-100 py-4 md:py-8">
     <!-- Background Circles (tanpa blur) -->
-<div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-    <!-- Circle 1 - Orange (Top Left) -->
-    <div class="absolute w-96 h-96 bg-orange-200 rounded-full opacity-40 -top-40 -left-40"></div>
+    <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+        <!-- Circle 1 - Orange (Top Left) -->
+        <div class="absolute w-64 h-64 md:w-96 md:h-96 bg-orange-200 rounded-full opacity-40 -top-20 -left-20 md:-top-40 md:-left-40"></div>
 
-    <!-- Circle 2 - Blue (Top Right) -->
-    <div class="absolute w-80 h-80 bg-blue-200 rounded-full opacity-30 -top-32 -right-32"></div>
+        <!-- Circle 2 - Blue (Top Right) -->
+        <div class="absolute w-56 h-56 md:w-80 md:h-80 bg-blue-200 rounded-full opacity-30 -top-16 -right-16 md:-top-32 md:-right-32"></div>
 
-    <!-- Circle 3 - Orange (Bottom Left) -->
-    <div class="absolute w-72 h-72 bg-orange-100 rounded-full opacity-50 bottom-32 left-32"></div>
+        <!-- Circle 3 - Orange (Bottom Left) -->
+        <div class="absolute w-48 h-48 md:w-72 md:h-72 bg-orange-100 rounded-full opacity-50 bottom-16 left-16 md:bottom-32 md:left-32"></div>
 
-    <!-- Circle 4 - Blue (Bottom Right) -->
-    <div class="absolute w-96 h-96 bg-blue-100 rounded-full opacity-30 bottom-48 right-48"></div>
+        <!-- Circle 4 - Blue (Bottom Right) -->
+        <div class="absolute w-64 h-64 md:w-96 md:h-96 bg-blue-100 rounded-full opacity-30 bottom-24 right-24 md:bottom-48 md:right-48"></div>
 
-    <!-- Tambahan untuk kedalaman -->
-    <div class="absolute w-64 h-64 bg-orange-300 rounded-full opacity-20 top-1/4 left-1/4"></div>
-    <div class="absolute w-56 h-56 bg-blue-300 rounded-full opacity-20 top-1/3 right-1/3"></div>
-</div>
+        <!-- Tambahan untuk kedalaman -->
+        <div class="absolute w-40 h-40 md:w-64 md:h-64 bg-orange-300 rounded-full opacity-20 top-1/4 left-1/4"></div>
+        <div class="absolute w-36 h-36 md:w-56 md:h-56 bg-blue-300 rounded-full opacity-20 top-1/3 right-1/3"></div>
+    </div>
 
-    <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-center text-5xl font-bebas text-gray-800 mb-8">DEPARTEMEN UNGGULAN SKARIGA</h2>
+    <div class="max-w-7xl mx-auto px-3 sm:px-4">
+        <h2 class="text-center text-3xl sm:text-4xl md:text-5xl font-bebas text-gray-800 mb-6 md:mb-8">DEPARTEMEN UNGGULAN SKARIGA</h2>
 
         <!-- Search Bar -->
-        <div class="mb-8 max-w-2xl mx-auto relative">
+        <div class="mb-6 md:mb-8 max-w-2xl mx-auto relative z-30">
             <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <i class="fas fa-search text-gray-400"></i>
+                    <i class="fas fa-search text-gray-400 text-sm md:text-base"></i>
                 </div>
                 <input 
                     type="text" 
                     id="searchInput"
                     placeholder="Cari jurusan berdasarkan nama, keterampilan, atau bidang pekerjaan..."
-                    class="w-full pl-10 pr-10 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 shadow-sm"
+                    class="w-full pl-10 pr-10 py-3 md:py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 shadow-sm text-sm md:text-base"
                 >
                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
                     <button 
                         id="clearSearch"
-                        class="hidden text-gray-400 hover:text-gray-600 transition-colors"
+                        class="hidden text-gray-400 hover:text-gray-600 transition-colors p-1"
                     >
-                        <i class="fas fa-times"></i>
+                        <i class="fas fa-times text-sm md:text-base"></i>
                     </button>
                 </div>
             </div>
-            <div id="searchResults" class="absolute left-0 right-0 mt-1 bg-white border border-gray-200 rounded-xl shadow-lg max-h-60 overflow-y-auto z-50 hidden"></div>
+            <div id="searchResults" class="absolute left-0 right-0 mt-1 bg-white border border-gray-200 rounded-xl shadow-lg max-h-60 overflow-y-auto z-40 hidden"></div>
         </div>
 
         <!-- Banner Rekomendasi -->
-        <div id="recommendationBanner" class="hidden mb-8 bg-gradient-to-r from-orange-50 to-blue-50 border-l-4 border-orange-500 p-6 rounded-lg">
+        <div id="recommendationBanner" class="hidden mb-6 md:mb-8 bg-gradient-to-r from-orange-50 to-blue-50 border-l-4 border-orange-500 p-4 md:p-6 rounded-lg relative z-20">
             <div class="flex items-center justify-between">
-                <div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">
+                <div class="flex-1">
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-2">
                         <i class="fas fa-star text-orange-500 mr-2"></i>
                         Jurusan Rekomendasi untuk Anda
                     </h3>
-                    <p class="text-gray-600" id="recommendedMajorText"></p>
+                    <p class="text-gray-600 text-sm md:text-base" id="recommendedMajorText"></p>
                 </div>
-                <button onclick="closeRecommendationBanner()" class="text-gray-400 hover:text-gray-600 transition-colors">
-                    <i class="fas fa-times text-xl"></i>
+                <button onclick="closeRecommendationBanner()" class="text-gray-400 hover:text-gray-600 transition-colors flex-shrink-0 ml-2">
+                    <i class="fas fa-times text-lg md:text-xl"></i>
                 </button>
             </div>
         </div>
 
-        <div class="space-y-8">
+        <div class="space-y-6 md:space-y-8 relative z-10">
             @foreach($departments as $deptKey => $dept)
-            <div class="relative bg-white rounded-2xl overflow-hidden shadow-2xl min-h-[400px]" id="department-{{ $deptKey }}">
+            <div class="relative bg-white rounded-2xl overflow-hidden shadow-xl md:shadow-2xl min-h-[300px] md:min-h-[400px] z-0" id="department-{{ $deptKey }}">
 
                 {{-- COVER DEPARTEMEN --}}
-                <div id="cover-{{ $deptKey }}" class="transition-all duration-500 ease-in-out">
+                <div id="cover-{{ $deptKey }}" class="transition-all duration-500 ease-in-out z-0">
                     <div onclick="showFirstMajor('{{ $deptKey }}')" class="cursor-pointer h-full relative">
-                        <img src="{{ $dept['cover'] }}" alt="{{ $dept['title'] }}" class="w-full h-[400px] object-cover">
-                        <div class="absolute inset-0 bg-black/50 flex flex-col justify-center items-start px-8">
-                            <span class="text-white text-lg mb-2 font-medium">Departemen</span>
-                            <h3 class="text-white text-4xl font-bold mb-3">{{ strtoupper($dept['title']) }}</h3>
-                            <p class="text-white text-base">Klik untuk melihat jurusan →</p>
+                        <img src="{{ $dept['cover'] }}" alt="{{ $dept['title'] }}" class="w-full h-[300px] md:h-[400px] object-cover">
+                        <div class="absolute inset-0 bg-black/50 flex flex-col justify-center items-start px-4 md:px-8">
+                            <span class="text-white text-sm md:text-lg mb-1 md:mb-2 font-medium">Departemen</span>
+                            <h3 class="text-white text-2xl md:text-4xl font-bold mb-2 md:mb-3">{{ strtoupper($dept['title']) }}</h3>
+                            <p class="text-white text-xs md:text-base">Klik untuk melihat jurusan →</p>
                         </div>
                     </div>
                 </div>
 
                 {{-- DETAIL JURUSAN --}}
                 <div id="detail-{{ $deptKey }}" 
-                     class="absolute inset-0 bg-white rounded-2xl z-50 opacity-0 pointer-events-none transition-all duration-500">
+                     class="absolute inset-0 bg-white rounded-2xl z-50 opacity-0 pointer-events-none transition-all duration-500 overflow-hidden">
 
                     {{-- CARD JURUSAN --}}
                     <div class="department-card h-full" id="department-card-{{ $deptKey }}"></div>
@@ -256,7 +256,7 @@ function displaySearchResults(results) {
              onclick="openSearchResult(${JSON.stringify(result).replace(/"/g, '&quot;')})">
             <div class="flex justify-between items-start mb-1">
                 <h4 class="font-semibold text-gray-800 text-sm">${result.major.name}</h4>
-                <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full whitespace-nowrap">${result.deptName}</span>
+                <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full whitespace-nowrap ml-2">${result.deptName}</span>
             </div>
             <p class="text-xs text-gray-600 line-clamp-2 mb-1">${result.major.desc || ''}</p>
             <div class="flex items-center text-xs text-gray-500">
@@ -381,45 +381,6 @@ function checkRecommendedMajor() {
     
     // Jika data tidak valid atau sudah kedaluwarsa, hapus dari localStorage
     removeRecommendation();
-}
-
-function startCountdownTimer(timeLeft) {
-    const bannerText = document.getElementById('recommendedMajorText');
-    if (!bannerText) return;
-    
-    // Hapus interval sebelumnya jika ada
-    if (countdownInterval) {
-        clearInterval(countdownInterval);
-    }
-    
-    let remainingTime = Math.floor(timeLeft / 1000);
-    
-    // Update immediately
-    updateCountdownDisplay(remainingTime);
-    
-    // Update every second
-    countdownInterval = setInterval(() => {
-        remainingTime--;
-        
-        if (remainingTime <= 0) {
-            clearInterval(countdownInterval);
-            countdownInterval = null;
-            removeRecommendation();
-            return;
-        }
-        
-        updateCountdownDisplay(remainingTime);
-    }, 1000);
-}
-
-function updateCountdownDisplay(seconds) {
-    const bannerText = document.getElementById('recommendedMajorText');
-    if (!bannerText) return;
-    
-    const originalContent = bannerText.innerHTML.split('<br><small')[0];
-    const countdownHtml = `<br><small class="recommendation-timer">⏰ Rekomendasi ini akan hilang dalam <strong>${seconds}</strong> detik</small>`;
-    
-    bannerText.innerHTML = originalContent + countdownHtml;
 }
 
 function removeRecommendation() {
@@ -616,10 +577,10 @@ function renderMajorDetail(deptId, index) {
         <div class="major-card closing-card">
             <div class="major-inner relative">
                 <img src="${departmentData[deptId].cover}" alt="${departmentData[deptId].title}" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-center items-center text-center px-8">
-                    <h3 class="text-white text-4xl font-bold mb-6">Selamat Menjelajahi!</h3>
-                    <p class="text-white text-xl mb-8">Anda sudah melihat semua jurusan di ${departmentData[deptId].title}</p>
-                    <button onclick="returnToCover('${deptId}')" class="bg-white text-gray-900 px-8 py-4 rounded-xl font-semibold shadow-2xl hover:bg-gray-200 transition-all transform hover:scale-105 active:scale-95">
+                <div class="absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-center items-center text-center px-4 md:px-8">
+                    <h3 class="text-white text-2xl md:text-4xl font-bold mb-4 md:mb-6">Selamat Menjelajahi!</h3>
+                    <p class="text-white text-base md:text-xl mb-6 md:mb-8">Anda sudah melihat semua jurusan di ${departmentData[deptId].title}</p>
+                    <button onclick="returnToCover('${deptId}')" class="bg-white text-gray-900 px-6 py-3 md:px-8 md:py-4 rounded-xl font-semibold shadow-2xl hover:bg-gray-200 transition-all transform hover:scale-105 active:scale-95 text-sm md:text-base">
                         ← Kembali ke Departemen
                     </button>
                 </div>
@@ -644,13 +605,18 @@ function renderMajorDetail(deptId, index) {
             <div class="image-section">
                 <img src="${major.image}" alt="${major.name}">
                 ${isRecommended ? `
-                <div class="absolute top-4 left-4 bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold animate-pulse">
+                <div class="absolute top-2 left-2 md:top-4 md:left-4 bg-orange-500 text-white px-2 py-1 md:px-3 md:py-1 rounded-full text-xs md:text-sm font-semibold animate-pulse">
                     ⭐ Rekomendasi
                 </div>
                 ` : ''}
             </div>
             <div class="content-section">
-                <div class="content-header">
+                <!-- Mobile Header - Nama Jurusan di Mobile -->
+                <div class="mobile-major-header md:hidden">
+                    <h3 class="mobile-major-title">${major.name}</h3>
+                </div>
+
+                <div class="content-header hidden md:block">
                     <h3 class="major-title">${major.name}</h3>
                     <p class="major-description">${major.desc}</p>
                 </div>
@@ -679,6 +645,10 @@ function renderMajorDetail(deptId, index) {
                          <div class="career-item">Konsultan bidang terkait</div>
                          <div class="career-item">Wirausahawan kreatif</div>`}
                     </div>
+                </div>
+
+                <div class="mobile-description md:hidden mt-4">
+                    <p class="text-gray-600 text-sm leading-relaxed">${major.desc}</p>
                 </div>
 
                 <div class="decor-icon"><i data-lucide="cpu"></i></div>
@@ -805,13 +775,18 @@ window.clearSearchResults = clearSearchResults;
 </script>
 
 <style>
-    /* Search Bar Styles */
-/* Search Bar Styles - Higher z-index */
+/* Z-Index Management */
+.min-h-screen {
+    position: relative;
+    z-index: 1;
+}
+
+/* Search Bar Styles */
 .search-container {
     position: relative;
     width: 100%;
     max-width: 100%;
-    z-index: 1000; /* Tingkatkan z-index */
+    z-index: 30;
 }
 
 #searchInput {
@@ -821,7 +796,7 @@ window.clearSearchResults = clearSearchResults;
     transition: all 0.3s ease;
     box-sizing: border-box;
     position: relative;
-    z-index: 1001; /* Lebih tinggi */
+    z-index: 31;
 }
 
 #searchResults {
@@ -834,8 +809,8 @@ window.clearSearchResults = clearSearchResults;
     max-width: 100%;
     left: 0;
     right: 0;
-    z-index: 1002; /* Lebih tinggi lagi */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* Tambah shadow untuk emphasis */
+    z-index: 40;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
 #searchInput:focus {
@@ -864,18 +839,6 @@ window.clearSearchResults = clearSearchResults;
 }
 
 /* Search Results Styles */
-#searchResults {
-    position: absolute;
-    width: 100%;
-    background: white;
-    border: 1px solid #e5e7eb;
-    margin-top: 4px;
-    box-sizing: border-box;
-    max-width: 100%;
-    left: 0;
-    right: 0;
-}
-
 .search-result-item {
     border-bottom: 1px solid #f3f4f6;
     transition: all 0.2s ease;
@@ -1059,7 +1022,33 @@ window.clearSearchResults = clearSearchResults;
     flex-direction: column;
     justify-content: center;
     overflow-y: auto;
+    position: relative;
 }
+
+/* Mobile Header untuk Nama Jurusan */
+.mobile-major-header {
+    display: none;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f97316;
+}
+
+.mobile-major-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #111;
+    margin: 0;
+    text-align: center;
+}
+
+.mobile-description {
+    display: none;
+    background: #f8fafc;
+    padding: 12px;
+    border-radius: 8px;
+    border-left: 3px solid #f97316;
+}
+
 .major-title {
     font-size: 2.2rem;
     font-weight: 800;
@@ -1090,7 +1079,10 @@ window.clearSearchResults = clearSearchResults;
     stroke-width: 2.2;
     flex-shrink: 0;
 }
-.section-content { color: #444; }
+.section-content { 
+    color: #444; 
+    max-height: none;
+}
 .skill-item, .career-item {
     padding: 8px 0 8px 14px;
     border-bottom: 1px solid #eee;
@@ -1119,17 +1111,60 @@ window.clearSearchResults = clearSearchResults;
     color: #000;
 }
 
-/* RESPONSIVE */
+/* RESPONSIVE BREAKPOINTS */
 @media (max-width: 1024px) {
-    .major-inner { flex-direction: column; }
-    .image-section { width: 100%; height: 250px; }
-    .content-section { width: 100%; padding: 30px; }
-    .major-title { font-size: 1.8rem; }
+    .major-inner { 
+        flex-direction: column; 
+        height: auto;
+        min-height: 100%;
+    }
+    .image-section { 
+        width: 100%; 
+        height: 250px; 
+    }
+    .content-section { 
+        width: 100%; 
+        padding: 30px; 
+        height: auto;
+        overflow-y: visible;
+    }
+    .major-title { 
+        font-size: 1.8rem; 
+    }
+    .decor-icon {
+        bottom: 15px;
+        right: 25px;
+    }
+    .decor-icon i {
+        width: 70px;
+        height: 70px;
+    }
 }
+
 @media (max-width: 768px) {
-    .content-section { padding: 25px; }
-    .major-title { font-size: 1.5rem; }
-    .major-description { font-size: 1rem; }
+    .content-section { 
+        padding: 25px 20px; 
+        height: auto;
+        overflow-y: visible;
+    }
+    
+    /* Tampilkan mobile header dan sembunyikan desktop header */
+    .mobile-major-header {
+        display: block;
+    }
+    .mobile-description {
+        display: block;
+    }
+    .content-header {
+        display: none;
+    }
+    
+    .major-title { 
+        font-size: 1.5rem; 
+    }
+    .major-description { 
+        font-size: 1rem; 
+    }
     #searchInput {
         font-size: 16px;
         padding: 12px 40px 12px 40px;
@@ -1140,11 +1175,201 @@ window.clearSearchResults = clearSearchResults;
     .search-result-item {
         padding: 12px;
     }
+    .section-title {
+        font-size: 1.1rem;
+    }
+    .section-title .icon {
+        width: 20px;
+        height: 20px;
+    }
+    .decor-icon {
+        bottom: 10px;
+        right: 20px;
+    }
+    .decor-icon i {
+        width: 60px;
+        height: 60px;
+    }
+    
+    /* Adjust sections for mobile */
+    .skills-section,
+    .career-section {
+        margin-bottom: 20px;
+    }
+    
+    /* Enable scrolling for the entire content section on mobile */
+    .department-card {
+        height: 100%;
+        overflow-y: auto;
+    }
+    
+    .major-inner {
+        min-height: 100vh;
+        height: auto;
+    }
+    
+    .content-section {
+        max-height: none;
+        overflow-y: visible;
+    }
 }
+
+@media (max-width: 640px) {
+    .major-inner {
+        border-radius: 16px;
+    }
+    .content-section {
+        padding: 20px 16px;
+    }
+    
+    .mobile-major-title {
+        font-size: 1.3rem;
+    }
+    
+    .mobile-description {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+    
+    .section-title {
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+    .skill-item, .career-item {
+        padding: 6px 0 6px 12px;
+        font-size: 0.9rem;
+    }
+    .decor-icon {
+        display: none;
+    }
+    
+    /* Better spacing for mobile */
+    .skills-section {
+        margin-bottom: 16px;
+    }
+    
+    .career-section {
+        margin-bottom: 16px;
+    }
+}
+
 @media (max-width: 480px) {
-    .content-section { padding: 20px; }
-    .major-title { font-size: 1.3rem; }
-    .major-description { font-size: 0.95rem; }
+    .content-section { 
+        padding: 16px 12px; 
+    }
+    
+    .mobile-major-title { 
+        font-size: 1.2rem; 
+    }
+    
+    .mobile-description { 
+        font-size: 0.85rem; 
+        line-height: 1.4;
+        padding: 10px;
+    }
+    
+    .section-title {
+        font-size: 0.95rem;
+    }
+    .section-title .icon {
+        width: 18px;
+        height: 18px;
+    }
+    .skill-item, .career-item {
+        font-size: 0.85rem;
+        padding: 5px 0 5px 10px;
+    }
+    
+    /* Mobile-specific touch improvements */
+    .major-card {
+        cursor: default;
+    }
+    
+    /* Better touch targets */
+    .skill-item, .career-item {
+        min-height: 24px;
+        display: flex;
+        align-items: center;
+    }
+    
+    /* Reduce image height on very small screens */
+    .image-section {
+        height: 200px;
+    }
+}
+
+/* Landscape orientation for mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .department-card {
+        height: 100vh;
+        overflow-y: auto;
+    }
+    .image-section {
+        height: 200px;
+    }
+    .content-section {
+        padding: 20px;
+        overflow-y: visible;
+    }
+    
+    /* Show mobile header in landscape too */
+    .mobile-major-header {
+        display: block;
+    }
+    .mobile-description {
+        display: block;
+    }
+    .content-header {
+        display: none;
+    }
+}
+
+/* High DPI screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .image-section img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .major-inner,
+    .department-card,
+    .search-result-item,
+    #recommendationBanner,
+    #searchInput {
+        transition: none;
+        animation: none;
+    }
+}
+
+/* Print styles */
+@media print {
+    .department-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+    .major-inner {
+        flex-direction: column;
+    }
+    .image-section {
+        width: 100%;
+        height: 200px;
+    }
+    .content-section {
+        width: 100%;
+    }
+    .mobile-major-header {
+        display: block;
+    }
+    .mobile-description {
+        display: block;
+    }
+    .content-header {
+        display: none;
+    }
 }
 </style>
 @endsection
