@@ -136,14 +136,17 @@
     border-color: #f97316;
 }
 
-/* Gambar */
 .berita-side-image {
-    width: 40%;
-    height: 120px;
-    object-fit: cover;
-    flex-shrink: 0;
-    transition: transform 0.3s ease;
-}
+            width: 50%; /* Diperlebar dari 45% menjadi 50% */
+            min-width: 200px; /* Lebar minimum yang lebih besar */
+            max-width: 200px; /* Lebar maksimum */
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            flex-shrink: 0; /* Mencegah gambar menyusut */
+        }
+
+
 
 .berita-side-card:hover .berita-side-image {
     transform: scale(1.05);
@@ -478,9 +481,9 @@
 
                     <!-- === CIRCLE BACKGROUND UNTUK SECTION INI === -->
         <div class="absolute inset-0 -z-[1] pointer-events-none">
-            <div class="absolute w-96 h-96 bg-orange-200 rounded-full opacity-40-top-20 left-1/4"></div>
+            <div class="absolute w-96 h-96 bg-orange-100 rounded-full opacity-10-top-20 left-1/9"></div>
             <div class="absolute w-80 h-80 bg-blue-200 rounded-full opacity-30 top-1/2 right-1/4"></div>
-            <div class="absolute w-72 h-72 bg-orange-100 rounded-full opacity-40 bottom-0 left-1/3"></div>
+            <div class="absolute w-72 h-72 bg-orange-100 rounded-full opacity-40 bottom-0 left-1/2"></div>
         </div>
 
             <h2 class="berita-title font-bebas">{{ $section['title'] }}</h2>
