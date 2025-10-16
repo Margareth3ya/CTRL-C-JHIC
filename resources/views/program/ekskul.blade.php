@@ -211,6 +211,8 @@
         });
     </script>
 
+@endsection
+@push('styles')
     <style>
         .font-bebas {
             font-family: 'Bebas Neue', cursive;
@@ -376,4 +378,4 @@
             }
         }
     </style>
-@endsection
+@endpush
