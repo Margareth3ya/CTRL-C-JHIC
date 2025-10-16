@@ -1,8 +1,9 @@
 <?php
-// app/Http/Controllers/AuthController.php
+
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\AdminLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -26,6 +27,11 @@ class AuthController extends Controller
         if ($user && Hash::check($request->password, $user->password)) {
             Auth::login($user);
             $request->session()->regenerate();
+
+            AdminLog::create([
+                'admin_name' => $user->name ?? $user->username,
+                'activity' => 'Login ke sistem',
+            ]);
 
             return redirect()->intended('/admin/dashboard');
         }
