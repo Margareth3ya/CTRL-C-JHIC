@@ -3,14 +3,29 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Content;
+use App\Models\AdminLog;
 
 class ContentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $contents = Content::latest()->get();
-        return view('admin.contents.index', compact('contents'));
+        $query = Content::orderBy('created_at', 'desc');
+    
+        if ($request->has('category') && $request->category != '') {
+            $query->where('folder', $request->category);
+        }
+    
+        if ($request->has('search') && $request->search != '') {
+            $query->where(function($q) use ($request) {
+                $q->where('title', 'like', '%' . $request->search . '%')
+                ->orWhere('body', 'like', '%' . $request->search . '%');
+        });
     }
+    
+    $contents = $query->paginate(10);
+    
+    return view('admin.contents.index', compact('contents'));
+}
 
     public function create()
     {
@@ -19,6 +34,11 @@ class ContentController extends Controller
 
     public function store(Request $request)
     {
+        AdminLog::create([
+                'admin_name' => $user->name ?? $user->username,
+                'activity' => 'Menambahkan Konten',
+        ]);
+        
         $request->validate([
             'title' => 'required|string|max:255',
             'body' => 'required|string',
@@ -59,6 +79,11 @@ class ContentController extends Controller
 
     public function update(Request $request, $id)
     {
+        AdminLog::create([
+                'admin_name' => $user->name ?? $user->username,
+                'activity' => 'Mengupdate data',
+        ]);
+
         $content = Content::findOrFail($id);
 
         $data = $request->validate([
@@ -90,6 +115,11 @@ class ContentController extends Controller
 
     public function destroy($id)
     {
+        AdminLog::create([
+                'admin_name' => $user->name ?? $user->username,
+                'activity' => 'Mengupdate data',
+        ]);
+
         $content = Content::findOrFail($id);
         $path = public_path("assets/{$content->folder}/{$content->image}");
         if(file_exists($path))

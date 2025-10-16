@@ -4,57 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pesan Baru dari Form Kontak</title>
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #fdfcfb, #e2d1c3);
-            color: #333;
-            padding: 30px;
-            margin: 0;
-        }
-        .container {
-            max-width: 600px;
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-            padding: 30px;
-            margin: 0 auto;
-        }
-        h2 {
-            background: linear-gradient(135deg, #2563eb, #f97316);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 22px;
-            margin-bottom: 20px;
-        }
-        p {
-            font-size: 15px;
-            line-height: 1.6;
-            margin: 10px 0;
-        }
-        strong {
-            color: #111827;
-        }
-        .footer {
-            border-top: 1px solid #e5e7eb;
-            margin-top: 30px;
-            padding-top: 10px;
-            text-align: center;
-            font-size: 13px;
-            color: #6b7280;
-        }
-    </style>
 </head>
-<body>
-    <div class="container">
-        <h2>Pesan dari: {{ $data['nama'] }}</h2>
-        <p><strong>Email:</strong> {{ $data['email'] }}</p>
-        <p><strong>Subjek:</strong> {{ $data['subjek'] }}</p>
-        <p><strong>Pesan:</strong><br>{{ $data['pesan'] }}</p>
+<body style="margin:0; padding:0; background-color:#f9fafb; font-family:'Poppins',sans-serif;">
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color:#f9fafb; padding:40px 0;">
+        <tr>
+            <td align="center">
+                <table width="600" cellpadding="0" cellspacing="0" role="presentation" style="background-color:white; border-radius:16px; overflow:hidden; box-shadow:0 6px 18px rgba(0,0,0,0.1);">
+                    <!-- Header -->
+                    <tr>
+                        <td style="background:linear-gradient(135deg,#f97316,#fb923c); padding:20px 0; text-align:center;">
+                            <h1 style="color:white; font-size:20px; margin:10px 0 0 0; font-weight:600;">
+                                Pesan Baru dari Website SMK PGRI 3
+                            </h1>
+                        </td>
+                    </tr>
 
-        <div class="footer">
-            Pesan ini dikirim melalui formulir kontak di website SMK PGRI 3.
-        </div>
-    </div>
+                    <!-- Body -->
+                    <tr>
+                        <td style="padding:30px 40px;">
+                            <h2 style="font-size:20px; color:#111827; margin-bottom:15px;">📩 Detail Pesan</h2>
+                            
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:15px; color:#374151;">
+                                <tr>
+                                    <td style="padding:6px 0; width:120px; color:#6b7280; font-weight:500;">👤 Dari</td>
+                                    <td style="font-weight:600;">{{ $data['nama'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:6px 0; color:#6b7280; font-weight:500;">📧 Email</td>
+                                    <td><a href="mailto:{{ $data['email'] }}" style="color:#2563eb; text-decoration:none;">{{ $data['email'] }}</a></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:6px 0; color:#6b7280; font-weight:500;">🏷️ Subjek</td>
+                                    <td>{{ $data['subjek'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:6px 0; color:#6b7280; font-weight:500;">📅 Dikirim</td>
+                                    <td>{{ $data['waktu'] }}</td>
+                                </tr>
+                            </table>
+
+                            <div style="margin-top:25px; padding:20px; background-color:#f3f4f6; border-radius:12px;">
+                                <p style="font-weight:600; color:#111827; margin:0 0 8px;">💬 Pesan:</p>
+                                <p style="color:#374151; white-space:pre-line; margin:0;">{{ $data['pesan'] }}</p>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td style="background-color:#f9fafb; text-align:center; padding:15px; font-size:13px; color:#6b7280; border-top:1px solid #e5e7eb;">
+                            Pesan ini dikirim melalui formulir <strong>Kontak Kami</strong> di website <strong>SMK PGRI 3 MALANG</strong>.<br>
+                            &copy; {{ date('Y') }} SMK PGRI 3 MALANG. All rights reserved.
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>

@@ -36,7 +36,7 @@ export async function initVisitorChart(apiUrl, labels, data) {
             chart.data.datasets[0].data = newData.map(d => d.total);
             chart.update();
 
-            indicator.textContent = "Live updating ✅";
+            indicator.textContent = "Server APIs Connected";
             indicator.classList.remove('text-red-500');
             indicator.classList.add('text-green-500');
         } catch {
