@@ -42,7 +42,7 @@
         </section>
 
         <!-- Section: Ekstrakurikuler -->
-        <section class="py-16 md:py-20 px-4">
+        <section id="ekskul-section" class="py-16 md:py-20 px-4">
             <h2
                 class="text-4xl md:text-5xl font-bebas text-center mb-12 bg-gradient-to-br from-gray-800 to-gray-700 bg-clip-text text-transparent relative">
                 EKSTRAKURIKULER
@@ -51,7 +51,8 @@
             </h2>
 
             <!-- Content -->
-            <div class="ekskul-content">
+            <div id="ekskul-content">
+                <!-- Grid untuk ekstrakurikuler - 6 card per halaman -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
                     @forelse ($eks as $item)
                         @php
@@ -62,13 +63,14 @@
                             $firstImage = $images[0];
                         @endphp
                         <div 
-                            class="bg-white rounded-2xl overflow-hidden shadow-xl transition-all duration-400 border border-gray-100 hover:-translate-y-3 hover:shadow-2xl hover:border-orange-500 relative scroll-reveal"
+                            class="ekskul-card bg-white rounded-2xl overflow-hidden shadow-xl transition-all duration-400 border border-gray-100 hover:-translate-y-3 hover:shadow-2xl hover:border-orange-500 relative scroll-reveal"
                             style="opacity: 0; transform: translateY(20px);"
+                            data-card-id="{{ $item->id }}"
                         >
                             <div class="relative h-64 overflow-hidden">
                                 <img src="{{ asset('assets/ekstrakulikuler' . '/' . $firstImage) }}"
                                     alt="{{ $item->title }}"
-                                    class="w-full h-full object-cover transition-transform duration-400 ease-in-out hover:scale-105">
+                                    class="w-full h-full object-cover transition-transform duration-400 ease-in-out">
                                 <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/70"></div>
                                 <div
                                     class="absolute top-4 right-4 bg-gradient-to-br from-orange-500 to-orange-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg shadow-orange-500/30 z-10">
@@ -89,15 +91,14 @@
                     @endforelse
                 </div>
                 
-                <!-- Pagination dengan style seperti prestasi -->
+                <!-- Pagination -->
                 @if($eks->hasPages())
                 <div class="ekskul-navigation flex justify-center items-center mt-12 gap-6">
                     <!-- Previous Button -->
                     <button 
-                        id="prev-btn" 
                         class="nav-button {{ $eks->onFirstPage() ? 'nav-button--disabled' : '' }}"
                         {{ $eks->onFirstPage() ? 'disabled' : '' }}
-                        onclick="window.location.href='{{ $eks->previousPageUrl() }}'"
+                        data-url="{{ $eks->previousPageUrl() }}"
                     >
                         ← Sebelumnya
                     </button>
@@ -113,10 +114,9 @@
 
                     <!-- Next Button -->
                     <button 
-                        id="next-btn" 
                         class="nav-button {{ !$eks->hasMorePages() ? 'nav-button--disabled' : '' }}"
                         {{ !$eks->hasMorePages() ? 'disabled' : '' }}
-                        onclick="window.location.href='{{ $eks->nextPageUrl() }}'"
+                        data-url="{{ $eks->nextPageUrl() }}"
                     >
                         Selanjutnya →
                     </button>
@@ -128,16 +128,46 @@
     </div>
 
     <script>
-        // Scroll reveal animation
+        // Fungsi untuk menginisialisasi animasi card
+        function initCardAnimations() {
+            const cards = document.querySelectorAll('.ekskul-card');
+            
+            cards.forEach((card, index) => {
+                // Hover effect untuk gambar
+                const img = card.querySelector('img');
+                if (img) {
+                    card.addEventListener('mouseenter', () => {
+                        img.style.transform = 'scale(1.05)';
+                    });
+                    card.addEventListener('mouseleave', () => {
+                        img.style.transform = 'scale(1)';
+                    });
+                }
+                
+                // Click effect
+                card.addEventListener('click', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.02)';
+                    setTimeout(() => {
+                        this.style.transform = 'translateY(-3px)';
+                    }, 150);
+                });
+            });
+        }
+
+        // Scroll reveal animation dengan delay bertahap
         function initScrollReveal() {
             const revealElements = document.querySelectorAll('.scroll-reveal');
 
             const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
+                entries.forEach((entry, index) => {
                     if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                        // Stop observing after animation
+                        // Stagger animation dengan delay berbeda untuk setiap card
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                            entry.target.style.transition = 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                        }, index * 100); // Delay 100ms untuk setiap card
+                        
                         observer.unobserve(entry.target);
                     }
                 });
@@ -190,28 +220,114 @@
             });
         }
 
+        // AJAX Pagination
+        function initAjaxPagination() {
+            document.addEventListener('click', function(e) {
+                // Cek jika klik berasal dari pagination button
+                if (e.target.matches('.nav-button') && !e.target.disabled && !e.target.classList.contains('nav-button--disabled')) {
+                    e.preventDefault();
+                    
+                    const url = e.target.getAttribute('data-url');
+                    if (!url) return;
+
+                    loadEkskulPage(url);
+                }
+            });
+        }
+
+        function loadEkskulPage(url) {
+            // Show loading state
+            const ekskulContent = document.getElementById('ekskul-content');
+            const originalContent = ekskulContent.innerHTML;
+            
+            ekskulContent.innerHTML = `
+                <div class="flex justify-center items-center py-20">
+                    <div class="text-center">
+                        <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-orange-500 mx-auto mb-4"></div>
+                        <span class="text-gray-600 text-lg font-poppins">Memuat ekstrakurikuler...</span>
+                    </div>
+                </div>
+            `;
+
+            // Scroll ke section ekskul untuk feedback visual
+            document.getElementById('ekskul-section').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+
+            // AJAX request
+            fetch(url, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'text/html'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(html => {
+                // Parse HTML response dan ekstrak hanya bagian ekskul-content
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const newContent = doc.getElementById('ekskul-content');
+                
+                if (newContent) {
+                    // Fade out effect
+                    ekskulContent.style.opacity = '0';
+                    ekskulContent.style.transition = 'opacity 0.3s ease';
+                    
+                    setTimeout(() => {
+                        ekskulContent.innerHTML = newContent.innerHTML;
+                        
+                        // Fade in effect
+                        ekskulContent.style.opacity = '1';
+                        
+                        // Re-initialize animations and effects
+                        initScrollReveal();
+                        initCardAnimations();
+                        initPaginationButtonEffects();
+                        
+                    }, 300);
+                    
+                    // Update URL tanpa reload page
+                    window.history.pushState({}, '', url);
+                } else {
+                    throw new Error('Invalid response format');
+                }
+            })
+            .catch(error => {
+                console.error('Error loading page:', error);
+                ekskulContent.innerHTML = originalContent;
+                ekskulContent.style.opacity = '1';
+                
+                // Show error message
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'text-center py-4 text-red-500 bg-red-50 rounded-lg mx-4';
+                errorDiv.innerHTML = `
+                    <p class="font-semibold">Terjadi kesalahan saat memuat data.</p>
+                    <p class="text-sm">Silakan refresh halaman dan coba lagi.</p>
+                `;
+                ekskulContent.prepend(errorDiv);
+            });
+        }
+
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', function() {
+            loadEkskulPage(window.location.href);
+        });
+
         // Initialize when page loads
         document.addEventListener('DOMContentLoaded', function() {
             initScrollReveal();
+            initCardAnimations();
             initPaginationButtonEffects();
-            
-            // Add hover effects for cards
-            const cards = document.querySelectorAll('.scroll-reveal');
-            cards.forEach(card => {
-                const img = card.querySelector('img');
-                if (img) {
-                    card.addEventListener('mouseenter', () => {
-                        img.style.transform = 'scale(1.05)';
-                    });
-                    card.addEventListener('mouseleave', () => {
-                        img.style.transform = 'scale(1)';
-                    });
-                }
-            });
+            initAjaxPagination();
         });
     </script>
-@endsection
-@push('styles')
+
     <style>
         .font-bebas {
             font-family: 'Bebas Neue', cursive;
@@ -229,7 +345,7 @@
             overflow: hidden;
         }
 
-        /* === PAGINATION STYLES (Sama seperti prestasi) === */
+        /* === PAGINATION STYLES === */
         .ekskul-navigation {
             display: flex;
             justify-content: center;
@@ -344,6 +460,15 @@
         }
 
         /* Card animations */
+        .ekskul-card {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+        }
+
+        .ekskul-card:hover {
+            transform: translateY(-8px) !important;
+        }
+
         .scroll-reveal {
             transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
@@ -377,4 +502,4 @@
             }
         }
     </style>
-@endpush
+@endsection

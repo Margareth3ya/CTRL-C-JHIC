@@ -14,12 +14,12 @@
             padding: 4rem 1rem;
             background: linear-gradient(180deg, #fafafa 0%, #fff 100%);
             position: relative;
-        }        
+        }
 
         .berita-container {
-            width: 98%;       
-            max-width: none;   
-            margin: 0 auto;      
+            width: 98%;
+            max-width: none;
+            margin: 0 auto;
             position: relative;
         }
 
@@ -156,8 +156,10 @@
             transition: all 0.3s ease;
             border: 1px solid #f3f4f6;
             display: flex;
-            height: 160px; /* TINGGI KONSISTEN */
-            width: 100%; /* LEBAR PENUH */
+            height: 160px;
+            /* TINGGI KONSISTEN */
+            width: 100%;
+            /* LEBAR PENUH */
         }
 
         .berita-side-card-large:hover {
@@ -168,8 +170,10 @@
 
         /* CONTAINER GAMBAR YANG KONSISTEN */
         .berita-side-image-container {
-            width: 200px; /* LEBAR GAMBAR KONSISTEN */
-            height: 100%; /* TINGGI MENGIKUTI CARD */
+            width: 200px;
+            /* LEBAR GAMBAR KONSISTEN */
+            height: 100%;
+            /* TINGGI MENGIKUTI CARD */
             flex-shrink: 0;
             position: relative;
             overflow: hidden;
@@ -198,7 +202,8 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-width: 0; /* MENCEGAH OVERFLOW */
+            min-width: 0;
+            /* MENCEGAH OVERFLOW */
         }
 
         .berita-side-title-large {
@@ -219,10 +224,15 @@
             line-height: 1.5;
             font-size: 0.9rem;
             margin-bottom: 1rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+            /* HAPUS SEMUA PEMBATASAN BARIS */
+            display: block;
+            overflow: visible;
+            white-space: normal;
+            max-height: none;
+            height: auto;
+            -webkit-line-clamp: unset;
+            -webkit-box-orient: unset;
+            text-overflow: unset;
         }
 
         .berita-read-more {
@@ -427,53 +437,54 @@
                         <h1 class="berita-judul">{{ $berita->title }}</h1>
 
                         <div class="berita-konten">
-                            {!! nl2br(e($berita->body)) !!}
+                            {{ $berita->body }}
                         </div>
                     </div>
 
                     <!-- Sidebar Berita Lain -->
-<div class="side-cards-container">
-    <h3 class="sidebar-title">BERITA LAINNYA</h3>
-    <div class="berita-side-container">
-        @foreach ($beritaLain as $item)
-            <div class="berita-side-card-large">
-                <!-- GAMBAR DENGAN CONTAINER YANG KONSISTEN -->
-                <div class="berita-side-image-container"> <!-- TAMBAHKAN INI -->
-                    <img src="{{ asset('assets/berita/' . trim(str_replace(['[', ']', '"'], '', $item->image))) }}" 
-                         class="berita-side-image-large">
-                    <div class="berita-badge-side">{{ strtoupper($item->category ?? 'BERITA') }}</div>
-                </div>
-                
-                <div class="berita-side-content-large">
-                    <div>
-                        <div class="berita-date-small">
-                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                </path>
-                            </svg>
-                            {{ $item->created_at->translatedFormat('d F Y') }}
+                    <div class="side-cards-container">
+                        <h3 class="sidebar-title">BERITA LAINNYA</h3>
+                        <div class="berita-side-container">
+                            @foreach ($beritaLain as $item)
+                                <div class="berita-side-card-large">
+                                    <!-- GAMBAR DENGAN CONTAINER YANG KONSISTEN -->
+                                    <div class="berita-side-image-container"> <!-- TAMBAHKAN INI -->
+                                        <img src="{{ asset('assets/berita/' . trim(str_replace(['[', ']', '"'], '', $item->image))) }}"
+                                            class="berita-side-image-large">
+                                        <div class="berita-badge-side">{{ strtoupper($item->category ?? 'BERITA') }}</div>
+                                    </div>
+
+                                    <div class="berita-side-content-large">
+                                        <div>
+                                            <div class="berita-date-small">
+                                                <svg class="w-3 h-3" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                                    </path>
+                                                </svg>
+                                                {{ $item->created_at->translatedFormat('d F Y') }}
+                                            </div>
+                                            <h4 class="berita-side-title-large">{{ $item->title }}</h4>
+                                            <p class="berita-side-excerpt-large">
+                                                {{ $item->content}}
+                                            </p>
+                                        </div>
+                                        <a href="{{ route('berita.show', $item->id) }}" class="berita-read-more">
+                                            Baca Selengkapnya →
+                                        </a>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
-                        <h4 class="berita-side-title-large">{{ $item->title }}</h4>
-                        <p class="berita-side-excerpt-large">
-                            {{ Str::limit(strip_tags($item->content), 120) }}
-                        </p>
                     </div>
-                    <a href="{{ route('berita.show', $item->id) }}" class="berita-read-more">
-                        Baca Selengkapnya →
-                    </a>
-                </div>
-            </div>
-        @endforeach
-    </div>
-</div>
                 </div>
             </div>
         </section>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const revealElements = document.querySelectorAll('.berita-side-card-large');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -482,7 +493,9 @@
                         entry.target.style.transform = 'translateY(0)';
                     }
                 });
-            }, { threshold: 0.1 });
+            }, {
+                threshold: 0.1
+            });
 
             revealElements.forEach(element => {
                 element.style.opacity = '0';

@@ -16,7 +16,7 @@
     </style>
 </head>
 
-<body class="bg-gray-100 flex h-screen">
+<body class="bg-gray-100 flex h-screen overflow-x-hidden">
 
     <div class="fixed left-4 top-1/2 -translate-y-1/2 bg-blue-800/80 backdrop-blur-lg text-white rounded-2xl shadow-xl flex flex-col items-center py-4 w-16 hover:w-56 transition-all duration-300 z-50 group">
         <div class="mb-6 text-center">
@@ -99,32 +99,32 @@
         }
     </script>
     <script>
-        // (function () {
-        //     function detectDevTools() {
-        //         const widthThreshold = window.outerWidth - window.innerWidth > 160;
-        //         const heightThreshold = window.outerHeight - window.innerHeight > 160;
+        (function () {
+            function detectDevTools() {
+                const widthThreshold = window.outerWidth - window.innerWidth > 160;
+                const heightThreshold = window.outerHeight - window.innerHeight > 160;
 
-        //         if (widthThreshold || heightThreshold) {
-        //             document.body.innerHTML = '<div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: Arial, sans-serif;"><div style="text-align: center;"><h1 style="color: #dc2626;">Akses Ditolak</h1><p>Ngapain lihat lihat kocak</p></div></div>';
-        //             throw new Error('DevTools detected');
-        //         }
-        //     }
-        //     detectDevTools();
-        //     window.addEventListener('resize', detectDevTools);
-        //     const originalConsole = {
-        //         log: console.log,
-        //         warn: console.warn,
-        //         error: console.error,
-        //         info: console.info
-        //     };
+                if (widthThreshold || heightThreshold) {
+                    document.body.innerHTML = '<div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: Arial, sans-serif;"><div style="text-align: center;"><h1 style="color: #dc2626;">Akses Ditolak</h1><p>Ngapain lihat lihat kocak</p></div></div>';
+                    throw new Error('DevTools detected');
+                }
+            }
+            detectDevTools();
+            window.addEventListener('resize', detectDevTools);
+            const originalConsole = {
+                log: console.log,
+                warn: console.warn,
+                error: console.error,
+                info: console.info
+            };
 
-        //     ['log', 'warn', 'error', 'info'].forEach(method => {
-        //         console[method] = function () {
-        //             detectDevTools();
-        //             originalConsole[method].apply(console, arguments);
-        //         };
-        //     });
-        // })();
+            ['log', 'warn', 'error', 'info'].forEach(method => {
+                console[method] = function () {
+                    detectDevTools();
+                    originalConsole[method].apply(console, arguments);
+                };
+            });
+        })();
     </script>
 </body>
 

@@ -30,7 +30,7 @@ class AuthController extends Controller
 
             AdminLog::create([
                 'admin_name' => $user->name ?? $user->username,
-                'activity' => 'Login ke sistem',
+                'activity' => 'Login',
             ]);
 
             return redirect()->intended('/admin/dashboard');

@@ -108,20 +108,77 @@ button[type="submit"]:active {
     box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
 }
 
+/* New styles for enhanced text section */
+.hero-text-content {
+    max-width: 600px;
+    text-align: center;
+}
+
+.cta-highlight {
+    color: #f97316;
+    font-weight: 700;
+}
+
+.benefit-list {
+    text-align: left;
+    margin-top: 1.5rem;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.8rem;
+    color: #e5e7eb;
+    font-size: 1.1rem;
+}
+
+.benefit-icon {
+    color: #f97316;
+    font-weight: bold;
+}
+
 </style>
 @endpush
 
 @section('content')
 <section class="py-12 bg-gray-50">
     <div class="container mx-auto px-4 flex flex-col md:flex-row justify-center items-start gap-10">
-        <div class="mt-36 text-center px-4 text-white">
-            <h1 class="text-3xl md:text-4xl font-bold mb-4">Kirimkan Pesan kepada kami</h1>
-            <p class="text-lg max-w-2xl mx-auto">
-                Jangan ragu untuk menghubungi kami melalui formulir di bawah ini.
-                Kami siap menjawab pertanyaan Anda dan membantu dalam hal apapun yang Anda butuhkan.
+        <!-- Enhanced Text Section -->
+        <div class="mt-36 text-center px-4 text-white hero-text-content">
+            <h1 class="text-3xl md:text-4xl font-bold mb-6">Punya Pertanyaan atau Ingin Daftar?
+Kami siap membantu!</h1>
+            
+            <p class="text-lg mb-6 leading-relaxed">
+                <span class="cta-highlight">Bergabunglah dengan keluarga besar SMK PGRI 3</span> - 
+                Isi formulir di bawah ini dan tim kami akan memberikan informasi sesuai kebutuhan Anda — cepat, jelas, dan ramah.
             </p>
+
+            <!-- <div class="benefit-list">
+                <div class="benefit-item">
+                    <span class="benefit-icon">✓</span>
+                    <span>Konsultasi gratis dengan tim akademik kami</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">✓</span>
+                    <span>Informasi lengkap program keahlian terbaru</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">✓</span>
+                    <span>Pendampingan proses pendaftaran yang mudah</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">✓</span>
+                    <span>Jawaban cepat dalam 1x24 jam</span>
+                </div>
+            </div>
+
+            <p class="text-lg mt-6 italic text-orange-200">
+                "Pilih subjek yang sesuai dengan kebutuhan Anda, dan mari kita mulai percakapan!"
+            </p> -->
         </div>
 
+        <!-- Form Section -->
         <div class="bg-white p-8 shadow-md rounded-2xl w-full md:w-2/5">
 
             <form action="{{ route('kontak.kirim') }}" method="POST">
@@ -161,10 +218,10 @@ button[type="submit"]:active {
                         placeholder="Email" required>
                 </div>
 
-                <!-- ✨ Redesain Radio jadi pill -->
+                <!-- Enhanced Radio Section with Descriptions -->
                 <div class="mb-6">
-                    <label class="block text-gray-700 font-semibold mb-3">Subjek</label>
-                    <div class="radio-pill-group">
+                    <label class="block text-gray-700 font-semibold mb-3">Pilih Jenis Layanan</label>
+                    <div class="radio-pill-group mb-3">
                         <label class="radio-pill">
                             <input type="radio" name="subjek" value="Konsultasi"
                                 {{ old('subjek') === 'Konsultasi' ? 'checked' : '' }} required>
@@ -177,20 +234,78 @@ button[type="submit"]:active {
                             <span>Pendaftaran</span>
                         </label>
                     </div>
+                    
+                    <!-- Description for each option -->
+                    <div class="text-sm text-gray-600 space-y-2">
+                        <div id="konsultasi-desc" class="radio-desc hidden">
+                            <span class="font-medium text-orange-600">Konsultasi:</span> 
+                            Tanyakan tentang program studi, fasilitas, kurikulum, atau informasi akademik lainnya. Tim kami siap membantu!
+                        </div>
+                        <div id="pendaftaran-desc" class="radio-desc hidden">
+                            <span class="font-medium text-orange-600">Pendaftaran:</span> 
+                            Mulai proses pendaftaran siswa baru. Dapatkan panduan lengkap dan bantuan untuk bergabung dengan SMK PGRI 3.
+                        </div>
+                        <div id="default-desc" class="radio-desc">
+                            <span class="font-medium text-orange-600">Pilih layanan:</span> 
+                            Konsultasi untuk bertanya informasi atau Pendaftaran untuk memulai proses bergabung dengan kami.
+                        </div>
+                    </div>
                 </div>
 
                 <div class="mb-6">
                     <textarea name="pesan" rows="5"
                         class="mt-1 bg-gray-200 block w-full border border-gray-300 rounded-xl shadow-sm p-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                        placeholder="Pesan" required>{{ old('pesan') }}</textarea>
+                        placeholder="Ceritakan kebutuhan Anda atau pertanyaan yang ingin diajukan..." required>{{ old('pesan') }}</textarea>
                 </div>
 
                 <button type="submit"
-                    class="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-4 rounded-xl transition duration-300 shadow-md">
-                    KIRIM PESAN
+                    class="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-4 rounded-xl transition duration-300 shadow-md transform hover:scale-105">
+                    KIRIM SEKARANG
                 </button>
+                
+                <!-- <p class="text-xs text-center text-gray-500 mt-3">
+                    Kami akan membalas pesan Anda dalam 1x24 jam melalui email
+                </p> -->
             </form>
         </div>
     </div>
 </section>
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const radioButtons = document.querySelectorAll('input[name="subjek"]');
+        const descriptions = document.querySelectorAll('.radio-desc');
+        
+        function showDescription(selectedValue) {
+            // Hide all descriptions first
+            descriptions.forEach(desc => {
+                desc.classList.add('hidden');
+            });
+            
+            // Show the appropriate description
+            if (selectedValue === 'Konsultasi') {
+                document.getElementById('konsultasi-desc').classList.remove('hidden');
+            } else if (selectedValue === 'Pendaftaran') {
+                document.getElementById('pendaftaran-desc').classList.remove('hidden');
+            } else {
+                document.getElementById('default-desc').classList.remove('hidden');
+            }
+        }
+        
+        // Add event listeners to radio buttons
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', function() {
+                showDescription(this.value);
+            });
+        });
+        
+        // Show appropriate description on page load if there's a selected value
+        const selectedRadio = document.querySelector('input[name="subjek"]:checked');
+        if (selectedRadio) {
+            showDescription(selectedRadio.value);
+        }
+    });
+</script>
+@endpush

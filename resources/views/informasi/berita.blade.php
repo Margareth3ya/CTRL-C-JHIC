@@ -11,11 +11,11 @@
         }
 
         /* === BERITA SECTION === */
-.berita-section {
-    padding: 4rem 1rem;
-    background: transparent;
-    position: relative;
-}
+        .berita-section {
+            padding: 4rem 1rem;
+            background: transparent;
+            position: relative;
+        }
 
 
         .berita-title {
@@ -41,12 +41,12 @@
             border-radius: 2px;
         }
 
-    .berita-container {
-        width: 98%;       
-        max-width: none;   
-        margin: 0 auto;      
-        position: relative;
-    }
+        .berita-container {
+            width: 98%;
+            max-width: none;
+            margin: 0 auto;
+            position: relative;
+        }
 
 
         /* Layout Utama */
@@ -103,6 +103,10 @@
             line-height: 1.6;
             margin-bottom: 1.5rem;
             font-size: 0.95rem;
+            /* TAMBAHKAN JIKA INGIN FULL TEKS */
+            display: block;
+            overflow: visible;
+            white-space: normal;
         }
 
         /* Container Card Kanan */
@@ -114,110 +118,119 @@
         }
 
         /* === SIDEBAR BERITA KANAN (SAMA DENGAN BERITA UTAMA) === */
-.berita-side-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
+        .berita-side-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
 
-.berita-side-card {
-    display: flex;
-    height: 245px;
-    background: #fff;
-    border-radius: 1rem;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    border: 1px solid #f3f4f6;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+        .berita-side-card {
+            display: flex;
+            height: 245px;
+            background: #fff;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f3f4f6;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-.berita-side-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-    border-color: #f97316;
-}
+        .berita-side-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            border-color: #f97316;
+        }
 
-.berita-side-image {
-            width: 50%; /* Diperlebar dari 45% menjadi 50% */
-            min-width: 200px; /* Lebar minimum yang lebih besar */
-            max-width: 200px; /* Lebar maksimum */
+        .berita-side-image {
+            width: 50%;
+            /* Diperlebar dari 45% menjadi 50% */
+            min-width: 200px;
+            /* Lebar minimum yang lebih besar */
+            max-width: 200px;
+            /* Lebar maksimum */
             height: 100%;
             object-fit: cover;
             transition: transform 0.3s ease;
-            flex-shrink: 0; /* Mencegah gambar menyusut */
+            flex-shrink: 0;
+            /* Mencegah gambar menyusut */
         }
 
 
 
-.berita-side-card:hover .berita-side-image {
-    transform: scale(1.05);
-}
+        .berita-side-card:hover .berita-side-image {
+            transform: scale(1.05);
+        }
 
-/* Konten */
-.berita-side-content {
-    flex: 1;
-    padding: 0.9rem 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 210px; /* tambahkan batas tinggi minimum */
-}
+        /* Konten */
+        .berita-side-content {
+            flex: 1;
+            padding: 0.9rem 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 210px;
+            /* tambahkan batas tinggi minimum */
+        }
 
-.berita-date {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.8rem;
-    color: #6b7280;
-    margin-bottom: 0.3rem;
-}
+        .berita-date {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-bottom: 0.3rem;
+        }
 
-.berita-side-title {
-    font-weight: 600;
-    font-size: 1rem;
-    line-height: 1.4;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* tampil maksimal 2 baris */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
+        .berita-side-title {
+            font-weight: 600;
+            font-size: 1rem;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            /* tampil maksimal 2 baris */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
 
 
-.berita-side-excerpt {
-    color: #6b7280;
-    line-height: 1.5;
-    font-size: 0.875rem;
-    margin-bottom: 0.5rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3; /* tampil maksimal 3 baris */
-    -webkit-box-orient: vertical;
-}
-.berita-read-more {
-    font-size: 0.85rem;
-    color: #f97316;
-    font-weight: 600;
-    text-decoration: none;
-    align-self: flex-start;
-    transition: color 0.3s ease;
-}
+        .berita-side-excerpt {
+            color: #6b7280;
+            line-height: 1.5;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            /* tampil maksimal 3 baris */
+            -webkit-box-orient: vertical;
+        }
 
-.berita-read-more:hover {
-    text-decoration: underline;
-    color: #ea580c;
-}
+        .berita-read-more {
+            font-size: 0.85rem;
+            color: #f97316;
+            font-weight: 600;
+            text-decoration: none;
+            align-self: flex-start;
+            transition: color 0.3s ease;
+        }
 
-/* Responsif */
-@media (max-width: 1024px) {
-    .berita-side-card {
-        flex-direction: column;
-    }
-    .berita-side-image {
-        width: 100%;
-        height: 180px;
-    }
-}
+        .berita-read-more:hover {
+            text-decoration: underline;
+            color: #ea580c;
+        }
+
+        /* Responsif */
+        @media (max-width: 1024px) {
+            .berita-side-card {
+                flex-direction: column;
+            }
+
+            .berita-side-image {
+                width: 100%;
+                height: 180px;
+            }
+        }
 
 
 
@@ -451,113 +464,120 @@
             position: relative;
             z-index: 1;
         }
-        
     </style>
 @endpush
 
 @section('content')
-<div class="min-h-screen relative z-0">
+    <div class="min-h-screen relative z-0">
 
 
 
-    @php
-        // Ubah ke array biar index jelas
-        $beritaArray = $berita->values();
+        @php
+            // Ubah ke array biar index jelas
+            $beritaArray = $berita->values();
 
-        // Pisah data jadi 3 blok
-        $sections = [
-            ['title' => 'BERITA TERBARU', 'items' => $beritaArray->slice(0, 3)],
-            ['title' => 'BERITA SEKOLAH', 'items' => $beritaArray->slice(3, 3)],
-            ['title' => 'BERITA LAINNYA', 'items' => $beritaArray->slice(6, 100)],
-        ];
-    @endphp
+            // Pisah data jadi 3 blok
+            $sections = [
+                ['title' => 'BERITA TERBARU', 'items' => $beritaArray->slice(0, 3)],
+                ['title' => 'BERITA SEKOLAH', 'items' => $beritaArray->slice(3, 3)],
+                ['title' => 'BERITA LAINNYA', 'items' => $beritaArray->slice(6, 100)],
+            ];
+        @endphp
 
-    @foreach ($sections as $section)
-        @if ($section['items']->count())
-        <section class="berita-section relative overflow-hidden">
+        @foreach ($sections as $section)
+            @if ($section['items']->count())
+                <section class="berita-section relative overflow-hidden">
 
                     <!-- === CIRCLE BACKGROUND UNTUK SECTION INI === -->
-        <div class="absolute inset-0 -z-[1] pointer-events-none">
-            <div class="absolute w-96 h-96 bg-orange-100 rounded-full opacity-10-top-20 left-1/9"></div>
-            <div class="absolute w-80 h-80 bg-blue-200 rounded-full opacity-30 top-1/2 right-1/4"></div>
-            <div class="absolute w-72 h-72 bg-orange-100 rounded-full opacity-40 bottom-0 left-1/2"></div>
-        </div>
-
-            <h2 class="berita-title font-bebas">{{ $section['title'] }}</h2>
-            <div class="berita-container">
-                <div class="berita-layout">
-                    @php $main = $section['items']->first(); @endphp
-                    @php
-                        $mainImages = json_decode($main->image, true);
-                        $mainImage = is_array($mainImages) ? $mainImages[0] : $main->image;
-                    @endphp
-
-                    <!-- Card utama -->
-                    <div class="berita-main-card scroll-reveal">
-                        <div class="relative overflow-hidden">
-                            <img src="{{ asset('assets/berita/' . $mainImage) }}" 
-                                alt="{{ $main->title }}" class="berita-main-image">
-                            <div class="berita-badge">{{ $section['title'] }}</div>
-                        </div>
-                        <div class="berita-main-content">
-                            <div class="berita-date">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                </svg>
-                                {{ $main->created_at->format('d F Y') }}
-                            </div>
-                            <h3 class="berita-main-title font-poppins">{{ $main->title }}</h3>
-                            <p class="berita-main-excerpt font-poppins">{{ Str::limit($main->body, 150) }}</p>
-                            <a href="{{ route('berita.show', $main->id) }}" 
-                                class="berita-read-more font-poppins">Baca Selengkapnya →</a>
-                        </div>
+                    <div class="absolute inset-0 -z-[1] pointer-events-none">
+                        <div class="absolute w-96 h-96 bg-orange-100 rounded-full opacity-10-top-20 left-1/9"></div>
+                        <div class="absolute w-80 h-80 bg-blue-200 rounded-full opacity-30 top-1/2 right-1/4"></div>
+                        <div class="absolute w-72 h-72 bg-orange-100 rounded-full opacity-40 bottom-0 left-1/2"></div>
                     </div>
 
-                    <!-- Dua card kecil kanan -->
-                    <div class="berita-side-container">
-                        @foreach ($section['items']->skip(1)->take(2) as $item)
+                    <h2 class="berita-title font-bebas">{{ $section['title'] }}</h2>
+                    <div class="berita-container">
+                        <div class="berita-layout">
+                            @php $main = $section['items']->first(); @endphp
                             @php
-                                $images = json_decode($item->image, true);
-                                $image = is_array($images) ? $images[0] : $item->image;
+                                $mainImages = json_decode($main->image, true);
+                                $mainImage = is_array($mainImages) ? $mainImages[0] : $main->image;
                             @endphp
-                            <div class="berita-side-card scroll-reveal">
-                                <img src="{{ asset('assets/berita/' . $image) }}" 
-                                    alt="{{ $item->title }}" class="berita-side-image">
-                                <div class="berita-side-content">
-                                    <div>
-                                        <div class="berita-date">
-                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                            </svg>
-                                            {{ $item->created_at->format('d F Y') }}
-                                        </div>
-                                        <h4 class="berita-side-title font-poppins">{{ $item->title }}</h4>
-                                        <p class="berita-side-excerpt font-poppins">{{ Str::limit($item->body, 100) }}</p>
+
+                            <!-- Card utama -->
+                            <div class="berita-main-card scroll-reveal">
+                                <div class="relative overflow-hidden">
+                                    <img src="{{ asset('assets/berita/' . $mainImage) }}" alt="{{ $main->title }}"
+                                        class="berita-main-image">
+                                    <div class="berita-badge">{{ $section['title'] }}</div>
+                                </div>
+                                <div class="berita-main-content">
+                                    <div class="berita-date">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                            </path>
+                                        </svg>
+                                        {{ $main->created_at->format('d F Y') }}
                                     </div>
-                                    <a href="{{ route('berita.show', $item->id) }}" class="berita-read-more">
-                                        Baca Selengkapnya →
-                                    </a>
+                                    <h3 class="berita-main-title font-poppins">{{ $main->title }}</h3>
+                                    <p class="berita-main-excerpt font-poppins">{{ Str::limit($main->body, 150) }}</p>
+                                    <a href="{{ route('berita.show', $main->id) }}"
+                                        class="berita-read-more font-poppins">Baca Selengkapnya →</a>
                                 </div>
                             </div>
-                        @endforeach
+
+                            <!-- Dua card kecil kanan -->
+                            <div class="berita-side-container">
+                                @foreach ($section['items']->skip(1)->take(2) as $item)
+                                    @php
+                                        $images = json_decode($item->image, true);
+                                        $image = is_array($images) ? $images[0] : $item->image;
+                                    @endphp
+                                    <div class="berita-side-card scroll-reveal">
+                                        <img src="{{ asset('assets/berita/' . $image) }}" alt="{{ $item->title }}"
+                                            class="berita-side-image">
+                                        <div class="berita-side-content">
+                                            <div>
+                                                <div class="berita-date">
+                                                    <svg class="w-3 h-3" fill="none" stroke="currentColor"
+                                                        viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                                        </path>
+                                                    </svg>
+                                                    {{ $item->created_at->format('d F Y') }}
+                                                </div>
+                                                <h4 class="berita-side-title font-poppins">{{ $item->title }}</h4>
+                                                <p class="berita-side-excerpt font-poppins">{{ strip_tags($item->body) }}
+                                                </p>
+                                            </div>
+                                            <a href="{{ route('berita.show', $item->id) }}" class="berita-read-more">
+                                                Baca Selengkapnya →
+                                            </a>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </section>
-        @endif
-    @endforeach
-</div>
+                </section>
+            @endif
+        @endforeach
+    </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const revealElements = document.querySelectorAll('.scroll-reveal');
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('revealed'));
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const revealElements = document.querySelectorAll('.scroll-reveal');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('revealed'));
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
 
-        revealElements.forEach(el => observer.observe(el));
-    });
-</script>
+            revealElements.forEach(el => observer.observe(el));
+        });
+    </script>
 @endsection

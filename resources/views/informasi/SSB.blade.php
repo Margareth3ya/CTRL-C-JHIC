@@ -207,7 +207,6 @@
                     <!-- Text -->
                     <div class="text-center lg:text-left">
                         @foreach ($ssb2 as $s2)
-
                             <h1 class="hero-title font-bebas">
                                 {{ $s2->title }}
                             </h1>
@@ -216,15 +215,26 @@
                             </p>
                         @endforeach
 
-                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                            <a href="{{ route('kontak') }}" class="hero-button font-poppins">
+                        <div class="flex flex-col gap-4 justify-center lg:justify-start">
+                            <!-- Tombol Daftar Sekarang (Lebih Besar) -->
+                            <a href="{{ route('kontak') }}"
+                                class="hero-button font-poppins text-lg py-3 px-8 text-center w-fit mx-auto lg:mx-0">
                                 Daftar Sekarang
                             </a>
-                            <button
-                                onclick="document.getElementById('offline-registration').scrollIntoView({behavior: 'smooth'})"
-                                class="hero-button hero-button-secondary font-poppins">
-                                Tata Cara Pendaftaran →
-                            </button>
+
+                            <!-- Container untuk tombol tata cara (Lebih Kecil) -->
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <button
+                                    onclick="document.getElementById('offline-registration').scrollIntoView({behavior: 'smooth'})"
+                                    class="hero-button hero-button-secondary font-poppins text-sm py-4 px-8">
+                                    Tata Cara Pendaftaran Offline
+                                </button>
+                                <button
+                                    onclick="document.getElementById('online-registration').scrollIntoView({behavior: 'smooth'})"
+                                    class="hero-button hero-button-secondary font-poppins text-sm py-4 px-8">
+                                    Tata Cara Pendaftaran Online
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -241,7 +251,8 @@
 
                             @foreach ($images as $img)
                                 <div class="slideshow-slide {{ $slideIndex === 0 ? 'active' : '' }}">
-                                    <img src="{{ asset('assets/ssb/' . $img) }}" alt="{{ $item->title }}" class="slideshow-image">
+                                    <img src="{{ asset('assets/ssb/' . $img) }}" alt="{{ $item->title }}"
+                                        class="slideshow-image">
                                     <div class="slideshow-overlay"></div>
                                 </div>
                                 @php $slideIndex++; @endphp
@@ -279,7 +290,7 @@
         </section>
 
         <!-- 🧩 ONLINE REGISTRATION -->
-        <section class="relative py-16 lg:py-24">
+        <section id="online-registration" class="relative py-16 lg:py-24">
             <div class="container mx-auto px-4">
                 <h2 class="section-title font-bebas">
                     Tata Cara Pendaftaran <span class="text-blue-600">Online</span>
@@ -327,10 +338,11 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // === Slideshow ===
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             let currentSlide = 0;
             const slides = document.querySelectorAll('.slideshow-slide');
             const totalSlides = slides.length;
+
             function showSlide(i) {
                 slides.forEach(slide => slide.classList.remove('active'));
                 slides[i].classList.add('active');
@@ -347,13 +359,14 @@
             type: 'bar',
             data: {
                 labels: ["2021", "2022", "2023", "2024", "2025"],
-                datasets: [
-                    {
-                        label: "Pendaftar", data: [800, 700, 860, 870, 980],
+                datasets: [{
+                        label: "Pendaftar",
+                        data: [800, 700, 860, 870, 980],
                         backgroundColor: "rgba(253, 136, 58, 0.8)"
                     },
                     {
-                        label: "Diterima", data: [750, 680, 820, 830, 920],
+                        label: "Diterima",
+                        data: [750, 680, 820, 830, 920],
                         backgroundColor: "rgba(54, 162, 235, 0.8)"
                     }
                 ]
@@ -361,7 +374,9 @@
             options: {
                 responsive: true,
                 scales: {
-                    y: { beginAtZero: true }
+                    y: {
+                        beginAtZero: true
+                    }
                 }
             }
         });

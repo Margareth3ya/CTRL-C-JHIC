@@ -2,44 +2,9 @@
 
 @push('styles')
     <style>
-        /* === 3-CARD CAROUSEL === */
-.carousel-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  gap: 1.5rem;
-  transition: transform 0.8s ease-in-out;
-}
-
-.carousel-card {
-  position: relative;
-  overflow: hidden;
-  border-radius: 1rem;
-  height: 420px;
-  width: 300px;
-  flex-shrink: 0;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  transition: transform 0.8s ease, opacity 0.8s ease;
-  opacity: 0.8;
-}
-
-.carousel-card.center {
-  transform: scale(1.1);
-  opacity: 1;
-  z-index: 3;
-}
-
-.carousel-card.left {
-  transform: translateX(-120%) scale(0.9);
-  z-index: 1;
-}
-
-.carousel-card.right {
-  transform: translateX(120%) scale(0.9);
-  z-index: 1;
-}
-
+        .font-bebas {
+            font-family: 'Bebas Neue', cursive;
+        }
         /* === Style-mu tetap dipertahankan === */
         .bg-circle-fix div {
             position: absolute;
@@ -89,19 +54,23 @@
 
         .gallery-card-title {
             position: absolute;
-            bottom: 1rem;
+            bottom: 2.5rem;
             left: 1rem;
             color: white;
             font-weight: 600;
             font-size: 1.1rem;
+            line-height: 1.3;
+            max-width: 90%;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
         }
 
         .gallery-card-date {
             position: absolute;
-            bottom: 0.3rem;
+            bottom: 1rem;
             left: 1rem;
-            color: #ddd;
+            color: #e5e7eb;
             font-size: 0.85rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
         }
 
         .slideshow-card {
@@ -112,7 +81,24 @@
             height: 420px;
         }
 
-        .slideshow-container img {
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slideshow-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slideshow-slide.active {
+            opacity: 1;
+        }
+
+        .slideshow-slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -122,6 +108,7 @@
             position: absolute;
             inset: 0;
             background: linear-gradient(to top, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.1));
+            pointer-events: none;
         }
 
         .slideshow-title {
@@ -131,20 +118,28 @@
             color: white;
             font-size: 1.5rem;
             font-weight: 700;
+            line-height: 1.3;
+            max-width: 90%;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            pointer-events: none;
         }
 
         .slideshow-date {
             position: absolute;
             bottom: 1rem;
             left: 2rem;
-            color: #ddd;
+            color: #e5e7eb;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            pointer-events: none;
         }
 
         .gallery-title {
             text-align: center;
-            font-size: 2rem;
+            font-size: 3rem;
             font-weight: bold;
             color: #333;
+            margin-top: 4rem;
+            margin-bottom: 2rem;
         }
 
         .fade {
@@ -155,7 +150,6 @@
             from {
                 opacity: 0.3;
             }
-
             to {
                 opacity: 1;
             }
@@ -204,31 +198,30 @@
                                         alt="{{ $slides[1]->title }}" class="gallery-image">
                                     <div class="gallery-overlay">
                                         <h3 class="gallery-card-title">{{ $slides[1]->title }}</h3>
-                                        <p class="gallery-card-date">-
-                                            {{ $slides[1]->created_at->translatedFormat('d F Y') }}</p>
+                                        <p class="gallery-card-date">{{ $slides[1]->created_at->translatedFormat('d F Y') }}</p>
                                     </div>
                                 </div>
                             </div>
                         @endif
 
-                        {{-- Slideshow Tengah --}}
-                        <!-- TOLONG YANG INI DI FIX SOALNYA SLIDE NYA GA BERFUNGSI, HARUSNYA AMBIL 3 IMAGE DULU
-                        DARI YANG SUDAH DI UPLOAD DI FOLDER assets/kegiatan, baru di card 4 lanjut ke image kanan kiri dan bawah -->
-                        @if (isset($slides[0]))
-                            @php
-                                $mainImages = json_decode($slides[0]->image, true);
-                                if (!is_array($mainImages)) {
-                                    $mainImages = [$slides[0]->image];
-                                }
-                            @endphp
+                        {{-- Slideshow Tengah - 3 DATA TERBARU --}}
+                        @if ($slides->count() >= 3)
                             <div class="slideshow-card">
-                                <div class="slideshow-container relative w-full h-full">
+                                <div class="slideshow-container">
                                     @php $slideIndex = 0; @endphp
-                                    @foreach ($mainImages as $img)
-                                        <div
-                                            class="slideshow-slide absolute inset-0 {{ $slideIndex === 0 ? 'active' : '' }}">
-                                            <img src="{{ asset('assets/kegiatan/' . $img) }}" alt="{{ $slides[0]->title }}"
-                                                class="w-full h-full object-cover">
+                                    @foreach ($slides->take(3) as $slide)
+                                        @php
+                                            $slideImages = json_decode($slide->image, true);
+                                            if (!is_array($slideImages)) {
+                                                $slideImages = [$slide->image];
+                                            }
+                                        @endphp
+                                        <div class="slideshow-slide {{ $slideIndex === 0 ? 'active' : '' }}"
+                                             data-title="{{ $slide->title }}" 
+                                             data-date="{{ $slide->created_at->translatedFormat('d F Y') }}">
+                                            <img src="{{ asset('assets/kegiatan/' . $slideImages[0]) }}" 
+                                                 alt="{{ $slide->title }}"
+                                                 class="w-full h-full object-cover">
                                             <div class="slideshow-overlay"></div>
                                         </div>
                                         @php $slideIndex++; @endphp
@@ -236,8 +229,31 @@
                                 </div>
                                 <div class="slideshow-overlay">
                                     <h3 id="slideTitle" class="slideshow-title">{{ $slides[0]->title }}</h3>
-                                    <p id="slideDate" class="slideshow-date">-
-                                        {{ $slides[0]->created_at->translatedFormat('d F Y') }}</p>
+                                    <p id="slideDate" class="slideshow-date">{{ $slides[0]->created_at->translatedFormat('d F Y') }}</p>
+                                </div>
+                            </div>
+                        @elseif ($slides->count() > 0)
+                            {{-- Fallback jika kurang dari 3 data --}}
+                            @php
+                                $mainImages = json_decode($slides[0]->image, true);
+                                if (!is_array($mainImages)) {
+                                    $mainImages = [$slides[0]->image];
+                                }
+                            @endphp
+                            <div class="slideshow-card">
+                                <div class="slideshow-container">
+                                    @foreach ($mainImages as $img)
+                                        <div class="slideshow-slide {{ $loop->first ? 'active' : '' }}">
+                                            <img src="{{ asset('assets/kegiatan/' . $img) }}" 
+                                                 alt="{{ $slides[0]->title }}"
+                                                 class="w-full h-full object-cover">
+                                            <div class="slideshow-overlay"></div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="slideshow-overlay">
+                                    <h3 id="slideTitle" class="slideshow-title">{{ $slides[0]->title }}</h3>
+                                    <p id="slideDate" class="slideshow-date">{{ $slides[0]->created_at->translatedFormat('d F Y') }}</p>
                                 </div>
                             </div>
                         @endif
@@ -256,8 +272,7 @@
                                         alt="{{ $slides[2]->title }}" class="gallery-image">
                                     <div class="gallery-overlay">
                                         <h3 class="gallery-card-title">{{ $slides[2]->title }}</h3>
-                                        <p class="gallery-card-date">-
-                                            {{ $slides[2]->created_at->translatedFormat('d F Y') }}</p>
+                                        <p class="gallery-card-date">{{ $slides[2]->created_at->translatedFormat('d F Y') }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -266,7 +281,7 @@
                 </div>
 
                 {{-- === SECTION 2: GALERI KEGIATAN === --}}
-                <h1 class="gallery-title font-bebas mt-20">GALERI KEGIATAN</h1>
+                <h1 class="gallery-title font-bebas">GALERI KEGIATAN</h1>
 
                 @foreach ($gallerySections as $section)
                     <div class="container mx-auto px-4 py-6 md:py-8 lg:py-10">
@@ -280,12 +295,12 @@
                                 @endphp
                                 <div class="gallery-card">
                                     <div class="gallery-image-container">
-                                        <img src="{{ asset('assets/kegiatan/' . $images[0]) }}" alt="{{ $item->title }}"
-                                            class="gallery-image">
+                                        <img src="{{ asset('assets/kegiatan/' . $images[0]) }}" 
+                                             alt="{{ $item->title }}"
+                                             class="gallery-image">
                                         <div class="gallery-overlay">
                                             <h3 class="gallery-card-title">{{ $item->title }}</h3>
-                                            <p class="gallery-card-date">-
-                                                {{ $item->created_at->translatedFormat('d F Y') }}</p>
+                                            <p class="gallery-card-date">{{ $item->created_at->translatedFormat('d F Y') }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -302,18 +317,31 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const slides = document.querySelectorAll(".slideshow-slide");
+            const slideTitle = document.getElementById("slideTitle");
+            const slideDate = document.getElementById("slideDate");
             let currentIndex = 0;
 
             function showSlide(index) {
+                // Hide all slides
                 slides.forEach(s => s.classList.remove("active"));
+                
+                // Show current slide
                 slides[index].classList.add("active");
+                
+                // Update title and date
+                if (slideTitle && slideDate) {
+                    slideTitle.textContent = slides[index].dataset.title;
+                    slideDate.textContent = slides[index].dataset.date;
+                }
             }
 
-            setInterval(() => {
-                if (slides.length === 0) return;
-                currentIndex = (currentIndex + 1) % slides.length;
-                showSlide(currentIndex);
-            }, 4000);
+            // Auto slide every 4 seconds
+            if (slides.length > 0) {
+                setInterval(() => {
+                    currentIndex = (currentIndex + 1) % slides.length;
+                    showSlide(currentIndex);
+                }, 4000);
+            }
         });
     </script>
 @endpush

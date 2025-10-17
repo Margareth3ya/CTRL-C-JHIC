@@ -56,7 +56,6 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
 
     // Apis Chart
     Route::get('/visitor-stats', [AdminController::class, 'getVisitorStats'])->name('admin.visitor.stats');
-
 });
 
 Route::get('/', function () {

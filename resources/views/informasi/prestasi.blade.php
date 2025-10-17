@@ -18,33 +18,81 @@
         overflow: hidden;
     }
 
-    /* Background Circles */
-    .prestasi-section::before {
-        content: '';
-        position: absolute;
-        width: 26rem;
-        height: 26rem;
-        background: #FFD2A0;
-        border-radius: 50%;
-        opacity: 0.5;
-        top: -10rem;
-        left: 25%;
-        z-index: -1;
-    }
+   /* BACKGROUND CIRCLES ZIG-ZAG POSITION - TANPA BLUR */
+.prestasi-section::before {
+    content: '';
+    position: absolute;
+    width: 28rem;
+    height: 28rem;
+    background: linear-gradient(135deg, #FFD2A0, #FFA94D);
+    border-radius: 50%;
+    opacity: 0.3;
+    top: -8rem;
+    left: -5rem;
+    z-index: -1;
+}
 
-    .prestasi-section::after {
-        content: '';
-        position: absolute;
-        width: 20rem;
-        height: 20rem;
-        background: #FFE5B4;
-        border-radius: 50%;
-        opacity: 0.5;
-        bottom: -5rem;
-        left: 30%;
-        z-index: -1;
-    }
+.prestasi-section::after {
+    content: '';
+    position: absolute;
+    width: 24rem;
+    height: 24rem;
+    background: linear-gradient(135deg, #B0E0FF, #87CEEB);
+    border-radius: 50%;
+    opacity: 0.3;
+    bottom: -6rem;
+    right: -4rem;
+    z-index: -1;
+}
 
+/* ADDITIONAL CIRCLES FOR ZIG-ZAG EFFECT - TANPA BLUR */
+.prestasi-section .circle-1 {
+    position: absolute;
+    width: 18rem;
+    height: 18rem;
+    background: linear-gradient(135deg, #FFE5B4, #FFB74D);
+    border-radius: 50%;
+    opacity: 0.25;
+    top: 40%;
+    left: 60%;
+    z-index: -1;
+}
+
+.prestasi-section .circle-2 {
+    position: absolute;
+    width: 16rem;
+    height: 16rem;
+    background: linear-gradient(135deg, #A7D8FF, #4FC3F7);
+    border-radius: 50%;
+    opacity: 0.25;
+    bottom: 20%;
+    left: 10%;
+    z-index: -1;
+}
+
+.prestasi-section .circle-3 {
+    position: absolute;
+    width: 14rem;
+    height: 14rem;
+    background: linear-gradient(135deg, #FFCCBC, #FF8A65);
+    border-radius: 50%;
+    opacity: 0.2;
+    top: 15%;
+    right: 15%;
+    z-index: -1;
+}
+
+.prestasi-section .circle-4 {
+    position: absolute;
+    width: 12rem;
+    height: 12rem;
+    background: linear-gradient(135deg, #C8E6C9, #81C784);
+    border-radius: 50%;
+    opacity: 0.15;
+    bottom: 40%;
+    right: 25%;
+    z-index: -1;
+}
     .prestasi-title {
         font-size: 2.5rem;
         background: linear-gradient(135deg, #1f2937, #374151);
@@ -232,248 +280,265 @@
         display: block;
     }
 
-    /* === DUAL ACHIEVEMENT LAYOUT === */
-    .achievement-container {
-        display: flex;
-        flex-direction: column;
-        gap: 2.5rem;
-        max-width: 1400px;
-        margin: 0 auto;
-        position: relative;
-        z-index: 10;
-    }
+/* === DUAL ACHIEVEMENT LAYOUT === */
+.achievement-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+}
 
+.achievement-pair {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: stretch; /* Ubah dari flex-start menjadi stretch */
+}
+
+/* Card dasar dengan tinggi tetap */
+.achievement-item {
+    display: flex;
+    align-items: stretch;
+    flex: 1 1 48%;
+    background: white;
+    border-radius: 1.5rem;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    transition: all 0.4s ease;
+    border: 1px solid #f3f4f6;
+    position: relative;
+    overflow: hidden;
+    min-height: 400px; /* Tinggi minimum yang sama untuk semua card */
+    height: auto; /* Biarkan tinggi menyesuaikan konten */
+    max-height: 500px; /* Tinggi maksimum */
+}
+
+.achievement-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #f97316, #fdba74);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.achievement-item:hover::before {
+    opacity: 1;
+}
+
+.achievement-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    border-color: #f97316;
+}
+
+/* Layout kiri */
+.achievement-item.left-layout {
+    flex-direction: row;
+    text-align: left;
+}
+
+.achievement-item.left-layout .achievement-image-container {
+    margin-right: 1.5rem;
+}
+
+/* Layout kanan */
+.achievement-item.right-layout {
+    flex-direction: row-reverse;
+    text-align: right;
+}
+
+.achievement-item.right-layout .achievement-image-container {
+    margin-left: 1.5rem;
+}
+
+/* CONTAINER GAMBAR BESAR - Ukuran tetap */
+.achievement-image-container {
+    flex: 0 0 45%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 260px; /* Tinggi minimum gambar */
+}
+
+/* GAMBAR BESAR - Ukuran konsisten */
+.achievement-image {
+    width: 100%;
+    height: 100%;
+    max-width: 260px;
+    max-height: 260px;
+    min-width: 220px;
+    min-height: 220px;
+    object-fit: cover;
+    border-radius: 1rem;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    transition: all 0.4s ease;
+    border: 3px solid white;
+    position: relative;
+    z-index: 2;
+}
+
+.achievement-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+}
+
+/* Konten teks dengan scroll */
+.achievement-content {
+    flex: 1;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Ubah dari center menjadi flex-start */
+    overflow: hidden; /* Sembunyikan overflow */
+}
+
+.achievement-content h3 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #1f2937, #374151);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    flex-shrink: 0; /* Judul tidak mengecil */
+}
+
+.achievement-content h3::after {
+    content: "";
+    position: absolute;
+    bottom: -0.4rem;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, #f97316, #fdba74);
+    border-radius: 2px;
+}
+
+.achievement-item.right-layout .achievement-content h3::after {
+    left: auto;
+    right: 0;
+}
+
+.achievement-content h4 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.5rem;
+    color: #f97316;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+    flex-shrink: 0; /* Credit tidak mengecil */
+}
+
+/* Container untuk teks dengan scroll */
+.achievement-text-container {
+    flex: 1;
+    overflow-y: auto; /* Scroll vertikal */
+    max-height: 200px; /* Tinggi maksimum untuk teks */
+    margin-top: 0.8rem;
+    padding-right: 8px; /* Ruang untuk scrollbar */
+}
+
+/* Style scrollbar */
+.achievement-text-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.achievement-text-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.achievement-text-container::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.achievement-text-container::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+.achievement-content p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    color: #6b7280;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Indikator scroll (opsional) */
+.achievement-text-container::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 8px;
+    height: 20px;
+    background: linear-gradient(transparent, white);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.achievement-text-container.scrollable::after {
+    opacity: 1;
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 768px) {
     .achievement-pair {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 2rem;
-        align-items: flex-start;
-    }
-
-    /* Card dasar */
-    .achievement-item {
-        display: flex;
-        align-items: stretch;
-        flex: 1 1 48%;
-        background: white;
-        border-radius: 1.5rem;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-        padding: 2rem;
-        transition: all 0.4s ease;
-        border: 1px solid #f3f4f6;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .achievement-item::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, #f97316, #fdba74);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-
-    .achievement-item:hover::before {
-        opacity: 1;
-    }
-
-    .achievement-item:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-        border-color: #f97316;
-    }
-
-    /* Layout kiri */
-    .achievement-item.left-layout {
-        flex-direction: row;
-        text-align: left;
-    }
-
-    .achievement-item.left-layout .achievement-image-container {
-        margin-right: 1.5rem;
-    }
-
-    /* Layout kanan */
-    .achievement-item.right-layout {
-        flex-direction: row-reverse;
-        text-align: right;
-    }
-
-    .achievement-item.right-layout .achievement-image-container {
-        margin-left: 1.5rem;
-    }
-
-    /* CONTAINER GAMBAR BESAR */
-    .achievement-image-container {
-        flex: 0 0 45%;
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* GAMBAR BESAR */
-    .achievement-image {
-        width: 100%;
-        height: 100%;
-        max-width: 260px;
-        max-height: 260px;
-        min-width: 220px;
-        min-height: 220px;
-        object-fit: cover;
-        border-radius: 1rem;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        transition: all 0.4s ease;
-        border: 3px solid white;
-        position: relative;
-        z-index: 2;
-    }
-
-    .achievement-image:hover {
-        transform: scale(1.05);
-        box-shadow: 0 12px 30px rgba(0,0,0,0.2);
-    }
-
-    /* Konten teks */
-    .achievement-content {
-        flex: 1;
-        position: relative;
-        z-index: 2;
-        display: flex;
         flex-direction: column;
-        justify-content: center;
+        gap: 1.5rem;
     }
 
-    .achievement-content h3 {
-        font-family: 'Bebas Neue', cursive;
-        font-size: 2rem;
-        margin-bottom: 0.5rem;
-        background: linear-gradient(135deg, #1f2937, #374151);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        position: relative;
-        letter-spacing: 1px;
-        line-height: 1.2;
+    .achievement-item {
+        flex-direction: column !important;
+        text-align: center !important;
+        padding: 1.5rem;
+        min-height: auto !important;
+        max-height: none !important;
+        margin-top: 0 !important;
+        height: auto;
+    }
+
+    .achievement-item .achievement-image-container {
+        margin: 0 0 1rem 0 !important;
+        flex: 0 0 auto;
+        min-height: 200px;
     }
 
     .achievement-content h3::after {
-        content: "";
-        position: absolute;
-        bottom: -0.4rem;
-        left: 0;
-        width: 50px;
-        height: 3px;
-        background: linear-gradient(90deg, #f97316, #fdba74);
-        border-radius: 2px;
+        left: 50% !important;
+        transform: translateX(-50%);
     }
 
-    .achievement-item.right-layout .achievement-content h3::after {
-        left: auto;
-        right: 0;
+    .achievement-image {
+        width: 200px;
+        height: 200px;
+        max-width: none;
+        max-height: none;
+    }
+    
+    .achievement-content {
+        padding: 0;
     }
 
-    .achievement-content h4 {
-        font-family: 'Bebas Neue', cursive;
-        font-size: 1.5rem;
-        color: #f97316;
-        margin-bottom: 0.8rem;
-        letter-spacing: 0.5px;
-        line-height: 1.2;
+    .achievement-text-container {
+        max-height: 150px; /* Lebih kecil di mobile */
     }
-
-    .achievement-content p {
-        font-family: 'Poppins', sans-serif;
-        font-size: 0.95rem;
-        color: #6b7280;
-        line-height: 1.6;
-        margin-top: 0.8rem;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-
-    /* Animation Keyframes */
-    @keyframes slideIn {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .slide-in {
-        animation: slideIn 0.6s ease-out;
-    }
-
-    /* === RESPONSIVE DESIGN === */
-    @media (max-width: 768px) {
-        .prestasi-section {
-            padding: 4rem 1rem 2rem;
-        }
-
-        .prestasi-title {
-            font-size: 2.5rem;
-        }
-
-        .prestasi-section .prestasi-navigation {
-            gap: 1rem;
-            flex-direction: column;
-        }
-
-        .prestasi-section .prestasi-navigation .nav-button {
-            min-width: 140px;
-            padding: 10px 20px;
-        }
-
-        .prestasi-section .prestasi-navigation .page-indicator {
-            order: -1;
-        }
-
-        .achievement-pair {
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .achievement-item {
-            flex-direction: column !important;
-            text-align: center !important;
-            padding: 1.5rem;
-            min-height: auto !important;
-            max-height: none !important;
-            margin-top: 0 !important;
-        }
-
-        .achievement-item .achievement-image-container {
-            margin: 0 0 1rem 0 !important;
-            flex: 0 0 auto;
-        }
-
-        .achievement-content h3::after {
-            left: 50% !important;
-            transform: translateX(-50%);
-        }
-
-        .achievement-image {
-            width: 200px;
-            height: 200px;
-            max-width: none;
-            max-height: none;
-        }
-        
-        .achievement-content {
-            padding: 0;
-        }
-    }
-
+}
     @media (max-width: 480px) {
         .prestasi-title {
             font-size: 2rem;
@@ -516,7 +581,7 @@
     <div class="min-h-screen">
 
         <!-- HERO SECTION -->
-        <section class="pt-4 pb-5 relative overflow-hidden bg-gradient-to-br from-white to-white">
+        <section class="pt-4 pb-5 relative overflow-hidden bg-transparent">
             <!-- === BACKGROUND CIRCLE HERO === -->
             <div class="absolute inset-0 -z-[1] pointer-events-none overflow-visible">
                 <div class="absolute w-[30rem] h-[30rem] bg-[#FFD2A0] rounded-full opacity-30 -top-40 -left-40 ]"></div>

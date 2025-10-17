@@ -17,14 +17,14 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
             <div class="flex justify-center md:justify-start relative">
-                <div class="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden shadow-xl relative z-10 bg-orange-200">
+                <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl relative z-10 bg-orange-200 border-4 border-white">
                     <img src="{{ asset('assets/kepsek/1760611327_Lukman-removebg-preview 2.png') }}"
-                         alt="Kepala Sekolah" class="object-cover w-full h-full">
+                         alt="Kepala Sekolah" class="object-cover w-full h-full scale-110">
                 </div>
             </div>
 
             <div class="md:col-span-2">
-                <h2 class="text-2xl font-bold text-gray-800 mb-6 relative inline-block">
+                <h2 class="text-2xl font-bold text-gray-800 relative inline-block">
                     Sambutan Kepala Sekolah
                     <span class="absolute bottom-0 left-0 w-1/2 h-1 bg-orange-400"></span>
                 </h2>
@@ -48,7 +48,7 @@
     </section>
 
     {{-- === VISI === --}}
-    <section class="relative bg-transparent-to-br from-orange-50 to-amber-50 py-20 rounded-3xl my-12">
+    <section class="relative bg-transparent-to-br from-orange-50 to-amber-50 py-20 rounded-3xl">
         <div class="absolute inset-0 -z-10">
             <div class="absolute w-72 h-72 bg-orange-200 rounded-full opacity-30 -top-24 left-12"></div>
             <div class="absolute w-64 h-64 bg-blue-200 rounded-full opacity-30 bottom-10 right-16"></div>

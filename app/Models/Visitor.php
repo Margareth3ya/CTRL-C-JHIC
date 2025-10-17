@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Visitor extends Model
 {
-    protected $primaryKey = 'id';
-    protected $table = 'visitors';
+    use HasFactory;
+
     protected $fillable = [
+        'visitor_uuid',
         'ip_address',
         'user_agent',
         'visit_date',
     ];
-    protected $dates = ['visit_date'];
 }
