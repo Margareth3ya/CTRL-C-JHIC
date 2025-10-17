@@ -31,7 +31,7 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <script src="{{ asset('js/main.js') }}" defer></script>
     @stack('scripts')
-    <script>
+    {{-- <script>
         (function() {
             function detectDevTools() {
                 const widthThreshold = window.outerWidth - window.innerWidth > 160;
@@ -59,7 +59,7 @@
                 };
             });
         })();
-    </script>
+    </script> --}}
 </body>
 
 </html>

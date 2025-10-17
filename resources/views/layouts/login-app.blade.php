@@ -11,7 +11,7 @@
     class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
     @yield('content')
     </div>
-        <script>
+        {{-- <script>
                 (function () {
             function detectDevTools() {
                 const widthThreshold = window.outerWidth - window.innerWidth > 160;
@@ -38,7 +38,7 @@
                 };
             });
         })();
-    </script>
+    </script> --}}
 </body>
 
 </html>

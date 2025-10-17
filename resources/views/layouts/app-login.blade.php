@@ -69,7 +69,7 @@
             @yield('content')
         </main>
     </div>
-        <script>
+        {{-- <script>
                 (function () {
             function detectDevTools() {
                 const widthThreshold = window.outerWidth - window.innerWidth > 160;
@@ -96,7 +96,7 @@
                 };
             });
         })();
-    </script>
+    </script> --}}
 
 </body>
 
